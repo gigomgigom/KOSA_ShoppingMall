@@ -61,11 +61,13 @@
 
 	<!-- 추천상품 -->
 	<div id="recommend"
-		class="container-fluid d-flex flex-column align-items-center justify-content-center">
+		class="container-fluid d-flex flex-column align-items-center justify-content-center"
+		style="background-color: rgb(236, 233, 233);">
+		<div style="height: 30px"></div>
 		<p class="fw-bold fs-3">추천상품</p>
 		<div class="bg-black" style="height: 2px; width: 30px"></div>
 		<div id="rcmd-product-list"
-			class="border p-3 mt-4 w-75 d-flex justify-content-center">
+			class="p-3 mt-4 w-75 d-flex justify-content-center">
 			<div id="rcmd-product-1" class="w-25 p-3">
 				<a href="#" class="d-flex flex-column align-items-center"> <img
 					src="https://i.ibb.co/Sc0bSjY/dogicecream.jpg"
@@ -74,11 +76,12 @@
 				<div class="p-2">
 					<a href="#"
 						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
-						혀가 시려워 샤베트 </a>
+						<p class="text-center">혀가 시려워 샤베트</p>
+					</a>
 					<hr />
-					<p>평점 5.0 - 리뷰 n개</p>
+					<p style="font-size: 0.75rem;">평점 5.0 - 리뷰 n개</p>
+					<p style="font-size: 0.75rem;">⭐⭐⭐⭐</p>
 					<p>n원</p>
-					<p>⭐⭐⭐⭐</p>
 				</div>
 			</div>
 			<div id="rcmd-product-2" class="w-25 p-3">
@@ -88,11 +91,12 @@
 				<div class="p-2">
 					<a href="#"
 						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
-						멍뭉이 쭈압쭈압 개껌 </a>
+						<p class="text-center">멍뭉이 쭈압쭈압 개껌</p>
+					</a>
 					<hr />
-					<p>평점 5.0 - 리뷰 n개</p>
+					<p style="font-size: 0.75rem;">평점 3.0 - 리뷰 n개</p>
+					<p style="font-size: 0.75rem;">⭐⭐⭐</p>
 					<p>n원</p>
-					<p>⭐⭐⭐</p>
 				</div>
 			</div>
 			<div id="rcmd-product-3" class="w-25 p-3">
@@ -103,11 +107,12 @@
 				<div class="p-2">
 					<a href="#"
 						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
-						득근득근 웅장한 닭가슴살 </a>
+						<p class="text-center">득근득근 웅장한 닭가슴살</p>
+					</a>
 					<hr />
-					<p>평점 5.0 - 리뷰 n개</p>
+					<p style="font-size: 0.75rem;">평점 1.0 - 리뷰 n개</p>
+					<p style="font-size: 0.75rem;">⭐</p>
 					<p>n원</p>
-					<p>⭐</p>
 				</div>
 			</div>
 			<div id="rcmd-product-4" class="w-25 p-3">
@@ -117,18 +122,36 @@
 				<div class="p-2">
 					<a href="#"
 						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
-						멍멍냠냠 영양만점 강아지사료 </a>
+						<p class="text-center">멍멍냠냠 영양만점 강아지사료</p>
+					</a>
 					<hr />
-					<p>평점 5.0 - 리뷰 n개</p>
+					<p style="font-size: 0.75rem;">평점 3.0 - 리뷰 n개</p>
+					<p style="font-size: 0.75rem;">⭐⭐⭐</p>
 					<p>n원</p>
-					<p>⭐⭐⭐</p>
 				</div>
+			</div>
+		</div>
+		<div style="height: 20px"></div>
+	</div>
+
+	<!--무언갈 보여드리겠습니다!-->
+	<div style="height: 150px"></div>
+
+	<div class="container-fluid d-flex flex-column align-items-center">
+		<p class="fw-bold fs-3">멍슐랭은 다릅니다!</p>
+		<div class="bg-black" style="height: 2px; width: 30px"></div>
+		<div class="mt-4 w-75 d-flex justify-content-center">
+			<div class="card me-4">
+				<img src="https://i.ibb.co/bFxSwMq/smallbanner1.png">
+			</div>
+
+			<div class="card ms-4">
+				<img src="https://i.ibb.co/NjzRQ8k/smallbanner2.png">
 			</div>
 		</div>
 	</div>
 
 	<div style="height: 150px"></div>
-
 
 	<!-- 실시간 리뷰 -->
 
@@ -148,7 +171,7 @@
 				</a>
 				<div class="p-2 d-flex flex-column align-items-center">
 					<a href="#"
-						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
 						혀가 시려워 샤베트 </a>
 					<hr />
 					<p>사르르 녹아내려요</p>
@@ -162,7 +185,7 @@
 				</a>
 				<div class="p-2 d-flex flex-column align-items-center">
 					<a href="#"
-						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
 						멍뭉이 쭈압쭈압 개껌 </a>
 					<hr />
 					<p>맛있게 잘먹었습니다.</p>
@@ -177,7 +200,7 @@
 
 				<div class="p-2 d-flex flex-column align-items-center">
 					<a href="#"
-						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
 						득근득근 웅장한 닭가슴살 </a>
 					<hr />
 					<p>울집 강아지 영양간식!</p>
@@ -191,7 +214,7 @@
 				</a>
 				<div class="p-2 d-flex flex-column align-items-center">
 					<a href="#"
-						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
 						멍멍냠냠 영양만점 강아지사료 </a>
 					<hr />
 					<p>우리 아이 술안주</p>
