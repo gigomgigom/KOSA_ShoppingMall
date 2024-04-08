@@ -198,6 +198,17 @@
 					<p>우리 아이 술안주</p>
 					<p>⭐⭐⭐⭐⭐</p>
 				</div>
+		<!-- Latest compiled JavaScript -->
+		<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<div class="card">
+    		<div class="card-header">Header</div>
+    		<div class="card-body">
+    			asdfasdfasdfasdfasdf
 			</div>
 		</div>
 		<div style="height: 20px"></div>
