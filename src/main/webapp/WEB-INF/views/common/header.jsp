@@ -29,21 +29,21 @@
 
 
 <div class="d-flex justify-content-center mt-5">
-	<img src="https://i.ibb.co/fMVwYYJ/pagelogo.png" style="width: 500px" />
+	<img src="https://i.ibb.co/fMVwYYJ/pagelogo.png" style="width: 600px" />
 </div>
 
 <div>
 	<ul class="nav justify-content-center align-items-center"
-		style="height: 50px; background-color: #27374D;">
-		<li class="nav-item ms-4 me-4"><a
+		style="height: 70px; background-color: #27374D;">
+		<li class="nav-item ms-5 me-5"><a
 			class="fw-bold nav-link active text-white" aria-current="page"
-			href="#">베스트셀러</a></li>
-		<li class="nav-item ms-4 me-4"><a class="nav-link text-white"
-			href="#">간식</a></li>
-		<li class="nav-item ms-4 me-4"><a class="nav-link  text-white"
-			href="#">사료</a></li>
-		<li class="nav-item ms-4 me-4"><a class="nav-link text-white"
-			href="#">Q&A</a></li>
+			href="#"><h2>베스트셀러</h2></a></li>
+		<li class="nav-item ms-5 me-5"><a class="nav-link text-white"
+			href="#"><h2>간식</h2></a></li>
+		<li class="nav-item ms-5 me-5"><a class="nav-link  text-white"
+			href="#"><h2>사료</h2></a></li>
+		<li class="nav-item ms-5 me-5"><a class="nav-link text-white"
+			href="#"><h2>Q&A</h2></a></li>
 	</ul>
 </div>
 
