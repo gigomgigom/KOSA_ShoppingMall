@@ -19,7 +19,9 @@
 
 <!-- footer -->
 <footer class="bg-dark text-white">
+		<!-- 자식 요소들의 정렬 기준을 정의함, 가운데 정렬 -->
 	<div class="d-flex justify-content-center">
+		
 		<div class="row w-75">
 			<div
 				class="col-sm-4 container p-5 border-end border-secondary col order-1">
