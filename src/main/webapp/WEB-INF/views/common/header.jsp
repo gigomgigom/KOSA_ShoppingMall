@@ -34,16 +34,16 @@
 
 <div>
 	<ul class="nav justify-content-center align-items-center"
-		style="height: 70px; background-color: #27374D;">
+		style="height: 50px; background-color: #27374D;">
 		<li class="nav-item ms-5 me-5"><a
-			class="fw-bold nav-link active text-white" aria-current="page"
-			href="#"><h2>베스트셀러</h2></a></li>
+			class="fw-bold nav-link text-white" aria-current="page"
+			href="#"><h5>베스트셀러</h5></a></li>
 		<li class="nav-item ms-5 me-5"><a class="nav-link text-white"
-			href="#"><h2>간식</h2></a></li>
+			href="#"><h5>간식</h5></a></li>
 		<li class="nav-item ms-5 me-5"><a class="nav-link  text-white"
-			href="#"><h2>사료</h2></a></li>
+			href="#"><h5>사료</h5></a></li>
 		<li class="nav-item ms-5 me-5"><a class="nav-link text-white"
-			href="#"><h2>Q&A</h2></a></li>
+			href="#"><h5>Q&A</h5></a></li>
 	</ul>
 </div>
 
