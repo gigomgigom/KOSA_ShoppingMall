@@ -29,7 +29,7 @@
 	<!-- header -->
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<!-- 홈 배너 캐로슬-->
-	<div class="h-75">
+	<div>
 		<div id="carouselControls" class="carousel" data-bs-ride="carousel">
 			<div class="carousel-inner ">
 				<div class="carousel-item">

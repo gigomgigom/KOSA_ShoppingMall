@@ -5,13 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
-@RequestMapping("/")
-public class HomeController {
+@Slf4j
+@RequestMapping("/shoppingcart")
+public class ShoppingCartController {
 	@RequestMapping("")
-	public String index() {
-		log.info("실행");
-		return "home";
+	String shoppingCart() {
+		return "/shoppingcart/shoppingcart";
 	}
 }
