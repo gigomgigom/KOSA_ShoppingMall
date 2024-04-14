@@ -10,6 +10,7 @@
         <style>
             
         </style>
+        <title>장바구니</title>
     </head>
 
     <body>

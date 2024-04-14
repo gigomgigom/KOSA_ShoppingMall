@@ -23,7 +23,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>멍슐랭</title>
 </head>
 <body>
 	<!-- header -->
@@ -85,11 +85,11 @@
 				</div>
 			</div>
 			<div id="rcmd-product-2" class="w-25 p-3">
-				<a href="#" class="d-flex flex-column align-items-center"> <img
+				<a href="${pageContext.request.contextPath}/item/item_detail" class="d-flex flex-column align-items-center"> <img
 					src="https://i.ibb.co/f9yTBG2/doggum.png" class="w-75 img-thumbnail" />
 				</a>
 				<div class="p-2">
-					<a href="#"
+					<a href="${pageContext.request.contextPath}/item/item_detail"
 						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
 						<p class="text-center">멍뭉이 쭈압쭈압 개껌</p>
 					</a>
