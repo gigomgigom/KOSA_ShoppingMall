@@ -37,7 +37,7 @@
 	<div style="height: 70px"></div>
 	
 	<div class="container-fluid d-flex justify-content-center">
-		<form id="loginForm" style="width: 400px;" method="post"
+		<form id="loginForm" style="width: 400px;" method="post" action="${pageContext.request.contextPath}/"
 			class="d-flex flex-column mt-5">
 
 			<div class="d-flex justify-content-center">
@@ -82,10 +82,10 @@
 				//if문을 사용하여 검사
 				if (username !== "황세림" || password !== "970321") {
 					alert("올바른 로그인 아이디 또는 비밀번호를 입력하세요.");
-				} else {
-
+				} else if(username === "황세림" && password === "970321"){
 					console.log("Username:", username);
 					console.log("Password:", password);
+					document.getElementById("loginForm").submit();
 				}
 			});
 	
