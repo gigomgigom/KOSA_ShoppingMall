@@ -91,7 +91,7 @@
 	<!-- header -->
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-	<div class="container-fluid my-5">
+	<div class="container-fluid my-2">
 		<!--data전달을 위한 form-->
 		<form>
 			<div id="wrapper" class="d-flex flex-column">
@@ -122,7 +122,7 @@
 								<div class="mt-3 d-flex justify-content-between">
 									<button type="button" class="btn btn-lg border fw-bold" onClick="location.href='${pageContext.request.contextPath}/shoppingcart'"
 										style="background-color: #9DB2BF;">장바구니</button>
-									<button class="btn btn-lg text-white fw-bold w-50"
+									<button type="button" class="btn btn-lg text-white fw-bold w-50" onClick="location.href='${pageContext.request.contextPath}/order/orderForm'"
 										style="background-color: #27374D;">바로구매</button>
 								</div>
 							</div>
