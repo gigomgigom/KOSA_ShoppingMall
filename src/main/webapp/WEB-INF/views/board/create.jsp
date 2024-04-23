@@ -19,7 +19,8 @@ $(function(){
 			formData.append("title", $("#title").val());
 			formData.append("id", $("#id").val());
 		    formData.append("content", $("#content").val());
-		    formData.append("attach", $("#attach")[0].files[0]);
+		    Array.from($('#attach')[0].files).map(a => formData.append('attach', a));
+		  
 			
  	        $.ajax({
 				url:"createBoard",

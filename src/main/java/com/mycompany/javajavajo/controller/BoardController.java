@@ -56,23 +56,25 @@ public class BoardController {
 
 	@PostMapping("/createBoard")
 	public String createBoard(Uplload board, HttpSession session) throws IllegalStateException, IOException {
-		log.info("run");
 		File destDir = new File("C:/Temp/uploadFiles");
-		if (!destDir.exists()) destDir.mkdirs();
-	
-		String fileName = board.getAttach().getOriginalFilename();
-		File destFile = new File(destDir, fileName);
-		board.getAttach().transferTo(destFile);
-		log.info(board.getAttach().getOriginalFilename() + "");
-		List<Board> boardList = (List<Board>) session.getAttribute("boardList");
-		if (boardList == null) {
-			boardList = new ArrayList<Board>();
-			session.setAttribute("boardList", boardList);
-			log.info("" + boardList.size());
+		if (!destDir.exists())
+			destDir.mkdirs();
+		
+		List<String> newAttach = new ArrayList<>();
+		for (MultipartFile mf : board.getAttach()) {
+			String fileName = mf.getOriginalFilename();
+			File destFile =new File(destDir, fileName); 
+			mf.transferTo(destFile);
+			newAttach.add(fileName);
 		}
-
-		Board newBoard = new Board(boardList.size(), board.getTitle(), board.getContent(), board.getId(),
-				board.getAttach().getOriginalFilename(), 0, new Date());
+	
+		 List<Board> boardList = (List<Board>) session.getAttribute("boardList"); 
+		 if(boardList == null) { 
+			 boardList = new ArrayList<Board>();
+		 session.setAttribute("boardList", boardList); 
+		 }
+		 
+		Board newBoard = new Board(boardList.size()+1, board.getTitle(), board.getContent(), board.getId(), newAttach, 0, new Date());
 		boardList.add(newBoard);
 		return "redirect: list";
 	}
@@ -92,7 +94,6 @@ public class BoardController {
 		Files.copy(path, os);
 		os.flush();
 		os.close();
-		return;
 	}
 
 }

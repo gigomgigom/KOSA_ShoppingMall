@@ -65,8 +65,10 @@
 			<div class="col-10 d-flex align-items-start m-0 p-0">
 				<ul id="attach-item" class="list-unstyled m-0 p-0"
 					style="display: none;">
-					<li class="m-0 p-0"><a href="downloadFile?fileName=${board.battach}"
-						class="text-dark m-0 p-0" style="font-size: 0.75rem">${board.battach}</a></li>
+					<c:forEach var='attach' items="${board.battach}">
+						<li class="m-0 p-0"><a href="downloadFile?fileName=${attach}"
+						class="text-dark m-0 p-0" style="font-size: 0.75rem">${attach}</a></li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
@@ -78,9 +80,7 @@
 				style="width: 50px; height: 50px;">
 				<h1>A</h1>
 			</div>
-			<p class="col-9">
-				자동 답변입니다
-			</p>
+			<p class="col-9">자동 답변입니다</p>
 		</div>
 
 		<div class="d-flex justify-content-center w-25 m-0 my-5 p-0">

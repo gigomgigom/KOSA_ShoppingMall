@@ -11,5 +11,5 @@ public class Uplload {
 	private String title;
 	private String id;
 	private String content;
-	private MultipartFile attach;
+	private List<MultipartFile> attach;
 }
