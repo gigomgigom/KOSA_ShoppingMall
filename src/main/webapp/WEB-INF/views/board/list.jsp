@@ -10,10 +10,22 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-</linkh>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <meta charset="UTF-8">
+<script>
+$(function(){
+		$("#search").click(() => { 
+			let select = $("option:selected").val();
+			let keyword = $("#keyword").val();
+			document.location.href = "search?search=" + select + "&keyword=" + keyword;
+		}); 
+})
+		
+		
+</script>
 </head>
 <body>
 	<header>
@@ -24,7 +36,7 @@
 		class="container-fluid  d-flex flex-column align-items-center m-0 my-5 p-0">
 		<div class="d-flex justify-content-between w-50 m-0 mb-3 p-0">
 			<div class="d-flex align-items-center m-0 p-0">
-				<p class="m-0 p-0">총 게시글 5건</p>
+				<p class="m-0 p-0">총 게시글  ${fn:length(boardList)}건</p>
 			</div>
 
 			<div class="d-flex m-0 p-0 " style="width: 30%; height: 10%;">
@@ -32,8 +44,9 @@
 					<option class="m-0 p-0" value="글쓴이" selected>글쓴이</option>
 					<option class="m-0 p-0" value="제목">제목</option>
 					<option class="m-0 p-0" value="내용">내용</option>
-				</select> <input class="form-control form-control-sm w-75 m-0 p-0"
+				</select> <input id="keyword" class="form-control form-control-sm w-50 m-0 p-0"
 					type="text">
+				<button id="search" type="button" class="btn btn-sm m-0 p-0 w-25 border">검색</button>
 			</div>
 
 		</div>
@@ -110,7 +123,7 @@
 		<div class="d-flex justify-content-between w-50 m-0 p-0">
 			<div></div>
 
-			<div class="m-0 p-0">
+			<div class="m-0 p-0" style="display:none;">
 				<ul class="pagination m-0 p-0">
 					<li class="page-item m-0 p-0"><a class="page-link text-dark"
 						href="#">이전</a></li>

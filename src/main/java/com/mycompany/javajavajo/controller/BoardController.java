@@ -35,6 +35,36 @@ public class BoardController {
 	public String list() {
 		return "board/list";
 	}
+	
+	@RequestMapping("/search")
+	public String search(String search, String keyword, HttpSession session, Model model) {
+		List<Board> boardList = (List<Board>) session.getAttribute("boardList"); 
+		 if(boardList == null) { 
+			 boardList = new ArrayList<Board>();
+		 session.setAttribute("boardList", boardList); 
+		 }
+		
+		 List<Board> searchList = new ArrayList<Board>();
+		 for (Board board : boardList) {
+			 if(search.equals("글쓴이")) {
+				if (board.getBid().contains(keyword)) {
+					searchList.add(board);
+				}
+			}else if(search.equals("제목")){
+				if (board.getBtitle().contains(keyword)) {
+					searchList.add(board);
+				}
+			}else if(search.equals("내용")){
+				if (board.getBcontent().contains(keyword)) {
+					searchList.add(board);
+				}
+			}
+		}
+		 
+		 model.addAttribute("boardList", searchList);
+		 
+		return "board/list";
+	}
 
 	@RequestMapping("/create")
 	public String create() {
