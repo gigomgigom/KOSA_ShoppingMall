@@ -155,9 +155,6 @@
                 totalResult = false;
             }
 			
-            // 주소 검사
-
-
             //총 유효성 검사가 true 일때
             if(totalResult) {
                 $("#joinForm")[0].submit();
@@ -192,8 +189,9 @@
 	
 	<div class="container-fluid d-flex justify-content-center">
 		<form id="joinForm" name="joinForm" action="/javajavajo_mini_web/" method="post"
-			onsubmit="handleCheckData()" novalidate style="width: 400px;"
-			class="d-flex flex-column">
+			  onsubmit="handleCheckData()" novalidate style="width: 400px;"
+			  class="d-flex flex-column">
+			<!-- handleCheckData()를 사용하여 사용자 정의 유효성 검사를 수행함, novalidate속성을 사용하여 기본 브라우저의  유효성 검사를 막음 -->
 			<div class="container-fluid d-flex justify-content-center p-5 m-3">
 				<h2>회원가입</h2>
 			</div>
