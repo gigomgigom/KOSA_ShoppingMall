@@ -43,18 +43,18 @@
 			<div class="row g-0">
 				<div class="col-md-1 mt-5">
 					<img
-						src="${pageContext.request.contextPath}/resources/image/photos/p1.jpg"
-						width="100" height="100" class="img-fluid rounded-start" alt="...">
+						src="${pageContext.request.contextPath}/resources/image/item/snack.png"
+						width="80" height="80" class="img rounded-start" alt="...">
 				</div>
 				<div class="col-md-11">
 					<div class="card-body">
 						<div class="col text-end">
 							<button type="button" class="btn btn-dark btn-sm">주문</button>
 						</div>
-						<h5 class="card-title">[3+1] 이벤트 호랑이액상 입호흡/폐호흡 30ml</h5>
+						<h5 class="card-title">굿데이 건강한육포 닭가슴살 스틱 300g</h5>
 						<div class="mx-100%">
 							<hr />
-							<p class="card-text">선택:입호흡/선택07.뿔라임 알로에</p>
+							<p class="card-text">선택: 스틱</p>
 							<div class="col text-end">
 								<button type="button" class="btn btn-dark btn-sm">사용후기
 									쓰기</button>
@@ -64,7 +64,7 @@
 										<div class="container-fluid d-flex justify-content-between">
 											<span>판매가
 												<div>배송비</div>
-											</span> <span>8,800
+											</span> <span>8,450
 												<div>선불</div>
 											</span>
 										</div>
@@ -79,7 +79,7 @@
 									</div>
 									<div
 										class="container-fluid d-flex justify-content-between border bg-light p-2">
-										<span>주문금액</span> <span>26,400</span>
+										<span>주문금액</span> <span>25,350</span>
 									</div>
 								</div>
 							</div>
@@ -93,7 +93,7 @@
 		<div class="container-fluid border bg-light m-2 p-2">
 			<div class="container-fluid d-flex justify-content-between p-2">
 				<span>주문총액</span>
-				<span>26,400원</span>
+				<span>25,350원</span>
 			</div>
 			<div class="container-fluid d-flex justify-content-between p-2">
 				<span>배송비</span>
@@ -104,7 +104,7 @@
 			</div>
 			<hr />
 			<div class="container-fluid d-flex justify-content-between p-2">
-				<span class="fw-bold">총계</span> <span class="fw-bold">28,900원</span>
+				<span class="fw-bold">총계</span> <span class="fw-bold">25,350원</span>
 			</div>
 		</div>
 		<div class="mt-3 container-fluid">
@@ -206,12 +206,12 @@
 					<div class="text-white">
 						<div
 							class="container-fluid d-flex justify-content-between mt-3 bg-secondary p-1">
-							<span>총 구매액</span> <span>28,900원</span>
+							<span>총 구매액</span> <span>25,350원</span>
 						</div>
 
 						<div
 							class="container-fluid d-flex justify-content-between bg-secondary mt-1 p-1">
-							<span>미결제액</span> <span>28,900원</span>
+							<span>미결제액</span> <span>25,350원</span>
 						</div>
 
 						<div
