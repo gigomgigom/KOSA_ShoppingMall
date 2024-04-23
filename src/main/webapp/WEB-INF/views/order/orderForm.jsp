@@ -78,7 +78,7 @@
 					<div class="col-2 row m-0 p-0">
 						<div
 							class="d-flex col-10 justify-content-center align-items-center p-0">
-							<img src="dogfood.jpg" width="75px">
+							<img src="https://i.ibb.co/f9yTBG2/doggum.png" width="75px">
 						</div>
 					</div>
 					<div
@@ -107,7 +107,7 @@
 			</ul>
 		</div>
 
-		<form class="w-100 d-flex justify-content-center">
+		<form class="w-100 d-flex justify-content-center" action="orderDetail">
 			<div class="w-75 d-flex flex-row border-top border-dark">
 				<!--주문정보 입력-->
 				<div

@@ -28,7 +28,7 @@
 		<li class="nav-item ms-5 me-5"><a class="nav-link  text-white"
 			href="#"><h5>사료</h5></a></li>
 		<li class="nav-item ms-5 me-5"><a class="nav-link text-white"
-			href="#"><h5>Q&A</h5></a></li>
+			href="${pageContext.request.contextPath}/board/list"><h5>Q&A</h5></a></li>
 	</ul>
 </div>
 

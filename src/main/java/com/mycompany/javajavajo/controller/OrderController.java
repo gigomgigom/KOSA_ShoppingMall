@@ -14,4 +14,9 @@ public class OrderController {
 	public String orderForm() {
 		return "order/orderForm";
 	}
+	
+	@RequestMapping("/orderDetail")
+	public String orderDetail() {
+		return "order/orderDetail";
+	}
 }

@@ -31,4 +31,8 @@ public class ItemController {
 	public String itemDelievery(Model model) {
 		return "item/item_delievery";
 	}
+	@RequestMapping("/item_list")
+	public String itemList() {
+		return "item/itemList";
+	}
 }
