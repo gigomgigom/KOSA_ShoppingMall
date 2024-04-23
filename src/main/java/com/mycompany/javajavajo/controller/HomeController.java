@@ -14,4 +14,10 @@ public class HomeController {
 		log.info("실행");
 		return "home";
 	}
+	
+	@RequestMapping("mypage")
+	public String mypage() {
+		log.info("실행");
+		return "mypage";
+	}
 }
