@@ -62,21 +62,27 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container">
+	<header>
+    		<%@ include file="/WEB-INF/views/common/header.jsp"%>
+    </header>
+    
+	<div class="container my-5">
 		<div class="d-flex justify-content-center mt-5 mb-3">
-			<h2>간식</h2>
+			<h2>🌈간식</h2>
 		</div>
 
-		<div class="btn-group dropright">
-			<button type="button" class="btn btn-secondary dropdown-toggle"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				Dropright</button>
-			<div class="dropdown-menu">
-				<a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
+		<div class="dropdown">
+			<div class="box1" id="dropdownMenuButton" data-toggle="dropdown"
+				aria-haspopup="true" aria-expanded="false">
+				상품정렬 ▼ <img src="/javajavajo_mini_web/resources/image/icon/grid_icon.png" style="width: 2%; height: auto;">
+			</div>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-item" href="#">기본 정렬</a> <a class="dropdown-item"
+					href="#">이름순</a> <a class="dropdown-item" href="#">낮은 가격순</a> <a
+					class="dropdown-item" href="#">높은 가격순</a>
 			</div>
 		</div>
+
 
 		<div class="flex-container">
 			<div class="flex-item mb-3">
@@ -240,5 +246,8 @@
 			</div>
 		</div>
 	</div>
+	<footer>
+        	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+    </footer>
 </body>
 </html>
