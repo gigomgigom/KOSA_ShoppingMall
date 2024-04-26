@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.mycompany.javajavajo.dto.Board;
-import com.mycompany.javajavajo.dto.Uplload;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -31,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/board")
 public class BoardController {
 
-	@RequestMapping("/list")
+/*	@RequestMapping("/list")
 	public String list() {
 		return "board/list";
 	}
@@ -124,6 +121,6 @@ public class BoardController {
 		Files.copy(path, os);
 		os.flush();
 		os.close();
-	}
+	}*/
 
 }
