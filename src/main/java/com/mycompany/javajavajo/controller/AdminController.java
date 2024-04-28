@@ -9,8 +9,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/admin")
 public class AdminController {
-	@RequestMapping("")
+	@RequestMapping("/main")
 	public String adminMain() {
 		return "admin/adminMain";
+	}
+	@RequestMapping("/admin_dashboard")
+	public String adminDashBoard() {
+		return "admin/admin_dashboard";
+	}
+	@RequestMapping("/admin_member_view")
+	public String adminMemberView() {
+		return "admin/admin_member_view";
 	}
 }

@@ -10,6 +10,11 @@
 <!-- jQuery 외부 라이브러리 설정 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+	
+</script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -18,17 +23,13 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
 <title>멍슐랭</title>
 </head>
 <body>
 	<!-- header -->
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
-
+	<div style="height: 100px"></div>
 	<div
 		class="container-fluid  d-flex flex-column align-items-center m-0, p-0">
 
@@ -40,7 +41,7 @@
 		</div>
 
 
-		<div class="row w-75 m-0  p-0">
+		<div class="row w-75 m-0  p-0 justify-content-center">
 			<div class="col-2 d-flex flex-column align-items-center m-0 p-0">
 				<div
 					class="d-flex flex-column justify-content-center align-items-center border w-100 m-0 p-0 py-3">
@@ -53,7 +54,9 @@
 				</div>
 
 				<div
-					class="d-flex flex-column justify-content-center align-items-center w-100 m-0 p-0 py-3"
+					class="d-flex flex-column justify-content-center align-items-center w-100 m-0 p-0 py-3
+					btn btn-primary"
+					data-bs-toggle="modal" data-bs-target="#myModal"
 					style="background-color: #27374D; color: white;">
 					<p class="m-0 p-0">포인트</p>
 					<p class="m-0 p-0">1500p</p>
@@ -86,17 +89,18 @@
 
 				<div
 					class="d-flex flex-column justify-content-between align-items-center border w-100 m-0 p-0 py-3">
-					<div class="w-75 m-0 my-2 p-0 py-2 text-center"
+					<div class="w-75 m-0 my-2 p-0 py-2 text-center rounded"
 						style="background-color: #27374D;">
-						<a class="text-decoration-none text-white m-0 p-0">회원정보 수정</a>
+						<a class="text-decoration-none text-white m-0 p-0" href="#">회원정보
+							수정</a>
 					</div>
-					<div class="w-75 m-0 my-2 p-0 py-2 text-center"
+					<div class="w-75 m-0 my-2 p-0 py-2 text-center rounded"
 						style="background-color: #27374D;">
-						<a class="text-decoration-none text-white m-0 p-0">로그아웃</a>
+						<a class="text-decoration-none text-white m-0 p-0" href="#">로그아웃</a>
 					</div>
-					<div class="w-75 m-0 my-2 p-0 py-2 text-center"
+					<div class="w-75 m-0 my-2 p-0 py-2 text-center rounded"
 						style="background-color: #27374D;">
-						<a class="text-decoration-none text-white m-0 p-0">탈퇴</a>
+						<a class="text-decoration-none text-white m-0 p-0" href="#">탈퇴</a>
 					</div>
 
 				</div>
@@ -187,8 +191,64 @@
 			</div>
 		</div>
 	</div>
+	<div style="height: 300px"></div>
 
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
-	<%@ include file="/WEB-INF/views/common/footer.jsp"%></
-	body>
+	<!-- The Modal -->
+	<div class="modal" id="myModal">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">포인트 사용내역</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<table class="table">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">No</th>
+								<th scope="col">일자</th>
+								<th scope="col">포인트 적립/사용</th>
+								<th scope="col">내용</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">1</th>
+								<td>2024-04-27</td>
+								<td>-1000</td>
+								<td>포인트 할인 사용</td>
+							</tr>
+							<tr>
+								<th scope="row">2</th>
+								<td>2024-04-27</td>
+								<td>5000</td>
+								<td>포인트 할인 사용</td>
+							</tr>
+							<tr>
+								<th scope="row">3</th>
+								<td>2024-04-27</td>
+								<td>-1050</td>
+								<td>포인트 할인 사용</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger"
+						data-bs-dismiss="modal">닫기</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
 </html>

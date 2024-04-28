@@ -30,126 +30,214 @@
 </head>
 <body>
 	<div class="d-flex flex-row">
-		<div class="d-flex flex-column"
-			style="height: 100vh; width: 250px; background-color: #9DB2BF;">
-			<div class="d-flex justify-content-center align-items-center"
-				style="height: 75px; background-color: #27374D;">
-				<h4 class="m-0 text-white fw-bold">관리자 페이지</h4>
-			</div>
-			<div class="btn d-flex justify-content-center align-items-center"
-				style="height: 52px">대쉬보드</div>
-			<div class="accordion" id="accordionExample">
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingOne">
-						<button class="accordion-button" type="button"
-							data-bs-toggle="collapse" data-bs-target="#collapseOne"
-							aria-expanded="true" aria-controls="collapseOne">
-							<img src="member.png" class="me-2" style="width: 20px;" /> 회원관리
-						</button>
-					</h2>
-					<div id="collapseOne" class="accordion-collapse collapse show"
-						aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-						<div class="accordion-body">
-							<div class="d-flex flex-column">
-								<button class="btn row-1">회원조회</button>
-								<button class="btn row-1">마일리지 관리</button>
-								<button class="btn row-1">관리자 계정 관리</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingTwo">
-						<button class="accordion-button collapsed" type="button"
-							data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-							aria-expanded="false" aria-controls="collapseTwo">
-							<img src="product.png" class="me-2" style="width: 20px;" /> 상품관리
-						</button>
-					</h2>
-					<div id="collapseTwo" class="accordion-collapse collapse"
-						aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-						<div class="accordion-body">
-							<div class="d-flex flex-column">
-								<button class="btn row-1">상품 설정</button>
-								<button class="btn row-1">상품 추가</button>
-								<button class="btn row-1">재고 확인</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingThree">
-						<button class="accordion-button collapsed" type="button"
-							data-bs-toggle="collapse" data-bs-target="#collapseThree"
-							aria-expanded="false" aria-controls="collapseThree">
-							<img src="order.png" class="me-2" style="width: 20px;" /> 주문관리
-						</button>
-					</h2>
-					<div id="collapseThree" class="accordion-collapse collapse"
-						aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-						<div class="accordion-body">
-							<div class="d-flex flex-column">
-								<button class="btn row-1">미완료된 주문</button>
-								<button class="btn row-1">완료된 주문</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="accordion-item">
-					<h2 class="accordion-header" id="headingFour">
-						<button class="accordion-button collapsed" type="button"
-							data-bs-toggle="collapse" data-bs-target="#collapseFour"
-							aria-expanded="false" aria-controls="collapseFour">
-							<img src="board.png" class="me-2" style="width: 20px;" /> 게시판 관리
-						</button>
-					</h2>
-					<div id="collapseFour" class="accordion-collapse collapse"
-						aria-labelledby="headingFour" data-bs-parent="#accordionExample">
-						<div class="accordion-body">
-							<div class="d-flex flex-column">
-								<button class="btn row-1">QA게시판</button>
-								<button class="btn row-1">공지사항</button>
-								<button class="btn row-1">후기조회</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="d-flex flex-column align-items-center"
+		<%@ include file="/WEB-INF/views/admin/common/admin_menu.jsp"%>
+		<div class="d-flex flex-column align-items-center" id="view_container"
 			style="width: 100vw;">
 			<!--상단 바-->
-			<div class="d-flex justify-content-end align-items-center"
+			<div class="d-flex justify-content-between align-items-center"
 				style="width: 100%; height: 75px; background-color: #27374D;">
-				<button type="button" class="btn me-5 text-white fw-bold"
-					style="background-color: #526D82;">로그아웃</button>
-				<span class="text-white fw-bold">환영합니다. OOO님</span>
-				<div class="mx-3"
-					style="border-radius: 50%; width: 60px; height: 60px; background-color: aqua;"></div>
+				<h4 class="my-0 ms-5 ps-5 text-white">대쉬보드</h4>
+				<div class="d-flex flex-row align-items-center">
+					<button type="button" class="btn me-5 text-white fw-bold"
+						style="background-color: #526D82;">로그아웃</button>
+					<span class="text-white fw-bold">환영합니다. 관리자 심영조님</span>
+					<div class="mx-3"
+						style="border-radius: 50%; width: 60px; height: 60px; background-color: aqua;">
+					</div>
+				</div>
 			</div>
-			<div class="mt-3 d-flex justify-content-start" style="width: 90%;">
-				<h4>대쉬보드</h4>
-			</div>
-			<div class="bg-dark" style="width: 90%; height: 4px;"></div>
-			<div class="d-flex" style="width: 90%; height: 81vh;">
+			<div class="d-flex" style="width: 90%; height: 91vh;">
 				<div
-					class="col-8 h-100 d-flex flex-column align-items-center justrify-content-center">
-					<div class="w-75 row-1"></div>
-					<div></div>
-					<div class="w-75 row-4"></div>
-					<div class="w-75 row-2"></div>
-					<div class="w-75 row-4"></div>
+					class="container col-8 h-100 d-flex flex-column align-items-center justify-content-center">
+					<!--주문 현황-->
+					<div class="w-100 my-1">
+						<div class="d-flex flex-column justify-content-start">
+							<h5>
+								<b>오늘 주문 현황</b>
+							</h5>
+							<div class="border my-4 p-3" style="width: 90%;">
+								<div class="d-flex w-100 p-1">
+									<div class="col-4 text-center">
+										<h5>
+											<b>결제완료 주문</b>
+										</h5>
+									</div>
+									<div class="col-4 text-center">
+										<h5>
+											<b>배송대기 중</b>
+										</h5>
+									</div>
+									<div class="col-4 text-center">
+										<h5>
+											<b>완료된 주문</b>
+										</h5>
+									</div>
+								</div>
+								<div class="d-flex w-100 p-1">
+									<div class="col-4 text-center">
+										<h5>15건</h5>
+									</div>
+									<div class="col-4 text-center">
+										<h5>4건</h5>
+									</div>
+									<div class="col-4 text-center">
+										<h5>30건</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="w-100 mb-1">
+						<div class="d-flex flex-column justify-content-start">
+							<h5>
+								<b>매출 현황</b>
+							</h5>
+							<div class="border my-4 p-3" style="width: 90%;">
+								<div class="d-flex w-100 p-1">
+									<div class="col-4 text-center">
+										<h5>
+											<b>오늘 매출액</b>
+										</h5>
+									</div>
+									<div class="col-4 text-center">
+										<h5>
+											<b>이번달 매출액</b>
+										</h5>
+									</div>
+									<div class="col-4 text-center">
+										<h5>
+											<b>최고 매출액</b>
+										</h5>
+									</div>
+								</div>
+								<div class="d-flex w-100 p-1">
+									<div class="col-4 text-center">
+										<h5>1,500,000원</h5>
+									</div>
+									<div class="col-4 text-center">
+										<h5>560,700,400원</h5>
+									</div>
+									<div class="col-4 text-center">
+										<h5>5,030,000원</h5>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="w-100">
+						<div class="d-flex flex-column justify-content-start">
+							<h5>
+								<b>이번 달 베스트 셀러 TOP 5</b>
+							</h5>
+							<div class="border d-flex my-4" style="width: 90%;">
+								<div class="card" style="width: 20%">
+									<img class="card-img-top"
+										src="${pageContext.request.contextPath}/resources/image/item/snack.png"
+										alt="Card image" style="width: 100%;">
+									<div class="card-body">
+										<h6 class="card-title">
+											<b>상품1</b>
+										</h6>
+										<p>판매량 : 300개</p>
+									</div>
+								</div>
+								<div class="card" style="width: 20%">
+									<img class="card-img-top"
+										src="${pageContext.request.contextPath}/resources/image/item/snack.png"
+										alt="Card image" style="width: 100%;">
+									<div class="card-body">
+										<h6 class="card-title">
+											<b>상품2</b>
+										</h6>
+										<p>판매량 : 300개</p>
+									</div>
+								</div>
+								<div class="card" style="width: 20%">
+									<img class="card-img-top"
+										src="${pageContext.request.contextPath}/resources/image/item/snack.png"
+										alt="Card image" style="width: 100%;">
+									<div class="card-body">
+										<h6 class="card-title">
+											<b>상품3</b>
+										</h6>
+										<p>판매량 : 300개</p>
+									</div>
+								</div>
+								<div class="card" style="width: 20%">
+									<img class="card-img-top"
+										src="${pageContext.request.contextPath}/resources/image/item/snack.png"
+										alt="Card image" style="width: 100%;">
+									<div class="card-body">
+										<h6 class="card-title">
+											<b>상품4</b>
+										</h6>
+										<p>판매량 : 300개</p>
+									</div>
+								</div>
+								<div class="card" style="width: 20%">
+									<img class="card-img-top"
+										src="${pageContext.request.contextPath}/resources/image/item/snack.png"
+										alt="Card image" style="width: 100%;">
+									<div class="card-body">
+										<h6 class="card-title">
+											<b>상품5</b>
+										</h6>
+										<p>판매량 : 300개</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 
 				<div
-					class="col-4 h-100 d-flex flex-column align-items-center justify-content-center">
+					class="col-4 d-flex flex-column align-items-center justify-content-center">
 					<h6>
 						<b>공용 메모장</b>
 					</h6>
 					<textarea class="form-control mt-3"
-						id="exampleFormControlTextarea1" rows="15"></textarea>
-					<button class="btn text-white mt-3"
+						id="exampleFormControlTextarea1" rows="8"></textarea>
+					<button class="btn text-white mt-1"
 						style="background-color: #27374D;">저장</button>
+					<div
+						class="container-fluid h-50 d-flex flex-column align-items-center mt-5">
+						<h6>
+							<b>재고 부족 리스트</b>
+						</h6>
+						<div class="container-fluid h-100 border border-dark"
+							style="overflow: auto;">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">상품번호</th>
+										<th scope="col">분류명</th>
+										<th scope="col">상품명</th>
+										<th scope="col">재고수량</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row">p101</th>
+										<td>간식</td>
+										<td>개껌</td>
+										<td>20</td>
+									</tr>
+									<tr>
+										<th scope="row">102</th>
+										<td>사료</td>
+										<td>유기농사료</td>
+										<td>10</td>
+									</tr>
+									<tr>
+										<th scope="row">303</th>
+										<td>사료</td>
+										<td>유기농사료</td>
+										<td>5</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

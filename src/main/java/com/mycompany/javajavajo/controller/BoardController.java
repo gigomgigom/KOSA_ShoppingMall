@@ -28,7 +28,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/board")
 public class BoardController {
 
-/*	@RequestMapping("/list")
+	/*
+	@RequestMapping("/list")
 	public String list() {
 		return "board/list";
 	}

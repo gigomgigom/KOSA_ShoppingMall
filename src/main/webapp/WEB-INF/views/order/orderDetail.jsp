@@ -49,7 +49,7 @@
 				<div class="col-md-11">
 					<div class="card-body">
 						<div class="col text-end">
-							<button type="button" class="btn btn-dark btn-sm">주문</button>
+							<div>배송 완료</div>
 						</div>
 						<h5 class="card-title">굿데이 건강한육포 닭가슴살 스틱 300g</h5>
 						<div class="mx-100%">
@@ -225,9 +225,6 @@
 							<div class="container-fluid">
 								<button type="button" class="btn w-100 mb-3">주문취소하기</button>
 							</div>
-							<input class="form-control mb-2" type="text"
-								placeholder="취소사유를 적어주세요." aria-label="default input example">
-							<button type="button" class="w-100 bg-secondary text-white">확인</button>
 						</div>
 					</div>
 				</div>
