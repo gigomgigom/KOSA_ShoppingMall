@@ -7,11 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/")
-public class HomeController {
+@RequestMapping("/mypage")
+public class MyPageController {
 	@RequestMapping("")
-	public String index() {
-		log.info("실행");
-		return "home";
+	public String myPageMain() {
+		return "mypage/mypage";
 	}
 }

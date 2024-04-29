@@ -10,13 +10,18 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/order")
 public class OrderController {
 	
-	@RequestMapping("/orderForm")
+	@RequestMapping("/order_form")
 	public String orderForm() {
 		return "order/orderForm";
 	}
 	
-	@RequestMapping("/orderDetail")
+	@RequestMapping("/order_detail")
 	public String orderDetail() {
 		return "order/orderDetail";
+	}
+	
+	@RequestMapping("/order_history")
+	public String orderHistory() {
+		return "order/orderHistory";
 	}
 }

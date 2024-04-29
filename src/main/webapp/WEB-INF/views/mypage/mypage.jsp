@@ -116,7 +116,8 @@
 				<div class="w-75 border m-0 mb-3 p-3">
 					<div class="d-flex justify-content-between m-0 mb-2 p-0">
 						<p class="m-0 p-0">
-							<a class="text-dark">202404181758268</a>
+							<a class="text-dark"
+								href="${pageContext.request.contextPath}/order/order_detail">202404181758268</a>
 						</p>
 						<p class="m-0  p-0" style="font-size: 0.75rem;">24-04-18
 							17:59:05</p>
@@ -134,7 +135,8 @@
 				<div class="w-75 border m-0 mb-3 p-3">
 					<div class="d-flex justify-content-between m-0 mb-2 p-0">
 						<p class="m-0 p-0">
-							<a class="text-dark">202404181758268</a>
+							<a class="text-dark"
+								href="${pageContext.request.contextPath}/order/order_detail">202404181758268</a>
 						</p>
 						<p class="m-0  p-0" style="font-size: 0.75rem;">24-04-18
 							17:59:05</p>
@@ -158,7 +160,8 @@
 				<div class="w-75 border m-0 p-3">
 					<div class="d-flex justify-content-between m-0 mb-2 p-0">
 						<p class="m-0 p-0">
-							<a class="text-dark">202404181758268</a>
+							<a class="text-dark"
+								href="${pageContext.request.contextPath}/order/order_detail">202404181758268</a>
 						</p>
 						<p class="m-0  p-0" style="font-size: 0.75rem;">24-04-18
 							17:59:05</p>
@@ -182,10 +185,10 @@
 				<hr class="w-75 m-0 my-3 p-0" />
 
 				<div
-					class=" d-flex justify-content-center align-items-center w-25 border m-0 my-3 p-0"
+					class=" d-flex justify-content-center align-items-center w-25 border m-0 my-3 p-0 rounded"
 					style="background-color: #27374D;">
 					<p class="m-0 p-0 py-2">
-						<a class="text-white text-decoration-none">주문내역 더보기</a>
+						<a class="text-white text-decoration-none" href="${pageContext.request.contextPath}/order/order_history">주문내역 더보기</a>
 					</p>
 				</div>
 			</div>
@@ -195,7 +198,7 @@
 
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
-	<!-- The Modal -->
+	<!-- 포인트 내역 모달창 -->
 	<div class="modal" id="myModal">
 		<div
 			class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -246,7 +249,6 @@
 					<button type="button" class="btn btn-danger"
 						data-bs-dismiss="modal">닫기</button>
 				</div>
-
 			</div>
 		</div>
 	</div>
