@@ -1,6 +1,7 @@
 package com.mycompany.javajavajo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +18,8 @@ public class AdminController {
 	public String adminDashBoard() {
 		return "admin/admin_dashboard";
 	}
-	@RequestMapping("/admin_member_view")
+	@GetMapping("/admin_member_view")
 	public String adminMemberView() {
-		return "admin/admin_member_view";
+		return "admin/admin_member";
 	}
 }

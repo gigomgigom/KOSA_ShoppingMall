@@ -10,7 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/shoppingcart")
 public class ShoppingCartController {
 	@RequestMapping("")
-	String shoppingCart() {
+	public String shoppingCart() {
+		log.info("모달 창 띄우면서 기능 호출");
 		return "/shoppingcart/shoppingcart";
 	}
 }

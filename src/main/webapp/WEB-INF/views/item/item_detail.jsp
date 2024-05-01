@@ -15,6 +15,7 @@
 </style>
 <!-- 사용자 정의 자바스크립트 -->
 <script>
+
 		function handleBtnShow(index) {
 			console.log("handleBtn1() 실행");
 			switch(index) {
@@ -120,9 +121,9 @@
 								</div>
 
 								<div class="mt-3 d-flex justify-content-between">
-									<button type="button" class="btn btn-lg border fw-bold" onClick="location.href='${pageContext.request.contextPath}/shoppingcart'"
-										style="background-color: #9DB2BF;">장바구니</button>
-									<button type="button" class="btn btn-lg text-white fw-bold w-50" onClick="location.href='${pageContext.request.contextPath}/order/order_form'"
+									<button type="button" id="add-cart" class="btn btn-lg border fw-bold" onClick="location.href='${pageContext.request.contextPath}/shoppingcart'"
+										style="background-color: #9DB2BF;">장바구니에 추가</button>
+									<button type="button" id="direct-purchase" class="btn btn-lg text-white fw-bold w-50" onClick="location.href='${pageContext.request.contextPath}/order/order_form'"
 										style="background-color: #27374D;">바로구매</button>
 								</div>
 							</div>

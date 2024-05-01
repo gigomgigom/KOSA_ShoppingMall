@@ -23,12 +23,12 @@
 				aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 				<div class="accordion-body">
 					<div class="d-flex flex-column">
-						<button class="btn row-1"
-							onclick="">회원조회</button>
-						<button class="btn row-1" onclick="">마일리지
-							관리</button>
-						<button class="btn row-1" onclick="">관리자
-							계정 관리</button>
+						<a class="btn row-1"
+							href="admin_member_view">회원조회</a>
+						<a class="btn row-1">마일리지
+							관리</a>
+						<a class="btn row-1">관리자
+							계정 관리</a>
 					</div>
 				</div>
 			</div>

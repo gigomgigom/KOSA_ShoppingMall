@@ -22,11 +22,11 @@
 		style="height: 50px; background-color: #27374D;">
 		<li class="nav-item ms-5 me-5"><a
 			class="fw-bold nav-link text-white" aria-current="page"
-			href="#"><h5>베스트셀러</h5></a></li>
+			href="${pageContext.request.contextPath}/item/item_list"><h5>베스트셀러</h5></a></li>
 		<li class="nav-item ms-5 me-5"><a class="nav-link text-white"
 			href="${pageContext.request.contextPath}/item/item_list"><h5>간식</h5></a></li>
 		<li class="nav-item ms-5 me-5"><a class="nav-link  text-white"
-			href="#"><h5>사료</h5></a></li>
+			href="${pageContext.request.contextPath}/item/item_list"><h5>사료</h5></a></li>
 		<li class="nav-item ms-5 me-5"><a class="nav-link text-white"
 			href="${pageContext.request.contextPath}/board/list"><h5>Q&A</h5></a></li>
 	</ul>

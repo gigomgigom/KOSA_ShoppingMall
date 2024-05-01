@@ -56,7 +56,7 @@
 							<hr />
 							<p class="card-text">선택: 스틱</p>
 							<div class="col text-end">
-								<button type="button" class="btn btn-dark btn-sm">사용후기
+								<button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">사용후기
 									쓰기</button>
 								<hr />
 								<div class="container mt-3">
@@ -233,6 +233,7 @@
 	</div>
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	<%@ include file="/WEB-INF/views/order/write_review_modal.jsp" %>
 </body>
 
 </html>

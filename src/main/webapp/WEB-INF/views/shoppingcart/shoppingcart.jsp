@@ -66,7 +66,7 @@
 
                 <div class="col-3 d-flex justify-content-center align-items-center my-2 p-0">
                     <div class="w-75 d-flex justify-content-center align-items-center">
-                        <button type="button" class="btn btn-light p-1" style="color: #273740">주문</button>
+                        <button type="button" class="btn btn-light p-1" style="color: #273740" onClick="location.href='${pageContext.request.contextPath}/order/order_form'">주문</button>
                     </div>
                 </div>
             </div>

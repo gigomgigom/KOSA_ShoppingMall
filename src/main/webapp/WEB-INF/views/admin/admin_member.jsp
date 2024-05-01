@@ -46,7 +46,7 @@
                 <div class="w-100 d-flex flex-column justify-content-center">
                     <h5><b>회원 리스트</b></h5>
                     <hr class="w-100"/>
-                    <div class="d-flex justify-content-end align-items-center">
+                    <form method="get" action="" class="d-flex justify-content-end align-items-center">
                         <div class="form-check">
                             <input type="radio" class="form-check-input" id="radio1" name="srcradio" value="name" checked>이름
                             <label class="form-check-label" for="radio1"></label>
@@ -57,9 +57,9 @@
                         </div>
                         <input type="text" class="form-control ms-4" placeholder="검색어 입력" name="검색" style="width: 15%;">
                         <div class="btn ms-1 d-flex justify-content-center align-items-center">
-                            <img src="search_icon.png" width="20px">
+                            <img src="${pageContext.request.contextPath}/resources/image/icon/search_icon.png" width="20px">
                         </div>                        
-                    </div>
+                    </form>
                     <div class="mt-4">
                         <table class="table table-hover text-center">
                             <thead class="table-dark">
