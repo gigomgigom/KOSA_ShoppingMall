@@ -7,7 +7,7 @@
 		<h4 class="m-0 text-white fw-bold">관리자 페이지</h4>
 	</div>
 	<div class="btn d-flex justify-content-center align-items-center"
-		style="height: 52px" onclick="">대쉬보드</div>
+		style="height: 52px" onclick="location.href='${pageContext.request.contextPath}/admin/main'">대쉬보드</div>
 	<div class="accordion" id="accordionExample">
 		<div class="accordion-item">
 			<h2 class="accordion-header" id="headingOne">

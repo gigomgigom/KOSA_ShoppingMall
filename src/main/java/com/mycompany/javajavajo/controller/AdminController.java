@@ -24,4 +24,8 @@ public class AdminController {
 	public String adminMemberView() {
 		return "admin/admin_member";
 	}
+	@GetMapping("/member_detail")
+	public String memberDetail() {
+		return "admin/admin_member_detail";
+	}
 }

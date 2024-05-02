@@ -16,7 +16,7 @@ public class Member {
 	private String memtel;
 	private boolean memenabled;
 	private String memrole;
-	private String mempoint;
+	private int mempoint;
 	private File memimg;
 	private Date memdate;
 }

@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="d-flex" style="width: 90%; height: 91vh;">
-                <div class="w-100 d-flex flex-column justify-content-center">
+                <div class="mt-5 w-100 d-flex flex-column">
                     <h5><b>회원 리스트</b></h5>
                     <hr class="w-100"/>
                     <form method="get" action="" class="d-flex justify-content-end align-items-center">
@@ -70,111 +70,17 @@
                                 <th>Email</th>
                                 <th>휴대폰번호</th>
                                 <th>가입일</th>
-                                <th>비밀번호 초기화</th>
-                                <th>마일리지 관리</th>
                               </tr>
                             </thead>
                             <tbody style="vertical-align: middle;">
-                              <tr>
+                              <tr onclick="location.href='${pageContext.request.contextPath}/admin/member_detail'">
                                 <td>1</td>
                                 <td>tkffuwnj</td>
                                 <td>감자바</td>
                                 <td>gamjava@example.com</td>
                                 <td>010-2810-4870</td>
                                 <td>2024. 04. 29.</td>
-                                <td><button class="btn btn-sm">초기화</button></td>
-                                <td><button class="btn btn-sm">마일리지 수정</button></td>
-                              </tr>
-                              <tr>
-                                <td>2</td>
-                                <td>tkffuwnj</td>
-                                <td>감자바</td>
-                                <td>gamjava@example.com</td>
-                                <td>010-2810-4870</td>
-                                <td>2024. 04. 29.</td>
-                                <td><button class="btn btn-sm">초기화</button></td>
-                                <td><button class="btn btn-sm">마일리지 수정</button></td>
-                              </tr>
-                              <tr>
-                                <td>3</td>
-                                <td>tkffuwnj</td>
-                                <td>감자바</td>
-                                <td>gamjava@example.com</td>
-                                <td>010-2810-4870</td>
-                                <td>2024. 04. 29.</td>
-                                <td><button class="btn btn-sm">초기화</button></td>
-                                <td><button class="btn btn-sm">마일리지 수정</button></td>
-                              </tr>
-                              <tr>
-                                <td>4</td>
-                                <td>tkffuwnj</td>
-                                <td>감자바</td>
-                                <td>gamjava@example.com</td>
-                                <td>010-2810-4870</td>
-                                <td>2024. 04. 29.</td>
-                                <td><button class="btn btn-sm">초기화</button></td>
-                                <td><button class="btn btn-sm">마일리지 수정</button></td>
-                              </tr>
-                              <tr>
-                                <td>5</td>
-                                <td>tkffuwnj</td>
-                                <td>감자바</td>
-                                <td>gamjava@example.com</td>
-                                <td>010-2810-4870</td>
-                                <td>2024. 04. 29.</td>
-                                <td><button class="btn btn-sm">초기화</button></td>
-                                <td><button class="btn btn-sm">마일리지 수정</button></td>
-                              </tr>
-                              <tr>
-                                <td>6</td>
-                                <td>tkffuwnj</td>
-                                <td>감자바</td>
-                                <td>gamjava@example.com</td>
-                                <td>010-2810-4870</td>
-                                <td>2024. 04. 29.</td>
-                                <td><button class="btn btn-sm">초기화</button></td>
-                                <td><button class="btn btn-sm">마일리지 수정</button></td>
-                              </tr>
-                              <tr>
-                                <td>7</td>
-                                <td>tkffuwnj</td>
-                                <td>감자바</td>
-                                <td>gamjava@example.com</td>
-                                <td>010-2810-4870</td>
-                                <td>2024. 04. 29.</td>
-                                <td><button class="btn btn-sm">초기화</button></td>
-                                <td><button class="btn btn-sm">마일리지 수정</button></td>
-                              </tr>
-                              <tr>
-                                <td>8</td>
-                                <td>tkffuwnj</td>
-                                <td>감자바</td>
-                                <td>gamjava@example.com</td>
-                                <td>010-2810-4870</td>
-                                <td>2024. 04. 29.</td>
-                                <td><button class="btn btn-sm">초기화</button></td>
-                                <td><button class="btn btn-sm">마일리지 수정</button></td>
-                              </tr>
-                              <tr>
-                                <td>9</td>
-                                <td>tkffuwnj</td>
-                                <td>감자바</td>
-                                <td>gamjava@example.com</td>
-                                <td>010-2810-4870</td>
-                                <td>2024. 04. 29.</td>
-                                <td><button class="btn btn-sm">초기화</button></td>
-                                <td><button class="btn btn-sm">마일리지 수정</button></td>
-                              </tr>
-                              <tr>
-                                <td>10</td>
-                                <td>tkffuwnj</td>
-                                <td>감자바</td>
-                                <td>gamjava@example.com</td>
-                                <td>010-2810-4870</td>
-                                <td>2024. 04. 29.</td>
-                                <td><button class="btn btn-sm">초기화</button></td>
-                                <td><button class="btn btn-sm">마일리지 수정</button></td>
-                              </tr>
+                              </tr>                              
                             </tbody>
                           </table>
                           <div class="d-flex justify-content-center mt-5">
