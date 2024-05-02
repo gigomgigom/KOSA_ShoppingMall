@@ -37,7 +37,7 @@
 	<div style="height: 70px"></div>
 	
 	<div class="container-fluid d-flex justify-content-center">
-		<form id="loginForm" style="width: 400px;" method="post" action="${pageContext.request.contextPath}/"
+		<form id="loginForm" style="width: 400px;" method="post" action="${pageContext.request.contextPath}/login"
 			class="d-flex flex-column mt-5">
 
 			<div class="d-flex justify-content-center">
@@ -45,10 +45,10 @@
 			</div>
 
 			<label for="username"></label> <input type="text" id="username"
-				name="username" class="form-control me-2 p-2 mt-5" placeholder="아이디">
+				name="memid" class="form-control me-2 p-2 mt-5" placeholder="아이디">
 
 			<label for="password"></label> <input type="password" id="password"
-				name="password" class="form-control me-2 p-2 mt-3 mb-1"
+				name="mempw" class="form-control me-2 p-2 mt-3 mb-1"
 				placeholder="비밀번호">
 
 			<div class="d-flex justify-content-end">
@@ -69,26 +69,5 @@
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	
-	<script>
-
-	//이벤트가 발생할 때 호출할 함수를 지정
-	document.getElementById("loginForm").addEventListener("submit",
-			function(event) {
-				event.preventDefault();
-
-				var username = document.getElementById("username").value;
-				var password = document.getElementById("password").value;
-
-				//if문을 사용하여 검사
-				if (username !== "황세림" || password !== "970321") {
-					alert("올바른 로그인 아이디 또는 비밀번호를 입력하세요.");
-				} else if(username === "황세림" && password === "970321"){
-					console.log("Username:", username);
-					console.log("Password:", password);
-					document.getElementById("loginForm").submit();
-				}
-			});
-	
-	</script>
 </body>
 </html>

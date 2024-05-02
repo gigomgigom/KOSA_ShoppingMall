@@ -14,6 +14,8 @@ public class Member {
 	private String memnicknm;
 	private String mememail;
 	private String memtel;
+	private boolean memenabled;
+	private String memrole;
 	private String mempoint;
 	private File memimg;
 	private Date memdate;

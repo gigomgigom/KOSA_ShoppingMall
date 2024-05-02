@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 보안 필터 체인을 적용하지 않는 요청 경로 : 보안 필터 체인 설정보다 먼저 설정해야함 -->
+	<security:http pattern="/resources/**" security="none" />
+
+	<!-- 보안 필터 체인 설정 -->
+	<security:http>
+		<!-- 인증 방식 설정: Form 인증 방식 -->
+		<security:form-login login-page="/auth/signin"			
+			username-parameter="memid" password-parameter="mempw"
+			login-processing-url="/login"
+			authentication-success-handler-ref="authenticationSuccessHandler"
+			authentication-failure-handler-ref="authenticationFailureHandler" />
+		
+		<!-- POST방식으로 요청하는 로그아웃 -->
+		<security:logout logout-url="/logout"
+			success-handler-ref="logoutSuccessHandler" />
+
+		<!-- 사이트간 요청 위조 방지 비활성화 -->
+		<!-- logout도 post 방식으로 요청(_csrf의 토큰을 전달해야함) -->
+		<security:csrf disabled="true" />
+
+		<!-- 요청 URL 권한 설정 방법1 -->
+		<security:intercept-url pattern="/ch17/admin/**" access="hasRole('ROLE_ADMIN')"/> 
+		<security:intercept-url pattern="/ch17/manager/**" access="hasRole('ROLE_MANAGER')"/> 
+		<security:intercept-url pattern="/ch17/user/**" access="isAuthenticated()"/>
+		
+		<security:intercept-url pattern="/**"
+			access="permitAll" />
+
+		<!-- 권한 없음일 경우 보여줄 페이지 설정 -->
+		<security:access-denied-handler
+			error-page="/ch17/error403" />
+	</security:http>
+	
+	<!-- 로그인 성공했을 때 실행하는 핸들러 -->
+	<bean id="authenticationSuccessHandler" class="com.mycompany.javajavajo.security.AuthenticationSuccessHandler">
+	
+	</bean>
+	<!-- 로그인 실패했을 때 실행하는 핸들러 -->
+	<bean id="authenticationFailureHandler" class="com.mycompany.javajavajo.security.AuthenticationFailureHandler">
+	
+	</bean>
+	<!-- 로그아웃 성공했을 때 실행하는 핸들러 -->
+	<bean id="logoutSuccessHandler" class="com.mycompany.javajavajo.security.LogoutSuccessHandler">
+	
+	</bean>
+
+	<!-- 요청 URL 권한 설정 방법2 클래스 또는 메소드에 @Secured("ROLE_ADMIN")을 붙일 수 있도록 설정 -->
+	<security:global-method-security
+		secured-annotations="enabled" />
+
+<!-- 인증 성공 또는 실패시 실행되는 핸들러 객체 설정
+	<bean id="authenticationSuccessHandler"
+		class="com.mycompany.springwebapp.security.Ch17AuthenticationSuccessHandler">
+		로그인 성공후 리다이렉트로 이동할 경로
+		alwaysUseDefaultTargetUrl: false(기본)-요청 경로로 리다이렉트, true-defaultTargetUrl로 
+			리다이렉트
+		<property name="alwaysUseDefaultTargetUrl" value="true"/> <property 
+			name="defaultTargetUrl" value="/"/>
+	</bean>
+
+	<bean id="authenticationFailureHandler"
+		class="com.mycompany.springwebapp.security.Ch17AuthenticationFailureHandler">
+		로그인 실패후 리다이렉트로 이동할 경로
+		<property name="defaultFailureUrl" value="/ch17/loginForm" />
+	</bean>
+
+	<bean id="logoutSuccessHandler"
+		class="com.mycompany.springwebapp.security.Ch17LogoutSuccessHandler">
+		로그아웃 성공시 리다이렉트로 이동할 경로
+		defaultTargetUrl: 생략-컨텍스트 루트 경로(/index.jsp)로 리다이렉트 , 지정-defaultTargetUrl로 
+			리다이렉트
+		<property name="defaultTargetUrl" value="/ch17/content"/>
+	</bean>
+ -->
+ 
+
+	<!-- 인증 관리자 설정(아이디와 패스워드를 DB와 비교해서 로그인 처리 관리) -->
+	<security:authentication-manager>
+		<security:authentication-provider
+			ref="daoAuthenticationProvider" />
+	</security:authentication-manager>
+
+	<!-- 인증 제공자 설정 -->
+	<bean id="daoAuthenticationProvider"
+		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<property name="userDetailsService"
+			ref="tm1UserDetailsService" />
+		<property name="authoritiesMapper"
+			ref="roleHierarchyAuthoritiesMapper" />
+	</bean>
+
+	<!-- 권한 계층 설정 -->
+	<bean id="roleHierarchyAuthoritiesMapper"
+		class="org.springframework.security.access.hierarchicalroles.RoleHierarchyAuthoritiesMapper">
+		<constructor-arg ref="roleHierarchyImpl" />
+	</bean>
+	<bean id="roleHierarchyImpl"
+		class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+		<property name="hierarchy">
+			<value>
+				ROLE_ADMIN
+				ROLE_USER
+			</value>
+		</property>
+	</bean>
+	
+	
+</beans>

@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/resources/spring/root/data_source.xml</config>
 		<config>src/main/resources/spring/root/mybatis.xml</config>
+		<config>src/main/resources/spring/root/security.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/resources/spring/dispatcher/ch01_static_resource.xml</config>
