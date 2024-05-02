@@ -1,5 +1,6 @@
 package com.mycompany.javajavajo.controller;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
+@Secured("ROLE_ADMIN")
 @RequestMapping("/admin")
 public class AdminController {
 	@RequestMapping("/main")

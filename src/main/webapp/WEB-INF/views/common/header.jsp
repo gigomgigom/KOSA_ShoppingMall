@@ -29,7 +29,7 @@
 				href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 			<li class="nav-item border-start border-end"><a
 				class="fw-bold nav-link text-black"
-				href="${pageContext.request.contextPath}/shoppingcart">관리자페이지로
+				href="${pageContext.request.contextPath}/admin/main">관리자페이지로
 					이동</a></li>
 		</sec:authorize>
 	</ul>
