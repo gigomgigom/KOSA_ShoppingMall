@@ -33,7 +33,7 @@
 			<!--상단 바-->
 			<div class="d-flex justify-content-between align-items-center"
 				style="width: 100%; height: 75px; background-color: #27374D;">
-				<h4 class="my-0 ms-5 ps-5 text-white">회원 조회</h4>
+				<h4 class="my-0 ms-5 ps-5 text-white">상품 관리</h4>
 				<div class="d-flex flex-row align-items-center">
 					<button type="button" class="btn me-5 text-white fw-bold"
 						style="background-color: #526D82;">로그아웃</button>
@@ -46,28 +46,36 @@
 			<div class="d-flex" style="width: 90%; height: 91vh;">
 				<div class="mt-5 w-100 d-flex flex-column">
 					<h5>
-						<b>심영조님의 정보</b>
+						<b>상품 추가</b>
 					</h5>
 					<hr class="w-100" />
 					<div class="d-flex flex-row">
 						<!-- 회원정보 출력(수정 input폼) -->
-						<div class="d-flex flex-column col-4">
+						<div class="d-flex flex-column col-3">
 							<form class="d-flex flex-column w-100 justify-content-center"
 								action="#" method="post">
 								<div class="my-3">
-									<label for="mno" class="form-label">회원번호</label> <input
+									<div class="form-group mb-2">
+						            	<label for="ctg">카테고리</label>
+						            	<select class="form-control" id="ctg" name="ctgno">
+						               		<option value="1">사료</option>
+						               		<option value="2">간식</option>
+						               		<option value="3">영양제</option>
+						            	</select>
+						        	</div>
+								</div>
+								<div class="mb-3">
+									<label for="mno" class="form-label">상품명</label> <input
 										type="text" class="form-control" id="mno" name="memno"
 										readonly value="1">
 								</div>
 								<div class="mb-3">
-									<label for="mid" class="form-label">회원 아이디</label> <input
-										type="text" class="form-control" id="mid" name="memid"
-										value="id1234">
+									<label for="mid" class="form-label">상품 가격</label> 
+									<input type="text" class="form-control" id="mid" name="memid">
 								</div>
 								<div class="mb-3">
-									<label for="memail" class="form-label">회원 E-mail</label> <input
-										type="text" class="form-control" id="memail" name="mememail"
-										value="email@naver.com">
+									<label for="memail" class="form-label">초기 수량</label> 
+									<input type="number" class="form-control" id="memail" name="mememail" value="0">
 								</div>
 								<div class="mb-3">
 									<label for="mtel" class="form-label">회원 휴대폰번호</label> <input
@@ -87,7 +95,7 @@
 								</div>
 							</form>
 						</div>
-						<div class="col-8">
+						<div class="col-9">
 							<div class="container-fluid h-50">
 								
 							</div>

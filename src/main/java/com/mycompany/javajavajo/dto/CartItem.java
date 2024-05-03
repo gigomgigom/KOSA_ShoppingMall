@@ -7,4 +7,6 @@ public class CartItem {
 	private int memno;
 	private int prodno;
 	private int qty;
+	
+	private Product product;
 }

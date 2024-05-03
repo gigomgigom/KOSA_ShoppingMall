@@ -3,7 +3,7 @@
 <mapper namespace="com.mycompany.javajavajo.dao.MemberDao">
 
 	<select id="selectByMid" parameterType="String" resultType="Member">
-		select memid, memname, mempw, memenabled, memrole, mememail
+		select memno, memid, mempw, memname, memnicknm, mememail, memtel, mempoint, memdate, memrole, memenabled
 		from member
 		where memid = #{memid}
 	</select>

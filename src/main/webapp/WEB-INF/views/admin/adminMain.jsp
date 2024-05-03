@@ -199,8 +199,7 @@
 						id="exampleFormControlTextarea1" rows="8"></textarea>
 					<button class="btn text-white mt-1"
 						style="background-color: #27374D;">저장</button>
-					<div
-						class="container-fluid h-50 d-flex flex-column align-items-center mt-5">
+					<div class="container-fluid h-50 d-flex flex-column align-items-center mt-5">
 						<h6>
 							<b>재고 부족 리스트</b>
 						</h6>
