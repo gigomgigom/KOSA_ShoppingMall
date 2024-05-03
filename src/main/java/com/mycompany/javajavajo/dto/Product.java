@@ -12,4 +12,6 @@ public class Product {
 	private int prodprice;
 	private Date proddate;
 	private int prodstock;
+	
+	private ProductImg productImg;
 }

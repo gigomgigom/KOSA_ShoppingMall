@@ -7,15 +7,24 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.javajavajo.dao.CartDao;
 import com.mycompany.javajavajo.dao.CartItemDao;
+import com.mycompany.javajavajo.dao.ProductDao;
+import com.mycompany.javajavajo.dao.ProductImgDao;
 import com.mycompany.javajavajo.dto.Cart;
 import com.mycompany.javajavajo.dto.CartItem;
+import com.mycompany.javajavajo.dto.Product;
+import com.mycompany.javajavajo.dto.ProductImg;
 
 @Service
-public class cartService {
+public class CartService {
 	@Autowired
 	private CartDao cartDao;
 	@Autowired
 	private CartItemDao cartItemDao;
+	@Autowired
+	private ProductDao productDao;
+	@Autowired
+	private ProductImgDao productImgDao;
+
 	
 	public Cart findCart(int memno) {
 		Cart cart = cartDao.selectByMemno(memno);
@@ -28,6 +37,14 @@ public class cartService {
 	
 	public List<CartItem> findCartItems(int memno) {
 		List<CartItem> cartItems = cartItemDao.selectByMemno(memno);
+		for(CartItem cartItem : cartItems) {
+			int prodno = cartItem.getProdno();
+			Product product = productDao.selectByProdno(prodno);
+			ProductImg productImg = productImgDao.selectByProdno(prodno);
+			product.setProductImg(productImg);
+			cartItem.setProduct(product);
+		}
+		
 		return cartItems;
 	}
 

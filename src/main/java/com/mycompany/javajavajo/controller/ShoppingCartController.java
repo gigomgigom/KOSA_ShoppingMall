@@ -11,7 +11,7 @@ import com.mycompany.javajavajo.dto.Cart;
 import com.mycompany.javajavajo.dto.CartItem;
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.security.Tm1UserDetails;
-import com.mycompany.javajavajo.service.cartService;
+import com.mycompany.javajavajo.service.CartService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/shoppingcart")
 public class ShoppingCartController {
 	@Autowired
-	private cartService service;
+	private CartService service;
 	
 	@RequestMapping("")
 	public String shoppingCart(Authentication authentication) {
