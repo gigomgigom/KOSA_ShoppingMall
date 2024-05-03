@@ -1,13 +1,12 @@
 package com.mycompany.javajavajo.dto;
 
-import java.io.File;
 import java.util.Date;
 
 import lombok.Data;
 
 @Data
 public class Member {
-	private int memno;
+	private int memno;	
 	private String memid;
 	private String mempw;
 	private String memname;
@@ -17,6 +16,7 @@ public class Member {
 	private boolean memenabled;
 	private String memrole;
 	private int mempoint;
-	private File memimg;
+	private byte[] memimg;
+	private String memimgtype;
 	private Date memdate;
 }

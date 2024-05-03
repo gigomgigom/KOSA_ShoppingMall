@@ -8,4 +8,9 @@
 		where memid = #{memid}
 	</select>
 	
+	<insert id="insert" parameterType="Member">
+		insert into member (memno, memid, mempw, memname, memnicknm, mememail, memtel, mempoint, memdate, memrole)
+		values(member_seq.nextval, #{memid}, #{mempw}, #{memname}, #{memnicknm}, #{mememail}, #{memtel}, 0, sysdate, 'ROLE_USER')
+	</insert>
+	
 </mapper>
