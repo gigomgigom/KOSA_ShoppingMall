@@ -7,6 +7,11 @@ import lombok.Data;
 @Data
 public class ProductImg {
 	private int prodno;
-	private File prodrepimg;
-	private File proddtlimg;
+	private byte[] prodrepimg;
+	private byte[] proddtlimg;
+	private String repimgoname;
+	private String repimgtype;
+	private String dtlimgoname;
+	private String dtlimgtype;
+	
 }
