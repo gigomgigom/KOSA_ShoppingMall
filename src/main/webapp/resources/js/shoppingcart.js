@@ -154,6 +154,6 @@ let data = [
     {img:"https://i.ibb.co/VNhrhcX/chickenbreast.jpg",name:"득근득근 웅장한 닭가슴살", price:20000, amount:2},
 ];
 
-initialSet(data);
+/*initialSet(data);*/
 
 

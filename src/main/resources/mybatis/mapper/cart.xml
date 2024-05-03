@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mycompany.javajavajo.dao.CartDao">
+	<insert id="insert" parameterType="int">
+		insert into cart
+		(memno)
+		values 
+		(#{memno})
+	</insert>
+	
+	<select id="selectByMemno" parameterType="int" resultType="com.mycompany.javajavajo.dto.Cart">
+		select *
+		from cart
+		where memno = #{memno}
+	</select>
 </mapper>
