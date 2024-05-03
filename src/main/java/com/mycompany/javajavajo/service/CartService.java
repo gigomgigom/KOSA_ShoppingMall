@@ -25,7 +25,7 @@ public class CartService {
 	@Autowired
 	private ProductImgDao productImgDao;
 
-	
+	//memno에 해당하는 cart가 있는지 확인 없다면 만들어줌
 	public Cart findCart(int memno) {
 		Cart cart = cartDao.selectByMemno(memno);
 		if(cart == null) {
@@ -35,6 +35,7 @@ public class CartService {
 		return cart;
 	}
 	
+	//카트를 찾아옴
 	public List<CartItem> findCartItems(int memno) {
 		List<CartItem> cartItems = cartItemDao.selectByMemno(memno);
 		for(CartItem cartItem : cartItems) {
