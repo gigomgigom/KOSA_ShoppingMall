@@ -88,8 +88,56 @@
 							</form>
 						</div>
 						<div class="col-8">
-							<div class="container-fluid h-50">
-								
+							<div class="container-fluid h-50 py-3">
+								<div class="container-fluid h-100 border border-dark"
+									style="overflow: auto;">
+									<table class="table">
+										<thead>
+											<tr>
+												<th scope="col">주문번호</th>
+												<th scope="col">주문상태</th>
+												<th scope="col">주문상품</th>
+												<th scope="col">결제금액</th>
+												<th scope="col">주문일자</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr onclick="location.href='${pageContext.request.contextPath}/order/member_detail'">
+												<th scope="row">202405030001</th>
+												<td>배송완료</td>
+												<td>개껌 외 2개</td>
+												<td>20000원</td>
+												<td>2024.05.03</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="container-fluid d-flex h-50 py-3">
+								<div class="col-8 h-100 border border-dark"
+									style="overflow: auto;">
+									<table class="table">
+										<thead>
+											<tr>
+												<th scope="col">주문번호</th>
+												<th scope="col">사용/적립</th>
+												<th scope="col">금액</th>
+												<th scope="col">일자</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row">202405030001</th>
+												<td>사용</td>
+												<td>3000포인트</td>
+												<td>2024.05.03</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="col-4 h-100">
+									
+								</div>								
 							</div>
 						</div>
 					</div>

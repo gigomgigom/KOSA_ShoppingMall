@@ -65,33 +65,19 @@
 						        	</div>
 								</div>
 								<div class="mb-3">
-									<label for="mno" class="form-label">상품명</label> <input
-										type="text" class="form-control" id="mno" name="memno"
-										readonly value="1">
+									<label for="mno" class="form-label">상품명</label> 
+									<input type="text" class="form-control" id="mno" name="memno">
 								</div>
 								<div class="mb-3">
 									<label for="mid" class="form-label">상품 가격</label> 
 									<input type="text" class="form-control" id="mid" name="memid">
 								</div>
 								<div class="mb-3">
-									<label for="memail" class="form-label">초기 수량</label> 
+									<label for="memail" class="form-label">입고된 수량</label> 
 									<input type="number" class="form-control" id="memail" name="mememail" value="0">
-								</div>
-								<div class="mb-3">
-									<label for="mtel" class="form-label">회원 휴대폰번호</label> <input
-										type="text" class="form-control" id="mtel" name="memtel"
-										value="010-2810-4870">
-								</div>
-								<div class="mb-3">
-									<label for="mdate" class="form-label">회원 가입일자</label> <input
-										type="text" class="form-control" id="mdate" name="memdate"
-										value="2024.04.29" readonly>
-								</div>
+								</div>								
 								<div class="w-100 d-flex flex-column align-items-center">
-									<button class="btn w-50 border my-4">수정</button>
-
-									<button class="btn w-50 border mt-4" type="button">비밀번호
-										초기화</button>
+									<button class="btn w-50 border my-4">추가</button>
 								</div>
 							</form>
 						</div>
