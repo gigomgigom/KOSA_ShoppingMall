@@ -2,8 +2,8 @@ package com.mycompany.javajavajo.controller;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.ProductImg;
 import com.mycompany.javajavajo.service.ItemService;
 
@@ -48,7 +49,9 @@ public class ItemController {
 		return "item/item_delievery";
 	}
 	@RequestMapping("/item_list")
-	public String itemList() {
+	public String itemList(int ctgno, Model model) {
+		List<Product> itemList = service.getItemListByCtgno(ctgno);
+		model.addAttribute("itemList", itemList);
 		return "item/itemList";
 	}
 	

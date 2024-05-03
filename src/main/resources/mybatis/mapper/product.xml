@@ -6,4 +6,10 @@
 		from product
 		where prodno = #{prodno}
 	</select>
+	
+	<select id="selectByCtgno" parameterType="int" resultType="com.mycompany.javajavajo.dto.Product">
+		select *
+		from product
+		where ctgno = #{ctgno}
+	</select>
 </mapper>
