@@ -14,6 +14,9 @@ import com.mycompany.javajavajo.dto.CartItem;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.ProductImg;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class CartService {
 	@Autowired
@@ -41,12 +44,26 @@ public class CartService {
 		for(CartItem cartItem : cartItems) {
 			int prodno = cartItem.getProdno();
 			Product product = productDao.selectByProdno(prodno);
-			ProductImg productImg = productImgDao.selectByProdno(prodno);
-			product.setProductImg(productImg);
 			cartItem.setProduct(product);
 		}
 		
 		return cartItems;
+	}
+
+	//카트 아이템 수량 변경
+	public void updateCart(int prodno, String operator) {
+		int result = 0;
+		if(operator.equals("+")) {
+			result = cartItemDao.updatePlus(prodno);
+		}else {
+			result = cartItemDao.updateMinus(prodno);
+		}
+	}
+	
+	//카트 아이템 삭제
+	public void deleteCartItems(int memno, int[] prodnos) {
+		int result = cartItemDao.deleteCartItems(memno, prodnos);
+		
 	}
 
 }

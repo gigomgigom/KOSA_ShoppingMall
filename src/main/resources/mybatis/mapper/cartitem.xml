@@ -6,4 +6,27 @@
 		from cartItem
 		where memno = ${memno}
 	</select>
+	
+	<update id="updatePlus" parameterType="int">
+		update cartitem
+		set qty = qty + 1
+		where prodno = #{prodno}
+	</update>
+	
+	<update id="updateMinus" parameterType="int">
+		update cartitem
+		set qty = qty - 1
+		where prodno = #{prodno}
+	</update>
+	
+	<delete id="deleteCartItems">
+		delete from cartitem
+		where memno = #{memno} 
+		and prodno in
+		<foreach item="prodno" collection="prodnos"
+      		open="(" separator="," close=")">
+        	#{prodno}
+  		</foreach>
+	</delete>
+	
 </mapper>
