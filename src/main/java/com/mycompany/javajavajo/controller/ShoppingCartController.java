@@ -41,8 +41,11 @@ public class ShoppingCartController {
 	
 	//카트아이템 수량 업데이트 컨트롤러
 	@PostMapping("/updateCart")
-	public void updateCart(int prodno,String operator) {
-		service.updateCart(prodno,operator);
+	public void updateCart(Authentication authentication, int prodno, String operator) {
+		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
+	    Member member = t1UserDetails.getMember();
+	    int memno = member.getMemno();
+		service.updateCart(memno, prodno, operator);
 	}
 	
 	//카트아이템 삭제 컨트롤러

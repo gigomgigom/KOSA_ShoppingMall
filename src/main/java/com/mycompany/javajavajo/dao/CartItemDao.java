@@ -12,9 +12,9 @@ public interface CartItemDao {
 
 	List<CartItem> selectByMemno(int memno);
 
-	int updatePlus(int prodno);
+	int updatePlus(@Param("memno") int memno, @Param("prodno") int prodno);
 
-	int updateMinus(int prodno);
+	int updateMinus(@Param("memno") int memno, @Param("prodno") int prodno);
 
 	int deleteCartItems(@Param("memno") int memno, @Param("prodnos")int[] prodnos);
 

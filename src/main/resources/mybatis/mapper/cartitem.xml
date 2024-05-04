@@ -7,16 +7,18 @@
 		where memno = ${memno}
 	</select>
 	
-	<update id="updatePlus" parameterType="int">
+	<update id="updatePlus">
 		update cartitem
 		set qty = qty + 1
-		where prodno = #{prodno}
+		where memno = #{memno}
+		and prodno = #{prodno}
 	</update>
 	
-	<update id="updateMinus" parameterType="int">
+	<update id="updateMinus">
 		update cartitem
 		set qty = qty - 1
-		where prodno = #{prodno}
+		where memno = #{memno}
+		and prodno = #{prodno}
 	</update>
 	
 	<delete id="deleteCartItems">
