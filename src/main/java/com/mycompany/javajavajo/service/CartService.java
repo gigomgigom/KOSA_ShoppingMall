@@ -52,12 +52,10 @@ public class CartService {
 
 	//카트 아이템 수량 변경
 	public void updateCart(int memno, int prodno, String operator) {
-		int result = 0;
-		if(operator.equals("+")) {
-			result = cartItemDao.updatePlus(memno, prodno);
-		}else {
-			result = cartItemDao.updateMinus(memno, prodno);
-		}
+		int result = cartItemDao.updateCart(memno, prodno, operator);;
+	
+
+
 	}
 	
 	//카트 아이템 삭제

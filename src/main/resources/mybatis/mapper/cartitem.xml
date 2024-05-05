@@ -7,20 +7,20 @@
 		where memno = ${memno}
 	</select>
 	
-	<update id="updatePlus">
+	<update id="updateCart">
 		update cartitem
-		set qty = qty + 1
+		set qty = 
+			<if test='operator.equals("+")'>
+				qty + 1
+			</if>
+			<if test='operator.equals("-")'>
+				qty - 1
+			</if>
 		where memno = #{memno}
 		and prodno = #{prodno}
 	</update>
 	
-	<update id="updateMinus">
-		update cartitem
-		set qty = qty - 1
-		where memno = #{memno}
-		and prodno = #{prodno}
-	</update>
-	
+
 	<delete id="deleteCartItems">
 		delete from cartitem
 		where memno = #{memno} 

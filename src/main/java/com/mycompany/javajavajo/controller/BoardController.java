@@ -28,100 +28,19 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/board")
 public class BoardController {
 
-	/*
+	
 	@RequestMapping("/list")
 	public String list() {
 		return "board/list";
 	}
 	
-	@RequestMapping("/search")
-	public String search(String search, String keyword, HttpSession session, Model model) {
-		List<Board> boardList = (List<Board>) session.getAttribute("boardList"); 
-		 if(boardList == null) { 
-			 boardList = new ArrayList<Board>();
-		 session.setAttribute("boardList", boardList); 
-		 }
-		
-		 List<Board> searchList = new ArrayList<Board>();
-		 for (Board board : boardList) {
-			 if(search.equals("글쓴이")) {
-				if (board.getBid().contains(keyword)) {
-					searchList.add(board);
-				}
-			}else if(search.equals("제목")){
-				if (board.getBtitle().contains(keyword)) {
-					searchList.add(board);
-				}
-			}else if(search.equals("내용")){
-				if (board.getBcontent().contains(keyword)) {
-					searchList.add(board);
-				}
-			}
-		}
-		 
-		 model.addAttribute("boardList", searchList);
-		 
-		return "board/list";
-	}
-
 	@RequestMapping("/create")
 	public String create() {
 		return "board/create";
 	}
 
 	@RequestMapping("/detail")
-	public String detail(int bno, HttpSession session, Model model) {
-		List<Board> boardList = (List<Board>) session.getAttribute("boardList");
-		for (Board board : boardList) {
-			if (board.getBno() == bno) {
-				board.setHitcount(board.getHitcount() + 1);
-				model.addAttribute("board", board);
-				break;
-			}
-		}
+	public String detail() {
 		return "board/detail";
 	}
-
-	@PostMapping("/createBoard")
-	public String createBoard(Uplload board, HttpSession session) throws IllegalStateException, IOException {
-		File destDir = new File("C:/Temp/uploadFiles");
-		if (!destDir.exists())
-			destDir.mkdirs();
-		
-		List<String> newAttach = new ArrayList<>();
-		for (MultipartFile mf : board.getAttach()) {
-			String fileName = mf.getOriginalFilename();
-			File destFile =new File(destDir, fileName); 
-			mf.transferTo(destFile);
-			newAttach.add(fileName);
-		}
-	
-		 List<Board> boardList = (List<Board>) session.getAttribute("boardList"); 
-		 if(boardList == null) { 
-			 boardList = new ArrayList<Board>();
-		 session.setAttribute("boardList", boardList); 
-		 }
-		 
-		Board newBoard = new Board(boardList.size()+1, board.getTitle(), board.getContent(), board.getId(), newAttach, 0, new Date());
-		boardList.add(newBoard);
-		return "redirect: list";
-	}
-
-	@GetMapping("/downloadFile")
-	public void downloadFile(String fileName, HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
-		String filePath = "C:/Temp/uploadFiles/" + fileName;
-		String fileType = request.getServletContext().getMimeType(fileName);
-		fileName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
-
-		response.setContentType(fileType);
-		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
-
-		OutputStream os = response.getOutputStream();
-		Path path = Paths.get(filePath);
-		Files.copy(path, os);
-		os.flush();
-		os.close();
-	}*/
-
 }
