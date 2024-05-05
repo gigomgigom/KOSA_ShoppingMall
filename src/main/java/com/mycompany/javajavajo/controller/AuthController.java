@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.javajavajo.dto.Member;
+import com.mycompany.javajavajo.dto.MemberAdr;
 import com.mycompany.javajavajo.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -40,9 +41,13 @@ public class AuthController {
 	}
 	
 	@PostMapping("/auth")
-	public String auth(Member member) {
-		service.auth(member);
+	// member, memberAdr 매개변수로 받음
+	public String auth(Member member, MemberAdr memberadr) {
+		service.auth(member, memberadr);
+		log.info(memberadr.getAdr());
 		return "redirect:/auth/signin";
 	}
+	
+	
 	
 }

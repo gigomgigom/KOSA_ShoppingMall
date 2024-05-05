@@ -9,8 +9,11 @@
 	</select>
 	
 	<insert id="insert" parameterType="Member">
+	<selectKey keyProperty="memno" order="BEFORE" resultType="int"> 
+			select member_seq.nextval from dual 
+	</selectKey>
 		insert into member (memno, memid, mempw, memname, memnicknm, mememail, memtel, mempoint, memdate, memrole)
-		values(member_seq.nextval, #{memid}, #{mempw}, #{memname}, #{memnicknm}, #{mememail}, #{memtel}, 0, sysdate, 'ROLE_USER')
+		values(#{memno}, #{memid}, #{mempw}, #{memname}, #{memnicknm}, #{mememail}, #{memtel}, 0, sysdate, 'ROLE_USER')
 	</insert>
 	
 </mapper>

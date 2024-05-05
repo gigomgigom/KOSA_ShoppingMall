@@ -5,6 +5,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.mycompany.javajavajo.dto.Member" alias="Member"/>
+		<typeAlias type="com.mycompany.javajavajo.dto.MemberAdr" alias="MemberAdr"/>
 	</typeAliases>
 	
 </configuration>

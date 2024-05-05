@@ -264,16 +264,16 @@
 			</div>
 
 			<div class="mb-3">
-				<input type="text" class="form-control w-100" id="uadress"
-					placeholder="주소 (필수)" name="dar" required>
+				<input type="text" class="form-control w-100" id="adr"
+					placeholder="주소 (필수)" name="adr" required>
 				<div class="mx-2">
-					<span id="uadressSpan" class="form-text" style="font-size: 11px;">주소를
+					<span id="adre" class="form-text" style="font-size: 11px;">주소를
 						입력해주세요.</span>
 				</div>
 			</div>
 
-			<input type="text" class="form-control w-100" id="text3"
-				placeholder="상세주소" name="text">
+			<input type="text" class="form-control w-100" id="adrdtl"
+				placeholder="상세주소" name="adrdtl">
 			<div class="w-100 d-flex justify-content-center p-5">
 				<input type="submit" class="btn text-white btn-sm w-100"
 					style="background-color: #27374D;" value="회원가입" />
