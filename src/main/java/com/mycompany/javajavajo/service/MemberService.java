@@ -32,4 +32,10 @@ public class MemberService {
 		memberAdrDao.insertAdr(memberAdr);
 		log.info(member.getMemno() + "");
 	}
+
+	public Member getMemberImage(int memno) {
+		Member member = memberDao.selectByMemnoMemImg(memno);
+	
+		return member;
+	}
 }

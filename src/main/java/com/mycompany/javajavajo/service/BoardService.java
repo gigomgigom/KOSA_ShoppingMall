@@ -27,6 +27,7 @@ public class BoardService {
 	public Qna getQna(int qnano) {
 		Qna qna = qnaDao.selectByQnano(qnano);
 		int memno = qna.getMemno();
+		qna.setQnacontent(qna.getQnacontent().replace("\r\n", "<br/>"));
 		Member member = memberDao.selectByMemno(memno);
 		qna.setQnawriter(member.getMemid());
 		return qna;

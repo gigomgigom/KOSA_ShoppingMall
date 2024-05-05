@@ -18,6 +18,8 @@ public interface MemberDao {
 
 
 	public Member selectByMemno(int memno);
-	
+
+
+	Member selectByMemnoMemImg(int memno);
 	
 }

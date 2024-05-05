@@ -9,6 +9,7 @@
 		insert into qna (qnano, memno, qnacontent, qnatitle, qnadate, qnahitcnt)
 		values(#{qnano}, #{memno}, #{qnacontent}, #{qnatitle}, sysdate, 0)
 	</insert>
+	
 
 	<select id="selectByQnano" parameterType="int" resultType="Qna">
 		select qnano, memno, qnatitle, qnacontent, qnadate, qnahitcnt

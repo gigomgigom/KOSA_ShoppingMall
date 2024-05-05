@@ -18,5 +18,6 @@ public class Member {
 	private int mempoint;
 	private byte[] memimg;
 	private String memimgtype;
+	private String memimgoname;
 	private Date memdate;
 }

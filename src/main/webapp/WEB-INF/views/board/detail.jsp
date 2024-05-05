@@ -29,7 +29,7 @@
 				<div class="col-1 border-end border-secondary-subtle m-0 p-0">
 					<div
 						class="d-flex justify-content-center align-items-center h-100 m-0 p-0">
-						<img class="img-fluid rounded-circle" src="photos\sun.jpg"
+						<img class="img-fluid rounded-circle" src="${pageContext.request.contextPath}/mypage/downloadMemImg?memno=${qna.memno}"
 							width="80%" height="80%">
 					</div>
 				</div>

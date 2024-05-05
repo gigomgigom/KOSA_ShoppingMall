@@ -22,4 +22,10 @@
 		where memno = #{memno}
 	</select>
 	
+	<select id="selectByMemnoMemImg" parameterType="int" resultType="Member">
+		select memimg, memimgtype, memimgoname
+		from member
+		where memno = #{memno}
+	</select>
+	
 </mapper>

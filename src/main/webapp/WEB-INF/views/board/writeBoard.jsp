@@ -86,8 +86,8 @@ $(function(){
 			</div>
 			<div
 				class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-2">
-			<!-- 	<textarea id='content'class="form-control w-75" rows="5"></textarea> -->
-			<input id='qnacontent' name="qnacontent" type="text" class="form-control w-75">
+				<textarea id='content' name="qnacontent" class="form-control w-75" rows="5"></textarea>
+			<!-- <input id='qnacontent' name="qnacontent" type="text" class="form-control w-75"> -->
 			</div>
 		</div>
 
