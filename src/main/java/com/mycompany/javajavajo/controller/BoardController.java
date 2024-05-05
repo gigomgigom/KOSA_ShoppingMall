@@ -1,25 +1,14 @@
 package com.mycompany.javajavajo.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
+
+import com.mycompany.javajavajo.dto.Qna;
+import com.mycompany.javajavajo.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,20 +16,35 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/board")
 public class BoardController {
-
+	@Autowired
+	private BoardService boardService;
+	
+	@GetMapping("/writeBoard")
+	public String writeBoard() {
+		return "board/writeBoard";
+	}
 	
 	@RequestMapping("/list")
-	public String list() {
+	public String listBoard() {
 		return "board/list";
 	}
 	
-	@RequestMapping("/create")
-	public String create() {
-		return "board/create";
+	@PostMapping("/writeBoard")
+	public String writeBoard(Qna qna) {
+		boardService.writeBoard(qna);
+		return "redirect:/board/list";
+		
 	}
-
-	@RequestMapping("/detail")
-	public String detail() {
+	
+	@GetMapping("/detailBoard")
+	public String detailBoard(int qnano, Model model) {
+		log.info("run");
+		Qna qna = boardService.getQna(qnano);
+		model.addAttribute("qna", qna);
+		log.info(qna.getQnatitle());
 		return "board/detail";
 	}
+	
+	
+	
 }

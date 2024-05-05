@@ -37,15 +37,15 @@
 				<div class="col-11 d-flex flex-column align-items-center m-0 p-0">
 					<div
 						class="d-flex justify-content-between align-items-center border-bottom w-100 h-75 m-0 p-0 py-2">
-						<p class="m-0 p-0 ps-3">제목이 들어갈 곳입니다</p>
+						<p class="m-0 p-0 ps-3">${qna.qnatitle}</p>
 					</div>
 
 					<diV
 						class="d-flex justify-content-start align-items-center w-100 h-25 m-0 p-0 py-4">
 						<p class="border-end border-secondary-subtle m-0 p-0 px-3"
-							style="font-weight: bold;">작성자</p>
-						<p class="border-end border-secondary-subtle m-0 p-0 px-3">2024-04-29</p>
-						<p class="border-end border-secondary-subtle m-0 p-0 px-3">24</p>
+							style="font-weight: bold;">${qna.qnawriter}</p>
+						<p class="border-end border-secondary-subtle m-0 p-0 px-3">${qna.qnadate}</p>
+						<p class="border-end border-secondary-subtle m-0 p-0 px-3">${qna.qnahitcnt}</p>
 						<p class="m-0 p-0 ps-3">
 							상태: <span class="badge rounded-pill"
 								style="background-color: #526D82;">완료</span>
@@ -56,9 +56,7 @@
 
 			<div class="w-100 m-0 p-0 p-5 mb-5">
 				<p class="m-0 p-0 ps-3">
-					안녕하세요. <br /> <br />사용환경 : 크롬 5.0 <br />QnA 게시판에서 해당 페이지을 글을 읽고
-					목록을 누르면 항상 1페이지로 갑니다. <br />원래 이런것인지요? <br />그리고 뒤로 가기도 적용이 되질
-					않네요. <br />프레임워크 게시판도 이렇게 되어 있는지 궁금합니다.
+					 ${qna.qnacontent}
 				</p>
 			</div>
 

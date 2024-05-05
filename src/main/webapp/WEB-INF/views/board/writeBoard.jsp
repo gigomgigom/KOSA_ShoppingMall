@@ -41,7 +41,7 @@ $(function(){
 	<header>
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	</header>
-
+	<form action="writeBoard" method="post">
 	<div
 		class="container-fluid  d-flex flex-column align-items-center m-0 my-5 p-0">
 
@@ -62,7 +62,7 @@ $(function(){
 			</div>
 			<div
 				class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-2">
-				<input id='title' type="text" class="form-control w-75">
+				<input id='qnatitle' name="qnatitle" type="text" class="form-control w-75">
 			</div>
 		</div>
 
@@ -74,7 +74,7 @@ $(function(){
 			</div>
 			<div
 				class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-2">
-				<input id='id' readonly class="w-75 text-center m-0 p-0" value='id'></p>
+				<input id='memno' name="memno" readonly class="w-75 text-center m-0 p-0" value='2'></p>
 			</div>
 		</div>
 
@@ -86,11 +86,12 @@ $(function(){
 			</div>
 			<div
 				class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-2">
-				<textarea id='content'class="form-control w-75" rows="5"></textarea>
+			<!-- 	<textarea id='content'class="form-control w-75" rows="5"></textarea> -->
+			<input id='qnacontent' name="qnacontent" type="text" class="form-control w-75">
 			</div>
 		</div>
 
-		<div class="row w-50 border-bottom m-0 p-0">
+		<!-- <div class="row w-50 border-bottom m-0 p-0">
 			<div
 				class="col-2 d-flex justify-content-center align-items-center border-end  m-0 p-0 py-2"
 				style="background-color: #27374D; color: white">
@@ -100,15 +101,15 @@ $(function(){
 				class="col-10 d-flex flex-column justify-content-center align-items-center m-0 p-0 py-2">
 				<input id='attach' type="file" class="form-control w-75 text-center m-0 p-0" multiple>
 			</div>
-		</div>
+		</div> -->
 
 		<div
 			class="d-flex justify-conten-center align-items-center m-0 my-5 p-0">
-			<a id="btn-save" class="btn me-2" style="background-color: #273740; color: white">저장</a>
+			<button id="btn-save" class="btn me-2" style="background-color: #273740; color: white">저장</button>
 			<a href="list" class="btn border text-decoration-none text-dark">취소</a>
 		</div>
 	</div>
-
+</form>
 	<footer>
 		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	</footer>

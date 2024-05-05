@@ -15,6 +15,9 @@ public interface MemberDao {
 	
 	// insert = int 타입으로 받기
 	public int insert(Member member);
+
+
+	public Member selectByMemno(int memno);
 	
 	
 }

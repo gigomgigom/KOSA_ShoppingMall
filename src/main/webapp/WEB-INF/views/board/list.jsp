@@ -39,7 +39,7 @@ $(function(){
                 </div>
 
                 <div class="d-flex m-0 p-0 " style="width:25%; height: 10%;">
-                    <form class="d-flex w-100 m-0 p-0" method="" action="">
+                    <form class="d-flex w-100 m-0 p-0" method="post" action="">
                         <select class="form-select form-select-sm w-25 m-0 p-0" style="background-image: none;">
                             <option class="text-center m-0 p-0" value="글쓴이">글쓴이</option>
                             <option class="text-center m-0 p-0" value="제목">제목</option>
@@ -87,7 +87,7 @@ $(function(){
                             <span class="badge rounded-pill" style="background-color: #9DB2BF; color: white">접수</span>
                         </td>
                         <td class="d-flex justify-content-center align-items-center col-6 m-0 p-0">
-                            <p class="m-0 p-0 text-start">제목1</p>
+                            <p href="${pageContext.request.contextPath}/board/detail"class="m-0 p-0 text-start">제목1</p>
                         </td>
                         <td class="d-flex justify-content-center align-items-center col-1 m-0 p-0">
                             <p class="m-0 p-0">글쓴이1</p>
@@ -170,7 +170,8 @@ $(function(){
                     </div>
                     
                     <div>
-                        <a class="btn" style="background-color: #273740; color: white">글쓰기</a>
+                        <a href="${pageContext.request.contextPath}/board/writeBoard" class="btn" style="background-color: #273740; color: white">글쓰기</a>
+                       
                     </div>
             </div>
         </div>

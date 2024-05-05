@@ -16,4 +16,10 @@
 		values(#{memno}, #{memid}, #{mempw}, #{memname}, #{memnicknm}, #{mememail}, #{memtel}, 0, sysdate, 'ROLE_USER')
 	</insert>
 	
+	<select id="selectByMemno" parameterType="int" resultType="Member">
+		select memno, memid
+		from member
+		where memno = #{memno}
+	</select>
+	
 </mapper>
