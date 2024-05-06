@@ -74,7 +74,7 @@ $(function(){
 			</div>
 			<div
 				class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-2">
-				<input id='memno' name="memno" readonly class="w-75 text-center m-0 p-0" value='2'></p>
+				<input id='memno'  name="memno" readonly class="w-75 text-center m-0 p-0" value='2'></p>
 			</div>
 		</div>
 
@@ -87,8 +87,7 @@ $(function(){
 			<div
 				class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-2">
 				<textarea id='content' name="qnacontent" class="form-control w-75" rows="5"></textarea>
-			<!-- <input id='qnacontent' name="qnacontent" type="text" class="form-control w-75"> -->
-			</div>
+			</div> 
 		</div>
 
 		<!-- <div class="row w-50 border-bottom m-0 p-0">
@@ -102,7 +101,7 @@ $(function(){
 				<input id='attach' type="file" class="form-control w-75 text-center m-0 p-0" multiple>
 			</div>
 		</div> -->
-
+		
 		<div
 			class="d-flex justify-conten-center align-items-center m-0 my-5 p-0">
 			<button id="btn-save" class="btn me-2" style="background-color: #273740; color: white">저장</button>

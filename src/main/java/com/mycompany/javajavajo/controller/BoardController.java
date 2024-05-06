@@ -30,9 +30,10 @@ public class BoardController {
 	@RequestMapping("/list")
 	public String listBoard(@RequestParam(defaultValue="") String keyword, Model model) {
 		log.info(keyword);
-		List<Qna> qna = boardService.getBoardList();
-		model.addAttribute("qnaList", qna);
-		
+		if(keyword.equals("")) {
+			List<Qna> qna = boardService.getBoardList();
+			model.addAttribute("qnaList", qna);
+		}
 		
 		return "board/list";
 	}
