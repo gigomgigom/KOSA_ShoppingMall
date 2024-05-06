@@ -4,9 +4,7 @@
 <html>
 <head>
 <!-- 사용자 정의 자바스크립트 -->
-<script>
-		
-		</script>
+<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 <!-- jQuery 외부 라이브러리 설정 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>

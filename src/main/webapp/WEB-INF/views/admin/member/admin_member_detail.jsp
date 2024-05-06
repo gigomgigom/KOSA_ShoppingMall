@@ -3,10 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 사용자 정의 자바스크립트 -->
-<script>
-		
-		</script>
+<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 <!-- jQuery 외부 라이브러리 설정 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
@@ -80,18 +77,22 @@
 										value="2024.04.29" readonly>
 								</div>
 								<div class="w-100 d-flex flex-column align-items-center">
-									<button class="btn w-50 border my-4">수정</button>
+									<button class="btn w-50 border mt-2">수정</button>
 
-									<button class="btn w-50 border mt-4" type="button">비밀번호
+									<button class="btn w-50 border mt-2" type="button">비밀번호
 										초기화</button>
+										
+									<button class="btn w-50 border mt-2" type="button">마일리지
+										수정</button>
 								</div>
 							</form>
 						</div>
 						<div class="col-8">
+							<!-- 주문내역 사용내역 -->
 							<div class="container-fluid h-50 py-3">
 								<div class="container-fluid h-100 border border-dark"
 									style="overflow: auto;">
-									<table class="table">
+									<table class="table table-hover">
 										<thead>
 											<tr>
 												<th scope="col">주문번호</th>
@@ -113,8 +114,9 @@
 									</table>
 								</div>
 							</div>
-							<div class="container-fluid d-flex h-50 py-3">
-								<div class="col-8 h-100 border border-dark"
+							<!-- 포인트 사용내역 -->
+							<div class="container-fluid h-50 py-3">
+								<div class="h-100 border border-dark"
 									style="overflow: auto;">
 									<table class="table">
 										<thead>
@@ -134,10 +136,7 @@
 											</tr>
 										</tbody>
 									</table>
-								</div>
-								<div class="col-4 h-100">
-									
-								</div>								
+								</div>						
 							</div>
 						</div>
 					</div>

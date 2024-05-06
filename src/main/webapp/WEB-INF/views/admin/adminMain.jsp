@@ -4,6 +4,7 @@
 <html>
 <head>
 <!-- 사용자 정의 자바스크립트 -->
+<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 <style>
 * {
 	margin: 0px;

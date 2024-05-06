@@ -11,9 +11,9 @@
 	<div class="accordion" id="accordionExample">
 		<div class="accordion-item">
 			<h2 class="accordion-header" id="headingOne">
-				<button class="accordion-button" type="button"
+				<button class="accordion-button ${menuNum==1 ? '' : 'collapsed'}" type="button"
 					data-bs-toggle="collapse" data-bs-target="#collapseOne"
-					aria-expanded="true" aria-controls="collapseOne">
+					aria-expanded="${menuNum==0}" aria-controls="collapseOne">
 					<img
 						src="${pageContext.request.contextPath}/resources/image/icon/member_icon.png"
 						class="me-2" style="width: 20px;" /> 회원관리
@@ -25,8 +25,6 @@
 					<div class="d-flex flex-column">
 						<a class="btn row-1"
 							href="admin_member_view">회원조회</a>
-						<a class="btn row-1">마일리지
-							관리</a>
 						<a class="btn row-1">관리자
 							계정 관리</a>
 					</div>
@@ -35,9 +33,9 @@
 		</div>
 		<div class="accordion-item">
 			<h2 class="accordion-header" id="headingTwo">
-				<button class="accordion-button collapsed" type="button"
+				<button class="accordion-button ${menuNum==1 ? '' : 'collapsed'}" type="button"
 					data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-					aria-expanded="false" aria-controls="collapseTwo">
+					aria-expanded="${menuNum==1}" aria-controls="collapseTwo">
 					<img
 						src="${pageContext.request.contextPath}/resources/image/icon/product_icon.png"
 						class="me-2" style="width: 20px;" /> 상품관리
@@ -47,18 +45,17 @@
 				aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 				<div class="accordion-body">
 					<div class="d-flex flex-column">
-						<button class="btn row-1">상품 설정</button>
-						<button class="btn row-1">상품 추가</button>
-						<button class="btn row-1">재고 확인</button>
+						<a class="btn row-1" href="product_list">상품 조회</a>
+						<a class="btn row-1" onclick="openAddProduct()">상품 추가</a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="accordion-item">
 			<h2 class="accordion-header" id="headingThree">
-				<button class="accordion-button collapsed" type="button"
+				<button class="accordion-button ${menuNum==2 ? '' : 'collapsed'}" type="button"
 					data-bs-toggle="collapse" data-bs-target="#collapseThree"
-					aria-expanded="false" aria-controls="collapseThree">
+					aria-expanded="${menuNum==2}" aria-controls="collapseThree">
 					<img
 						src="${pageContext.request.contextPath}/resources/image/icon/order_icon.png"
 						class="me-2" style="width: 20px;" /> 주문관리
@@ -76,9 +73,9 @@
 		</div>
 		<div class="accordion-item">
 			<h2 class="accordion-header" id="headingFour">
-				<button class="accordion-button collapsed" type="button"
+				<button class="accordion-button ${menuNum==3 ? '' : 'collapsed'}" type="button"
 					data-bs-toggle="collapse" data-bs-target="#collapseFour"
-					aria-expanded="false" aria-controls="collapseFour">
+					aria-expanded="${menuNum==3}" aria-controls="collapseFour">
 					<img
 						src="${pageContext.request.contextPath}/resources/image/icon/board_icon.png"
 						class="me-2" style="width: 20px;" /> 게시판 관리
