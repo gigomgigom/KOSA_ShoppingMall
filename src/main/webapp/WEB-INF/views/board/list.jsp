@@ -33,23 +33,19 @@ $(function(){
 	</header>
 
         <div class="container-fluid  d-flex flex-column align-items-center m-0, p-0">
+            
+             <div class="d-flex w-75 m-0 my-5 p-0 ">
+                    <form class="d-flex w-100 m-0 p-0" method="get" action="">
+                        <input name="keyword" class="form-control form-control-sm text-center text-muted w-100 m-0 p-0 py-2" type="text" placeholder="&#8474; 검색어를 입력해주세요">
+                   </form>
+                </div>
+            
+            
             <div class="d-flex justify-content-between align-items-center w-75 m-0 mb-3 p-0">
                 <div class="d-flex align-items-center m-0 p-0">
                     <p class="m-0 p-0">총 게시글 30건</p>
                 </div>
-
-                <div class="d-flex m-0 p-0 " style="width:25%; height: 10%;">
-                    <form class="d-flex w-100 m-0 p-0" method="post" action="">
-                        <select class="form-select form-select-sm w-25 m-0 p-0" style="background-image: none;">
-                            <option class="text-center m-0 p-0" value="글쓴이">글쓴이</option>
-                            <option class="text-center m-0 p-0" value="제목">제목</option>
-                            <option class="text-center m-0 p-0" value="내용">내용</option>
-                        </select>
-                        <input class="form-control form-control-sm w-75 m-0 p-0" type="text">
-                   </form>
-                </div>
             </div>
-            
             
             <table class="table table-borderless w-75 m-0 mb-5 p-0">
                 <thead class="m-0 p-0">
