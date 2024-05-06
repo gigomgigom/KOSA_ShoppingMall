@@ -29,12 +29,8 @@ public class BoardController {
 	
 	@RequestMapping("/list")
 	public String listBoard(@RequestParam(defaultValue="") String keyword, Model model) {
-		log.info(keyword);
-		if(keyword.equals("") || keyword == null) {
-			List<Qna> qna = boardService.getBoardList();
-		}
-		// 게시판의 제목이나 내용을 불러옴
-		List<Qna> qna = boardService.getBykeyword(keyword);
+		
+		List<Qna> qna = boardService.getQnaList(keyword);
 		model.addAttribute("qnaList", qna);
 		return "board/list";
 		
