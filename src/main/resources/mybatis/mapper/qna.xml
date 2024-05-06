@@ -29,7 +29,14 @@
 		from qna
 		where qnatitle like '%' || #{keyword} || '%'
 		or qnacontent like '%' || #{keyword} || '%'
+		order by qnano desc
 	</select>
+
+	<update id="updatehitcnt" parameterType="int">
+		update qna set
+			qnahitcnt = qnahitcnt + 1
+			where qnano = #{qnano}
+	</update>
 
 
 </mapper>

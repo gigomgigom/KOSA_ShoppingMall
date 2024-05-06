@@ -44,7 +44,7 @@
 						class="d-flex justify-content-start align-items-center w-100 h-25 m-0 p-0 py-4">
 						<p class="border-end border-secondary-subtle m-0 p-0 px-3"
 							style="font-weight: bold;">${qna.qnawriter}</p>
-						<p class="border-end border-secondary-subtle m-0 p-0 px-3">${qna.qnadate}</p>
+						<p class="border-end border-secondary-subtle m-0 p-0 px-3"><fmt:formatDate value="${qna.qnadate}" pattern="yyyy-MM-dd"/></p>
 						<p class="border-end border-secondary-subtle m-0 p-0 px-3">${qna.qnahitcnt}</p>
 						<p class="m-0 p-0 ps-3">
 							상태: <span class="badge rounded-pill"
@@ -91,7 +91,7 @@
 		<div
 			class="d-flex w-75 justify-content-center align-items-center m-0 mb-3 p-0">
 			<a class="btn btn-sm m-0 p-0"
-				style="background-color: #27374D; color: white;">목록</a>
+				style="background-color: #27374D; color: white;" href="${pageContext.request.contextPath}/board/list">목록</a>
 		</div>
 
 		<div

@@ -27,6 +27,7 @@ public class BoardService {
 	}
 	// service에서 dao를 호출 memid 테이블얻어옴
 	public Qna getQna(int qnano) {
+		int qnahitcnt = qnaDao.updatehitcnt(qnano);
 		Qna qna = qnaDao.selectByQnano(qnano);
 		int memno = qna.getMemno();
 		qna.setQnacontent(qna.getQnacontent().replace("\r\n", "<br/>"));
