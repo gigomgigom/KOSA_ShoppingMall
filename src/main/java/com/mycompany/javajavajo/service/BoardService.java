@@ -1,5 +1,7 @@
 package com.mycompany.javajavajo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,7 @@ public class BoardService {
 	
 	public void writeBoard(Qna qna) {
 		// 비지니스 로직 처리
-		int rowNum = qnaDao.insertBoard(qna);
+		int rowNum = qnaDao.insertBoard(qna); // insert, update, delete = int형으로 (몇행이 바뀌는지 리턴해줌)
 		log.info("rowNum: " + rowNum + ", bno: " + qna.getQnano());
 	}
 	// service에서 dao를 호출 memid 테이블얻어옴
@@ -32,5 +34,16 @@ public class BoardService {
 		qna.setQnawriter(member.getMemid());
 		return qna;
 	}
+	
+	public List<Qna> getBoardList() {
+		List<Qna> qna = qnaDao.selectQnaList();
+		for(Qna q : qna) {
+			int memno = q.getMemno();
+			Member member = memberDao.selectByMemno(memno);
+			q.setQnawriter(member.getMemid());
+		}
+		return qna;
+	}
+	
 	
 }

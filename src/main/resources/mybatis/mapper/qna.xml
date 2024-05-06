@@ -3,6 +3,7 @@
 <mapper namespace="com.mycompany.javajavajo.dao.QnaDao">
 	
 	<insert id="insertBoard" parameterType="Qna">
+	<!-- dto의 qnano에 시퀀스 번호를 qnano에 넣어줌 -->
 	<selectKey keyProperty="qnano" order="BEFORE" resultType="int"> 
 			select qna_seq.nextval from dual 
 	</selectKey>
@@ -17,7 +18,11 @@
 		where qnano = #{qnano}
 	</select>
 
-
+<!-- 리스트로 받아야 하지만 교수님이 그냥 Qna dto로받으라고 하심 -->
+	<select id="selectQnaList" resultType="Qna">
+		select *
+		from qna
+	</select>
 
 
 </mapper>

@@ -60,95 +60,27 @@ $(function(){
                 
                 
                 <tbody id="tboard" class="m-0 p-0">                   
-                    <tr class="row border-bottom border-second-subtle m-0 p-0 py-3">
+              <!-- items = 반복가능한 무언가?(qna(dto)의 정보) -->
+                    <c:forEach var="qna" items="${qnaList}">
+                    	<tr class="row border-bottom border-second-subtle m-0 p-0 py-3">
                         <td class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
                             <span class="badge rounded-pill" style="background-color: #9DB2BF; color: white">접수</span>
                         </td>
                         <td class="d-flex justify-content-center align-items-center col-6 m-0 p-0">
-                            <p class="m-0 p-0 text-start">제목1</p>
+                            <p class="m-0 p-0 text-start">${qna.qnatitle}</p>
                         </td>
                         <td class="d-flex justify-content-center align-items-center col-1 m-0 p-0">
-                            <p class="m-0 p-0">글쓴이1</p>
+                            <p class="m-0 p-0">${qna.qnawriter}</p>
                         </td>
                         <td class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
-                            <p class="m-0 p-0">2024-04-12</p>
+                            <p class="m-0 p-0"><fmt:formatDate value="${qna.qnadate}" pattern="yyyy-MM-dd"/></p>
                         </td>
                         <td class="d-flex justify-content-center align-items-center col-1 m-0 p-0">
-                            <p class="m-0 p-0">7</p>
+                            <p class="m-0 p-0">${qna.qnahitcnt}</p>
                         </td>
                     </tr>
-
-                    <tr class="row border-bottom border-second-subtle m-0 p-0 py-3">
-                        <td class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
-                            <span class="badge rounded-pill" style="background-color: #9DB2BF; color: white">접수</span>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-6 m-0 p-0">
-                            <p href="${pageContext.request.contextPath}/board/detail"class="m-0 p-0 text-start">제목1</p>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-1 m-0 p-0">
-                            <p class="m-0 p-0">글쓴이1</p>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
-                            <p class="m-0 p-0">2024-04-12</p>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-1 m-0 p-0">
-                            <p class="m-0 p-0">7</p>
-                        </td>
-                    </tr>
-
-                    <tr class="row border-bottom border-second-subtle m-0 p-0 py-3">
-                        <td class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
-                            <span class="badge rounded-pill" style="background-color: #526D82; color: white">완료</span>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-6 m-0 p-0">
-                            <p class="m-0 p-0 text-start">제목2</p>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-1 m-0 p-0">
-                            <p class="m-0 p-0">글쓴이2</p>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
-                            <p class="m-0 p-0">2024-04-12</p>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-1 m-0 p-0">
-                            <p class="m-0 p-0">7</p>
-                        </td>
-                    </tr>
-
-                    <tr class="row border-bottom border-second-subtle m-0 p-0 py-3">
-                        <td class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
-                            <span class="badge rounded-pill" style="background-color: #526D82; color: white">완료</span>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-6 m-0 p-0">
-                            <p class="m-0 p-0 text-start">제목3</p>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-1 m-0 p-0">
-                            <p class="m-0 p-0">글쓴이3</p>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
-                            <p class="m-0 p-0">2024-04-12</p>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-1 m-0 p-0">
-                            <p class="m-0 p-0">7</p>
-                        </td>
-                    </tr>
-
-                    <tr class="row border-bottom border-second-subtle m-0 p-0 py-3">
-                        <td class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
-                            <span class="badge rounded-pill" style="background-color: #526D82; color: white">완료</span>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-6 m-0 p-0">
-                            <p class="m-0 p-0 text-start">제목3</p>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-1 m-0 p-0">
-                            <p class="m-0 p-0">글쓴이3</p>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
-                            <p class="m-0 p-0">2024-04-12</p>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center col-1 m-0 p-0">
-                            <p class="m-0 p-0">7</p>
-                        </td>
-                    </tr>
+                    </c:forEach>
+                    
                 </tbody>
             </table>
              
@@ -167,11 +99,10 @@ $(function(){
                     
                     <div>
                         <a href="${pageContext.request.contextPath}/board/writeBoard" class="btn" style="background-color: #273740; color: white">글쓰기</a>
-                       
                     </div>
             </div>
         </div>
-	</div>
+	  </div>
 	<footer>
 		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	</footer>
