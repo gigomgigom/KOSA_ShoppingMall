@@ -77,15 +77,21 @@
 			</div>
 
 		</div>
+		
 		<div class="w-75 m-0 mb-5 p-0">
-			<div
-				class="d-flex justify-content-start align-items-center border-top border-bottom border-secondary-subtle w-100 m-0 px-5 py-1">
-				<p class="m-0 p-0">&#9651이전글</p>
-			</div>
-			<div
-				class="d-flex justify-content-start align-items-center border-bottom border-secondary-subtle w-100 m-0 px-5 py-1">
-				<p class="m-0 p-0">&#9661다음글</p>
-			</div>
+			<c:if test="${qna.nextno != -1}">
+				<div
+					class="d-flex justify-content-start align-items-center border-top border-bottom border-secondary-subtle w-100 m-0 px-5 py-1">
+					<p class="m-0 p-0">&#9651다음글 <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.nextno}" class="text-dark text-decoration-none">${qna.nexttitle}</a></p>
+				</div>
+			</c:if>
+			
+			<c:if test="${qna.preno != -1}">
+				<div
+					class="d-flex justify-content-start align-items-center border-bottom border-secondary-subtle w-100 m-0 px-5 py-1">
+					<p class="m-0 p-0">&#9661이전글  <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.preno}" class="text-dark text-decoration-none">${qna.pretitle}</a></p>
+				</div>
+			</c:if>
 		</div>
 
 		<div

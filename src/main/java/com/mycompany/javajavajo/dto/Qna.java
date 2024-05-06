@@ -18,4 +18,8 @@ public class Qna {
 	private byte[] qnaattachdata;
 	
 	private String qnawriter;
+	private String pretitle;
+	private int preno;
+	private String nexttitle;
+	private int nextno;
 }

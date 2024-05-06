@@ -29,10 +29,12 @@ public class BoardService {
 	public Qna getQna(int qnano) {
 		int qnahitcnt = qnaDao.updatehitcnt(qnano);
 		Qna qna = qnaDao.selectByQnano(qnano);
-		int memno = qna.getMemno();
 		qna.setQnacontent(qna.getQnacontent().replace("\r\n", "<br/>"));
+		int memno = qna.getMemno();
 		Member member = memberDao.selectByMemno(memno);
 		qna.setQnawriter(member.getMemid());
+		log.info(qna.getNextno()+"");
+		log.info(qna.getPreno()+"");
 		return qna;
 	}
 	

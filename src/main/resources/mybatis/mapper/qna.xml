@@ -13,8 +13,13 @@
 	
 
 	<select id="selectByQnano" parameterType="int" resultType="Qna">
-		select qnano, memno, qnatitle, qnacontent, qnadate, qnahitcnt
-		from qna
+		select *
+		from (
+			select qnano, memno, qnatitle, qnacontent, qnadate, qnahitcnt,
+			lag(qnatitle,1,-1) over(order by qnano) as pretitle,  lag(qnano,1,-1) over(order by qnano) as preno,
+			lead(qnatitle,1,-1) over(order by qnano) as nexttitle,lead(qnano,1,-1) over(order by qnano) as nextno
+			from qna
+		)
 		where qnano = #{qnano}
 	</select>
 
