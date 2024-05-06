@@ -52,4 +52,23 @@ public class AdminController {
 		model.addAttribute("menuNum", 1);
 		return "admin/product/admin_add_product";
 	}
+	
+	//주문관리 컨트롤러
+	@GetMapping("/uncom_order")
+	public String uncomOrder(Model model) {
+		model.addAttribute("menuNum", 2);
+		return "admin/order/admin_uncom_order";
+	}
+	
+	@GetMapping("/com_order")
+	public String comOrder(Model model) {
+		model.addAttribute("menuNum", 2);
+		return "admin/order/admin_com_order";
+	}
+	
+	@GetMapping("/order_detail")
+	public String orderDetail(Model model) {
+		model.addAttribute("menuNum", 2);
+		return "admin/order/admin_order_detail";
+	}
 }

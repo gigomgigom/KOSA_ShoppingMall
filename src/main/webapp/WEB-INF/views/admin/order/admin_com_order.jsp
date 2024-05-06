@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 <!-- jQuery 외부 라이브러리 설정 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
@@ -30,7 +31,7 @@
 			<!--상단 바-->
 			<div class="d-flex justify-content-between align-items-center"
 				style="width: 100%; height: 75px; background-color: #27374D;">
-				<h4 class="my-0 ms-5 ps-5 text-white">상품 관리</h4>
+				<h4 class="my-0 ms-5 ps-5 text-white">주문 관리</h4>
 				<div class="d-flex flex-row align-items-center">
 					<button type="button" class="btn me-5 text-white fw-bold"
 						style="background-color: #526D82;">로그아웃</button>
@@ -43,60 +44,69 @@
 			<div class="d-flex" style="width: 90%; height: 91vh;">
 				<div class="mt-5 w-100 d-flex flex-column">
 					<h5>
-						<b>상품 조회</b>
+						<b>완료된 주문</b>
 					</h5>
 					<hr class="w-100" />
 					<div class="d-flex flex-column">
-						<form method="get" action=""
-							class="d-flex justify-content-between align-items-center">
-							<div class="d-flex">
-								<div class="form-group d-flex align-items-center" style="width: 250px">
-									<label for="ctg" style="width: 100px">카테고리</label> 
-									<select class="form-control"
-										id="ctg" name="ctgno">
-										<option value="0" selected>전체</option>
-										<option value="1">사료</option>
-										<option value="2">간식</option>
-										<option value="3">영양제</option>
-									</select>
+						<form method="get" action="" class="d-flex flex-column">
+							<div class="d-flex justify-content-end align-items-center">
+								<div>
+									<label for="start">시작일자</label> <input class="me-4" id="start"
+										type="date"> <label for="end">종료일자</label> <input
+										type="date" id="end" placeholder="EndDate">
 								</div>
 							</div>
-							<div class="d-flex">
-								<input type="text" class="form-control ms-4"
-									placeholder="검색어 입력" name="검색" style="width: 300px;">
-								<div
-									class="btn ms-1 d-flex justify-content-center align-items-center">
-									<img
-										src="${pageContext.request.contextPath}/resources/image/icon/search_icon.png"
-										width="20px">
+							<div class="d-flex justify-content-between align-items-end mt-2">
+								<div>
+									<span>검색 결과 n건</span>
+								</div>
+								<div class="d-flex">
+									<div class="d-flex">
+										<div class="form-group d-flex align-items-center"
+											style="width: 100px">
+											<select class="form-control" name="searchindex">
+												<option value="0" selected>주문번호</option>
+												<option value="1">주문자</option>
+											</select>
+										</div>
+									</div>
+									<div class="d-flex">
+										<input type="text" class="form-control ms-1"
+											placeholder="검색어 입력" name="검색" style="width: 300px;">
+										<div
+											class="btn ms-1 d-flex justify-content-center align-items-center">
+											<img
+												src="${pageContext.request.contextPath}/resources/image/icon/search_icon.png"
+												width="20px">
+										</div>
+									</div>
 								</div>
 							</div>
 						</form>
-						<div class="mt-4">
+						<div>
 							<table class="table table-hover text-center">
 								<thead class="table-dark">
 									<tr>
-										<th>분류명</th>
-										<th>상품번호</th>
-										<th>상품명</th>
-										<th>상품가격</th>
-										<th>상품등록일</th>
-										<th>상품재고</th>
+										<th>주문일자</th>
+										<th>주문번호</th>
+										<th>주문상태</th>
+										<th>주문자</th>
+										<th>주문 상품수</th>
+										<th>주문자전화</th>
+										<th>수령자</th>
+										<th>금액</th>
 									</tr>
 								</thead>
 								<tbody style="vertical-align: middle;">
-									<tr>	
-										<td onclick="openProductDetail()">간식</td>
-										<td onclick="openProductDetail()">1</td>
-										<td onclick="openProductDetail()">개껌</td>
-										<td onclick="openProductDetail()">20000원</td>
-										<td onclick="openProductDetail()">2024. 04. 29.</td>
-										<td>
-											<form action=""  class="d-flex justify-content-center">
-												<input type="number" value="30" style="width:50px">
-												<a href="" class="btn btn-primary btn-sm">재고 수정</a>
-											</form>
-										</td>
+									<tr>
+										<td>2024-05-04</td>
+										<td>202405042030</td>
+										<td>배송대기중</td>
+										<td>심영조</td>
+										<td>4건</td>
+										<td>01028104870</td>
+										<td>심영우</td>
+										<td>25000원</td>
 									</tr>
 								</tbody>
 							</table>

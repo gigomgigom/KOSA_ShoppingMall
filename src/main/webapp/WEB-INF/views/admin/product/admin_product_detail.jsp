@@ -78,6 +78,9 @@
 			<div class="w-100 d-flex flex-column align-items-center">
 				<button class="btn w-50 border my-4">수정</button>
 			</div>
+			<div class="w-100 d-flex flex-column align-items-center">
+				<button class="btn w-50 border mb-4">삭제</button>
+			</div>
 		</form>
 	</div>
 </body>

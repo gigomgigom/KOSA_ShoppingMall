@@ -11,7 +11,7 @@
 	<div class="accordion" id="accordionExample">
 		<div class="accordion-item">
 			<h2 class="accordion-header" id="headingOne">
-				<button class="accordion-button ${menuNum==1 ? '' : 'collapsed'}" type="button"
+				<button class="accordion-button ${menuNum==0 ? '' : 'collapsed'}" type="button"
 					data-bs-toggle="collapse" data-bs-target="#collapseOne"
 					aria-expanded="${menuNum==0}" aria-controls="collapseOne">
 					<img
@@ -19,7 +19,7 @@
 						class="me-2" style="width: 20px;" /> 회원관리
 				</button>
 			</h2>
-			<div id="collapseOne" class="accordion-collapse collapse show"
+			<div id="collapseOne" class="accordion-collapse collapse ${menuNum==0?'show':''}"
 				aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 				<div class="accordion-body">
 					<div class="d-flex flex-column">
@@ -41,7 +41,7 @@
 						class="me-2" style="width: 20px;" /> 상품관리
 				</button>
 			</h2>
-			<div id="collapseTwo" class="accordion-collapse collapse"
+			<div id="collapseTwo" class="accordion-collapse collapse ${menuNum==1?'show':''}"
 				aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 				<div class="accordion-body">
 					<div class="d-flex flex-column">
@@ -61,12 +61,12 @@
 						class="me-2" style="width: 20px;" /> 주문관리
 				</button>
 			</h2>
-			<div id="collapseThree" class="accordion-collapse collapse"
+			<div id="collapseThree" class="accordion-collapse collapse ${menuNum==2?'show':''}"
 				aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 				<div class="accordion-body">
 					<div class="d-flex flex-column">
-						<button class="btn row-1">미완료된 주문</button>
-						<button class="btn row-1">완료된 주문</button>
+						<a class="btn row-1" href="uncom_order">미완료된 주문</a>
+						<a class="btn row-1" href="com_order">완료된 주문</a>
 					</div>
 				</div>
 			</div>
@@ -81,7 +81,7 @@
 						class="me-2" style="width: 20px;" /> 게시판 관리
 				</button>
 			</h2>
-			<div id="collapseFour" class="accordion-collapse collapse"
+			<div id="collapseFour" class="accordion-collapse collapse ${menuNum==3?'show':''}"
 				aria-labelledby="headingFour" data-bs-parent="#accordionExample">
 				<div class="accordion-body">
 					<div class="d-flex flex-column">
