@@ -30,13 +30,16 @@ public class BoardController {
 	@RequestMapping("/list")
 	public String listBoard(@RequestParam(defaultValue="") String keyword, Model model) {
 		log.info(keyword);
-		if(keyword.equals("")) {
+		if(keyword.equals("") || keyword == null) {
 			List<Qna> qna = boardService.getBoardList();
-			model.addAttribute("qnaList", qna);
 		}
-		
+		// 게시판의 제목이나 내용을 불러옴
+		List<Qna> qna = boardService.getBykeyword(keyword);
+		model.addAttribute("qnaList", qna);
 		return "board/list";
+		
 	}
+		
 	//글쓰기 페이지에서 dto로 게시물 작성에 필요한 정보들을 얻어옴
 	// Controller에서 Service로 요청
 	@PostMapping("/writeBoard")

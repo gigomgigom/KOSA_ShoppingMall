@@ -13,4 +13,8 @@ public interface QnaDao {
 	public Qna selectByQnano(int qnano);
 
 	public List<Qna> selectQnaList();
+
+	public List<Qna> selectQnaListByKeyword(String keyword);
+	
+	
 }

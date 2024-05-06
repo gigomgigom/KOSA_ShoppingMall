@@ -24,5 +24,12 @@
 		from qna
 	</select>
 
+	<select id="selectQnaListByKeyword" parameterType="String" resultType="Qna">
+		select *
+		from qna
+		where qnatitle like '%' || #{keyword} || '%'
+		or qnacontent like '%' || #{keyword} || '%'
+	</select>
+
 
 </mapper>

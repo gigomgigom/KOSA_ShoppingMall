@@ -67,7 +67,8 @@ $(function(){
                             <span class="badge rounded-pill" style="background-color: #9DB2BF; color: white">접수</span>
                         </td>
                         <td class="d-flex justify-content-center align-items-center col-6 m-0 p-0">
-                            <p class="m-0 p-0 text-start">${qna.qnatitle}</p>
+                        <!-- 제목의 절대경로지정 제목 클릭 시 detailBoard의 qnano해당 번호로 이동 -->
+                            <p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.qnano}" class="text-dark">${qna.qnatitle}</a></p>
                         </td>
                         <td class="d-flex justify-content-center align-items-center col-1 m-0 p-0">
                             <p class="m-0 p-0">${qna.qnawriter}</p>

@@ -44,6 +44,16 @@ public class BoardService {
 		}
 		return qna;
 	}
+	public List<Qna> getBykeyword(String keyword) {
+		List<Qna> qna = qnaDao.selectQnaListByKeyword(keyword);
+		for(Qna q : qna) {
+			int memno = q.getMemno();
+			Member member = memberDao.selectByMemno(memno);
+			q.setQnawriter(member.getMemid());
+		}
+		
+		return qna;
+	}
 	
 	
 }
