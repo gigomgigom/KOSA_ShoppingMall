@@ -3,6 +3,7 @@ package com.mycompany.javajavajo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.Qna;
+import com.mycompany.javajavajo.security.Tm1UserDetails;
 import com.mycompany.javajavajo.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,8 +31,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/list")
-	public String listBoard(@RequestParam(defaultValue="") String keyword, Model model) {
-		
+	public String listBoard(@RequestParam(defaultValue="") String keyword, Authentication authentication,Model model) {
 		List<Qna> qna = boardService.getQnaList(keyword);
 		model.addAttribute("qnaList", qna);
 		return "board/list";
@@ -54,27 +56,7 @@ public class BoardController {
 		return "board/detail";
 	}
 	
-	/*@GetMapping("/board")
-	public String boardList(String pageNo, Model model, HttpSession session) {
-		// pageNo를 받지 못했을 경우, 세션에 저장되어 있는지 확인
-		if(pageNo == null) {
-			pageNo = (String) session.getAttribute("pageNo");
-			// 세션에 저장되어 있지 않을 경우 "1"로 강제 세팅
-			if(pageNo == null) {
-				pageNo = "1";
-			}
-		}
-		// 세션에 pageNo 저장
-		session.setAttribute("pageNo", pageNo);
-		// 문자열을 정수로 변환
-		int intPageNo = Integer.parseInt(pageNo);
-		
-		// Pager 객체 생성
-		
-	}*/
-	
-	
-	
+
 }
 
 

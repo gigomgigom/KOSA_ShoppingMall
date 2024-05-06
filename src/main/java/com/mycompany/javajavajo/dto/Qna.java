@@ -16,6 +16,7 @@ public class Qna {
 	private String qnaattachoname;
 	private String qnaattachtype;
 	private byte[] qnaattachdata;
+	private int qnalock;
 	
 	private String qnawriter;
 	private String pretitle;

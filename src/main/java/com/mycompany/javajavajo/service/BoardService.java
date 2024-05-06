@@ -25,6 +25,7 @@ public class BoardService {
 		int rowNum = qnaDao.insertBoard(qna); // insert, update, delete = int형으로 (몇행이 바뀌는지 리턴해줌)
 		log.info("rowNum: " + rowNum + ", bno: " + qna.getQnano());
 	}
+	
 	// service에서 dao를 호출 memid 테이블얻어옴
 	public Qna getQna(int qnano) {
 		int qnahitcnt = qnaDao.updatehitcnt(qnano);

@@ -7,15 +7,15 @@
 	<selectKey keyProperty="qnano" order="BEFORE" resultType="int"> 
 			select qna_seq.nextval from dual 
 	</selectKey>
-		insert into qna (qnano, memno, qnacontent, qnatitle, qnadate, qnahitcnt)
-		values(#{qnano}, #{memno}, #{qnacontent}, #{qnatitle}, sysdate, 0)
+		insert into qna (qnano, memno, qnacontent, qnatitle, qnadate, qnahitcnt , qnalock)
+		values(#{qnano}, #{memno}, #{qnacontent}, #{qnatitle}, sysdate, 0, #{qnalock})
 	</insert>
 	
 
 	<select id="selectByQnano" parameterType="int" resultType="Qna">
 		select *
 		from (
-			select qnano, memno, qnatitle, qnacontent, qnadate, qnahitcnt,
+			select qnano, memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock,
 			lag(qnatitle,1,-1) over(order by qnano) as pretitle,  lag(qnano,1,-1) over(order by qnano) as preno,
 			lead(qnatitle,1,-1) over(order by qnano) as nexttitle,lead(qnano,1,-1) over(order by qnano) as nextno
 			from qna

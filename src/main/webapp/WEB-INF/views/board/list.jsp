@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
- <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +68,34 @@ $(function(){
                         </td>
                         <td class="d-flex justify-content-center align-items-center col-6 m-0 p-0">
                         <!-- 제목의 절대경로지정 제목 클릭 시 detailBoard의 qnano해당 번호로 이동 -->
-                            <p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
+						<sec:authorize access="isAuthenticated()">
+							<sec:authentication property="principal.username" var="username" />
+	                        <c:if test="${qna.qnalock == 1}">
+	                        	<c:if test="${qna.qnawriter == username}">
+	                            	<p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
+	                        	</c:if>
+	                        
+	                        	<c:if test="${qna.qnawriter != username}">
+	                            	<p class="m-0 p-0 text-start">비밀이라니까요...</a></p>
+	                        	</c:if>
+	                        </c:if>
+                        
+                        
+	                        <c:if test="${qna.qnalock == 0}">
+	                        	<p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
+	                        </c:if>
+                        </sec:authorize>
+                        
+                        <sec:authorize access="isAnonymous()">
+	                        <c:if test="${qna.qnalock == 1}">
+	                        	<p class="m-0 p-0 text-start">비밀이에요...</a></p>
+	                        </c:if>
+                        
+	                        <c:if test="${qna.qnalock == 0}">
+	                        	<p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
+	                        </c:if>
+                        </sec:authorize>
+                        
                         </td>
                         <td class="d-flex justify-content-center align-items-center col-1 m-0 p-0">
                             <p class="m-0 p-0">${qna.qnawriter}</p>

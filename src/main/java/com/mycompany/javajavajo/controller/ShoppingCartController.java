@@ -26,7 +26,7 @@ public class ShoppingCartController {
 	private CartService service;
 	
 	@RequestMapping("")
-	public String shoppingCart(Authentication authentication,Model model) {
+	public String shoppingCart(Authentication authentication, Model model) {
 		//로그인한 유저의 Memno를 얻어옴
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 	    Member member = t1UserDetails.getMember();
