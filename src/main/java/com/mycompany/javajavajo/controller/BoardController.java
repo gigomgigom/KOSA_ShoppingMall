@@ -32,6 +32,8 @@ public class BoardController {
 		log.info(keyword);
 		List<Qna> qna = boardService.getBoardList();
 		model.addAttribute("qnaList", qna);
+		
+		
 		return "board/list";
 	}
 	//글쓰기 페이지에서 dto로 게시물 작성에 필요한 정보들을 얻어옴
