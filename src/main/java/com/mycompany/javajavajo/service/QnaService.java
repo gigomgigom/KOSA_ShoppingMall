@@ -22,8 +22,10 @@ public class QnaService {
 	
 	public void writeBoard(Qna qna) {
 		// 비지니스 로직 처리
+		log.info("바보입니다.");
 		int rowNum = qnaDao.insertBoard(qna); // insert, update, delete = int형으로 (몇행이 바뀌는지 리턴해줌)
 		log.info("rowNum: " + rowNum + ", bno: " + qna.getQnano());
+		log.info("바보");
 	}
 	
 	// service에서 dao를 호출 memid 테이블얻어옴
@@ -57,8 +59,6 @@ public class QnaService {
 	public void deleteQna(int qnano) {
 		int rowNum = qnaDao.deleteQna(qnano);
 	}
-	
-	
 	
 	
 }

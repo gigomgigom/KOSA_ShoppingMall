@@ -2,6 +2,8 @@ package com.mycompany.javajavajo.dto;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -29,4 +31,6 @@ public class Qna {
 	private int nextno;
 	private String nextmemno; 
 	private int nextlock;
+	
+	private MultipartFile qnaattach;
 }
