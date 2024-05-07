@@ -10,7 +10,6 @@ import com.mycompany.javajavajo.dto.Product;
 
 @Service
 public class ItemListService {
-	
 	@Autowired
 	ProductDao productDao;
 	
