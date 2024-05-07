@@ -34,6 +34,7 @@ public class ItemService {
 		return itemList;
 	}
 
+	//세림이 - 상세페이지에 나올 이미지들을 product를 받아 로직을 수행
 	public Product getProductByProdno(int prodno) {
 		Product product = productDao.selectByProdno(prodno);
 		return product;
