@@ -12,4 +12,14 @@
 		from product
 		where ctgno = #{ctgno}
 	</select>
+	
+	<select id="selectLackStock" resultType="com.mycompany.javajavajo.dto.Product">
+		<![CDATA[
+		select prodno, ctgno, prodname, prodstock 
+		from product 
+		where prodstock < 10 
+		order by prodstock
+		]]>
+	</select>
+	
 </mapper>

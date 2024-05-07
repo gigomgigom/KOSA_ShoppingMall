@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <!-- 사용자 정의 자바스크립트 -->
-<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 <style>
 * {
 	margin: 0px;
@@ -200,7 +202,8 @@
 						id="exampleFormControlTextarea1" rows="8"></textarea>
 					<button class="btn text-white mt-1"
 						style="background-color: #27374D;">저장</button>
-					<div class="container-fluid h-50 d-flex flex-column align-items-center mt-5">
+					<div
+						class="container-fluid h-50 d-flex flex-column align-items-center mt-5">
 						<h6>
 							<b>재고 부족 리스트</b>
 						</h6>
@@ -216,24 +219,14 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th scope="row">p101</th>
-										<td>간식</td>
-										<td>개껌</td>
-										<td>20</td>
-									</tr>
-									<tr>
-										<th scope="row">102</th>
-										<td>사료</td>
-										<td>유기농사료</td>
-										<td>10</td>
-									</tr>
-									<tr>
-										<th scope="row">303</th>
-										<td>사료</td>
-										<td>유기농사료</td>
-										<td>5</td>
-									</tr>
+									<c:forEach var="product" items="${lackproducts}">
+										<tr>
+											<th scope="row">${product.prodno}</th>
+											<td>${product.ctgno==1?'사료':product.ctgno==2?'간식':'영양제'}</td>
+											<td>${product.prodname}</td>
+											<td>${product.prodstock}</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>

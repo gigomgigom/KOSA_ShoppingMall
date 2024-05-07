@@ -28,4 +28,25 @@
 		where memno = #{memno}
 	</select>
 	
+	<select id="countSelectedRows" resultType="int">
+		select count(*) from member where memrole != 'ROLE_ADMIN'
+	</select>
+	
+	<select id="selectByPage" resultType="Member">
+		<![CDATA[
+		select rnum, memno, memid, memname, mememail, memtel, memdate
+		from (
+		select rownum as rnum, memno, memid, memname, mememail, memtel, memdate
+		from (
+		select memno, memid, memname, mememail, memtel, memdate
+		from member
+		where memrole != 'ROLE_ADMIN'
+		order by memno desc
+		)
+		where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
+	</select>
+	
 </mapper>
