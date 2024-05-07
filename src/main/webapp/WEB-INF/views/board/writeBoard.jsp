@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,13 @@
 	<header>
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	</header>
-	<form action="writeBoard" method="post">
+	<c:if test="${qna == null}">
+		<form action="writeBoard" method="post">
+	</c:if>
+	
+	<c:if test="${qna != null}">
+		<form action="updateBoard" method="post">
+	</c:if>
 		<div
 			class="container-fluid  d-flex flex-column align-items-center m-0 my-5 p-0">
 
@@ -32,7 +39,7 @@
 			<hr class="w-25 m-0 mb-5 p-0" />
 
 			<div class="row w-50 border-top border-bottom m-0 p-0">
-
+				<input type="hidden" name="qnano" value="${qna.qnano}">
 				<div
 					class="col-2 d-flex justify-content-center align-items-center border-end m-0 p-0 py-2"
 					style="background-color: #27374D; color: white">
@@ -41,7 +48,7 @@
 				<div
 					class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-2">
 					<input id='qnatitle' name="qnatitle" type="text"
-						class="form-control w-75">
+						class="form-control w-75" value="${qna.qnatitle}">
 				</div>
 			</div>
 
@@ -68,7 +75,7 @@
 				<div
 					class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-2">
 					<textarea id='content' name="qnacontent" class="form-control w-75"
-						rows="5"></textarea>
+						rows="5">${qna.qnacontent}</textarea>
 				</div>
 			</div>
 
@@ -90,8 +97,14 @@
 		</div>
 			<div
 				class="d-flex justify-conten-center align-items-center m-0 my-5 p-0">
-				<button id="btn-save" class="btn me-2"
-					style="background-color: #273740; color: white">저장</button>
+				<c:if test="${qna == null}">
+					<button id="btn-save" class="btn me-2"
+						style="background-color: #273740; color: white">저장</button>
+				</c:if>
+				<c:if test="${qna != null}">
+					<button id="btn-save" class="btn me-2"
+						style="background-color: #273740; color: white">수정</button>
+				</c:if>
 				<a href="list" class="btn border text-decoration-none text-dark">취소</a>
 			</div>
 		</div>

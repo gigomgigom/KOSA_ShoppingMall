@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class BoardService {
+public class QnaService {
 	@Autowired
 	private QnaDao qnaDao;
 	@Autowired
@@ -49,6 +49,12 @@ public class BoardService {
 		
 		return qna;
 	}
+	
+	public void updateBoard(Qna qna) {
+		int rowNum = qnaDao.updateQna(qna);
+	}
+	
+	
 	
 	
 }
