@@ -110,7 +110,7 @@
 			</ul>
 		</div>
 
-		<form class="w-100 d-flex justify-content-center" action="orderDetail">
+		<form class="w-100 d-flex justify-content-center" action="orderDetail" method="post">
 			<div class="w-75 d-flex flex-row border-top border-dark">
 				<!--주문정보 입력-->
 				<div
@@ -121,10 +121,10 @@
 							<b>주문자 정보</b>
 						</h4>
 					</div>
-					<div
-						class="d-flex flex-column align-items-center border-bottom border-dark pb-4">
+					<div 
+						class="d-flex flex-column align-items-center border-bottom border-dark pb-4" >
 						<!--입력란-->
-						<div class="w-75 d-flex flex-column">
+						<div id="orderer" class="w-75 d-flex flex-column">
 							<input type="text" class="form-control mb-4" id="ordname"
 								placeholder="이름 (필수 입력)" name="ordname" required value="${member.memname}"/> 
 							<input type="text" class="form-control mb-4" id="ordtel"
@@ -153,33 +153,31 @@
 						<!--입력란-->
 						<div class="w-75 mb-2">
 							<div class="form-check">
-								<input class="form-check-input" type="radio" name="easyFill"
-									id="sameasuser" checked> <label class="form-check-label"
-									for="sameasuser"> 기본 정보와 동일 </label>
+								<input class="form-check-input" type="radio" id="sameasuser" onclick="defaultInfo()"> 
+								<label class="form-check-label" for="sameasuser"> 기본 정보와 동일 </label>
 							</div>
-							<div class="form-check mt-2">
-								<input class="form-check-input" type="radio" name="easyFill"
-									id="sameasorderer"> <label class="form-check-label"
-									for="sameasorderer"> 주문자와 동일 </label>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" id="sameasorderer" onclick="ordInfo()"> 
+								<label class="form-check-label" for="sameasorderer"> 주문자와 동일 </label>
 							</div>
 						</div>
-						<div class="w-75 d-flex flex-column">
+						<div id="recipient" class="w-75 d-flex flex-column">
 							<input type="text" class="form-control mb-4" id="rcptname"
-								placeholder="이름 (필수 입력)" name="rcptname" required value="${member.memname}"/> <input
+								placeholder="이름 (필수 입력)" name="rcptname" required /> <input
 								type="text" class="form-control mb-4" id="rcpttel"
-								placeholder="휴대폰번호 (필수 입력)" name="rcpttel" required value="${member.memtel}"/>
+								placeholder="휴대폰번호 (필수 입력)" name="rcpttel" required />
 							<div class="d-flex">
 								<input type="text" class="form-control mb-4 w-25" id="rcptpostno"
-									placeholder="우편번호" name="rcptpostno" required value="${memberAdr.postno}"/>
+									placeholder="우편번호" name="rcptpostno" required />
 								<button type="button" class="btn btn-sm ms-2 text-white"
 									style="height: 38px; background-color: #27374D">주소검색</button>
 							</div>
-							<input type="text" class="form-control mb-4" id="rcptddr"
-								placeholder="주소 (필수 입력)" name="rcptddr" required value="${memberAdr.adr}"/> 
-							<input type="text" class="form-control mb-4" id="rcptddrdtl"
-								placeholder="상세주소 (필수 입력)" name="rcptddrdtl" required value="${memberAdr.adrdtl}"/> 
+							<input type="text" class="form-control mb-4" id="rcptadr"
+								placeholder="주소 (필수 입력)" name="rcptadr" required /> 
+							<input type="text" class="form-control mb-4" id="rcptadrdtl"
+								placeholder="상세주소 (필수 입력)" name="rcptadrdtl" required /> 
 							<input type="email" class="form-control mb-4" id="rcptemail"
-								placeholder="E-mail (필수 입력)" name="rcptemail" required value="${member.mememail}"/> 
+								placeholder="E-mail (필수 입력)" name="rcptemail" required /> 
 							<label for="request">요청사항</label>
 							<textarea class="form-control" id="request" rows="3"></textarea>
 						</div>
@@ -196,13 +194,13 @@
 					<div
 						class="px-2 mb-2 w-75 border d-flex justify-content-between align-items-center"
 						style="height: 38px;">
-						<span><b>보유중 포인트</b></span> <span>${member.mempoint}</span>
+						<span><b>보유중 포인트</b></span> <span id="haspoint">${member.mempoint}</span>
 					</div>
 					<div
 						class="px-2 mb-2 w-75 border d-flex justify-content-between align-items-center"
 						style="height: 38px;">
-						<span><b>사용할 포인트</b></span> <input type="number" id="usepoint"
-							name="usepoint" style="width: 100px" />
+						<span><b>사용할 포인트</b></span> 
+						<input type="number" id="disprice" name="disprice" value="0" min="0" max="${member.mempoint}" onchange="usePoint()"   style="width: 100px" />
 					</div>
 					<div style="height: 20px;"></div>
 					<!--2.2 결제 정보-->
@@ -218,29 +216,29 @@
 							<p>
 								<b>주문 금액</b>
 							</p>
-							<p class="mt-3">${itemsPrice}</p>
+							<p id="ordprice" class="mt-3">${itemsPrice}원</p>
 						</div>
 						<div
 							class="col-4 pt-3 border-end d-flex flex-column align-items-center">
 							<p>
 								<b>할인 금액</b>
 							</p>
-							<p class="mt-3">200원</p>
+							<p id="useprice" class="mt-3">0원</p>
 						</div>
 						<div class="col-4 pt-3 d-flex flex-column align-items-center">
 							<p>
 								<b>배송비</b>
 							</p>
-							<p class="mt-3">${deliveryPrice}</p>
+							<p id="deliveryprice" class="mt-3">${deliveryPrice}원</p>
 						</div>
 					</div>
 					<div class="py-1 w-75 text-center"
 						style="background-color: #DDE6ED;">
-						<span><b>최종 결제금액 : 20000원</b></span>
+						<span><b>최종 결제금액 : <span id="finprice">${itemsPrice + deliveryPrice}원</span></b></span>
 					</div>
 					<div style="height: 30px;"></div>
 					<!--2.3 결제방식 선택-->
-					<div class="w-100 ps-5 my-4">
+				<!-- 	<div class="w-100 ps-5 my-4">
 						<h4>
 							<b>결제 방식 선택</b>
 						</h4>
@@ -257,7 +255,7 @@
 
 					<div style="height: 30px;"></div>
 
-					<!--2.3.1 무통장입금시 예금주명 입력-->
+					2.3.1 무통장입금시 예금주명 입력
 					<div class="w-75 p-3 d-flex flex-column align-items-center">
 						<span><b>입금 계좌 : 3333-06-144-1796 카카오</b></span>
 
@@ -267,9 +265,9 @@
 								name="despositor" class="form-control w-50" placeholder="예금주 입력"
 								required />
 						</div>
-					</div>
+					</div> -->
 
-					<button class="btn text-white w-75"
+					<button class="btn text-white w-75" type="submit"
 						style="background-color: #27374D;">결제하기</button>
 				</div>
 			</div>
@@ -281,8 +279,7 @@
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 
-	<script>
-	
-	</script>
+	<script src="/javajavajo_mini_web/resources/js/order/orderForm.js"></script>>
+
 </body>
 </html>
