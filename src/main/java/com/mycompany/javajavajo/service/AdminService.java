@@ -29,16 +29,17 @@ public class AdminService {
 
 	public int getTotalRows() {
 		int totalRows = memberDao.countSelectedRows();
-		log.info(totalRows + "");
 		return totalRows;
 	}
 
 	public List<Member> getMemberList(Pager pager) {
 		List<Member> memberList = memberDao.selectByPage(pager);
-		for(Member member : memberList) {
-			log.info(member.getMemname());
-		}
 		return memberList;
+	}
+
+	public Member getMemberByMemno(int memno) {
+		Member member = memberDao.selectByMemno(memno);
+		return member;
 	}
 	
 }

@@ -43,7 +43,7 @@
 			<div class="d-flex" style="width: 90%; height: 91vh;">
 				<div class="mt-5 w-100 d-flex flex-column">
 					<h5>
-						<b>심영조님의 정보</b>
+						<b>${member.memname}님의 정보</b>
 					</h5>
 					<hr class="w-100" />
 					<div class="d-flex flex-row">

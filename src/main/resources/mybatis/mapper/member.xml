@@ -17,7 +17,7 @@
 	</insert>
 	
 	<select id="selectByMemno" parameterType="int" resultType="Member">
-		select memno, memid
+		select memno, memid, memname, mememail, memtel, memdate, mempoint
 		from member
 		where memno = #{memno}
 	</select>

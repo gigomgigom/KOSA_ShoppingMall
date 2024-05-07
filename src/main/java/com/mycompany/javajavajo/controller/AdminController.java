@@ -65,7 +65,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/member_detail")
-	public String memberDetail(Model model) {
+	public String memberDetail(Model model, int memno) {
+		adminService.getMemberByMemno(memno);
+		
 		model.addAttribute("menuNum", 0);
 		return "admin/member/admin_member_detail";
 	}
