@@ -6,6 +6,12 @@
 		insert into memberAdr (memno, postno, adr, adrdtl)
 		values(#{memno}, #{postno}, #{adr}, #{adrdtl}) 
 	</insert>
+	
+	<select id="selectByMemno" parameterType="int">
+		select *
+		from memberadr
+		where memno = #{memno}
+	</select>
 
 
 

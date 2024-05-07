@@ -37,4 +37,9 @@ public class MemberService {
 		Member member = memberDao.selectByMemnoMemImg(memno);
 		return member;
 	}
+
+	public MemberAdr getMemberAdr(int memno) {
+		MemberAdr memberAdr = memberAdrDao.selectByMemno(memno);
+		return memberAdr;
+	}
 }

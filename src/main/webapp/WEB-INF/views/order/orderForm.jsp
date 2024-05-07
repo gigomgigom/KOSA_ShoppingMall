@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,37 +74,39 @@
 						<p class="m-0 p-0 fw-bold">소계</p>
 					</div>
 				</li>
-
-				<li class="w-100 row border-bottom m-0">
-					<div class="col-2 row m-0 p-0">
+				
+				<c:forEach var="cartItem" items="${cartItemList}">
+					<li class="w-100 row border-bottom m-0">
+						<div class="col-2 row m-0 p-0">
+							<div
+								class="d-flex col-10 justify-content-center align-items-center p-0">
+								<img src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${cartItem.prodno}" width="75px">
+							</div>
+						</div>
 						<div
-							class="d-flex col-10 justify-content-center align-items-center p-0">
-							<img src="https://i.ibb.co/f9yTBG2/doggum.png" width="75px">
+							class="col-3 d-flex flex-column justify-content-center align-items-center p-0">
+							<p class="m-0 p-0">${cartItem.product.prodname}</p>
 						</div>
-					</div>
-					<div
-						class="col-3 d-flex flex-column justify-content-center align-items-center p-0">
-						<p class="m-0 p-0">개사료</p>
-					</div>
-					<div
-						class="col-3 d-flex align-items-center justify-content-center m-0 p-0">
-						<div>
-							<p class="m-0 p-0">5개</p>
+						<div
+							class="col-3 d-flex align-items-center justify-content-center m-0 p-0">
+							<div>
+								<p class="m-0 p-0">${cartItem.qty}개</p>
+							</div>
 						</div>
-					</div>
-					<div
-						class="col-2 d-flex flex-column justify-content-center align-items-center p-0">
-						<div>
-							<p class="m-0 p-0">5000원</p>
+						<div
+							class="col-2 d-flex flex-column justify-content-center align-items-center p-0">
+							<div>
+								<p class="m-0 p-0">${cartItem.product.prodprice}원</p>
+							</div>
 						</div>
-					</div>
-					<div
-						class="col-2 d-flex justify-content-center align-items-center p-0">
-						<div class="w-75 text-center">
-							<p class="m-0 p-0">25000원</p>
+						<div
+							class="col-2 d-flex justify-content-center align-items-center p-0">
+							<div class="w-75 text-center">
+								<p class="m-0 p-0">${cartItem.product.prodprice * cartItem.qty}원</p>
+							</div>
 						</div>
-					</div>
-				</li>
+					</li>
+				</c:forEach>	
 			</ul>
 		</div>
 
@@ -122,22 +125,22 @@
 						class="d-flex flex-column align-items-center border-bottom border-dark pb-4">
 						<!--입력란-->
 						<div class="w-75 d-flex flex-column">
-							<input type="text" class="form-control mb-4" id="nickname"
-								placeholder="이름 (필수 입력)" name="nickname" required /> <input
-								type="text" class="form-control mb-4" id="phone"
-								placeholder="휴대폰번호 (필수 입력)" name="phone" required />
+							<input type="text" class="form-control mb-4" id="ordname"
+								placeholder="이름 (필수 입력)" name="ordname" required value="${member.memname}"/> 
+							<input type="text" class="form-control mb-4" id="ordtel"
+								placeholder="휴대폰번호 (필수 입력)" name="ordtel" required value="${member.memtel}" />
 							<div class="d-flex">
-								<input type="text" class="form-control mb-4 w-25" id="addrnum"
-									placeholder="우편번호" name="addrnum" required />
+								<input type="text" class="form-control mb-4 w-25" id="ordpostno"
+									placeholder="우편번호" name="ordpostno" required value="${memberAdr.postno}"/>
 								<button type="button" class="btn btn-sm ms-2 text-white"
 									style="height: 38px; background-color: #27374D">주소검색</button>
 							</div>
-							<input type="text" class="form-control mb-4" id="addr"
-								placeholder="주소 (필수 입력)" name="addr" required /> <input
-								type="text" class="form-control mb-4" id="detailaddr"
-								placeholder="상세주소 (필수 입력)" name="detailaddr" required /> <input
-								type="email" class="form-control mb-4" id="uemail"
-								placeholder="E-mail (필수 입력)" name="uemail" required />
+							<input type="text" class="form-control mb-4" id="ordadr"
+								placeholder="주소 (필수 입력)" name="ordadr" required value="${memberAdr.adr}" /> 
+							<input type="text" class="form-control mb-4" id="ordadrdtl"
+								placeholder="상세주소 (필수 입력)" name="ordadrdtl" required value="${memberAdr.adrdtl}"/> 
+							<input type="email" class="form-control mb-4" id="ordemail"
+								placeholder="E-mail (필수 입력)" name="ordemail" required value="${member.mememail}"/>
 						</div>
 					</div>
 					<!--수령인 정보-->
@@ -151,7 +154,7 @@
 						<div class="w-75 mb-2">
 							<div class="form-check">
 								<input class="form-check-input" type="radio" name="easyFill"
-									id="sameasuser"> <label class="form-check-label"
+									id="sameasuser" checked> <label class="form-check-label"
 									for="sameasuser"> 기본 정보와 동일 </label>
 							</div>
 							<div class="form-check mt-2">
@@ -161,23 +164,23 @@
 							</div>
 						</div>
 						<div class="w-75 d-flex flex-column">
-							<input type="text" class="form-control mb-4" id="nickname"
-								placeholder="이름 (필수 입력)" name="nickname" required /> <input
-								type="text" class="form-control mb-4" id="phone"
-								placeholder="휴대폰번호 (필수 입력)" name="phone" required />
+							<input type="text" class="form-control mb-4" id="rcptname"
+								placeholder="이름 (필수 입력)" name="rcptname" required value="${member.memname}"/> <input
+								type="text" class="form-control mb-4" id="rcpttel"
+								placeholder="휴대폰번호 (필수 입력)" name="rcpttel" required value="${member.memtel}"/>
 							<div class="d-flex">
-								<input type="text" class="form-control mb-4 w-25" id="addrnum"
-									placeholder="우편번호" name="addrnum" required />
+								<input type="text" class="form-control mb-4 w-25" id="rcptpostno"
+									placeholder="우편번호" name="rcptpostno" required value="${memberAdr.postno}"/>
 								<button type="button" class="btn btn-sm ms-2 text-white"
 									style="height: 38px; background-color: #27374D">주소검색</button>
 							</div>
-							<input type="text" class="form-control mb-4" id="addr"
-								placeholder="주소 (필수 입력)" name="addr" required /> <input
-								type="text" class="form-control mb-4" id="detailaddr"
-								placeholder="상세주소 (필수 입력)" name="detailaddr" required /> <input
-								type="email" class="form-control mb-4" id="uemail"
-								placeholder="E-mail (필수 입력)" name="uemail" required /> <label
-								for="request">요청사항</label>
+							<input type="text" class="form-control mb-4" id="rcptddr"
+								placeholder="주소 (필수 입력)" name="rcptddr" required value="${memberAdr.adr}"/> 
+							<input type="text" class="form-control mb-4" id="rcptddrdtl"
+								placeholder="상세주소 (필수 입력)" name="rcptddrdtl" required value="${memberAdr.adrdtl}"/> 
+							<input type="email" class="form-control mb-4" id="rcptemail"
+								placeholder="E-mail (필수 입력)" name="rcptemail" required value="${member.mememail}"/> 
+							<label for="request">요청사항</label>
 							<textarea class="form-control" id="request" rows="3"></textarea>
 						</div>
 					</div>
@@ -193,7 +196,7 @@
 					<div
 						class="px-2 mb-2 w-75 border d-flex justify-content-between align-items-center"
 						style="height: 38px;">
-						<span><b>보유중 포인트</b></span> <span>4000P</span>
+						<span><b>보유중 포인트</b></span> <span>${member.mempoint}</span>
 					</div>
 					<div
 						class="px-2 mb-2 w-75 border d-flex justify-content-between align-items-center"
@@ -215,7 +218,7 @@
 							<p>
 								<b>주문 금액</b>
 							</p>
-							<p class="mt-3">25200원</p>
+							<p class="mt-3">${itemsPrice}</p>
 						</div>
 						<div
 							class="col-4 pt-3 border-end d-flex flex-column align-items-center">
@@ -228,7 +231,7 @@
 							<p>
 								<b>배송비</b>
 							</p>
-							<p class="mt-3">5000원</p>
+							<p class="mt-3">${deliveryPrice}</p>
 						</div>
 					</div>
 					<div class="py-1 w-75 text-center"

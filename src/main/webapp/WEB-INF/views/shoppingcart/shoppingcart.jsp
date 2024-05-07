@@ -47,7 +47,7 @@
 							<input onclick="cancelAllCheck()" class="m-0" type="checkbox" style="accent-color: #27374D;">
 						</div>
 						<div class="d-flex col-10 justify-content-center align-items-center p-0">
-							<img src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=41" class="w-50" height="150">
+							<img src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${cartItem.prodno}" class="w-50" height="150">
 						</div>
 					</div>
 	

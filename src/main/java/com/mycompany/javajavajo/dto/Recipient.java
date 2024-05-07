@@ -10,4 +10,5 @@ public class Recipient {
 	private String rcptpostno;
 	private String rcptaddr;
 	private String rcptadrdtl;
+	private String pcptemail;
 }

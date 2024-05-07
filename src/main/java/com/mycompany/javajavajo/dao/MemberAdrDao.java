@@ -9,5 +9,7 @@ public interface MemberAdrDao {
 
 	public int insertAdr(MemberAdr memberAdr);
 
+	public MemberAdr selectByMemno(int memno);
+
 	
 }
