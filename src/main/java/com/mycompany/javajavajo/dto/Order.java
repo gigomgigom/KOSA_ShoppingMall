@@ -13,4 +13,5 @@ public class Order {
 	private int ordprice;
 	private int discprice;
 	private int finprice;
+	private String ordrqst;
 }

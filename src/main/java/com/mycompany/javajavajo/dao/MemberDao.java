@@ -3,6 +3,7 @@ package com.mycompany.javajavajo.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.Pager;
@@ -33,5 +34,8 @@ public interface MemberDao {
 
 
 	public int updateMemberInfo(Member member);
+
+
+	public int updatePoint(@Param("memno") int memno,@Param("amount") int amount,@Param("operator") String operator);
 	
 }

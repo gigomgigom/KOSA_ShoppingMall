@@ -54,4 +54,17 @@
 		mememail = #{mememail}, memtel = #{memtel}
 		where memno = #{memno}
 	</update>
+	
+	<update id="updatePoint">
+		update member 
+		set mempoint =
+		<if test='operator.equals("+")'>
+				mempoint + #{amount}
+		</if>
+		
+		<if test='operator.equals("-")'>
+				mempoint - #{amount}
+		</if>
+		where memno = #{memno}
+	</update>
 </mapper>

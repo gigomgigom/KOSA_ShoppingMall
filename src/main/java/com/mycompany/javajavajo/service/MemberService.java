@@ -42,4 +42,8 @@ public class MemberService {
 		MemberAdr memberAdr = memberAdrDao.selectByMemno(memno);
 		return memberAdr;
 	}
+
+	public void updatePoint(int memno, int amount, String operator) {
+		int result = memberDao.updatePoint(memno,amount,operator);
+	}
 }
