@@ -17,7 +17,9 @@
 		from (
 			select qnano, memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock,
 			lag(qnatitle,1,-1) over(order by qnano) as pretitle,  lag(qnano,1,-1) over(order by qnano) as preno,
-			lead(qnatitle,1,-1) over(order by qnano) as nexttitle,lead(qnano,1,-1) over(order by qnano) as nextno
+			lag(memno,1,-1) over(order by qnano) as prememno, 	lag(qnalock,1,-1) over(order by qnano) as prelock,
+			lead(qnatitle,1,-1) over(order by qnano) as nexttitle,lead(qnano,1,-1) over(order by qnano) as nextno,
+			lead(memno,1,-1) over(order by qnano) as nextmemno,	lead(qnalock,1,-1) over(order by qnano) as nextlock
 			from qna
 		)
 		where qnano = #{qnano}

@@ -19,8 +19,14 @@ public class Qna {
 	private int qnalock;
 	
 	private String qnawriter;
+	
 	private String pretitle;
 	private int preno;
+	private String prememno; 
+	private int prelock;
+
 	private String nexttitle;
 	private int nextno;
+	private String nextmemno; 
+	private int nextlock;
 }

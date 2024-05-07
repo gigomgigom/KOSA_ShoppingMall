@@ -70,12 +70,13 @@ $(function(){
                         <!-- 제목의 절대경로지정 제목 클릭 시 detailBoard의 qnano해당 번호로 이동 -->
 						<sec:authorize access="isAuthenticated()">
 							<sec:authentication property="principal.username" var="username" />
+							<sec:authentication property="principal.member" var="member" />
 	                        <c:if test="${qna.qnalock == 1}">
-	                        	<c:if test="${qna.qnawriter == username}">
+	                        	<c:if test="${qna.qnawriter == username or member.memrole == 'ROLE_ADMIN'}">
 	                            	<p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
 	                        	</c:if>
 	                        
-	                        	<c:if test="${qna.qnawriter != username}">
+	                        	<c:if test="${qna.qnawriter != username and member.memrole != 'ROLE_ADMIN'}">
 	                            	<p class="m-0 p-0 text-start">비밀이라니까요...</a></p>
 	                        	</c:if>
 	                        </c:if>

@@ -79,19 +79,72 @@
 		</div>
 		
 		<div class="w-75 m-0 mb-5 p-0">
+		
 			<c:if test="${qna.nextno != -1}">
-				<div
-					class="d-flex justify-content-start align-items-center border-top border-bottom border-secondary-subtle w-100 m-0 px-5 py-1">
-					<p class="m-0 p-0">&#9651다음글 <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.nextno}" class="text-dark text-decoration-none">${qna.nexttitle}</a></p>
-				</div>
+				<div class="d-flex justify-content-start align-items-center border-top border-bottom border-secondary-subtle w-100 m-0 px-5 py-1">
+					<sec:authorize access="isAuthenticated()">
+								<sec:authentication property="principal.member" var="member" />
+		                        <c:if test="${qna.nextlock == 1}">
+		                        	<c:if test="${member.memno == qna.nextmemno or member.memrole == 'ROLE_ADMIN'}">
+		                            	<p class="m-0 p-0">&#9651다음글 <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.nextno}" class="text-dark text-decoration-none">${qna.nexttitle}</a></p>
+		                        	</c:if>
+		                        
+		                        	<c:if test="${member.memno != qna.nextmemno and member.memrole != 'ROLE_ADMIN'}">
+		                            	<p class="m-0 p-0 text-start">&#9651다음글 비밀이라니까요...</p>
+		                        	</c:if>
+		                        </c:if>
+	                        
+	                        
+		                        <c:if test="${qna.nextlock == 0}">
+		                        	<p class="m-0 p-0">&#9651다음글 <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.nextno}" class="text-dark text-decoration-none">${qna.nexttitle}</a></p>
+		                        </c:if>
+                     </sec:authorize>
+					
+					 <sec:authorize access="isAnonymous()">
+	                        <c:if test="${qna.nextlock == 1}">
+	                        	<p class="m-0 p-0 text-start">&#9651다음글 비밀이에요...</p>
+	                        </c:if>
+                        
+	                        <c:if test="${qna.nextlock == 0}">
+	                        	<p class="m-0 p-0">&#9651다음글 <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.nextno}" class="text-dark text-decoration-none">${qna.nexttitle}</a></p>
+	                        </c:if>
+                     </sec:authorize>
+				</div> 
 			</c:if>
 			
 			<c:if test="${qna.preno != -1}">
-				<div
-					class="d-flex justify-content-start align-items-center border-bottom border-secondary-subtle w-100 m-0 px-5 py-1">
-					<p class="m-0 p-0">&#9661이전글  <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.preno}" class="text-dark text-decoration-none">${qna.pretitle}</a></p>
-				</div>
+				
+				<div class="d-flex justify-content-start align-items-center border-top border-bottom border-secondary-subtle w-100 m-0 px-5 py-1">
+					<sec:authorize access="isAuthenticated()">
+								<sec:authentication property="principal.member" var="member" />
+		                        <c:if test="${qna.prelock == 1}">
+		                        	<c:if test="${member.memno == qna.prememno or member.memrole == 'ROLE_ADMIN'}">
+		                            	<p class="m-0 p-0">&#9661이전글  <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.preno}" class="text-dark text-decoration-none">${qna.pretitle}</a></p>
+		                        	</c:if>
+		                        
+		                        	<c:if test="${member.memno != qna.prememno and member.memrole != 'ROLE_ADMIN'}">
+		                            	<p class="m-0 p-0 text-start">&#9661이전글 비밀이라니까요...</p>
+		                        	</c:if>
+		                        </c:if>
+	                        
+	                        
+		                        <c:if test="${qna.prelock == 0}">
+		                        	<p class="m-0 p-0">&#9661이전글  <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.preno}" class="text-dark text-decoration-none">${qna.pretitle}</a></p>
+		                        </c:if>
+                     </sec:authorize>
+					
+					 <sec:authorize access="isAnonymous()">
+	                        <c:if test="${qna.prelock == 1}">
+	                        	<p class="m-0 p-0 text-start">&#9661이전글 비밀이에요...</p>
+	                        </c:if>
+                        
+	                        <c:if test="${qna.prelock == 0}">
+	                        	<p class="m-0 p-0">&#9661이전글  <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.preno}" class="text-dark text-decoration-none">${qna.pretitle}</a></p>
+	                        </c:if>
+                     </sec:authorize>
+				</div> 
 			</c:if>
+				
 		</div>
 
 		<div
