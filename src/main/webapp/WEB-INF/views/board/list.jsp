@@ -32,7 +32,7 @@ $(function(){
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	</header>
 
-        <div class="container-fluid  d-flex flex-column align-items-center m-0, p-0">
+        <div class="container-fluid  d-flex flex-column align-items-center m-0, my-5 p-0">
             
              <div class="d-flex w-75 m-0 my-5 p-0 ">
                     <form class="d-flex w-100 m-0 p-0" method="get" action="">
@@ -69,22 +69,21 @@ $(function(){
                         <td class="d-flex justify-content-center align-items-center col-6 m-0 p-0">
                         <!-- 제목의 절대경로지정 제목 클릭 시 detailBoard의 qnano해당 번호로 이동 -->
 						<sec:authorize access="isAuthenticated()">
-							<sec:authentication property="principal.username" var="username" />
 							<sec:authentication property="principal.member" var="member" />
-	                        <c:if test="${qna.qnalock == 1}">
-	                        	<c:if test="${qna.qnawriter == username or member.memrole == 'ROLE_ADMIN'}">
-	                            	<p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
-	                        	</c:if>
+		                    <c:if test="${qna.qnalock == 1}">
+		                        <c:if test="${qna.qnawriter == member.memid or member.memrole == 'ROLE_ADMIN'}">
+		                            <p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
+		                        </c:if>
+		                        
+		                        <c:if test="${qna.qnawriter != member.memid and member.memrole != 'ROLE_ADMIN'}">
+		                            <p class="m-0 p-0 text-start">비밀이라니까요...</a></p>
+		                        </c:if>
+		                     </c:if>
 	                        
-	                        	<c:if test="${qna.qnawriter != username and member.memrole != 'ROLE_ADMIN'}">
-	                            	<p class="m-0 p-0 text-start">비밀이라니까요...</a></p>
-	                        	</c:if>
-	                        </c:if>
-                        
-                        
-	                        <c:if test="${qna.qnalock == 0}">
-	                        	<p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
-	                        </c:if>
+	                        
+		                        <c:if test="${qna.qnalock == 0}">
+		                        	<p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
+		                        </c:if>
                         </sec:authorize>
                         
                         <sec:authorize access="isAnonymous()">
@@ -108,7 +107,7 @@ $(function(){
                             <p class="m-0 p-0">${qna.qnahitcnt}</p>
                         </td>
                     </tr>
-                    </c:forEach>
+                   </c:forEach>
                     
                 </tbody>
             </table>
@@ -131,7 +130,7 @@ $(function(){
                     </div>
             </div>
         </div>
-	  </div>
+
 	<footer>
 		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	</footer>

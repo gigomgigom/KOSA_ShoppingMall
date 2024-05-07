@@ -22,7 +22,7 @@
 	</header>
 
 	<div
-		class="container-fluid d-flex flex-column align-items-center m-0 p-0">
+		class="container-fluid d-flex flex-column align-items-center m-0 my-5 p-0">
 		<div
 			class="container-fluid d-flex flex-column align-items-center border border-secondary-subtle w-75 m-0 mb-5 p-0">
 			<div class="row w-100 border-bottom border-secondary-subtle m-0 p-0">
@@ -114,7 +114,7 @@
 			
 			<c:if test="${qna.preno != -1}">
 				
-				<div class="d-flex justify-content-start align-items-center border-top border-bottom border-secondary-subtle w-100 m-0 px-5 py-1">
+				<div class="d-flex justify-content-start align-items-center border-bottom border-secondary-subtle w-100 m-0 px-5 py-1">
 					<sec:authorize access="isAuthenticated()">
 								<sec:authentication property="principal.member" var="member" />
 		                        <c:if test="${qna.prelock == 1}">
@@ -163,18 +163,5 @@
 		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	</footer>
 
-	<script>
-	const toggleAttach = oc =>{
-		if(oc === "open"){
-			$("#attach-open").css("display","none");
-			$("#attach-close").css("display","inline");
-			$("#attach-item").css("display","block");
-		} else{
-			$("#attach-open").css("display","inline");
-			$("#attach-close").css("display","none");
-			$("#attach-item").css("display","none");
-		}
-	};
-</script>
 </body>
 </html>

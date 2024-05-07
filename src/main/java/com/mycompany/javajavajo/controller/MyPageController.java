@@ -29,7 +29,7 @@ public class MyPageController {
 		return "mypage/mypage";
 	}
 	
-	//멤어 이미지 다운로드
+	//멤버 이미지 다운로드
 	@GetMapping("/downloadMemImg")
 	public void downloadMemberImg(int memno, HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
 		Member member = service.getMemberImage(memno);
