@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<!-- 사용자 정의 자바스크립트 -->
 <script>
-
-    </script>
+</script>
 <!-- jQuery 외부 라이브러리 설정 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
@@ -39,11 +37,9 @@
 	</header>
 
 	<div class="container-fluid d-flex align-items-center flex-column mt-5">
-	<div id="categoryOutput">
 		<h1>
-			<b>간식</b>
+			<b>${ctgno == 1 ? '사료' : ctgno == 2 ? '간식' : '영양제'}</b>
 		</h1>
-		</div>
 		<div class="d-flex flex-column my-5" style="width: 80vw;">
 			<div
 				class="w-100 d-flex justify-content-between border border-dark rounded mb-5">
@@ -70,48 +66,32 @@
 				<!--상품 목록 출력-->
 				<c:forEach var="item" items="${itemList}">
 					<div class="card mb-4" style="width: 24%">
-					<a href="${pageContext.request.contextPath}/item/item_detail"> <img class="card-img-top"
-						src="${pageContext.request.contextPath}/resources/image/item/snack.png"
-						alt="Card image" style="width: 100%;">
-					</a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="${pageContext.request.contextPath}/item/item_detail" class="text-decoration-none text-black"> ${item.prodname}
-							</a>
-						</h4>
-						<h5>45,000원</h5>
-						<p>상품 평점 : 4.5 리뷰 : 4개</p>
+						<a href="${pageContext.request.contextPath}/item/item_detail">
+							<img class="card-img-top"
+							src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${item.prodno}"
+							alt="Card image" style="width: 100%;">
+						</a>
+						<div class="card-body">
+							<h4 class="card-title">
+								<a href="${pageContext.request.contextPath}/item/item_detail"
+									class="text-decoration-none text-black"> ${item.prodname} </a>
+							</h4>
+							<h5>45,000원</h5>
+							<p>상품 평점 : 4.5 리뷰 : 4개</p>
+						</div>
 					</div>
-				</div>
 				</c:forEach>
 			</div>
 		</div>
 	</div>
+
 	<footer>
 		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	</footer>
-	<!-- Latest compiled JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-	  function printCategory(ctgno) {
-          var categoryOutput = document.getElementById("categoryOutput");
 
-			 switch (ctgno) {
-              case 1:
-                  categoryOutput.innerHTML = "사료";
-                  break;
-              case 2:
-                  categoryOutput.innerHTML = "간식";
-                  break;
-              case 3:
-                  categoryOutput.innerHTML = "영양제";
-                  break;
-              default:
-                  categoryOutput.innerHTML = "알 수 없음";
-          } 
-			
-      }
-	  
-	  
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 	</script>
 </body>
 </html>

@@ -52,6 +52,7 @@ public class ItemController {
 	public String itemList(int ctgno, Model model) {
 		List<Product> itemList = service.getItemListByCtgno(ctgno);
 		model.addAttribute("itemList", itemList);
+		model.addAttribute("ctgno", ctgno);
 		return "item/itemList";
 	}
 	
