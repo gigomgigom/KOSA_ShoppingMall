@@ -106,11 +106,17 @@ const resultBoxUpdate = () => {
 	
 	const resultBoxElement = document.querySelector("#resultBox");
 	const itemsPriceElement = resultBoxElement.querySelector("#itemsPrice");
+	const inputItemsPriceElement = resultBoxElement.querySelector("#inputItemsPrice")
 	const deliveryPriceElement = resultBoxElement.querySelector("#deliveryPrice");
+	const inputDeliveryPriceElement = resultBoxElement.querySelector("#inputDeliveryPrice");
 	const resultPriceElement = resultBoxElement.querySelector("#resultPrice");
 	
+	
+	
 	itemsPriceElement.innerText = itemsPrice + "원";
+	inputItemsPriceElement.value = itemsPrice;
 	const deliveryPrice = (itemsPrice >= 100000)?  0  : 3000;
+	inputDeliveryPriceElement.value = deliveryPrice;
 	deliveryPriceElement.innerText = deliveryPrice + "원";
 	resultPriceElement.innerText = itemsPrice + deliveryPrice + "원";
 }

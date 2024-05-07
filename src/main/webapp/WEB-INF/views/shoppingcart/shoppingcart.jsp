@@ -92,36 +92,38 @@
 		</div>
 
 		<hr class="w-75 my-1 p-0" />
-
-		<div id="resultBox" class="w-50 row text-white my-1"
-			style="background-color: #273740">
-			<div
-				class="col-3 d-flex flex-column justify-content-center align-items-center my-2 p-0">
-				<p class="m-0 p-0">상품금액</p>
-				<p id="itemsPrice" class="m-0 p-0"></p>
-			</div>
-
-			<div
-				class="col-3 d-flex flex-column justify-content-center align-items-center my-2 p-0">
-				<p class="m-0 p-0">배달비</p>
-				<p id="deliveryPrice" class="m-0 p-0"></p>
-			</div>
-
-			<div
-				class="col-3 d-flex flex-column justify-content-center align-items-center my-2 p-0">
-				<p class="m-0 p-0">총금액</p>
-				<p id="resultPrice" class="m-0 p-0"></p>
-			</div>
-
-			<div
-				class="col-3 d-flex justify-content-center align-items-center my-2 p-0">
-				<div class="w-75 d-flex justify-content-center align-items-center">
-					<button type="button" class="btn btn-light p-1"
-						style="color: #273740"
-						onClick="location.href='${pageContext.request.contextPath}/order/order_form'">주문</button>
+		<form action="${pageContext.request.contextPath}/order/order_form" method="post" class="w-50 m-0 p-0">
+			<div id="resultBox" class="w-100 row text-white my-1"
+				style="background-color: #273740">
+				<div
+					class="col-3 d-flex flex-column justify-content-center align-items-center my-2 p-0">
+					<p class="m-0 p-0">상품금액</p>
+					<p id="itemsPrice" class="m-0 p-0"></p>
+					<input id="inputItemsPrice" name="itemsPrice" type="hidden">
+				</div>
+	
+				<div
+					class="col-3 d-flex flex-column justify-content-center align-items-center my-2 p-0">
+					<p class="m-0 p-0">배달비</p>
+					<p id="deliveryPrice" class="m-0 p-0"></p>
+					<input id="inputDeliveryPrice" name="deliveryPrice" type="hidden">
+				</div>
+	
+				<div
+					class="col-3 d-flex flex-column justify-content-center align-items-center my-2 p-0">
+					<p class="m-0 p-0">총금액</p>
+					<p id="resultPrice" class="m-0 p-0"></p>
+				</div>
+	
+				<div
+					class="col-3 d-flex justify-content-center align-items-center my-2 p-0">
+					<div class="w-75 d-flex justify-content-center align-items-center">
+						<button type="submit" class="btn btn-light p-1"
+							style="color: #273740">주문</button>
+					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 
 	<footer>
