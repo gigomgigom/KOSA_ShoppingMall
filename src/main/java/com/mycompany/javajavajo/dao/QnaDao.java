@@ -20,6 +20,8 @@ public interface QnaDao {
 
 	public int updateQna(Qna qna);
 
+	public int deleteQna(int qnano);
+
 
 	
 	

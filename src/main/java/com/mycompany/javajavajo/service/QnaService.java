@@ -50,8 +50,12 @@ public class QnaService {
 		return qna;
 	}
 	
-	public void updateBoard(Qna qna) {
+	public void updateQna(Qna qna) {
 		int rowNum = qnaDao.updateQna(qna);
+	}
+
+	public void deleteQna(int qnano) {
+		int rowNum = qnaDao.deleteQna(qnano);
 	}
 	
 	

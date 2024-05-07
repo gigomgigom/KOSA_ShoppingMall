@@ -41,15 +41,16 @@
 			where qnano = #{qnano}
 	</update>
 
-	<update id="updateBoard" parameterType="Qna">
+	<update id="updateQna" parameterType="Qna">
 		update qna set
 			qnatitle=#{qnatitle},
-			qnacontent=#{qnacontent},
-			qnadate=#{qnadate},
-			qnahitcnt=#{qnahitcnt}
+			qnacontent=#{qnacontent}
+			where qnano = #{qnano}
 	</update>
 
-
+	<delete id="deleteQna" parameterType="int">
+		delete from qna where qnano = #{qnano}
+	</delete>
 
 
 
