@@ -73,7 +73,18 @@ public class AdminController {
 		return "admin/member/admin_member_detail";
 	}
 	
-	
+	@RequestMapping("/update_member")
+	public String updateMember(int memno, String mememail, String memtel,  Model model) {
+		Member member = new Member();
+		member.setMememail(mememail);
+		member.setMemtel(memtel);
+		member.setMemno(memno);
+		log.info(member.getMemid());
+		log.info(member.getMememail());
+		adminService.editMemberInfo(member);
+		
+		return "redirect:/admin/admin_member_view";
+	}
 	
 	//상품관리 컨트롤러
 	@GetMapping("/product_list")

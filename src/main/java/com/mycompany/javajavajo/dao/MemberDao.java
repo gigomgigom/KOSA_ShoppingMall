@@ -30,5 +30,8 @@ public interface MemberDao {
 
 	//심영조 - Admin-회원관리-memberList에서 사용자가 요청한 페이지정보에 따라 List<Member>를 가져오기
 	public List<Member> selectByPage(Pager pager);
+
+
+	public int updateMemberInfo(Member member);
 	
 }

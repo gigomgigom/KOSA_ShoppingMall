@@ -42,5 +42,10 @@ public class AdminService {
 		Member member = memberDao.selectByMemno(memno);
 		return member;
 	}
+	public int editMemberInfo(Member member) {
+		log.info(member.getMememail());
+		int updatedRowNo = memberDao.updateMemberInfo(member);
+		return updatedRowNo;
+	}
 	
 }

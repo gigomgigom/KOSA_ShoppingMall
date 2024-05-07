@@ -49,4 +49,9 @@
 		]]>
 	</select>
 	
+	<update id="updateMemberInfo" parameterType="Member">
+		update member set
+		mememail = #{mememail}, memtel = #{memtel}
+		where memno = #{memno}
+	</update>
 </mapper>

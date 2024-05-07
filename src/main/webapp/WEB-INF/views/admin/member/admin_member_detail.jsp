@@ -50,16 +50,16 @@
 						<!-- 회원정보 출력(수정 input폼) -->
 						<div class="d-flex flex-column col-4">
 							<form class="d-flex flex-column w-100 justify-content-center"
-								action="update_member" method="post">
+								action="update_member" method="post" enctype="multipart/form-data">
 								<div class="my-3">
 									<label for="mno" class="form-label">회원번호</label> <input
-										type="text" class="form-control" id="mno" name="memno"
+										type="number" class="form-control" id="mno" name="memno"
 										readonly value="${member.memno}">
 								</div>
 								<div class="mb-3">
 									<label for="mid" class="form-label">회원 아이디</label> <input
 										type="text" class="form-control" id="mid" name="memid"
-										value="${member.memid}">
+										value="${member.memid}" readonly>
 								</div>
 								<div class="mb-3">
 									<label for="memail" class="form-label">회원 E-mail</label> <input
@@ -77,7 +77,7 @@
 										value="${member.memdate}" readonly>
 								</div>
 								<div class="w-100 d-flex flex-column align-items-center">
-									<button class="btn w-50 border mt-2">수정</button>
+									<button type="submit" class="btn w-50 border mt-2">수정</button>
 
 									<button class="btn w-50 border mt-2" type="button">비밀번호
 										초기화</button>
