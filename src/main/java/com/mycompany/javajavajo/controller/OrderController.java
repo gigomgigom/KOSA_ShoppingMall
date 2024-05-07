@@ -57,37 +57,16 @@ public class OrderController {
 		
 		return "order/orderForm";
 	}
+	
 	@PostMapping("/createOrder")
 	public String createOrder(Order order, Orderer orderer, Recipient recipient, Authentication authentication) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 	    Member member = t1UserDetails.getMember();
 	    int memno = member.getMemno();
 		
-	    //order 삽입
-	    order.setMemno(memno);
-	    order.setOrdstts("배달 준비 중");
-		order.setFinprice(order.getFinprice() - order.getDiscprice());
-		orderService.createOrder(order);
+		orderService.createOrder(memno, order, orderer,recipient);
 		
-		//orderer 삽입
-		orderer.setOrdno(order.getOrdno());
-		orderService.createorderer(orderer);
-		
-		//recipient 삽입
-		recipient.setOrdno(order.getOrdno());
-		orderService.createRecipient(recipient);
-		
-		//멤버 포인트 차감
-	    memberService.updatePoint(memno,order.getDiscprice(),"-");
-	    
-	    //pointDtl 삽입
-	    PointDtl pointDtl = new PointDtl();
-	    pointDtl.setOrdno(order.getOrdno());
-	    pointDtl.setAction(1);
-	    pointDtl.setAmount(order.getDiscprice());
-	    orderService.createPointDtl(pointDtl);
-		
-		return "redirect:/";
+		return "redirect:/order/order_detail";
 	}
 	
 	@RequestMapping("/order_detail")

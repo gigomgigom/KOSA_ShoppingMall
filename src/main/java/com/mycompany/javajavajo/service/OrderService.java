@@ -1,15 +1,24 @@
 package com.mycompany.javajavajo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mycompany.javajavajo.dao.CartItemDao;
+import com.mycompany.javajavajo.dao.MemberDao;
+import com.mycompany.javajavajo.dao.OrdProdDao;
 import com.mycompany.javajavajo.dao.OrderDao;
 import com.mycompany.javajavajo.dao.OrdererDao;
 import com.mycompany.javajavajo.dao.PointDtlDao;
+import com.mycompany.javajavajo.dao.ProductDao;
 import com.mycompany.javajavajo.dao.RecipientDao;
+import com.mycompany.javajavajo.dto.CartItem;
+import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Orderer;
 import com.mycompany.javajavajo.dto.PointDtl;
+import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.Recipient;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,19 +34,63 @@ public class OrderService {
 	private RecipientDao recipientDao;
 	@Autowired
 	private PointDtlDao pointDtlDao;
-	
-	public void createOrder(Order order) {
-		int result = orderDao.insert(order);
-	}
-	public void createorderer(Orderer orderer) {
-		int result = ordererDao.insert(orderer);
-	}
-	public void createRecipient(Recipient recipient) {
-		int result = recipientDao.insert(recipient);
+	@Autowired
+	private MemberDao memberDao;
+	@Autowired
+	private CartItemDao cartItemDao;
+	@Autowired
+	private ProductDao productDao;
+	@Autowired
+	private OrdProdDao ordProdDao;
+
+	public void createOrder(int memno, Order order, Orderer orderer, Recipient recipient) {
+
+		// order 삽입
+		order.setMemno(memno);
+		order.setOrdstts("배달 준비 중");
+		order.setFinprice(order.getFinprice() - order.getDiscprice());
+		int orderResult = orderDao.insert(order);
+
+		// orderer 삽입
+		orderer.setOrdno(order.getOrdno());
+		int ordererResult = ordererDao.insert(orderer);
+		int ordno = order.getOrdno();
 		
-	}
-	public void createPointDtl(PointDtl pointDtl) {
-		int result = pointDtlDao.insert(pointDtl);
+		// recipient 삽입
+		recipient.setOrdno(ordno);
+		int recipientResult = recipientDao.insert(recipient);
+
+		// 멤버 포인트 차감
+		memberDao.updatePoint(memno, order.getDiscprice(), "-");
+
+		// pointDtl 삽입
+		PointDtl pointDtl = new PointDtl();
+		pointDtl.setOrdno(ordno);
+		pointDtl.setAction(1);
+		pointDtl.setAmount(order.getDiscprice());
+		int pointDtlResult = pointDtlDao.insert(pointDtl);
+		
+		//memno에 해당하는 cartitem 얻어오기
+		List<CartItem> cartItemList = cartItemDao.selectByMemno(memno);
+		int[] prodnos = new int[cartItemList.size()];
+		int i = 0;
+		for(CartItem cartItem : cartItemList) {
+			int prodno = cartItem.getProdno();
+			int qty = cartItem.getQty();
+			Product product = productDao.selectByProdno(prodno);
+			int price = product.getProdprice();
+			
+			OrdProd ordProd = new OrdProd();
+			ordProd.setOrdno(ordno);
+			ordProd.setProdno(prodno);
+			ordProd.setQty(qty);
+			ordProd.setSubtot(price * qty);
+			int ordProdResult = ordProdDao.insert(ordProd);
+			
+			prodnos[i] = prodno;
+			i += 1;
+		}
+		int carItemDeleteResult = cartItemDao.deleteCartItems(memno, prodnos);
 		
 	}
 
