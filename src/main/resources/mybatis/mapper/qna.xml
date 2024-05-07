@@ -41,5 +41,16 @@
 			where qnano = #{qnano}
 	</update>
 
+	<update id="updateBoard" parameterType="Qna">
+		update qna set
+			qnatitle=#{qnatitle},
+			qnacontent=#{qnacontent},
+			qnadate=#{qnadate},
+			qnahitcnt=#{qnahitcnt}
+	</update>
+
+
+
+
 
 </mapper>

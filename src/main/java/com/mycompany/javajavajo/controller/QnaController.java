@@ -11,19 +11,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.Qna;
-import com.mycompany.javajavajo.security.Tm1UserDetails;
-import com.mycompany.javajavajo.service.BoardService;
+import com.mycompany.javajavajo.service.QnaService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 @RequestMapping("/board")
-public class BoardController {
+public class QnaController {
 	@Autowired
-	private BoardService boardService;
+	private QnaService qnaService;
 	// 글쓰기 페이지로 이동
 	@GetMapping("/writeBoard")
 	public String writeBoard() {
@@ -32,7 +30,7 @@ public class BoardController {
 	
 	@RequestMapping("/list")
 	public String listBoard(@RequestParam(defaultValue="") String keyword, Authentication authentication,Model model) {
-		List<Qna> qna = boardService.getQnaList(keyword);
+		List<Qna> qna = qnaService.getQnaList(keyword);
 		model.addAttribute("qnaList", qna);
 		return "board/list";
 		
@@ -42,7 +40,7 @@ public class BoardController {
 	// Controller에서 Service로 요청
 	@PostMapping("/writeBoard")
 	public String writeBoard(Qna qna) {
-		boardService.writeBoard(qna);
+		qnaService.writeBoard(qna);
 		return "redirect:/board/list";
 		//클라이언트 요청 -> 컨트롤러 -> 클라이언트 -> 경로로 이동시킴
 	}
@@ -50,13 +48,27 @@ public class BoardController {
 	@GetMapping("/detailBoard")
 	public String detailBoard(int qnano, Model model) {
 		log.info("run");
-		Qna qna = boardService.getQna(qnano); // dto를 통해서 한 게시물의 정보를 가져옴
+		Qna qna = qnaService.getQna(qnano); // dto를 통해서 한 게시물의 정보를 가져옴
 		model.addAttribute("qna", qna);
 		log.info(qna.getQnatitle());
 		return "board/detail";
 	}
+	//글수정할 페이지 이동
+	@GetMapping("/updateBoard")
+	public String updateBoard(int qnano, Model model) {
+		Qna qna = qnaService.getQna(qnano);
+		model.addAttribute("qna", qna);
+		return "board/writeBoard";
+	}
+	// 글수정된 페이지로 이동
+	@PostMapping("/updateBoard")
+	public String updateBoard(Qna qna) {
+		qnaService.updateBoard(qna);
+		log.info("실행 post");
+		return "redirect:/board/detailBoard?qnano="+qna.getQnano();
+	}
 	
-
+	
 }
 
 

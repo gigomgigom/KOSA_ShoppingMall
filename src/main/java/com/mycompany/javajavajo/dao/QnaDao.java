@@ -17,6 +17,10 @@ public interface QnaDao {
 	public List<Qna> selectQnaListByKeyword(String keyword);
 
 	public int updatehitcnt(int qnano);
+
+	public int updateQna(Qna qna);
+
+
 	
 	
 }
