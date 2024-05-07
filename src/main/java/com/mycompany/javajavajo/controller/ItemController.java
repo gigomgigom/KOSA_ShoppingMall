@@ -36,7 +36,9 @@ public class ItemController {
 	
 	//다음단계는 ItemService로!
 	@RequestMapping("/item_detail")
-	public String itemDetail() {
+	public String itemDetail(int prodno, Model model) {
+		Product product = service.getProductByProdno(prodno);
+		model.addAttribute("product", product);
 		return "item/item_detail";
 	}
 	
