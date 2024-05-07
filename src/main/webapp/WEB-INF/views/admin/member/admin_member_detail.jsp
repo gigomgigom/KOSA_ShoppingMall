@@ -50,31 +50,31 @@
 						<!-- 회원정보 출력(수정 input폼) -->
 						<div class="d-flex flex-column col-4">
 							<form class="d-flex flex-column w-100 justify-content-center"
-								action="#" method="post">
+								action="update_member" method="post">
 								<div class="my-3">
 									<label for="mno" class="form-label">회원번호</label> <input
 										type="text" class="form-control" id="mno" name="memno"
-										readonly value="1">
+										readonly value="${member.memno}">
 								</div>
 								<div class="mb-3">
 									<label for="mid" class="form-label">회원 아이디</label> <input
 										type="text" class="form-control" id="mid" name="memid"
-										value="id1234">
+										value="${member.memid}">
 								</div>
 								<div class="mb-3">
 									<label for="memail" class="form-label">회원 E-mail</label> <input
 										type="text" class="form-control" id="memail" name="mememail"
-										value="email@naver.com">
+										value="${member.mememail}">
 								</div>
 								<div class="mb-3">
 									<label for="mtel" class="form-label">회원 휴대폰번호</label> <input
 										type="text" class="form-control" id="mtel" name="memtel"
-										value="010-2810-4870">
+										value="${member.memtel}">
 								</div>
 								<div class="mb-3">
 									<label for="mdate" class="form-label">회원 가입일자</label> <input
 										type="text" class="form-control" id="mdate" name="memdate"
-										value="2024.04.29" readonly>
+										value="${member.memdate}" readonly>
 								</div>
 								<div class="w-100 d-flex flex-column align-items-center">
 									<button class="btn w-50 border mt-2">수정</button>
@@ -103,7 +103,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr onclick="location.href='${pageContext.request.contextPath}/order/member_detail'">
+											<tr onclick="location.href='${pageContext.request.contextPath}/order/order_detail'">
 												<th scope="row">202405030001</th>
 												<td>배송완료</td>
 												<td>개껌 외 2개</td>

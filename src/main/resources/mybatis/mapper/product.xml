@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mycompany.javajavajo.dao.ProductDao">
+	<!-- 이 추상메소드의 이름과 매개변수 타입, 반환값 타입을 어떻게 설정했으며 만약 아래 sql문을 실행했을때 몇개의 결과값이 나올까요?-->
 	<select id="selectByProdno" parameterType="int" resultType="com.mycompany.javajavajo.dto.Product">
 		select *
 		from product

@@ -85,7 +85,7 @@
 							<tbody style="vertical-align: middle;">
 								<c:forEach var="member" items="${memberList}">
 									<tr
-										onclick="location.href='${pageContext.request.contextPath}/admin/member_detail?member=${member.memno}'">
+										onclick="location.href='${pageContext.request.contextPath}/admin/member_detail?memno=${member.memno}'">
 										<td>${member.memno}</td>
 										<td>${member.memid}</td>
 										<td>${member.memname}</td>

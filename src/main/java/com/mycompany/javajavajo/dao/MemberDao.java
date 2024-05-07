@@ -25,10 +25,10 @@ public interface MemberDao {
 
 	public Member selectByMemnoMemImg(int memno);
 
-
+	//심영조 - Admin-회원관리-memberList에서 총 회원수를 가져오기 위한 메소드
 	public int countSelectedRows();
 
-
+	//심영조 - Admin-회원관리-memberList에서 사용자가 요청한 페이지정보에 따라 List<Member>를 가져오기
 	public List<Member> selectByPage(Pager pager);
 	
 }

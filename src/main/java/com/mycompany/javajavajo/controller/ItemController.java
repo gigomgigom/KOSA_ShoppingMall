@@ -29,10 +29,14 @@ public class ItemController {
 	@Autowired
 	private ItemService service;
 	
+	//세림씨 숙제에요!
+	//1. itemList.jsp에서 'item_detail'URL로 요청했을때 prodno(상품번호)를 전달한다.
+	//2. 요청매핑메소드(아래 메소드)에서 service의 메소드를 호출하며 prodno(상품번호)를 전달한다.
+	//   뭘 하기 위해서? 상품번호에 해당하는 상품의 정보들을 가져오기 위해서(그럼 리턴타입이 어떻게 되야할까?)
+	
+	//다음단계는 ItemService로!
 	@RequestMapping("/item_detail")
-	public String itemDetail(int prodno, Model model) {
-		Product product = service.getProductByProdno(prodno);
-		model.addAttribute("product", product);
+	public String itemDetail() {
 		return "item/item_detail";
 	}
 	

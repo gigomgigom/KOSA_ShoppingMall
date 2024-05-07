@@ -23,15 +23,16 @@ public class AdminService {
 	@Autowired
 	private MemberDao memberDao;
 	
+	//심영조-admin-main페이지-재고부족상품들 가져오기
 	public List<Product> getOutOfStock() {
 		return productDao.selectLackStock();
 	}
-
+	//심영조-admin-memberList페이지-조건에 맞는 member들의 총 갯수를 가져옴
 	public int getTotalRows() {
 		int totalRows = memberDao.countSelectedRows();
 		return totalRows;
 	}
-
+	//심영조-admin-memberList페이지-Pager 조건에 맞는 데이터(List<Member>)를 받아와라
 	public List<Member> getMemberList(Pager pager) {
 		List<Member> memberList = memberDao.selectByPage(pager);
 		return memberList;

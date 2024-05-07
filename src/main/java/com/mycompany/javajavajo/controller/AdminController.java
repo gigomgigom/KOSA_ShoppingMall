@@ -66,11 +66,14 @@ public class AdminController {
 	
 	@RequestMapping("/member_detail")
 	public String memberDetail(Model model, int memno) {
-		adminService.getMemberByMemno(memno);
+		Member member = adminService.getMemberByMemno(memno);
 		
 		model.addAttribute("menuNum", 0);
+		model.addAttribute("member", member);
 		return "admin/member/admin_member_detail";
 	}
+	
+	
 	
 	//상품관리 컨트롤러
 	@GetMapping("/product_list")
