@@ -7,8 +7,8 @@
 	<selectKey keyProperty="qnano" order="BEFORE" resultType="int"> 
 			select qna_seq.nextval from dual 
 	</selectKey>
-		insert into qna (qnano, memno, qnacontent, qnatitle, qnadate, qnahitcnt , qnalock)
-		values(#{qnano}, #{memno}, #{qnacontent}, #{qnatitle}, sysdate, 0, #{qnalock})
+		insert into qna (qnano, memno, qnacontent, qnatitle, qnadate, qnahitcnt , qnalock, qnaattachoname, qnaattachtype, qnaattachdata)
+		values(#{qnano}, #{memno}, #{qnacontent}, #{qnatitle}, sysdate, 0, #{qnalock}, #{qnaattachoname}, #{qnaattachtype}, #{qnaattachdata})
 	</insert>
 	
 
@@ -52,6 +52,7 @@
 		delete from qna where qnano = #{qnano}
 	</delete>
 
+	
 
 
 </mapper>

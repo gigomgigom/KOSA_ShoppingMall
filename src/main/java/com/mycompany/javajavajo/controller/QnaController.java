@@ -41,10 +41,23 @@ public class QnaController {
 	@PostMapping("/writeBoard")
 	public String writeBoard(Qna qna) {
 		log.info("글써보기할까요?");
+		if(qna.getQnaattach() != null || !qna.getQnaattach().isEmpty()) {
+			
+			qna.setQnaattachoname(qna.getQnaattach().getOriginalFilename());
+			qna.setQnaattachtype(qna.getQnaattach().getContentType());
+			
+			try {
+				qna.setQnaattachdata(qna.getQnaattach().getBytes());
+			} catch (Exception e) {}
+		}
+		log.info(qna.getQnaattach().getOriginalFilename());
+		log.info(qna.getQnaattachtype());
 		qnaService.writeBoard(qna);
 		return "redirect:/board/list";
 		//클라이언트 요청 -> 컨트롤러 -> 클라이언트 -> 경로로 이동시킴
+		
 	}
+	
 	
 	@GetMapping("/detailBoard")
 	public String detailBoard(int qnano, Model model) {
@@ -74,6 +87,7 @@ public class QnaController {
 		qnaService.deleteQna(qnano);
 		return "redirect:/board/list";
 	}
+	
 	
 	
 	

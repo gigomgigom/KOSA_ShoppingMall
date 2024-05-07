@@ -20,11 +20,11 @@
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	</header>
 	<c:if test="${qna == null}">
-		<form action="writeBoard" method="post">
+		<form action="writeBoard" method="post" enctype="multipart/form-data">
 	</c:if>
 	
 	<c:if test="${qna != null}">
-		<form action="updateBoard" method="post">
+		<form action="updateBoard" method="post" enctype="multipart/form-data">
 	</c:if>
 		<div
 			class="container-fluid  d-flex flex-column align-items-center m-0 my-5 p-0">
@@ -82,17 +82,18 @@
 				</div>
 			</div>
 
-			<!-- <div class="row w-50 border-bottom m-0 p-0">
+			<div class="row w-50 border-bottom m-0 p-0">
 			<div
 				class="col-2 d-flex justify-content-center align-items-center border-end  m-0 p-0 py-2"
 				style="background-color: #27374D; color: white">
+				<input class="form-control" type="file" name="qnaattach">
 				<p class="m-0 p-0">첨부파일</p>
 			</div>
 			<div
 				class="col-10 d-flex flex-column justify-content-center align-items-center m-0 p-0 py-2">
 				<input id='attach' type="file" class="form-control w-75 text-center m-0 p-0" multiple>
 			</div>
-		</div> -->
+		</div> 
 			
 		<div class="form-check mt-5">
 				<input class="form-check-input" type="checkbox" name="qnalock" value="1"> 
@@ -111,7 +112,7 @@
 				<a href="list" class="btn border text-decoration-none text-dark">취소</a>
 			</div>
 		</div>
-	</form>
+		</form>
 	<footer>
 		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	</footer>
