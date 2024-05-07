@@ -68,17 +68,17 @@
 				<!--상품 목록 출력-->
 				<c:forEach var="item" items="${itemList}">
 					<div class="card mb-4" style="width: 24%">
-						<a href="${pageContext.request.contextPath}/item/item_detail">
+						<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${item.prodno}">
 							<img class="card-img-top"
 							src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${item.prodno}"
 							alt="Card image" style="width: 100%;">
 						</a>
 						<div class="card-body">
 							<h4 class="card-title">
-								<a href="${pageContext.request.contextPath}/item/item_detail"
+								<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${item.prodno}"
 									class="text-decoration-none text-black"> ${item.prodname} </a>
 							</h4>
-							<h5>45,000원</h5>
+							<h5>${item.prodprice}</h5>
 							<p>상품 평점 : 4.5 리뷰 : 4개</p>
 						</div>
 					</div>

@@ -34,4 +34,10 @@ public class ItemService {
 		return itemList;
 	}
 
+	public Product getProductByProdno(int prodno) {
+		Product product = productDao.selectByProdno(prodno);
+		return product;
+		
+	}
+
 }
