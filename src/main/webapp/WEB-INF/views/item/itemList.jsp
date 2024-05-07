@@ -5,6 +5,7 @@
 <html>
 <head>
 <script>
+	
 </script>
 <!-- jQuery 외부 라이브러리 설정 -->
 <script
@@ -21,7 +22,8 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    </script>
+	
+</script>
 <style>
 * {
 	margin: 0;
@@ -81,6 +83,18 @@
 						</div>
 					</div>
 				</c:forEach>
+				<div class="w-100 d-flex justify-content-center">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" href="#">이전</a></li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#">다음</a></li>
+						</ul>
+					</nav>
+				</div>
+
 			</div>
 		</div>
 	</div>
@@ -92,6 +106,7 @@
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+		
 	</script>
 </body>
 </html>

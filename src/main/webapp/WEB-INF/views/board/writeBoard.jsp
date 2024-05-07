@@ -39,7 +39,10 @@
 			<hr class="w-25 m-0 mb-5 p-0" />
 
 			<div class="row w-50 border-top border-bottom m-0 p-0">
+				<c:if test="${qna != null}">
 				<input type="hidden" name="qnano" value="${qna.qnano}">
+				</c:if>
+				
 				<div
 					class="col-2 d-flex justify-content-center align-items-center border-end m-0 p-0 py-2"
 					style="background-color: #27374D; color: white">

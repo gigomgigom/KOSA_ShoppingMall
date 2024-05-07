@@ -156,7 +156,7 @@
 		<div
 			class="d-flex w-75 justify-content-center align-items-center m-0 p-0">
 			<a href="${pageContext.request.contextPath}/board/updateBoard?qnano=${qna.qnano}" class="btn btn-sm border border-secondary-subtle m-0 me-3 p-0">수정</a>
-			<a class="btn btn-sm border border-secondary-subtle m-0 p-0">삭제</a>
+			<a href="${pageContext.request.contextPath}/board/deleteQna?qnano=${qna.qnano}" class="btn btn-sm border border-secondary-subtle m-0 p-0">삭제</a>
 		</div>
 	</div>
 	<footer>

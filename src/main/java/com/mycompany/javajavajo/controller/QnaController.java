@@ -40,6 +40,7 @@ public class QnaController {
 	// Controller에서 Service로 요청
 	@PostMapping("/writeBoard")
 	public String writeBoard(Qna qna) {
+		log.info("글써보기할까요?");
 		qnaService.writeBoard(qna);
 		return "redirect:/board/list";
 		//클라이언트 요청 -> 컨트롤러 -> 클라이언트 -> 경로로 이동시킴
@@ -63,10 +64,17 @@ public class QnaController {
 	// 글수정된 페이지로 이동
 	@PostMapping("/updateBoard")
 	public String updateBoard(Qna qna) {
-		qnaService.updateBoard(qna);
+		qnaService.updateQna(qna);
 		log.info("실행 post");
 		return "redirect:/board/detailBoard?qnano="+qna.getQnano();
 	}
+	
+	@GetMapping("/deleteQna")
+	public String deleteQna(int qnano) {
+		qnaService.deleteQna(qnano);
+		return "redirect:/board/list";
+	}
+	
 	
 	
 }
