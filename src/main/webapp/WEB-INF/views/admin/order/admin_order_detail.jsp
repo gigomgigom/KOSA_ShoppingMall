@@ -76,6 +76,7 @@
 										</div>
 										<div class="w-25">
 											<button type="button" class="btn" data-toggle="modal" data-target="#myModal">운송장 입력</button>
+											<%@ include file="/WEB-INF/views/admin/order/modal_select_del_com.jsp"%>
 										</div>
 									</div>
 								</div>
@@ -191,6 +192,7 @@
 			</div>
 		</div>
 	</div>
-	<%@ include file="/WEB-INF/views/admin/order/modal_select_del_com.jsp"%>
+	<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

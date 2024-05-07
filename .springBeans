@@ -10,16 +10,16 @@
 		<config>src/main/resources/spring/root/data_source.xml</config>
 		<config>src/main/resources/spring/root/mybatis.xml</config>
 		<config>src/main/resources/spring/root/security.xml</config>
+		<config>src/main/resources/spring/dispatcher/view_resolver.xml</config>
+		<config>src/main/resources/spring/dispatcher/static_resource.xml</config>
+		<config>src/main/resources/spring/dispatcher/component_scan.xml</config>
+		<config>src/main/resources/spring/root/component_scan.xml</config>
+		<config>src/main/resources/spring/dispatcher/multipartresolver.xml</config>
 	</configs>
 	<autoconfigs>
-		<config>src/main/resources/spring/dispatcher/ch01_static_resource.xml</config>
 		<config>src/test/resources/spring/dispatcher/ch01_static_resource.xml</config>
-		<config>src/main/resources/spring/dispatcher/board.xml</config>
-		<config>src/main/resources/spring/dispatcher/ch01_component_scan.xml</config>
 		<config>src/test/resources/spring/dispatcher/ch01_view_resolver.xml</config>
 		<config>src/test/resources/spring/root/ch01_component_scan.xml</config>
-		<config>src/main/resources/spring/dispatcher/ch01_view_resolver.xml</config>
-		<config>src/main/resources/spring/root/ch01_component_scan.xml</config>
 		<config>src/test/resources/spring/dispatcher/ch01_component_scan.xml</config>
 	</autoconfigs>
 	<configSets>
