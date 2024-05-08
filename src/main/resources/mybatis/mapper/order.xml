@@ -14,4 +14,8 @@
 	<select id="selectOrderByMemno" parameterType="int" resultType="Order">
 		select * from ord where memno = #{memno} order by orddate desc
 	</select>
+	
+	<select id="selectOrderByOrdno" parameterType="int" resultType="Order">
+		select * from ord where ordno = #{ordno}
+	</select>
 </mapper>

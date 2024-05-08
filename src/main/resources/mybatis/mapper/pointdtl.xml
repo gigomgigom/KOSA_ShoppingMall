@@ -6,4 +6,7 @@
 		values	(#{ordno}, #{action}, #{amount})
 	</insert>
 	
+	<select id="selectPointDtlByOrdnoAndAction" parameterType="int" resultType="PointDtl">
+		select * from pointdtl where ordno = #{ordno} and action = #{action}
+	</select>
 </mapper>

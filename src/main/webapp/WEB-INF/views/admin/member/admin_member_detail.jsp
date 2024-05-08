@@ -5,7 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 <!-- jQuery 외부 라이브러리 설정 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
@@ -76,14 +77,16 @@
 								<div class="mb-3">
 									<label for="mdate" class="form-label">회원 가입일자</label> <input
 										type="text" class="form-control" id="mdate" name="memdate"
-										value='<fmt:formatDate value="${member.memdate}" pattern="yyyy-MM-dd" />' readonly>
+										value='<fmt:formatDate value="${member.memdate}" pattern="yyyy-MM-dd" />'
+										readonly>
 								</div>
 								<div class="w-100 d-flex flex-column align-items-center">
 									<button type="submit" class="btn w-50 border mt-2">수정</button>
 
-									<button class="btn w-50 border mt-2" type="button" data-bs-toggle="modal" data-bs-target="#resetpw">비밀번호
+									<button class="btn w-50 border mt-2" type="button"
+										data-bs-toggle="modal" data-bs-target="#resetpw">비밀번호
 										초기화</button>
-										
+
 									<button class="btn w-50 border mt-2" type="button">마일리지
 										수정</button>
 								</div>
@@ -106,17 +109,20 @@
 										</thead>
 										<tbody>
 											<c:forEach var="order" items="${orderList}">
-												<tr onclick="location.href='${pageContext.request.contextPath}/order/order_detail?ordno=${order.ordno}'">
+												<tr
+													onclick="location.href='${pageContext.request.contextPath}/order/order_detail?ordno=${order.ordno}'">
 													<th scope="row">${order.ordno}</th>
 													<td>${order.ordstts}</td>
 													<c:if test="${order.ordproductcnt != 0}">
-													<td>${order.oneproduct.prodname} 외 ${order.ordproductcnt}개</td>
+														<td>${order.oneproduct.prodname}외
+															${order.ordproductcnt}개</td>
 													</c:if>
 													<c:if test="${order.ordproductcnt == 0}">
-													<td>개껌</td>
+														<td>개껌</td>
 													</c:if>
 													<td>${order.finprice}</td>
-													<td><fmt:formatDate value="${order.orddate}" pattern="yyyy-MM-dd" /></td>
+													<td><fmt:formatDate value="${order.orddate}"
+															pattern="yyyy-MM-dd" /></td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -125,8 +131,7 @@
 							</div>
 							<!-- 포인트 사용내역 -->
 							<div class="container-fluid h-50 py-3">
-								<div class="h-100 border border-dark"
-									style="overflow: auto;">
+								<div class="h-100 border border-dark" style="overflow: auto;">
 									<table class="table">
 										<thead>
 											<tr>
@@ -137,15 +142,23 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<th scope="row">202405030001</th>
-												<td>사용</td>
-												<td>3000포인트</td>
-												<td>2024.05.03</td>
-											</tr>
+											<c:forEach var="pointDtl" items="${pointDtlList}">
+												<tr>
+													<th scope="row">${pointDtl.ordno}</th>
+													<c:if test="${pointDtl.action == 1}">
+														<td>사용</td>
+													</c:if>
+													<c:if test="${pointDtl.action == 0}">
+														<td>적립</td>
+													</c:if>
+													<td>${pointDtl.amount}포인트</td>
+													<td><fmt:formatDate value="${pointDtl.date}"
+															pattern="yyyy-MM-dd" /></td>
+												</tr>
+											</c:forEach>
 										</tbody>
 									</table>
-								</div>						
+								</div>
 							</div>
 						</div>
 					</div>

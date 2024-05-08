@@ -18,5 +18,6 @@
 		<typeAlias type="com.mycompany.javajavajo.dto.OrdProd" alias="OrdProd"/>
 		<typeAlias type="com.mycompany.javajavajo.dto.Pager" alias="Pager"/>
 		<typeAlias type="com.mycompany.javajavajo.dto.Product" alias="Product"/>
+		<typeAlias type="com.mycompany.javajavajo.dto.PointDtl" alias="PointDtl"/>
 	</typeAliases>
 </configuration>

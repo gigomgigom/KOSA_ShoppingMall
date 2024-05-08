@@ -1,5 +1,6 @@
 package com.mycompany.javajavajo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Pager;
+import com.mycompany.javajavajo.dto.PointDtl;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.service.AdminService;
 
@@ -73,19 +75,38 @@ public class AdminController {
 		//회원 주문정보 리스트 가져오기
 		List<Order> orderList = adminService.getOrderListByMemno(memno);
 		
+		List<PointDtl> pointDtlList = new ArrayList<>();
+		
 		//주문에 상품의 수 그리고 그 들중 한 상품에 대한 정보를 찾아서 Order객체에 넣어준다.
 		for(Order order : orderList) {
 			//주문마다 몇개의 상품을 구매했는지 찾는다.
 			Order outlineOrderProduct = adminService.getOrderProductCnt(order.getOrdno());
 			//주문의 총상품 수를 Order객체에 넣어준다.
 			order.setOrdproductcnt(outlineOrderProduct.getOrdproductcnt());
-			//
+			//주문한 상품들 중 하나를 찾아서 oneOfProduct에 넣어준다.
 			Product oneOfProduct = adminService.getProductByProdNo(outlineOrderProduct.getOneofordproduct());
 			order.setOneproduct(oneOfProduct);
+			
+			//주문번호를 주어졌을때 포인트 이력(사용, 적립)을 가져온다.
+			PointDtl usedPointDtl = adminService.getPointDtlListByOrdno(order.getOrdno(), 1);
+			PointDtl rewardPointDtl = adminService.getPointDtlListByOrdno(order.getOrdno(), 0);
+			//포인트 이력에서 일자를 찾기 위해 주문번호를 넘겨 해당 주문정보를 받아오는 메소드를 호출한다.
+			Order orderForDate = adminService.getOrderByOrdno(order.getOrdno());
+			
+			if(usedPointDtl != null) {
+				usedPointDtl.setDate(orderForDate.getOrddate());
+				pointDtlList.add(usedPointDtl);
+			}
+			if(rewardPointDtl != null) {
+				rewardPointDtl.setDate(orderForDate.getOrddate());
+				pointDtlList.add(rewardPointDtl);
+			}
 		}
+		
 		model.addAttribute("menuNum", 0);
 		model.addAttribute("member", member);
 		model.addAttribute("orderList", orderList);
+		model.addAttribute("pointDtlList", pointDtlList);
 		return "admin/member/admin_member_detail";
 	}
 	
