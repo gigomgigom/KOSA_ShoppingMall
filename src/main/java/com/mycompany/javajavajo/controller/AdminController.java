@@ -73,16 +73,16 @@ public class AdminController {
 		return "admin/member/admin_member_detail";
 	}
 	
+	//문제 발생 메소드
 	@RequestMapping("/update_member")
-	public String updateMember(int memno, String mememail, String memtel,  Model model) {
-		Member member = new Member();
+	public String updateMember(Member member,  Model model) {
+		/*Member member = new Member();
 		member.setMememail(mememail);
 		member.setMemtel(memtel);
-		member.setMemno(memno);
-		log.info(member.getMemid());
-		log.info(member.getMememail());
+		member.setMemno(memno);*/
+		//log.info(member.getMemid());
+		//log.info(member.getMememail());
 		adminService.editMemberInfo(member);
-		
 		return "redirect:/admin/admin_member_view";
 	}
 	

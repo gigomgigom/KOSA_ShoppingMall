@@ -37,11 +37,12 @@ public class AdminService {
 		List<Member> memberList = memberDao.selectByPage(pager);
 		return memberList;
 	}
-
+	//심영조-admin-memberDetail페이지- 회원번호를 주었을때 회원의 정보를 가져와라
 	public Member getMemberByMemno(int memno) {
 		Member member = memberDao.selectByMemno(memno);
 		return member;
 	}
+	//문제 발생 메소드
 	public int editMemberInfo(Member member) {
 		log.info(member.getMememail());
 		int updatedRowNo = memberDao.updateMemberInfo(member);
