@@ -8,13 +8,13 @@ import lombok.Data;
 
 @Data
 public class Member {
-	private int memno; //form
-	private String memid; //form
+	private int memno;
+	private String memid;
 	private String mempw;
 	private String memname; 
 	private String memnicknm;
-	private String mememail; //form
-	private String memtel; //form
+	private String mememail;
+	private String memtel;
 	private boolean memenabled;
 	private String memrole;
 	private int mempoint;
@@ -22,5 +22,5 @@ public class Member {
 	private String memimgtype;
 	private String memimgoname;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date memdate; //form
+	private Date memdate;
 }

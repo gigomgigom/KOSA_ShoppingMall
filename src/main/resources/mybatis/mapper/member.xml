@@ -28,7 +28,7 @@
 		where memno = #{memno}
 	</select>
 	
-	<select id="countSelectedRows" resultType="int">
+	<select id="selectTotalRows" resultType="int">
 		select count(*) from member where memrole != 'ROLE_ADMIN'
 	</select>
 	
@@ -52,6 +52,26 @@
 	<update id="updateMemberInfo" parameterType="Member">
 		update member set
 		mememail = #{mememail}, memtel = #{memtel}
+		<if test="mempw != null">
+		, mempw = #{mempw}
+		</if>
+		<if test="memname != null">
+		, memname = #{memname}
+		</if>
+		<if test="memnicknm != null">
+		, memnicknm = #{memnicknm}
+		</if>
+		<if test="memimgoname != null">
+		, memimgoname = #{memimgoname},
+		memimgtype = #{memimgtype},
+		memimg = #{memimg}
+		</if>
+		where memno = #{memno}
+	</update>
+	
+	<update id="updatePassword" parameterType="Member">
+		update member 
+		set mempw = #{mempw}
 		where memno = #{memno}
 	</update>
 	

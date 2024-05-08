@@ -76,7 +76,7 @@
 										</div>
 										<div class="w-25">
 											<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">운송장 입력</button>
-											<%@ include file="/WEB-INF/views/admin/order/modal_select_del_com.jsp"%>
+											<%@ include file="/WEB-INF/views/admin/modal/modal_select_del_com.jsp"%>
 										</div>
 									</div>
 								</div>

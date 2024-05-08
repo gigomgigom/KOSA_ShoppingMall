@@ -26,3 +26,16 @@ function closePopupAndRefresh() {
     // 원래 페이지를 새로 고침
     window.opener.location.reload();
 }
+
+function resetPassword(memno) {
+	var data = {memno : memno};
+	
+	$.ajax({
+		url: "reset_password",
+		method: "get",
+		data: data,
+		success: function(data) {
+			$('#resetcomplete').modal();
+		}
+	})
+}

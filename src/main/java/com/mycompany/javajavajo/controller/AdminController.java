@@ -26,7 +26,7 @@ public class AdminController {
 	@Autowired
 	private AdminService adminService;
 	
-	//Main페이지 이동 컨트롤러
+	//Main페이지 이동 컨트롤러(DashBoard)
 	@RequestMapping("/main")
 	public String adminMain(Model model) {
 		List<Product> lackProducts = adminService.getOutOfStock();
@@ -35,7 +35,7 @@ public class AdminController {
 		model.addAttribute("menuNum", -1);
 		return "admin/adminMain";
 	}
-	
+	//-----------------------------------------------------------------------------------------
 	//회원관리 컨트롤러
 	@GetMapping("/admin_member_view")
 	public String adminMemberView(String pageNo, Model model, HttpSession session) {
@@ -64,6 +64,7 @@ public class AdminController {
 		return "admin/member/admin_member";
 	}
 	
+	//회원 상세정보 보기
 	@RequestMapping("/member_detail")
 	public String memberDetail(Model model, int memno) {
 		Member member = adminService.getMemberByMemno(memno);
@@ -73,19 +74,26 @@ public class AdminController {
 		return "admin/member/admin_member_detail";
 	}
 	
-	//문제 발생 메소드
+	//회원 상세정보 보기 - 회원 정보 변경(수정)
 	@RequestMapping("/update_member")
 	public String updateMember(Member member,  Model model) {
-		/*Member member = new Member();
-		member.setMememail(mememail);
-		member.setMemtel(memtel);
-		member.setMemno(memno);*/
-		//log.info(member.getMemid());
-		//log.info(member.getMememail());
 		adminService.editMemberInfo(member);
 		return "redirect:/admin/admin_member_view";
 	}
 	
+	//회원 상세정보 보기 - 회원 비밀번호 초기화
+	@RequestMapping("/reset_password")
+	public String resetPassword(int memno) {
+		Member member = new Member();
+		member.setMemno(memno);
+		log.info(member.getMemno()+"");
+		adminService.resetPassword(member);
+		return "redirect:/admin/admin_member_view";
+	}
+	
+	//회원 상세정보 보기 - 회원 마일리지 수정
+	
+	//-----------------------------------------------------------------------------------------
 	//상품관리 컨트롤러
 	@GetMapping("/product_list")
 	public String productList(Model model) {

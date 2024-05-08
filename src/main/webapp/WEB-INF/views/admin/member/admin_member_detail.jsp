@@ -80,7 +80,7 @@
 								<div class="w-100 d-flex flex-column align-items-center">
 									<button type="submit" class="btn w-50 border mt-2">수정</button>
 
-									<button class="btn w-50 border mt-2" type="button">비밀번호
+									<button class="btn w-50 border mt-2" type="button" data-bs-toggle="modal" data-bs-target="#resetpw">비밀번호
 										초기화</button>
 										
 									<button class="btn w-50 border mt-2" type="button">마일리지
@@ -145,5 +145,7 @@
 			</div>
 		</div>
 	</div>
+	<%@ include file="/WEB-INF/views/admin/modal/modal_reset_password.jsp"%>
+	<%@ include file="/WEB-INF/views/admin/modal/modal_reset_complete.jsp"%>
 </body>
 </html>
