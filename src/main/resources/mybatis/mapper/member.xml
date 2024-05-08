@@ -87,4 +87,10 @@
 		</if>
 		where memno = #{memno}
 	</update>
+	
+	<update id="updatePointByAdmin" parameterType="Member">
+		update member
+		set mempoint = #{mempoint}
+		where memno = #{memno}
+	</update>
 </mapper>

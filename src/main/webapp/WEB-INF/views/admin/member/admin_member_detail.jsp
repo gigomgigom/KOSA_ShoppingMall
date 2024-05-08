@@ -87,7 +87,8 @@
 										data-bs-toggle="modal" data-bs-target="#resetpw">비밀번호
 										초기화</button>
 
-									<button class="btn w-50 border mt-2" type="button">마일리지
+									<button class="btn w-50 border mt-2" type="button"
+										data-bs-toggle="modal" data-bs-target="#pointModal">마일리지
 										수정</button>
 								</div>
 							</form>
@@ -167,5 +168,6 @@
 		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/admin/modal/modal_reset_password.jsp"%>
+	<%@ include file="/WEB-INF/views/admin/modal/modal_edit_point.jsp"%>
 </body>
 </html>

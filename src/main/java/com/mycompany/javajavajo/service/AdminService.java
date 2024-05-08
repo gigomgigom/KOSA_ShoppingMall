@@ -26,16 +26,12 @@ public class AdminService {
 	
 	@Autowired
 	private ProductDao productDao;
-	
 	@Autowired
 	private MemberDao memberDao;
-	
 	@Autowired
 	private OrderDao orderDao;
-	
 	@Autowired
 	private OrdProdDao ordProdDao;
-	
 	@Autowired
 	private PointDtlDao pointDtlDao;
 	
@@ -93,6 +89,10 @@ public class AdminService {
 	public Order getOrderByOrdno(int ordno) {
 		Order order = orderDao.selectOrderByOrdno(ordno);
 		return order;
+	}
+	//심영조-admin-memberDetail페이지- 회원의 포인트를 주어진 값으로 변경한다.
+	public int editPoint(Member member) {
+		return memberDao.updatePointByAdmin(member);
 	}
 	
 }
