@@ -40,7 +40,7 @@
 
 	<div class="container-fluid d-flex align-items-center flex-column mt-5">
 		<h1>
-			<b>${ctgno == 1 ? '사료' : ctgno == 2 ? '간식' : '영양제'}</b>
+			<b>삼항연산자 중첩으로 해서 카테고리명 출력하기</b>
 		</h1>
 		<div class="d-flex flex-column my-5" style="width: 80vw;">
 			<div
@@ -66,23 +66,23 @@
 			</div>
 			<div class="w-100 d-flex flex-wrap justify-content-between mb-5">
 				<!--상품 목록 출력-->
-				<c:forEach var="item" items="${itemList}">
-					<div class="card mb-4" style="width: 24%">
-						<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${item.prodno}">
-							<img class="card-img-top"
-							src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${item.prodno}"
-							alt="Card image" style="width: 100%;">
-						</a>
-						<div class="card-body">
-							<h4 class="card-title">
-								<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${item.prodno}"
-									class="text-decoration-none text-black"> ${item.prodname} </a>
-							</h4>
-							<h5>${item.prodprice}원</h5>
-							<p>상품 평점 : 4.5 리뷰 : 4개</p>
-						</div>
+				<!-- JSTL에서 ForEach태그를 사용해서 아래 상품 출력칸을 가져온 상품 수만큼 뿌려준다. -->
+				
+				
+				<div class="card mb-4" style="width: 24%">
+					<a href="${pageContext.request.contextPath}/item/item_detail">
+						<img class="card-img-top" src="${pageContext.request.contextPath}/item/downloadRepimg" alt="Card image" style="width: 100%;">
+					</a>
+					<div class="card-body">
+						<h4 class="card-title">
+							<a href="${pageContext.request.contextPath}/item/item_detail" class="text-decoration-none text-black"> 상품명 </a>
+						</h4>
+						<h5>()가격나와야함)원</h5>
+						<p>상품 평점 : 4.5 리뷰 : 4개</p>
 					</div>
-				</c:forEach>
+				</div>
+				
+				<!-- ---------------------------------------------------------------------------------------- -->
 				<div class="w-100 d-flex justify-content-center">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">

@@ -29,9 +29,10 @@ public class ItemService {
 		return productImg;
 	}
 	
-	public List<Product> getItemListByCtgno(int ctgno) {
-		List<Product> itemList = productDao.selectByCtgno(ctgno);
-		return itemList;
+	//카테고리별로 상품리스트가져오기
+	//DAO 메소드는 selectByCtgno입니다!
+	public List<Product> getItemListByCtgno() {
+		return null;
 	}
 
 	

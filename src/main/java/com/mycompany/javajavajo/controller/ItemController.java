@@ -36,9 +36,7 @@ public class ItemController {
 	
 	//다음단계는 ItemService로!
 	@RequestMapping("/item_detail")
-	public String itemDetail(int prodno, Model model) {
-		Product product = service.getProductByProdno(prodno);
-		model.addAttribute("product", product);
+	public String itemDetail() {
 		return "item/item_detail";
 	}
 	
@@ -58,11 +56,11 @@ public class ItemController {
 	public String itemDelievery(Model model) {
 		return "item/item_delievery";
 	}
+	
+	//위 경로로 요청했을 때 카테고리번호를 넘겨받는다.
+	//Service의 메소드 이름은 getItemListByCtgno이다.
 	@RequestMapping("/item_list")
-	public String itemList(int ctgno, Model model) {
-		List<Product> itemList = service.getItemListByCtgno(ctgno);
-		model.addAttribute("itemList", itemList);
-		model.addAttribute("ctgno", ctgno);
+	public String itemList() {
 		return "item/itemList";
 	}
 	
