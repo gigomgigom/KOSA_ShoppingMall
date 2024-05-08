@@ -18,5 +18,4 @@
 		<typeAlias type="com.mycompany.javajavajo.dto.OrdProd" alias="OrdProd"/>
 		<typeAlias type="com.mycompany.javajavajo.dto.Pager" alias="Pager"/>
 	</typeAliases>
-	
 </configuration>

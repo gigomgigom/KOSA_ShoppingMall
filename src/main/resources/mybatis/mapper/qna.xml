@@ -58,11 +58,11 @@
 	
 	<select id="selectByPage" parameterType="Pager" resultType="Qna">
 	<![CDATA[
-		select rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt
+		select rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt, qnalock
 		from (
-		    select rownum as rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt
+		    select rownum as rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt, qnalock
 		    from (
-		        select qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt
+		        select qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt, qnalock
 		        from qna 
 		        order by qnano desc
 		    )
