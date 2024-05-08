@@ -21,7 +21,7 @@
 			switch(index) {
 				case 1: 
 					$.ajax({
-						url: "item_info?prodno=${product.prodno}",
+						url: "item_info",
 						method: "get",
 						success: function(data) {
 							$(".active").attr("class", "nav-item");
@@ -100,16 +100,16 @@
 					<div class="w-75 d-flex justify-content-center">
 						<div class="w-50 p-3">
 							<div class="card w-75">
-								<img src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${product.prodno}" alt="">
+								<img src="${pageContext.request.contextPath}/item/downloadRepimg" alt="">
 							</div>
 						</div>
 						<div class="w-50 p-3 d-flex flex-column">
 							<div class="d-flex flex-column py-5">
 								<!--상품정보(상품명, 구매후기, 가격, 배송비)-->
 								<div class="d-flex flex-column border-bottom">
-									<h5 class="fw-bold">${product.prodname}</h5>
+									<h5 class="fw-bold">[상품명]</h5>
 									<span>구매후기 n건 | ⭐⭐⭐⭐</span> <span class="mt-4 fw-bold">소비자가
-										${product.prodprice}원</span> 
+										[가격]원</span> 
 										
 										<span class="mt-2" style="font-size: 0.75rem;">배송비
 										3,000원 (주문시 결제) - CJ 대한통운</span> <span class="mb-3"
