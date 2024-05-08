@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mycompany.javajavajo.dao.OrdererDao">
+		<insert id="insert" parameterType="Orderer">
+			insert into orderer (ordno, ordname, ordtel, ordpostno, ordadr, ordadrdtl, ordemail)
+			values
+			(#{ordno}, #{ordname}, #{ordtel}, #{ordpostno}, #{ordadr}, #{ordadrdtl}, #{ordemail})
+		</insert>
 </mapper>

@@ -8,7 +8,7 @@ public class Recipient {
 	private String rcptname;
 	private String rcpttel;
 	private String rcptpostno;
-	private String rcptaddr;
+	private String rcptadr;
 	private String rcptadrdtl;
-	private String pcptemail;
+	private String rcptemail;
 }

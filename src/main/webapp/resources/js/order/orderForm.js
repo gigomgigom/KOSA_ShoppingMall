@@ -44,18 +44,18 @@ const ordInfo = () =>{
 
 const usePoint = () => {
 	const haspoint = document.querySelector("#haspoint").textContent;
-	const disprice = document.querySelector("#disprice");
+	const discprice = document.querySelector("#discprice");
 	const useprice = document.querySelector("#useprice");
 	const finprice = document.querySelector("#finprice");
 	finprice.innerText = defaultFinPrice;
 
 	
-	if(haspoint*1 < disprice.value*1){
+	if(haspoint*1 < discprice.value*1){
 		disprice.value = haspoint;
 	}
 	
-	useprice.innerText = disprice.value + "원";
-	finprice.innerText = (finprice.innerText.slice(0,-1)*1 - disprice.value*1) + "원";
+	useprice.innerText = discprice.value + "원";
+	finprice.innerText = (finprice.innerText.slice(0,-1)*1 - discprice.value*1) + "원";
 	
 	
 }

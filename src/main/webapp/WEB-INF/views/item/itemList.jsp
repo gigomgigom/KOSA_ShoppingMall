@@ -78,7 +78,7 @@
 								<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${item.prodno}"
 									class="text-decoration-none text-black"> ${item.prodname} </a>
 							</h4>
-							<h5>${item.prodprice}</h5>
+							<h5>${item.prodprice}원</h5>
 							<p>상품 평점 : 4.5 리뷰 : 4개</p>
 						</div>
 					</div>

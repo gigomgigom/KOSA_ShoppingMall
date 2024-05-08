@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Orderer {
-	private String ordno;
+	private int ordno;
 	private String ordname;
 	private String ordtel;
 	private String ordemail;

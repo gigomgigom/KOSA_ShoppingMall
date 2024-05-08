@@ -7,6 +7,11 @@
 		<typeAlias type="com.mycompany.javajavajo.dto.Member" alias="Member"/>
 		<typeAlias type="com.mycompany.javajavajo.dto.MemberAdr" alias="MemberAdr"/>
 		<typeAlias type="com.mycompany.javajavajo.dto.Qna" alias="Qna"/>
+		<typeAlias type="com.mycompany.javajavajo.dto.Order" alias="Order"/>
+		<typeAlias type="com.mycompany.javajavajo.dto.Orderer" alias="Orderer"/>
+		<typeAlias type="com.mycompany.javajavajo.dto.Recipient" alias="Recipient"/>
+		<typeAlias type="com.mycompany.javajavajo.dto.PointDtl" alias="PointDtl"/>
+		<typeAlias type="com.mycompany.javajavajo.dto.OrdProd" alias="OrdProd"/>
 	</typeAliases>
 	
 </configuration>

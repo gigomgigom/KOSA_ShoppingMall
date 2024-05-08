@@ -110,7 +110,7 @@
 			</ul>
 		</div>
 
-		<form class="w-100 d-flex justify-content-center" action="orderDetail" method="post">
+		<form class="w-100 d-flex justify-content-center" action="createOrder" method="post">
 			<div class="w-75 d-flex flex-row border-top border-dark">
 				<!--주문정보 입력-->
 				<div
@@ -179,7 +179,7 @@
 							<input type="email" class="form-control mb-4" id="rcptemail"
 								placeholder="E-mail (필수 입력)" name="rcptemail" required /> 
 							<label for="request">요청사항</label>
-							<textarea class="form-control" id="request" rows="3"></textarea>
+							<textarea class="form-control" name="ordrqst" rows="3"></textarea>
 						</div>
 					</div>
 				</div>
@@ -200,7 +200,7 @@
 						class="px-2 mb-2 w-75 border d-flex justify-content-between align-items-center"
 						style="height: 38px;">
 						<span><b>사용할 포인트</b></span> 
-						<input type="number" id="disprice" name="disprice" value="0" min="0" max="${member.mempoint}" onchange="usePoint()"   style="width: 100px" />
+						<input type="number" id="discprice" name="discprice" value="0" min="0" max="${member.mempoint}" onchange="usePoint()"   style="width: 100px" />
 					</div>
 					<div style="height: 20px;"></div>
 					<!--2.2 결제 정보-->
@@ -217,6 +217,7 @@
 								<b>주문 금액</b>
 							</p>
 							<p id="ordprice" class="mt-3">${itemsPrice}원</p>
+							<input type="hidden" name="ordprice" value="${itemsPrice}">
 						</div>
 						<div
 							class="col-4 pt-3 border-end d-flex flex-column align-items-center">
@@ -235,6 +236,7 @@
 					<div class="py-1 w-75 text-center"
 						style="background-color: #DDE6ED;">
 						<span><b>최종 결제금액 : <span id="finprice">${itemsPrice + deliveryPrice}원</span></b></span>
+						<input type="hidden" name="finprice" value="${itemsPrice + deliveryPrice}">
 					</div>
 					<div style="height: 30px;"></div>
 					<!--2.3 결제방식 선택-->
