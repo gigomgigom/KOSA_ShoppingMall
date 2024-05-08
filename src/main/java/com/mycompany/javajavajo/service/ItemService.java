@@ -25,14 +25,14 @@ public class ItemService {
 	//번호에 해당하는 productimg 객체 받아오기
 	public ProductImg getProductImages(int prodno) {
 		ProductImg productImg = productImgDao.selectByProdno(prodno);
-		
 		return productImg;
 	}
 	
-	//카테고리별로 상품리스트가져오기
-	//DAO 메소드는 selectByCtgno입니다!
-	public List<Product> getItemListByCtgno() {
-		return null;
+	
+	// 세림 : 카테고리를 매개변수로 받음 -> 카테고리별로 상품 리스트 가져오기
+	public List<Product> getItemListByCtgno(int ctgno) {
+		List<Product> itemList = productDao.selectByCtgno(ctgno);
+		return itemList;
 	}
 
 	
@@ -41,9 +41,9 @@ public class ItemService {
 	//2. Dao객체의 메소드를 호출됬을 때 반환하는 타입은 무엇일까?
 	//3. Dao의 추상메소드를 resources/mybatis/mapper/product.xml에서 구현이 됬습니둥
 	//다음단계는 mybatis에서의 product.xml로 이동!
-	public Product getProductByProdno(int prodno) {
-		Product product = productDao.selectByProdno(prodno);
-		return product;
+	public Product getProductByProdno() {
+		return null;
 	}
+
 
 }
