@@ -21,25 +21,21 @@
 			lead(qnatitle,1,-1) over(order by qnano) as nexttitle,lead(qnano,1,-1) over(order by qnano) as nextno,
 			lead(memno,1,-1) over(order by qnano) as nextmemno,	lead(qnalock,1,-1) over(order by qnano) as nextlock
 			from qna
+			<if test="keyword != null">
+				where qnatitle like '%' || #{keyword} || '%'
+				or qnacontent like '%' || #{keyword} || '%'
+			</if>
 		)
 		where qnano = #{qnano}
 	</select>
 
-	<select id="selectQnaListByKeyword" parameterType="String" resultType="Qna">
-		select *
-		from qna
-		<if test='#{keyword} != null or #{keyword}.equals("")'>
-			where qnatitle like '%' || #{keyword} || '%'
-			or qnacontent like '%' || #{keyword} || '%'
-			order by qnano desc
-		</if>
-	</select>
 
 	<update id="updatehitcnt" parameterType="int">
 		update qna set
 			qnahitcnt = qnahitcnt + 1
 			where qnano = #{qnano}
 	</update>
+
 
 	<update id="updateQna" parameterType="Qna">
 		update qna set
@@ -48,27 +44,42 @@
 			where qnano = #{qnano}
 	</update>
 
+
 	<delete id="deleteQna" parameterType="int">
 		delete from qna where qnano = #{qnano}
 	</delete>
 
-	<select id="count" resultType="int">
-		select count(*) from qna
+	<select id="count" parameterType="String" resultType="int">
+		select count(*) 
+		from (
+			select qnatitle, qnacontent
+			from qna
+			<if test="keyword != null">
+				where qnatitle like '%' || #{keyword} || '%'
+				or qnacontent like '%' || #{keyword} || '%'
+			</if>
+		)
+	
+		
 	</select>
 	
-	<select id="selectByPage" parameterType="Pager" resultType="Qna">
-	<![CDATA[
+	<select id="selectQnaList" parameterType="Pager" resultType="Qna">
+	
 		select rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt, qnalock
 		from (
 		    select rownum as rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt, qnalock
 		    from (
 		        select qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt, qnalock
-		        from qna 
+		        from qna
+		        <if test="keyword != null">
+		        	where qnatitle like '%' || #{keyword} || '%'
+					or qnacontent like '%' || #{keyword} || '%'
+				</if>
 		        order by qnano desc
 		    )
-		    where rownum <= #{endRowNo}
+		    <![CDATA[where rownum <= #{pager.endRowNo}
 		)
-		where rnum >= #{startRowNo}
+		where rnum >= #{pager.startRowNo}
 		]]>
 	</select>
 

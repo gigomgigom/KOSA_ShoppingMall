@@ -3,6 +3,7 @@ package com.mycompany.javajavajo.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Qna;
@@ -11,11 +12,9 @@ import com.mycompany.javajavajo.dto.Qna;
 public interface QnaDao {
 	public int insertBoard(Qna qna);
 
-	public Qna selectByQnano(int qnano);
+	public Qna selectByQnano(@Param("qnano") int qnano, @Param("keyword") String keyword);
 
-	public List<Qna> selectQnaList();
-
-	public List<Qna> selectQnaListByKeyword(String keyword);
+	public List<Qna> selectQnaList(@Param("pager") Pager pager, @Param("keyword") String keyword);
 
 	public int updatehitcnt(int qnano);
 
@@ -23,10 +22,6 @@ public interface QnaDao {
 
 	public int deleteQna(int qnano);
 
-	public int count();
-
-	public List<Qna> selectByPage(Pager pager);
-
-
+	public int count(String keyword);
 	
 }

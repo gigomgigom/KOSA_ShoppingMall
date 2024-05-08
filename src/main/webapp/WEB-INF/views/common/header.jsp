@@ -53,7 +53,7 @@
 		<li class="nav-item ms-5 me-5"><a class="nav-link  text-white"
 			href="${pageContext.request.contextPath}/item/item_list?ctgno=3"><h5>영양제</h5></a></li>
 		<li class="nav-item ms-5 me-5"><a class="nav-link text-white"
-			href="${pageContext.request.contextPath}/qna/qna_list"><h5>Q&A</h5></a></li>
+			href='${pageContext.request.contextPath}/qna/qna_list?keyword='><h5>Q&A</h5></a></li>
 	</ul>
 </div>
 

@@ -26,6 +26,7 @@
             
              <div class="d-flex w-75 m-0 my-5 p-0 ">
                     <form class="d-flex w-100 m-0 p-0" method="get" action="">
+                    	<input name="pageNo" type="hidden" value="1">
                         <input name="keyword" class="form-control form-control-sm text-center text-muted w-100 m-0 p-0 py-2" type="text" placeholder="&#8474; 검색어를 입력해주세요">
                    </form>
                 </div>
@@ -33,7 +34,7 @@
             
             <div class="d-flex justify-content-between align-items-center w-75 m-0 mb-3 p-0">
                 <div class="d-flex align-items-center m-0 p-0">
-                    <p class="m-0 p-0">총 게시글 30건</p>
+                    <p class="m-0 p-0">총 게시글 ${pager.totalRows}개</p>
                 </div>
             </div>
             

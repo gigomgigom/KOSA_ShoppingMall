@@ -20,39 +20,44 @@ public class QnaService {
 	private QnaDao qnaDao;
 	@Autowired
 	private MemberDao memberDao;
-	
+
 	public void writeBoard(Qna qna) {
 		// 비지니스 로직 처리
-		log.info("바보입니다.");
 		int rowNum = qnaDao.insertBoard(qna); // insert, update, delete = int형으로 (몇행이 바뀌는지 리턴해줌)
 		log.info("rowNum: " + rowNum + ", bno: " + qna.getQnano());
-		log.info("바보");
 	}
-	
-	// service에서 dao를 호출 memid 테이블얻어옴
-	public Qna getQna(int qnano) {
+
+	// service에서 dao를 호출 qnano 테이블얻어옴
+	public Qna getQna(int qnano, String keyword) {
 		int qnahitcnt = qnaDao.updatehitcnt(qnano);
-		Qna qna = qnaDao.selectByQnano(qnano);
-		qna.setQnacontent(qna.getQnacontent().replace("\r\n", "<br/>"));
+		Qna qna = qnaDao.selectByQnano(qnano,keyword);
+		
+		if(qna.getQnacontent() != null) {
+			qna.setQnacontent(qna.getQnacontent().replace("\r\n", "<br/>"));
+		}
 		int memno = qna.getMemno();
+		
 		Member member = memberDao.selectByMemno(memno);
 		qna.setQnawriter(member.getMemid());
-		log.info(qna.getNextno()+"");
-		log.info(qna.getPreno()+"");
+		log.info(qna.getNextno() + "");
+		log.info(qna.getPreno() + "");
 		return qna;
 	}
-	
-	// 게시물 검색 (제목으로 검색, 내용으로 검색)
-	public List<Qna> getQnaList(String keyword) {
-		List<Qna> qna = qnaDao.selectQnaListByKeyword(keyword);
-		for(Qna q : qna) {
-			int memno = q.getMemno();
-			Member member = memberDao.selectByMemno(memno);
-			q.setQnawriter(member.getMemid());
-		}
-		return qna;
+
+	// 전체 행수 가져오기
+	public int getTotalRows(String keyword) {
+		int totalRows = qnaDao.count(keyword);
+		return totalRows;
 	}
+
+	// 페이징 게시물 목록 요청
+	public List<Qna> getQnaList(Pager pager, String keyword) {
 	
+		List<Qna> qnaList = qnaDao.selectQnaList(pager, keyword);
+
+		return qnaList;
+	}
+
 	// 게시물 수정
 	public void updateQna(Qna qna) {
 		int rowNum = qnaDao.updateQna(qna);
@@ -62,27 +67,5 @@ public class QnaService {
 	public void deleteQna(int qnano) {
 		int rowNum = qnaDao.deleteQna(qnano);
 	}
-	
-	// 전체 행수 가져오기
-	public int getTotalRows() {
-		int totalRows = qnaDao.count();
-		return totalRows;
-	}
 
-	// 게시물 목록 요청
-	public List<Qna> getQnaList(Pager pager) {
-		List<Qna> qnaList = qnaDao.selectByPage(pager);
-		for(Qna qna : qnaList) {
-			int memno = qna.getMemno();
-			Member member = memberDao.selectByMemno(memno);
-			qna.setQnawriter(member.getMemid());
-		}
-		return qnaList;
-	}
-
-	
-	
-
-	
-	
 }

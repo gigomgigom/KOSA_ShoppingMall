@@ -27,29 +27,32 @@ public class QnaController {
 	private QnaService qnaService;
 
 	@GetMapping("/qna_list")
-	public String qnaList(Authentication authentication, String keyword, String pageNo, Model model,
+	public String qnaList(Authentication authentication, String pageNo, String keyword, Model model,
 			HttpSession session) {
-		List<Qna> qna = qnaService.getQnaList(keyword);
+		
 		if (pageNo == null) {
-
+			pageNo = (String) session.getAttribute("pageNo");
 			if (pageNo == null) {
 				pageNo = "1";
 			}
 		}
-
+		
+		if(keyword == null) {
+			keyword = (String) session.getAttribute("keyword");
+		}
 		// 세션에 pageNo변수를 선언하고 값을 할당
 		session.setAttribute("pageNo", pageNo);
-		pageNo = (String) session.getAttribute("pageNo");
+		session.setAttribute("keyword", keyword);
+	
 		// pageNo를 정수형으로 변환
 		int intPageNo = Integer.parseInt(pageNo);
 		// Pager 객체 생성
-		int rowsPagingTarget = qnaService.getTotalRows();
-
-		Pager pager = new Pager(10, 5, rowsPagingTarget, intPageNo);
+		int rowsPagingTarget = qnaService.getTotalRows(keyword);
+		log.info(rowsPagingTarget+"");
+		Pager pager = new Pager(3, 3, rowsPagingTarget, intPageNo);
 
 		// Service에서 게시물 목록 요청
-		List<Qna> qnaList = qnaService.getQnaList(pager);
-		log.info("" + qnaList.size());
+		List<Qna> qnaList = qnaService.getQnaList(pager, keyword);
 
 		model.addAttribute("pager", pager);
 		model.addAttribute("qnaList", qnaList);
@@ -86,8 +89,9 @@ public class QnaController {
 	}
 
 	@GetMapping("/qna_detail")
-	public String qnaDetail(int qnano, Model model) {
-		Qna qna = qnaService.getQna(qnano); // dto를 통해서 한 게시물의 정보를 가져옴
+	public String qnaDetail(int qnano, Model model, HttpSession session) {
+		String keyword = (String) session.getAttribute("keyword");
+		Qna qna = qnaService.getQna(qnano,keyword); // dto를 통해서 한 게시물의 정보를 가져옴
 		model.addAttribute("qna", qna);
 		return "qna/detail";
 	}
@@ -95,7 +99,8 @@ public class QnaController {
 	// 글수정할 페이지 이동
 	@GetMapping("/update_qna")
 	public String updateQnaForm(int qnano, Model model) {
-		Qna qna = qnaService.getQna(qnano);
+		String keyword = "";
+		Qna qna = qnaService.getQna(qnano,keyword);
 		model.addAttribute("qna", qna);
 		return "qna/writeQna";
 	}
