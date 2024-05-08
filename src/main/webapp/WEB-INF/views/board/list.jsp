@@ -113,16 +113,34 @@ $(function(){
             </table>
              
                 <div class="d-flex justify-content-between w-75 m-0 p-0">
-                    <div></div>
+                   
         
                     <div class="m-0 p-0">
-                        <ul class="pagination m-0 p-0">
-                          <li class="page-item m-0 p-0"><a class="page-link text-dark" href="#">이전</a></li>
-                          <li class="page-item m-0 p-0"><a class="page-link text-dark" href="#">1</a></li>
-                          <li class="page-item m-0 p-0"><a class="page-link text-dark" href="#">2</a></li>
-                          <li class="page-item m-0 p-0"><a class="page-link text-dark" href="#">3</a></li>
-                          <li class="page-item m-0 p-0"><a class="page-link text-dark" href="#">다음</a></li>
-                        </ul>
+                        <tr>
+							            <td colspan="4" class="text-center">
+							               <div>
+							                  <a class="btn btn-outline-primary btn-sm" href="list?pageNo=1">처음</a>
+							                  <c:if test="${pager.groupNo>1}"> 
+							                     <a class="btn btn-outline-info btn-sm" href="list?pageNo=${pager.startPageNo-1}">이전</a>
+							                  </c:if>
+							                  
+							                  <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
+							                     <c:if test="${pager.pageNo != i}">
+							                        <a class="btn btn-outline-success btn-sm" href="list?pageNo=${i}">${i}</a>
+							                     </c:if>
+							                     <c:if test="${pager.pageNo == i}">
+							                        <a class="btn btn-danger btn-sm" href="list?pageNo=${i}">${i}</a>
+							                     </c:if>
+							                  </c:forEach>
+							                  <!-- 그룹의 번호가 마지막 그룹의 번호보다 작을 경우에만 다음 버튼이 보이게 함 -->
+							                  <c:if test="${pager.groupNo<pager.totalGroupNo}">
+							                     <a class="btn btn-outline-info btn-sm" href="list?pageNo=${pager.endPageNo+1}">다음</a>
+							                  </c:if>
+							                  <a class="btn btn-outline-primary btn-sm" href="list?pageNo=${pager.totalPageNo}">맨끝</a>
+							               </div>
+							            </td>
+							         </tr>
+							      </table>
                     </div>
                     
                     <div>

@@ -3,6 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<!-- null값이 들어왔을때 null값으로 처리해줘라 느낌 -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
 	<typeAliases>
 		<typeAlias type="com.mycompany.javajavajo.dto.Member" alias="Member"/>
 		<typeAlias type="com.mycompany.javajavajo.dto.MemberAdr" alias="MemberAdr"/>
@@ -12,6 +16,7 @@
 		<typeAlias type="com.mycompany.javajavajo.dto.Recipient" alias="Recipient"/>
 		<typeAlias type="com.mycompany.javajavajo.dto.PointDtl" alias="PointDtl"/>
 		<typeAlias type="com.mycompany.javajavajo.dto.OrdProd" alias="OrdProd"/>
+		<typeAlias type="com.mycompany.javajavajo.dto.Pager" alias="Pager"/>
 	</typeAliases>
 	
 </configuration>

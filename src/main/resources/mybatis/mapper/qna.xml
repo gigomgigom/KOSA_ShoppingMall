@@ -52,7 +52,28 @@
 		delete from qna where qnano = #{qnano}
 	</delete>
 
+	<select id="count" resultType="int">
+		select count(*) from qna
+	</select>
 	
-
+	<select id="selectByPage" parameterType="Pager" resultType="Qna">
+	<![CDATA[
+		select rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt
+		from (
+		    select rownum as rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt
+		    from (
+		        select qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt
+		        from qna 
+		        order by qnano desc
+		    )
+		    where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
+	</select>
 
 </mapper>
+
+
+
+

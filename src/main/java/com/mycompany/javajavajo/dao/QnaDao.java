@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Qna;
 
 @Mapper
@@ -21,5 +22,11 @@ public interface QnaDao {
 	public int updateQna(Qna qna);
 
 	public int deleteQna(int qnano);
+
+	public int count();
+
+	public List<Qna> selectByPage(Pager pager);
+
+
 	
 }

@@ -2,6 +2,8 @@ package com.mycompany.javajavajo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Qna;
 import com.mycompany.javajavajo.service.QnaService;
 
@@ -28,10 +31,32 @@ public class QnaController {
 		return "board/writeBoard";
 	}
 	
-	@RequestMapping("/list")
-	public String listBoard(@RequestParam(defaultValue="") String keyword, Authentication authentication,Model model) {
+	@GetMapping("/list")
+	public String listBoard(@RequestParam(defaultValue="") String keyword, Authentication authentication,Model model, String pageNo, HttpSession session) {
 		List<Qna> qna = qnaService.getQnaList(keyword);
-		model.addAttribute("qnaList", qna);
+		if(pageNo == null) {
+			
+			if(pageNo == null) {
+				pageNo ="1";
+			}
+		}
+		
+		// 세션에 pageNo변수를 선언하고 값을 할당
+		session.setAttribute("pageNo", pageNo);
+		pageNo = (String) session.getAttribute("pageNo");
+		// pageNo를 정수형으로 변환
+		int intPageNo = Integer.parseInt(pageNo);
+		// Pager 객체 생성
+		int rowsPagingTarget = qnaService.getTotalRows();
+	
+		Pager pager = new Pager(10, 5, rowsPagingTarget, intPageNo); 
+		
+		// Service에서 게시물 목록 요청
+		List<Qna> qnaList = qnaService.getQnaList(pager);
+		log.info("" + qnaList.size());
+		
+		model.addAttribute("pager", pager);
+		model.addAttribute("qnaList", qnaList);
 		return "board/list";
 		
 	}
@@ -41,7 +66,8 @@ public class QnaController {
 	@PostMapping("/writeBoard")
 	public String writeBoard(Qna qna) {
 		log.info("글써보기할까요?");
-		if(qna.getQnaattach() != null || !qna.getQnaattach().isEmpty()) {
+		// 첨부파일이 null값이 아니고 비어있지 않으면 첨부파일의 오리지널 네임과, 타입을 세팅해줌
+		if(qna.getQnaattach() != null && !qna.getQnaattach().isEmpty()) {
 			
 			qna.setQnaattachoname(qna.getQnaattach().getOriginalFilename());
 			qna.setQnaattachtype(qna.getQnaattach().getContentType());
@@ -50,6 +76,7 @@ public class QnaController {
 				qna.setQnaattachdata(qna.getQnaattach().getBytes());
 			} catch (Exception e) {}
 		}
+		
 		log.info(qna.getQnaattach().getOriginalFilename());
 		log.info(qna.getQnaattachtype());
 		qnaService.writeBoard(qna);
@@ -92,9 +119,5 @@ public class QnaController {
 	
 	
 }
-
-
-
-
 
 

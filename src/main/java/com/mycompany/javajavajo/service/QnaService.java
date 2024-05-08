@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.mycompany.javajavajo.dao.MemberDao;
 import com.mycompany.javajavajo.dao.QnaDao;
 import com.mycompany.javajavajo.dto.Member;
+import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Qna;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +42,7 @@ public class QnaService {
 		return qna;
 	}
 	
+	// 게시물 검색 (제목으로 검색, 내용으로 검색)
 	public List<Qna> getQnaList(String keyword) {
 		List<Qna> qna = qnaDao.selectQnaListByKeyword(keyword);
 		for(Qna q : qna) {
@@ -48,17 +50,34 @@ public class QnaService {
 			Member member = memberDao.selectByMemno(memno);
 			q.setQnawriter(member.getMemid());
 		}
-		
 		return qna;
 	}
 	
+	// 게시물 수정
 	public void updateQna(Qna qna) {
 		int rowNum = qnaDao.updateQna(qna);
 	}
 
+	// 게시물 삭제
 	public void deleteQna(int qnano) {
 		int rowNum = qnaDao.deleteQna(qnano);
 	}
+	
+	// 전체 행수 가져오기
+	public int getTotalRows() {
+		int totalRows = qnaDao.count();
+		return totalRows;
+	}
+
+	// 게시물 목록 요청
+	public List<Qna> getQnaList(Pager pager) {
+		List<Qna> qnaList = qnaDao.selectByPage(pager);
+		return qnaList;
+	}
+
+	
+	
+
 	
 	
 }
