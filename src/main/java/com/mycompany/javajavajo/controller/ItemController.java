@@ -59,8 +59,12 @@ public class ItemController {
 	
 	//위 경로로 요청했을 때 카테고리번호를 넘겨받는다.
 	//Service의 메소드 이름은 getItemListByCtgno이다.
+	//세림 : 아래 경로를 요청하여 카테고리 번호를 넘겨 받음
 	@RequestMapping("/item_list")
-	public String itemList() {
+	public String itemList(int ctgno, Model model) {
+		List<Product> itemList = service.getItemListByCtgno(ctgno);
+		model.addAttribute("ctgno", ctgno);
+		model.addAttribute("itemList", itemList);
 		return "item/itemList";
 	}
 	
