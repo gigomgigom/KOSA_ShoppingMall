@@ -10,4 +10,8 @@
 			values
 			(#{ordno}, #{memno}, #{ordstts}, sysdate, #{ordprice}, #{discprice}, #{finprice})
 	</insert>
+	
+	<select id="selectOrderByMemno" parameterType="int" resultType="Order">
+		select * from ord where memno = #{memno} order by orddate desc
+	</select>
 </mapper>

@@ -3,19 +3,19 @@
 <mapper namespace="com.mycompany.javajavajo.dao.ProductDao">
 	<!-- 이 추상메소드의 이름과 매개변수 타입, 반환값 타입을 어떻게 설정했으며 만약 아래 sql문을 실행했을때 몇개의 결과값이 나올까요?-->
 	<!-- 세림 답변 : selectByProdno /  매개변수 타입 - int/ 반환 값 타입은 product / 40개! -->
-	<select id="selectByProdno" parameterType="int" resultType="com.mycompany.javajavajo.dto.Product">
+	<select id="selectByProdno" parameterType="int" resultType="Product">
 		select *
 		from product
 		where prodno = #{prodno}
 	</select>
 	
-	<select id="selectByCtgno" parameterType="int" resultType="com.mycompany.javajavajo.dto.Product">
+	<select id="selectByCtgno" parameterType="int" resultType="Product">
 		select *
 		from product
 		where ctgno = #{ctgno}
 	</select>
 	
-	<select id="selectLackStock" resultType="com.mycompany.javajavajo.dto.Product">
+	<select id="selectLackStock" resultType="Product">
 		<![CDATA[
 		select prodno, ctgno, prodname, prodstock 
 		from product 
@@ -23,5 +23,4 @@
 		order by prodstock
 		]]>
 	</select>
-	
 </mapper>

@@ -8,8 +8,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.javajavajo.dao.MemberDao;
+import com.mycompany.javajavajo.dao.OrdProdDao;
+import com.mycompany.javajavajo.dao.OrderDao;
 import com.mycompany.javajavajo.dao.ProductDao;
 import com.mycompany.javajavajo.dto.Member;
+import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Product;
 
@@ -24,6 +27,12 @@ public class AdminService {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private OrderDao orderDao;
+	
+	@Autowired
+	private OrdProdDao ordProdDao;
 	
 	//심영조-admin-main페이지-재고부족상품들 가져오기
 	public List<Product> getOutOfStock() {
@@ -56,6 +65,19 @@ public class AdminService {
 		member.setMempw(newPassword);
 		log.info(member.getMemno() + member.getMempw());
 		return memberDao.updatePassword(member);
+	}
+	//심영조-admin-memberDetail페이지- 해당 회원의 주문리스트를 가져와라
+	public List<Order> getOrderListByMemno(int memno) {
+		List<Order> orderList = orderDao.selectOrderByMemno(memno);
+		return orderList;
+	}
+	//심영조-admin-memberDetail페이지- 건당 주문 상품 수를 가져와
+	public Order getOrderProductCnt(int ordno) {
+		return ordProdDao.selectOutlineOfOrdProd(ordno);
+	}
+	//심영조-admin-memberDetail페이지- 건당 주문 상품들중 하나를 가져와
+	public Product getProductByProdNo(int oneofordproduct) {
+		return productDao.selectByProdno(oneofordproduct);
 	}
 	
 }

@@ -5,4 +5,12 @@
 		insert into ordprod (ordno, prodno, qty, subtot)
 		values (#{ordno}, #{prodno}, #{qty}, #{subtot})
 	</insert>
+	
+	<select id="selectOutlineOfOrdProd" parameterType="Order">
+		select 
+		max(prodno) as oneOfOrdProduct, count(*) as ordProductCnt
+		from (
+    		select prodno from ordprod where ordno = #{ordno}
+		)
+	</select>
 </mapper>

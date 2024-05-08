@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.javajavajo.dto.Member;
+import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.service.AdminService;
@@ -67,10 +68,24 @@ public class AdminController {
 	//회원 상세정보 보기
 	@RequestMapping("/member_detail")
 	public String memberDetail(Model model, int memno) {
+		//회원 데이터가져오기
 		Member member = adminService.getMemberByMemno(memno);
+		//회원 주문정보 리스트 가져오기
+		List<Order> orderList = adminService.getOrderListByMemno(memno);
 		
+		//주문에 상품의 수 그리고 그 들중 한 상품에 대한 정보를 찾아서 Order객체에 넣어준다.
+		for(Order order : orderList) {
+			//주문마다 몇개의 상품을 구매했는지 찾는다.
+			Order outlineOrderProduct = adminService.getOrderProductCnt(order.getOrdno());
+			//주문의 총상품 수를 Order객체에 넣어준다.
+			order.setOrdproductcnt(outlineOrderProduct.getOrdproductcnt());
+			//
+			Product oneOfProduct = adminService.getProductByProdNo(outlineOrderProduct.getOneofordproduct());
+			order.setOneproduct(oneOfProduct);
+		}
 		model.addAttribute("menuNum", 0);
 		model.addAttribute("member", member);
+		model.addAttribute("orderList", orderList);
 		return "admin/member/admin_member_detail";
 	}
 	

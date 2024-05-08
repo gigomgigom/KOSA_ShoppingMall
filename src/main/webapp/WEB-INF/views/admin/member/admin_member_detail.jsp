@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,13 +105,20 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr onclick="location.href='${pageContext.request.contextPath}/order/order_detail'">
-												<th scope="row">202405030001</th>
-												<td>배송완료</td>
-												<td>개껌 외 2개</td>
-												<td>20000원</td>
-												<td>2024.05.03</td>
-											</tr>
+											<c:forEach var="order" items="${orderList}">
+												<tr onclick="location.href='${pageContext.request.contextPath}/order/order_detail?ordno=${order.ordno}'">
+													<th scope="row">${order.ordno}</th>
+													<td>${order.ordstts}</td>
+													<c:if test="${order.ordproductcnt != 0}">
+													<td>${order.oneproduct.prodname} 외 ${order.ordproductcnt}개</td>
+													</c:if>
+													<c:if test="${order.ordproductcnt == 0}">
+													<td>개껌</td>
+													</c:if>
+													<td>${order.finprice}</td>
+													<td><fmt:formatDate value="${order.orddate}" pattern="yyyy-MM-dd" /></td>
+												</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -146,6 +154,5 @@
 		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/admin/modal/modal_reset_password.jsp"%>
-	<%@ include file="/WEB-INF/views/admin/modal/modal_reset_complete.jsp"%>
 </body>
 </html>
