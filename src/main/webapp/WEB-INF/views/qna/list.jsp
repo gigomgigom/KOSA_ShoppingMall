@@ -132,10 +132,12 @@
 							         </tr>
 							      </table>
                     </div>
+                    <sec:authorize access="isAuthenticated">
+                    	<div>
+                       		<a href="${pageContext.request.contextPath}/qna/write_qna" class="btn" style="background-color: #273740; color: white">글쓰기</a>
+                   	 	</div>
+                    </sec:authorize>
                     
-                    <div>
-                        <a href="${pageContext.request.contextPath}/qna/write_qna" class="btn" style="background-color: #273740; color: white">글쓰기</a>
-                    </div>
             </div>
         </div>
 

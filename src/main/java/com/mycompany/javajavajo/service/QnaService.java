@@ -72,6 +72,11 @@ public class QnaService {
 	// 게시물 목록 요청
 	public List<Qna> getQnaList(Pager pager) {
 		List<Qna> qnaList = qnaDao.selectByPage(pager);
+		for(Qna qna : qnaList) {
+			int memno = qna.getMemno();
+			Member member = memberDao.selectByMemno(memno);
+			qna.setQnawriter(member.getMemid());
+		}
 		return qnaList;
 	}
 

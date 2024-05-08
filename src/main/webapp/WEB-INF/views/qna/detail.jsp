@@ -155,8 +155,10 @@
 
 		<div
 			class="d-flex w-75 justify-content-center align-items-center m-0 p-0">
-			<a href="${pageContext.request.contextPath}/qna/update_qna?qnano=${qna.qnano}" class="btn btn-sm border border-secondary-subtle m-0 me-3 p-0">수정</a>
-			<a href="${pageContext.request.contextPath}/qna/delete_qna?qnano=${qna.qnano}" class="btn btn-sm border border-secondary-subtle m-0 p-0">삭제</a>
+			<sec:authorize access="isAuthenticated">
+				<a href="${pageContext.request.contextPath}/qna/update_qna?qnano=${qna.qnano}" class="btn btn-sm border border-secondary-subtle m-0 me-3 p-0">수정</a>
+				<a href="${pageContext.request.contextPath}/qna/delete_qna?qnano=${qna.qnano}" class="btn btn-sm border border-secondary-subtle m-0 p-0">삭제</a>
+			</sec:authorize>
 		</div>
 	</div>
 	<footer>
