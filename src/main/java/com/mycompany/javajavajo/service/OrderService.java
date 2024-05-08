@@ -60,16 +60,19 @@ public class OrderService {
 		// recipient 삽입
 		recipient.setOrdno(ordno);
 		int recipientResult = recipientDao.insert(recipient);
-
-		// 멤버 포인트 차감
-		memberDao.updatePoint(memno, order.getDiscprice(), "-");
-
-		// pointDtl 삽입
-		PointDtl pointDtl = new PointDtl();
-		pointDtl.setOrdno(ordno);
-		pointDtl.setAction(1);
-		pointDtl.setAmount(order.getDiscprice());
-		int pointDtlResult = pointDtlDao.insert(pointDtl);
+		
+		//사용한 포인트가 0 이상이라면
+		if(order.getDiscprice() != 0) {
+			// 멤버 포인트 차감
+			memberDao.updatePoint(memno, order.getDiscprice(), "-");
+	
+			// pointDtl 삽입
+			PointDtl pointDtl = new PointDtl();
+			pointDtl.setOrdno(ordno);
+			pointDtl.setAction(1);
+			pointDtl.setAmount(order.getDiscprice());
+			int pointDtlResult = pointDtlDao.insert(pointDtl);
+		}
 		
 		//memno에 해당하는 cartitem을 얻어 온 후 ordprod추가 및 cartitem삭제
 		List<CartItem> cartItemList = cartItemDao.selectByMemno(memno);
