@@ -130,5 +130,5 @@
 		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	</footer>
 </body>
-<script src="/javajavajo_mini_web/resources/js/shoppingcart.js"></script>
+<script src="/javajavajo_mini_web/resources/js/cart/cart.js"></script>
 </html>

@@ -59,7 +59,7 @@ public class OrderController {
 	}
 	
 	//주문서 작성 - 권우상
-	@PostMapping("/createOrder")
+	@PostMapping("/create_order")
 	public String createOrder(Order order, Orderer orderer, Recipient recipient, Authentication authentication) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 	    Member member = t1UserDetails.getMember();

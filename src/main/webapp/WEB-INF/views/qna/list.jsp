@@ -15,17 +15,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <meta charset="UTF-8">
-<script>
-$(function(){
-		$("#search").click(() => { 
-			let select = $("option:selected").val();
-			let keyword = $("#keyword").val();
-			document.location.href = "search?search=" + select + "&keyword=" + keyword;
-		}); 
-})
-		
-		
-</script>
+
 </head>
 <body>
 	<header>
@@ -72,7 +62,7 @@ $(function(){
 							<sec:authentication property="principal.member" var="member" />
 		                    <c:if test="${qna.qnalock == 1}">
 		                        <c:if test="${qna.qnawriter == member.memid or member.memrole == 'ROLE_ADMIN'}">
-		                            <p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
+		                            <p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/qna/qna_detail?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
 		                        </c:if>
 		                        
 		                        <c:if test="${qna.qnawriter != member.memid and member.memrole != 'ROLE_ADMIN'}">
@@ -82,7 +72,7 @@ $(function(){
 	                        
 	                        
 		                        <c:if test="${qna.qnalock == 0}">
-		                        	<p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
+		                        	<p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/qna/qna_detail?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
 		                        </c:if>
                         </sec:authorize>
                         
@@ -92,7 +82,7 @@ $(function(){
 	                        </c:if>
                         
 	                        <c:if test="${qna.qnalock == 0}">
-	                        	<p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
+	                        	<p class="m-0 p-0 text-start"><a href="${pageContext.request.contextPath}/qna/qna_detail?qnano=${qna.qnano}" class="text-dark text-decoration-none">${qna.qnatitle}</a></p>
 	                        </c:if>
                         </sec:authorize>
                         
@@ -119,24 +109,24 @@ $(function(){
                         <tr>
 							            <td colspan="4" class="text-center">
 							               <div>
-							                  <a class="btn btn-outline-primary btn-sm" href="list?pageNo=1">처음</a>
+							                  <a class="btn btn-outline-primary btn-sm" href="${pageContext.request.contextPath}/qna/qna_list?pageNo=1">처음</a>
 							                  <c:if test="${pager.groupNo>1}"> 
-							                     <a class="btn btn-outline-info btn-sm" href="list?pageNo=${pager.startPageNo-1}">이전</a>
+							                     <a class="btn btn-outline-info btn-sm" href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${pager.startPageNo-1}">이전</a>
 							                  </c:if>
 							                  
 							                  <c:forEach var="i" begin="${pager.startPageNo}" end="${pager.endPageNo}">
 							                     <c:if test="${pager.pageNo != i}">
-							                        <a class="btn btn-outline-success btn-sm" href="list?pageNo=${i}">${i}</a>
+							                        <a class="btn btn-outline-success btn-sm" href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${i}">${i}</a>
 							                     </c:if>
 							                     <c:if test="${pager.pageNo == i}">
-							                        <a class="btn btn-danger btn-sm" href="list?pageNo=${i}">${i}</a>
+							                        <a class="btn btn-danger btn-sm" href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${i}">${i}</a>
 							                     </c:if>
 							                  </c:forEach>
 							                  <!-- 그룹의 번호가 마지막 그룹의 번호보다 작을 경우에만 다음 버튼이 보이게 함 -->
 							                  <c:if test="${pager.groupNo<pager.totalGroupNo}">
-							                     <a class="btn btn-outline-info btn-sm" href="list?pageNo=${pager.endPageNo+1}">다음</a>
+							                     <a class="btn btn-outline-info btn-sm" href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${pager.endPageNo+1}">다음</a>
 							                  </c:if>
-							                  <a class="btn btn-outline-primary btn-sm" href="list?pageNo=${pager.totalPageNo}">맨끝</a>
+							                  <a class="btn btn-outline-primary btn-sm" href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${pager.totalPageNo}">맨끝</a>
 							               </div>
 							            </td>
 							         </tr>
@@ -144,7 +134,7 @@ $(function(){
                     </div>
                     
                     <div>
-                        <a href="${pageContext.request.contextPath}/board/writeBoard" class="btn" style="background-color: #273740; color: white">글쓰기</a>
+                        <a href="${pageContext.request.contextPath}/qna/write_qna" class="btn" style="background-color: #273740; color: white">글쓰기</a>
                     </div>
             </div>
         </div>

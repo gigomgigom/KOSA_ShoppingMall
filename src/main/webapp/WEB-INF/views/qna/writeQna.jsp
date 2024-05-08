@@ -21,11 +21,11 @@
 	</header>
 
 	<c:if test="${qna == null}">
-		<form action="writeBoard" method="post" enctype="multipart/form-data">
+		<form action="write_qna" method="post" enctype="multipart/form-data">
 	</c:if>
 
 	<c:if test="${qna != null}">
-		<form action="updateBoard" method="post" enctype="multipart/form-data">
+		<form action="update_qna" method="post" enctype="multipart/form-data">
 	</c:if>
 	<div
 		class="container-fluid  d-flex flex-column align-items-center m-0 my-5 p-0">

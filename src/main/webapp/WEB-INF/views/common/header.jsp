@@ -18,7 +18,7 @@
 				href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 			<li class="nav-item border-start border-end"><a
 				class="fw-bold nav-link text-black"
-				href="${pageContext.request.contextPath}/shoppingcart">🛒장바구니</a></li>
+				href="${pageContext.request.contextPath}/cart">🛒장바구니</a></li>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			<li><b class="text-white me-2"> <sec:authentication
@@ -53,7 +53,7 @@
 		<li class="nav-item ms-5 me-5"><a class="nav-link  text-white"
 			href="${pageContext.request.contextPath}/item/item_list?ctgno=3"><h5>영양제</h5></a></li>
 		<li class="nav-item ms-5 me-5"><a class="nav-link text-white"
-			href="${pageContext.request.contextPath}/board/list"><h5>Q&A</h5></a></li>
+			href="${pageContext.request.contextPath}/qna/qna_list"><h5>Q&A</h5></a></li>
 	</ul>
 </div>
 

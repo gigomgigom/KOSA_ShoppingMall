@@ -51,7 +51,7 @@ const usePoint = () => {
 
 	
 	if(haspoint*1 < discprice.value*1){
-		disprice.value = haspoint;
+		discprice.value = haspoint;
 	}
 	
 	useprice.innerText = discprice.value + "원";

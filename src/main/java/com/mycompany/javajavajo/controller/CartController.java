@@ -20,8 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("/shoppingcart")
-public class ShoppingCartController {
+@RequestMapping("/cart")
+public class CartController {
 	@Autowired
 	private CartService service;
 	
@@ -37,11 +37,11 @@ public class ShoppingCartController {
 	    List<CartItem> cartItems = service.findCartItems(cart.getMemno());
 	    model.addAttribute("cartItems", cartItems);
 	
-	    return "/shoppingcart/shoppingcart";
+	    return "/cart/cart";
 	}
 	
 	//권우상 - 카트아이템 수량 업데이트 컨트롤러
-	@PostMapping("/updateCart")
+	@PostMapping("/update_cart")
 	public void updateCart(Authentication authentication, int prodno, String operator) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 	    Member member = t1UserDetails.getMember();
@@ -50,7 +50,7 @@ public class ShoppingCartController {
 	}
 	
 	//권우상 - 카트아이템 삭제 컨트롤러
-	@PostMapping("/deleteCartItems")
+	@PostMapping("/delete_cart_items")
 	public void deleteCartItems(Authentication authentication, @RequestParam(value="prodnos[]")int[] prodnos) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 	    Member member = t1UserDetails.getMember();

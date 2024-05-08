@@ -86,7 +86,7 @@
 								<sec:authentication property="principal.member" var="member" />
 		                        <c:if test="${qna.nextlock == 1}">
 		                        	<c:if test="${member.memno == qna.nextmemno or member.memrole == 'ROLE_ADMIN'}">
-		                            	<p class="m-0 p-0">&#9651다음글 <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.nextno}" class="text-dark text-decoration-none">${qna.nexttitle}</a></p>
+		                            	<p class="m-0 p-0">&#9651다음글 <a href="${pageContext.request.contextPath}/qna/qna_detail?qnano=${qna.nextno}" class="text-dark text-decoration-none">${qna.nexttitle}</a></p>
 		                        	</c:if>
 		                        
 		                        	<c:if test="${member.memno != qna.nextmemno and member.memrole != 'ROLE_ADMIN'}">
@@ -96,7 +96,7 @@
 	                        
 	                        
 		                        <c:if test="${qna.nextlock == 0}">
-		                        	<p class="m-0 p-0">&#9651다음글 <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.nextno}" class="text-dark text-decoration-none">${qna.nexttitle}</a></p>
+		                        	<p class="m-0 p-0">&#9651다음글 <a href="${pageContext.request.contextPath}/qna/qna_detail?qnano=${qna.nextno}" class="text-dark text-decoration-none">${qna.nexttitle}</a></p>
 		                        </c:if>
                      </sec:authorize>
 					
@@ -106,7 +106,7 @@
 	                        </c:if>
                         
 	                        <c:if test="${qna.nextlock == 0}">
-	                        	<p class="m-0 p-0">&#9651다음글 <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.nextno}" class="text-dark text-decoration-none">${qna.nexttitle}</a></p>
+	                        	<p class="m-0 p-0">&#9651다음글 <a href="${pageContext.request.contextPath}/qna/qna_detail?qnano=${qna.nextno}" class="text-dark text-decoration-none">${qna.nexttitle}</a></p>
 	                        </c:if>
                      </sec:authorize>
 				</div> 
@@ -119,7 +119,7 @@
 								<sec:authentication property="principal.member" var="member" />
 		                        <c:if test="${qna.prelock == 1}">
 		                        	<c:if test="${member.memno == qna.prememno or member.memrole == 'ROLE_ADMIN'}">
-		                            	<p class="m-0 p-0">&#9661이전글  <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.preno}" class="text-dark text-decoration-none">${qna.pretitle}</a></p>
+		                            	<p class="m-0 p-0">&#9661이전글  <a href="${pageContext.request.contextPath}/qna/qna_detail?qnano=${qna.preno}" class="text-dark text-decoration-none">${qna.pretitle}</a></p>
 		                        	</c:if>
 		                        
 		                        	<c:if test="${member.memno != qna.prememno and member.memrole != 'ROLE_ADMIN'}">
@@ -129,7 +129,7 @@
 	                        
 	                        
 		                        <c:if test="${qna.prelock == 0}">
-		                        	<p class="m-0 p-0">&#9661이전글  <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.preno}" class="text-dark text-decoration-none">${qna.pretitle}</a></p>
+		                        	<p class="m-0 p-0">&#9661이전글  <a href="${pageContext.request.contextPath}/qna/qna_detail?qnano=${qna.preno}" class="text-dark text-decoration-none">${qna.pretitle}</a></p>
 		                        </c:if>
                      </sec:authorize>
 					
@@ -139,7 +139,7 @@
 	                        </c:if>
                         
 	                        <c:if test="${qna.prelock == 0}">
-	                        	<p class="m-0 p-0">&#9661이전글  <a href="${pageContext.request.contextPath}/board/detailBoard?qnano=${qna.preno}" class="text-dark text-decoration-none">${qna.pretitle}</a></p>
+	                        	<p class="m-0 p-0">&#9661이전글  <a href="${pageContext.request.contextPath}/qna/qna_detail?qnano=${qna.preno}" class="text-dark text-decoration-none">${qna.pretitle}</a></p>
 	                        </c:if>
                      </sec:authorize>
 				</div> 
@@ -150,13 +150,13 @@
 		<div
 			class="d-flex w-75 justify-content-center align-items-center m-0 mb-3 p-0">
 			<a class="btn btn-sm m-0 p-0"
-				style="background-color: #27374D; color: white;" href="${pageContext.request.contextPath}/board/list">목록</a>
+				style="background-color: #27374D; color: white;" href="${pageContext.request.contextPath}/qna/qna_list">목록</a>
 		</div>
 
 		<div
 			class="d-flex w-75 justify-content-center align-items-center m-0 p-0">
-			<a href="${pageContext.request.contextPath}/board/updateBoard?qnano=${qna.qnano}" class="btn btn-sm border border-secondary-subtle m-0 me-3 p-0">수정</a>
-			<a href="${pageContext.request.contextPath}/board/deleteQna?qnano=${qna.qnano}" class="btn btn-sm border border-secondary-subtle m-0 p-0">삭제</a>
+			<a href="${pageContext.request.contextPath}/qna/update_qna?qnano=${qna.qnano}" class="btn btn-sm border border-secondary-subtle m-0 me-3 p-0">수정</a>
+			<a href="${pageContext.request.contextPath}/qna/delete_qna?qnano=${qna.qnano}" class="btn btn-sm border border-secondary-subtle m-0 p-0">삭제</a>
 		</div>
 	</div>
 	<footer>

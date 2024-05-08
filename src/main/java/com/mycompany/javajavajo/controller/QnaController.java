@@ -21,26 +21,22 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping("/board")
+@RequestMapping("/qna")
 public class QnaController {
 	@Autowired
 	private QnaService qnaService;
-	// 글쓰기 페이지로 이동
-	@GetMapping("/writeBoard")
-	public String writeBoard() {
-		return "board/writeBoard";
-	}
-	
-	@GetMapping("/list")
-	public String listBoard(@RequestParam(defaultValue="") String keyword, Authentication authentication,Model model, String pageNo, HttpSession session) {
+
+	@GetMapping("/qna_list")
+	public String qnaList(Authentication authentication, String keyword, String pageNo, Model model,
+			HttpSession session) {
 		List<Qna> qna = qnaService.getQnaList(keyword);
-		if(pageNo == null) {
-			
-			if(pageNo == null) {
-				pageNo ="1";
+		if (pageNo == null) {
+
+			if (pageNo == null) {
+				pageNo = "1";
 			}
 		}
-		
+
 		// 세션에 pageNo변수를 선언하고 값을 할당
 		session.setAttribute("pageNo", pageNo);
 		pageNo = (String) session.getAttribute("pageNo");
@@ -48,76 +44,74 @@ public class QnaController {
 		int intPageNo = Integer.parseInt(pageNo);
 		// Pager 객체 생성
 		int rowsPagingTarget = qnaService.getTotalRows();
-	
-		Pager pager = new Pager(10, 5, rowsPagingTarget, intPageNo); 
-		
+
+		Pager pager = new Pager(10, 5, rowsPagingTarget, intPageNo);
+
 		// Service에서 게시물 목록 요청
 		List<Qna> qnaList = qnaService.getQnaList(pager);
 		log.info("" + qnaList.size());
-		
+
 		model.addAttribute("pager", pager);
 		model.addAttribute("qnaList", qnaList);
-		return "board/list";
-		
+		return "qna/list";
+
 	}
-		
-	//글쓰기 페이지에서 dto로 게시물 작성에 필요한 정보들을 얻어옴
+
+	// 글쓰기 페이지로 이동
+	@GetMapping("/write_qna")
+	public String writeQnaForm() {
+		return "qna/writeQna";
+	}
+
+	// 글쓰기 페이지에서 dto로 게시물 작성에 필요한 정보들을 얻어옴
 	// Controller에서 Service로 요청
-	@PostMapping("/writeBoard")
-	public String writeBoard(Qna qna) {
-		log.info("글써보기할까요?");
+	@PostMapping("/write_qna")
+	public String writeQna(Qna qna) {
 		// 첨부파일이 null값이 아니고 비어있지 않으면 첨부파일의 오리지널 네임과, 타입을 세팅해줌
-		if(qna.getQnaattach() != null && !qna.getQnaattach().isEmpty()) {
-			
+		if (qna.getQnaattach() != null && !qna.getQnaattach().isEmpty()) {
+
 			qna.setQnaattachoname(qna.getQnaattach().getOriginalFilename());
 			qna.setQnaattachtype(qna.getQnaattach().getContentType());
-			
+
 			try {
 				qna.setQnaattachdata(qna.getQnaattach().getBytes());
-			} catch (Exception e) {}
+			} catch (Exception e) {
+			}
 		}
-		
-		log.info(qna.getQnaattach().getOriginalFilename());
-		log.info(qna.getQnaattachtype());
+
 		qnaService.writeBoard(qna);
-		return "redirect:/board/list";
-		//클라이언트 요청 -> 컨트롤러 -> 클라이언트 -> 경로로 이동시킴
-		
+
+		return "redirect:/qna/qna_list";
+		// 클라이언트 요청 -> 컨트롤러 -> 클라이언트 -> 경로로 이동시킴
 	}
-	
-	
-	@GetMapping("/detailBoard")
-	public String detailBoard(int qnano, Model model) {
-		log.info("run");
+
+	@GetMapping("/qna_detail")
+	public String qnaDetail(int qnano, Model model) {
 		Qna qna = qnaService.getQna(qnano); // dto를 통해서 한 게시물의 정보를 가져옴
 		model.addAttribute("qna", qna);
-		log.info(qna.getQnatitle());
-		return "board/detail";
+		return "qna/detail";
 	}
-	//글수정할 페이지 이동
-	@GetMapping("/updateBoard")
-	public String updateBoard(int qnano, Model model) {
+
+	// 글수정할 페이지 이동
+	@GetMapping("/update_qna")
+	public String updateQnaForm(int qnano, Model model) {
 		Qna qna = qnaService.getQna(qnano);
 		model.addAttribute("qna", qna);
-		return "board/writeBoard";
+		return "qna/writeQna";
 	}
+
 	// 글수정된 페이지로 이동
-	@PostMapping("/updateBoard")
-	public String updateBoard(Qna qna) {
+	@PostMapping("/update_qna")
+	public String updateQna(Qna qna) {
 		qnaService.updateQna(qna);
-		log.info("실행 post");
-		return "redirect:/board/detailBoard?qnano="+qna.getQnano();
+		
+		return "redirect:/qna/qna_detail?qnano=" + qna.getQnano();
 	}
-	
-	@GetMapping("/deleteQna")
+
+	@GetMapping("/delete_qna")
 	public String deleteQna(int qnano) {
 		qnaService.deleteQna(qnano);
-		return "redirect:/board/list";
+		return "redirect:/qna/qna_list";
 	}
-	
-	
-	
-	
+
 }
-
-

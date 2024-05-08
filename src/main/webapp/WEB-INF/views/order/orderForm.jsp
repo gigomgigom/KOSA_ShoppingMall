@@ -110,7 +110,7 @@
 			</ul>
 		</div>
 
-		<form class="w-100 d-flex justify-content-center" action="createOrder" method="post">
+		<form class="w-100 d-flex justify-content-center" action="create_order" method="post">
 			<div class="w-75 d-flex flex-row border-top border-dark">
 				<!--주문정보 입력-->
 				<div
