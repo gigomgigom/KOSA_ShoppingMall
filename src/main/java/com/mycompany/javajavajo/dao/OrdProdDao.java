@@ -6,7 +6,7 @@ import com.mycompany.javajavajo.dto.OrdProd;
 
 @Mapper
 public interface OrdProdDao {
-
+	//ordProd 데이터 삽입
 	public int insert(OrdProd ordProd);
 
 }

@@ -6,7 +6,7 @@ import com.mycompany.javajavajo.dto.Recipient;
 
 @Mapper
 public interface RecipientDao {
-
+	//recpient 데이터 삽입
 	public int insert(Recipient recipent);
 
 }

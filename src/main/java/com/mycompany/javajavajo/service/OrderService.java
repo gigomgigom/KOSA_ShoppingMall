@@ -42,7 +42,8 @@ public class OrderService {
 	private ProductDao productDao;
 	@Autowired
 	private OrdProdDao ordProdDao;
-
+	
+	//권우상 - 주문서 폼 내용 db 등록 실행  
 	public void createOrder(int memno, Order order, Orderer orderer, Recipient recipient) {
 
 		// order 삽입
@@ -70,7 +71,7 @@ public class OrderService {
 		pointDtl.setAmount(order.getDiscprice());
 		int pointDtlResult = pointDtlDao.insert(pointDtl);
 		
-		//memno에 해당하는 cartitem 얻어오기
+		//memno에 해당하는 cartitem을 얻어 온 후 ordprod추가 및 cartitem삭제
 		List<CartItem> cartItemList = cartItemDao.selectByMemno(memno);
 		int[] prodnos = new int[cartItemList.size()];
 		int i = 0;

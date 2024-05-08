@@ -28,7 +28,7 @@ public class CartService {
 	@Autowired
 	private ProductImgDao productImgDao;
 
-	//memno에 해당하는 cart가 있는지 확인 없다면 만들어줌
+	//권우상 - memno에 해당하는 cart가 있는지 확인 없다면 만들어줌
 	public Cart findCart(int memno) {
 		Cart cart = cartDao.selectByMemno(memno);
 		if(cart == null) {
@@ -38,7 +38,7 @@ public class CartService {
 		return cart;
 	}
 	
-	//카트를 찾아옴
+	//권우상 - memno에 해당하는 cartItem 전부를 찾아옴
 	public List<CartItem> findCartItems(int memno) {
 		List<CartItem> cartItems = cartItemDao.selectByMemno(memno);
 		for(CartItem cartItem : cartItems) {
@@ -50,7 +50,7 @@ public class CartService {
 		return cartItems;
 	}
 
-	//카트 아이템 수량 변경
+	//권우상 - operator에 따라서  memeno와 prodno를 둘다 만족한는 cartitem에 "+"나 "-" 연산을 해준다 
 	public void updateCart(int memno, int prodno, String operator) {
 		int result = cartItemDao.updateCart(memno, prodno, operator);;
 	
@@ -58,7 +58,7 @@ public class CartService {
 
 	}
 	
-	//카트 아이템 삭제
+	//권우상 - memno에 해당하면서 prodnos안에 있는 prodno에 해당하는 cartitem을 전부 삭제한다
 	public void deleteCartItems(int memno, int[] prodnos) {
 		int result = cartItemDao.deleteCartItems(memno, prodnos);
 		

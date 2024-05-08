@@ -35,7 +35,7 @@ public interface MemberDao {
 
 	public int updateMemberInfo(Member member);
 
-
+	//권우상 - memno에 해당하는 유저의 mempoint를 operator에 따라 "+" 혹은 "-" amount 양만큼 연산을 해준다 
 	public int updatePoint(@Param("memno") int memno,@Param("amount") int amount,@Param("operator") String operator);
 	
 }
