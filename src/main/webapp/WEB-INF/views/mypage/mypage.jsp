@@ -187,7 +187,9 @@
 					class=" d-flex justify-content-center align-items-center w-25 border m-0 my-3 p-0 rounded"
 					style="background-color: #27374D;">
 					<p class="m-0 p-0 py-2">
-						<a class="text-white text-decoration-none" href="${pageContext.request.contextPath}/order/order_history">주문내역 더보기</a>
+						<a class="text-white text-decoration-none"
+							href="${pageContext.request.contextPath}/order/order_history">주문내역
+							더보기</a>
 					</p>
 				</div>
 			</div>
@@ -196,6 +198,6 @@
 	<div style="height: 300px"></div>
 
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
-	<%@ include file="/WEB-INF/views/mypage/point_detail_modal.jsp" %>
+	<%@ include file="/WEB-INF/views/mypage/point_detail_modal.jsp"%>
 </body>
 </html>
