@@ -1,21 +1,8 @@
-
-var productCells = document.querySelectorAll('.productCell');
-
-// 각 셀에 클릭 이벤트 리스너를 추가합니다.
-productCells.forEach(function(cell) {
-    cell.addEventListener('click', function() {
-        // 해당 셀의 제품 번호를 가져옵니다.
-        var prodno = this.getAttribute('data-prodno');
-        
-        // openProductDetail() 함수 호출
-        openProductDetail(prodno);
-    });
-});
-
 //PopUp
 //상품 상세 확인 및 정보 수정
 function openProductDetail(prodno){
-    var url = 'product_detail?prodno=' + encodeURIComponent(prodno);
+	var prodnoParam = prodno;
+    var url = 'product_detail?prodno=' + prodnoParam;
     window.open(url, 'new', 'scrollbars=yes,resizable=no,width=500,height=600,left=0,top=0');
 }
 //상품 추가 팝업

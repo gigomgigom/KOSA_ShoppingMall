@@ -89,11 +89,11 @@
 								<tbody style="vertical-align: middle;">
 									<c:forEach var="product" items="${productList}">
 										<tr>
-											<td class="productCell" data-prodno="${product.prodno}">${product.ctgno==1?'사료':product.ctgno==2?'간식':'영양제'}</td>
-											<td class="productCell" data-prodno="${product.prodno}">${product.prodno}</td>
-											<td class="productCell" data-prodno="${product.prodno}">${product.prodname}</td>
-											<td class="productCell" data-prodno="${product.prodno}">${product.prodprice}원</td>
-											<td class="productCell" data-prodno="${product.prodno}"><fmt:formatDate value="${product.proddate}" pattern="yyyy-MM-dd"/></td>
+											<td onclick="openProductDetail(${product.prodno})">${product.ctgno==1?'사료':product.ctgno==2?'간식':'영양제'}</td>
+											<td onclick="openProductDetail(${product.prodno})">${product.prodno}</td>
+											<td onclick="openProductDetail(${product.prodno})">${product.prodname}</td>
+											<td onclick="openProductDetail(${product.prodno})">${product.prodprice}원</td>
+											<td onclick="openProductDetail(${product.prodno})"><fmt:formatDate value="${product.proddate}" pattern="yyyy-MM-dd"/></td>
 											<td>
 												<form action="updateProdStock" class="d-flex justify-content-center" method="post">
 													<input type="number" style="width: 50px" value="${product.prodstock}" name="prodstock">

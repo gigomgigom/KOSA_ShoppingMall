@@ -166,21 +166,21 @@ public class AdminController {
 		model.addAttribute("menuNum", 1);
 		return "admin/product/admin_product_list";
 	}
+	
 	//상품 재고 수정
 	@PostMapping("/updateProdStock")
 	public String editProdStock(Product product) {
 		adminService.editProdStock(product);
 		return "redirect:/admin/product_list";
 	}
+	
 	//상품 수정 화면으로 이동
 	@GetMapping("/product_detail")
 	public String productDetail(int prodno, Model model) {
 		Product product = adminService.getProductByProdno(prodno);
-
-
 		model.addAttribute("product", product);
 		model.addAttribute("menuNum", 1);
-		return "admin/product/admin_product_detail";
+		return "admin/modal/admin_product_detail";
 	}
 
 	@GetMapping("/edit_product")
