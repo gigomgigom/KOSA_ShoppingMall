@@ -30,7 +30,8 @@
 		</h5>
 		<hr class="w-100" />
 		<form class="d-flex flex-column w-100 justify-content-center"
-			action="#" method="post">
+			action="edit_product" method="post" id="editForm" enctype="multipart/form-data">
+			<input type="hidden" value="${product.prodno}" name="prodno">
 			<div class="my-3">
 				<div class="form-group mb-2">
 					<label for="ctg">카테고리</label> <select class="form-control" id="ctg"
@@ -77,10 +78,10 @@
 				</div>
 			</div>
 			<div class="w-100 d-flex flex-column align-items-center">
-				<button class="btn w-50 border my-4">수정</button>
+				<button type="submit" class="btn w-50 border my-4">수정</button>
 			</div>
 			<div class="w-100 d-flex flex-column align-items-center">
-				<button class="btn w-50 border mb-4">삭제</button>
+				<button type="submit" class="btn w-50 border mb-4">삭제</button>
 			</div>
 		</form>
 	</div>

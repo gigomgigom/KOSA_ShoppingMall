@@ -30,6 +30,9 @@ public interface ProductDao {
 	
 	//심영조-Admin-Product관리 상품의 재고 수치를 수정하기
 	int updateProdStock(Product product);
+	
+	//심영조-Admin-Product관리 상품의 정보 수정하기
+	int updateProductInfo(Product product);
 
 	
 	

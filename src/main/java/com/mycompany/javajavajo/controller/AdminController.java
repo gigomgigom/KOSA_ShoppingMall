@@ -1,5 +1,6 @@
 package com.mycompany.javajavajo.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.PointDtl;
 import com.mycompany.javajavajo.dto.Product;
+import com.mycompany.javajavajo.dto.ProductImg;
 import com.mycompany.javajavajo.service.AdminService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -185,11 +187,35 @@ public class AdminController {
 		model.addAttribute("menuNum", 1);
 		return "admin/modal/admin_product_detail";
 	}
-
-	@GetMapping("/edit_product")
-	public String edit_product(Product product, Model model) {
+	
+	@RequestMapping("/edit_product")
+	public String edit_product(Product product, ProductImg prodimg) {
+		////DTO에 추가 설정(첨부파일의 정보들을 DB에 저장)
+		//대표사진 추가 설정
+		if(prodimg.getRepattach() != null && !prodimg.getRepattach().isEmpty()) {
+			prodimg.setRepimgoname(prodimg.getRepattach().getOriginalFilename());
+			prodimg.setRepimgtype(prodimg.getRepattach().getContentType());
+			try {
+				prodimg.setRepimg(prodimg.getRepattach().getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		//상세사진 추가 설정
+		if(prodimg.getDtlattach() != null && !prodimg.getDtlattach().isEmpty()) {
+			prodimg.setDtlimgoname(prodimg.getDtlattach().getOriginalFilename());
+			prodimg.setDtlimgtype(prodimg.getDtlattach().getContentType());
 		
-		return null;
+			try {
+				prodimg.setDtlimg(prodimg.getDtlattach().getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		product.setProductImg(prodimg);
+		
+		int result = adminService.editProduct(product);
+		return "redirect:/admin/main";
 	}
 
 	@GetMapping("/add_product")

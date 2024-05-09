@@ -13,6 +13,7 @@ import com.mycompany.javajavajo.dao.OrdProdDao;
 import com.mycompany.javajavajo.dao.OrderDao;
 import com.mycompany.javajavajo.dao.PointDtlDao;
 import com.mycompany.javajavajo.dao.ProductDao;
+import com.mycompany.javajavajo.dao.ProductImgDao;
 import com.mycompany.javajavajo.dto.Category;
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.Order;
@@ -28,6 +29,8 @@ public class AdminService {
 
 	@Autowired
 	private ProductDao productDao;
+	@Autowired
+	private ProductImgDao productImgDao;
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
@@ -137,6 +140,15 @@ public class AdminService {
 	//심영조-admin-product 수정 페이지 - 선택한 상품의 데이터를 가져와줘
 	public Product getProductByProdno(int prodno) {
 		return productDao.selectByProdno(prodno);
+	}
+	
+	//심영조-admin-product 수정 페이지 - 선택한 상품의 정보와 사진들을 수정해줘
+	public int editProduct(Product product) {
+		//상품정보 수정 (PRODUCT 테이블)
+		int info = productDao.updateProductInfo(product);
+		//상품사진 수정 (PRODUCTIMG 테이블)
+		int img = productImgDao.updateProductImg(product);
+		return info+img;
 	}
 
 }

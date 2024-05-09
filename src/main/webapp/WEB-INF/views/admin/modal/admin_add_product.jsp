@@ -41,12 +41,12 @@
 				</div>
 			</div>
 			<div class="mb-3">
-				<label for="mno" class="form-label">상품명</label> <input type="text"
-					class="form-control" id="mno" name="memno">
+				<label for="productName" class="form-label">상품명</label> <input type="text"
+					class="form-control" id="productName" name="prodno">
 			</div>
 			<div class="mb-3">
 				<label for="mid" class="form-label">상품 가격</label> <input type="text"
-					class="form-control" id="mid" name="memid">
+					class="form-control" id="mid" name="prodprice">
 			</div>
 			<div class="mb-3">
 				<label for="memail" class="form-label">입고할 수량</label> <input

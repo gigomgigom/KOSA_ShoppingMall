@@ -1,6 +1,6 @@
 package com.mycompany.javajavajo.dto;
 
-import java.sql.Blob;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -13,5 +13,8 @@ public class ProductImg {
 	private String repimgtype;
 	private String dtlimgoname;
 	private String dtlimgtype;
+	
+	private MultipartFile repattach;
+	private MultipartFile dtlattach;
 	
 }
