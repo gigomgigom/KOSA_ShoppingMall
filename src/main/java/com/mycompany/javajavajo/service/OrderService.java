@@ -14,6 +14,7 @@ import com.mycompany.javajavajo.dao.PointDtlDao;
 import com.mycompany.javajavajo.dao.ProductDao;
 import com.mycompany.javajavajo.dao.RecipientDao;
 import com.mycompany.javajavajo.dto.CartItem;
+import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Orderer;
@@ -126,5 +127,9 @@ public class OrderService {
 		return null;
 	}
 
+	public List<Order> getMemberByMemno(int memno) {
+		List<Order> orderList = orderDao.selectOrderByMemno(memno);
+		return orderList;
+	}
 
 }
