@@ -26,10 +26,12 @@
 	
 </script>
 <style>
+
 * {
 	margin: 0;
 	padding: 0;
 }
+
 </style>
 <meta charset="UTF-8">
 <title>ItemList</title>
@@ -59,8 +61,7 @@
 					<input type="text" class="form-control" placeholder="상품 검색"
 						aria-label="Recipient's username" aria-describedby="button-addon2">
 					<button class="btn" type="button" id="button-addon2">
-						<img
-							src="${pageContext.request.contextPath}/resources/image/icon/search_icon.png"
+						<img src="${pageContext.request.contextPath}/resources/image/icon/search_icon.png"
 							style="height: 30px;">
 					</button>
 				</div>
@@ -70,10 +71,8 @@
 				<!-- JSTL에서 ForEach태그를 사용해서 아래 상품 출력칸을 가져온 상품 수만큼 뿌려준다. -->
 				<c:forEach var="item" items="${itemList}">
 				<div class="card mb-4" style="width: 24%">
-					<a href="">
-						<img class="card-img-top" src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${item.prodno}"
-						alt="Card image" style="width: 100%;">
-					</a>
+					<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${item.prodno}">
+						<img class="card-img-top" src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${item.prodno}" alt="Card image" style="width: 100%;"> </a>
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="${pageContext.request.contextPath}/item/item_detail" class="text-decoration-none text-black">${item.prodname}</a>

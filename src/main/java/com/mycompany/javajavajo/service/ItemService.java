@@ -41,8 +41,9 @@ public class ItemService {
 	//2. Dao객체의 메소드를 호출됬을 때 반환하는 타입은 무엇일까?
 	//3. Dao의 추상메소드를 resources/mybatis/mapper/product.xml에서 구현이 됬습니둥
 	//다음단계는 mybatis에서의 product.xml로 이동!
-	public Product getProductByProdno() {
-		return null;
+	public Product getProductByProdno(int prodno) {
+		Product product = productDao.selectByProdno(prodno);
+		return product;
 	}
 
 
