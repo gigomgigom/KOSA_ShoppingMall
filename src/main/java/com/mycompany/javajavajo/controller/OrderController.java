@@ -96,7 +96,21 @@ public class OrderController {
 		
 	}
 	
-
+	@RequestMapping("/order_history")
+	// 인증된 객체 확인 - 신우호
+	public String orderHistory(Model model, Authentication authentication) {
+		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
+		int memno = t1UserDetails.getMember().getMemno();
+		// memno를 통해 order정보를 얻어옴 
+		List<Order> orderList = orderService.getOrderListByMemno(memno); 
+		log.info("" + memno);
+		// order 정보가 제대로 얻어와졌는지 확인
+		for(Order order : orderList) {
+			log.info("" + order);
+		}
+		model.addAttribute("orderList", orderList);
+		return "order/orderHistory";
+	}
 }
 
 

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,20 +36,20 @@
 		<hr class="w-50 m-0 my-3 p-0" />
 		
 		<!-- 주문내역 한행당 아래와같이 작성 -->
+		<c:forEach var="order" items="${orderList}">
 		<div class="w-50 d-flex flex-column align-items-center">			
 			<div class="w-100 border mb-2 p-3">
 				<div class="d-flex justify-content-between m-0 mb-2 p-0">
 					<div class="d-flex flex-column">
 						<p class="m-0 p-0">
 							<a class="text-dark"
-								href="${pageContext.request.contextPath}/order/order_detail">202404181758268</a>
+								href="${pageContext.request.contextPath}/order/order_detail?ordno=${order.ordno}">${order.ordno}</a>
 						</p>
 						<p class="m-0 mb-2 p-0">상품3</p>
-						<p class="m-0 mb-2 p-0">0원</p>
+						<p class="m-0 mb-2 p-0">${order.ordprice}</p>
 					</div>
 					<div class="d-flex flex-column">
-						<p class="m-0  p-0" style="font-size: 0.75rem;">24-04-18
-						17:59:05</p>
+						<p class="m-0  p-0" style="font-size: 0.75rem;"><fmt:formatDate value="${order.orddate}" pattern="yyyy-MM-dd"/></p>
 						<div class="d-flex justify-content-center mt-2">
 							<p class="text-center rounded d-flex align-items-center p-1"
 								style="background-color: #27374D; color: white;">주문 취소</p>
@@ -55,11 +57,11 @@
 					</div>					
 				</div>				
 				<div class="d-flex justify-content-center  m-0 p-0 px-2">
-					<p class="w-100 m-0 p-0 py-3 text-center border">배송 정보 없음</p>
+					<p class="w-100 m-0 p-0 py-3 text-center border">${order.ordstts}</p>
 				</div>
 			</div>
 		</div>
-		
+		</c:forEach>
 	</div>
 	<div style="height: 100px"></div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>

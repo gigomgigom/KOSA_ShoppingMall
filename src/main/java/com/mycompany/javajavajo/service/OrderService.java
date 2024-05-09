@@ -125,10 +125,16 @@ public class OrderService {
 		Recipient recipient = recipientDao.selectRecipientByOrdno(ordno);
 		return recipient;
 	}
-
-	public List<Order> getMemberByMemno(int memno) {
+	// momno에 해당하는 order의 정보를 얻어옴
+	public List<Order> getOrderListByMemno(int memno) {
 		List<Order> orderList = orderDao.selectOrderByMemno(memno);
 		return orderList;
+	}
+
+	
+
+	public Product getProductByProdNo(int oneofordproduct) {
+		return productDao.selectByProdno(oneofordproduct);
 	}
 
 }

@@ -55,6 +55,7 @@ public class QnaController {
 
 		model.addAttribute("pager", pager);
 		model.addAttribute("qnaList", qnaList);
+		
 		return "qna/list";
 
 	}
