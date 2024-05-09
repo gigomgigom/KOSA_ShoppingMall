@@ -118,16 +118,16 @@ public class OrderService {
 	//수정해야함(변수명)
 	//권우상 - 주문번호로 주문에 해당하는 주문상품의 목록을 불러옴
 	public List<OrdProd> getOrdProdListByOrdno(int ordno) {
-		List<OrdProd> ordProd = ordProdDao.selectOrdProdListByOrdno(ordno);
+		List<OrdProd> ordProdList = ordProdDao.selectOrdProdListByOrdno(ordno);
 		
 		//주문상품에 리뷰를 쓴 기록이 있는지 확인
-		for(OrdProd ord : ordProd) {
-			int prodno = ord.getProdno();
+		for(OrdProd ordProd : ordProdList) {
+			int prodno = ordProd.getProdno();
 			
 			
 		}
 		
-		return ordProd;
+		return ordProdList;
 	}
 	
 	

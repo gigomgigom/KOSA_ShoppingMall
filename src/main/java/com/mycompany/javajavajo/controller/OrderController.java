@@ -87,17 +87,6 @@ public class OrderController {
 
 		return "order/orderDetail";
 	}
-	/*
-	 * @PostMapping(value="/write_review",
-	 * produces="application/json; charset=UTF-8")
-	 * 
-	 * @ResponseBody
-	 */
-	@PostMapping("/write_review")
-	public void writeReview(Review review) {
-		log.info("들어와지나요?");
-
-	}
 
 	@RequestMapping("/order_history")
 	// 인증된 객체 확인 - 신우호
