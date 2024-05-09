@@ -73,22 +73,22 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${springframework-version}</version>
 		</dependency>
-		
+
 		<!-- json 라이브러리 사용 -->
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20240303</version>
 		</dependency>
-		
-		
+
+
 		<!-- jackson 라이브러리 사용 @resonsbody에서 리턴된 객체를 json으로 변환하기 위해서 -->
 		<dependency>
-    		<groupId>com.fasterxml.jackson.core</groupId>
-    		<artifactId>jackson-databind</artifactId>
-    		<version>2.17.0</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.17.0</version>
 		</dependency>
-		
+
 		<!-- 데이터베이스를 위한 라이브러리 -->
 
 		<!-- SpringFramework와 JDBC 연동을 위한 라이브러리 -->
@@ -140,7 +140,7 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>2.1.2</version>
 		</dependency>
-		
+
 		<!-- Spring Security를 사용하기 위한 라이브러리 -->
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
 		<dependency>
@@ -162,7 +162,14 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${springframework-security-version}</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.9.19</version>
+			<scope>runtime</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
