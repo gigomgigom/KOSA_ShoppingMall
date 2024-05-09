@@ -15,15 +15,16 @@
 	<select id="selectByQnano" parameterType="int" resultType="Qna">
 		select *
 		from (
-			select qnano, memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock,
+			select qnano, qna.memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, memid as qnawriter,
 			lag(qnatitle,1,-1) over(order by qnano) as pretitle,  lag(qnano,1,-1) over(order by qnano) as preno,
-			lag(memno,1,-1) over(order by qnano) as prememno, 	lag(qnalock,1,-1) over(order by qnano) as prelock,
+			lag(qna.memno,1,-1) over(order by qnano) as prememno, 	lag(qnalock,1,-1) over(order by qnano) as prelock,
 			lead(qnatitle,1,-1) over(order by qnano) as nexttitle,lead(qnano,1,-1) over(order by qnano) as nextno,
-			lead(memno,1,-1) over(order by qnano) as nextmemno,	lead(qnalock,1,-1) over(order by qnano) as nextlock
-			from qna
+			lead(qna.memno,1,-1) over(order by qnano) as nextmemno,	lead(qnalock,1,-1) over(order by qnano) as nextlock
+			from qna , member 
+			where qna.memno = member.memno
 			<if test="keyword != null">
-				where qnatitle like '%' || #{keyword} || '%'
-				or qnacontent like '%' || #{keyword} || '%'
+				and (qnatitle like '%' || #{keyword} || '%'
+				or qnacontent like '%' || #{keyword} || '%')
 			</if>
 		)
 		where qnano = #{qnano}
@@ -65,15 +66,16 @@
 	
 	<select id="selectQnaList" parameterType="Pager" resultType="Qna">
 	
-		select rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt, qnalock
+		select *
 		from (
-		    select rownum as rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt, qnalock
+		    select rownum as rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt, qnalock, memid as qnawriter
 		    from (
-		        select qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt, qnalock
-		        from qna
+		        select qnano, qnatitle, qnacontent, qna.memno as memno, qnadate, qnahitcnt, qnalock, memid
+		        from qna, member
+		        where qna.memno = member.memno
 		        <if test="keyword != null">
-		        	where qnatitle like '%' || #{keyword} || '%'
-					or qnacontent like '%' || #{keyword} || '%'
+		        	and (qnatitle like '%' || #{keyword} || '%'
+					or qnacontent like '%' || #{keyword} || '%')
 				</if>
 		        order by qnano desc
 		    )

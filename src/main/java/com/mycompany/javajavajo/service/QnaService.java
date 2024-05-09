@@ -35,12 +35,7 @@ public class QnaService {
 		if(qna.getQnacontent() != null) {
 			qna.setQnacontent(qna.getQnacontent().replace("\r\n", "<br/>"));
 		}
-		int memno = qna.getMemno();
-		
-		Member member = memberDao.selectByMemno(memno);
-		qna.setQnawriter(member.getMemid());
-		log.info(qna.getNextno() + "");
-		log.info(qna.getPreno() + "");
+
 		return qna;
 	}
 
