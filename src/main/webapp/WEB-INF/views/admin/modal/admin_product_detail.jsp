@@ -41,24 +41,24 @@
 				</div>
 			</div>
 			<div class="mb-3">
-				<label for="mno" class="form-label">상품명</label> <input type="text"
-					class="form-control" id="mno" name="memno">
+				<label for="productname" class="form-label">상품명</label> <input type="text"
+					class="form-control" id="productname" name="prodname" value="${product.prodname}">
 			</div>
 			<div class="mb-3">
-				<label for="mid" class="form-label">상품 가격</label> <input type="text"
-					class="form-control" id="mid" name="memid">
+				<label for="productprice" class="form-label">상품 가격</label> <input type="text"
+					class="form-control" id="productprice" name="prodprice" value="${product.prodprice}">
 			</div>
 			<div class="mb-3">
-				<label for="memail" class="form-label">입고할 수량</label> <input
-					type="number" class="form-control" id="memail" name="mememail"
-					value="0">
+				<label for="productstock" class="form-label">입고할 수량</label> <input
+					type="number" class="form-control" id="productstock" name="prodstock"
+					value="${product.prodstock}">
 			</div>
 			<div>
 				<span>상품 대표 이미지</span>
 			</div>
 			<div class="border d-flex justify-content-center"
 				style="width: 100px">
-				<img id="repimg-container" src=""
+				<img id="repimg-container" src="${pageContext.request.contextPath}/downloadRepimg?prodno=${product.prodno}"
 					style="width: 100px; height: 100px" />
 			</div>
 			<div class="mt-3">
