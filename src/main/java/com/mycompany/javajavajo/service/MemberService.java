@@ -43,4 +43,10 @@ public class MemberService {
 		return memberAdr;
 	}
 
+	//황세림 - Member 정보를 가져오기 위함(getMemberInfo)
+	public Member getMemberInfo(int memno) {
+		Member member = memberDao.selectByMemno(memno);
+		return member;
+	}
+
 }

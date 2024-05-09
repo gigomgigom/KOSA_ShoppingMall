@@ -20,7 +20,6 @@ public interface MemberDao {
 
 	//심영조 - 회원번호를 통해 해당 회원의 정보들을 가져오기
 	public Member selectByMemno(int memno);
-
 	
 	public Member selectByMemnoMemImg(int memno);
 
@@ -42,5 +41,7 @@ public interface MemberDao {
 
 	//심영조 - Admin-회원관리-memberDetail에서 회원의 포인트를 관리자가 수정할 때 사용함
 	public int updatePointByAdmin(Member member);
+	
+
 	
 }
