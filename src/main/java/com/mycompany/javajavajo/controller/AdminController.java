@@ -103,6 +103,7 @@ public class AdminController {
 			if(rewardPointDtl != null) {
 				rewardPointDtl.setDate(orderForDate.getOrddate());
 				pointDtlList.add(rewardPointDtl);
+				
 			}
 		}
 		
