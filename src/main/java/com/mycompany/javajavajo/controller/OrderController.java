@@ -8,14 +8,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.javajavajo.dto.CartItem;
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.MemberAdr;
+import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Orderer;
-import com.mycompany.javajavajo.dto.PointDtl;
 import com.mycompany.javajavajo.dto.Recipient;
+import com.mycompany.javajavajo.dto.Review;
 import com.mycompany.javajavajo.security.Tm1UserDetails;
 import com.mycompany.javajavajo.service.AdminService;
 import com.mycompany.javajavajo.service.CartService;
@@ -58,7 +60,7 @@ public class OrderController {
 		return "order/orderForm";
 	}
 	
-	//주문서 작성 - 권우상
+	//권우상 - 주문 데이터를 데이터 베이스에 등록
 	@PostMapping("/create_order")
 	public String createOrder(Order order, Orderer orderer, Recipient recipient, Authentication authentication) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
@@ -67,14 +69,24 @@ public class OrderController {
 		
 		orderService.createOrder(memno, order, orderer,recipient);
 		
-		return "redirect:/order/order_detail";
+		return "redirect:/order/order_detail?ordno=" + order.getOrdno();
 	}
 	
+	//권우상 - 주문 상세 페이지
 	@RequestMapping("/order_detail")
-	public String orderDetail() {
+	public String orderDetail(int ordno) {
+		Order order = orderService.getOrderByOrdno(ordno);
+		List<OrdProd> ordProdList = orderService.getOrdProdListByOrdno(ordno);
+		Orderer orderer = orderService.getOrdererByOrdno(ordno);
+		Recipient recipient = orderService.getRecipientByOrdno(ordno);
 		return "order/orderDetail";
 	}
 	
+	@PostMapping(value="/write_review", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public String writeReview(Review review) {
+		return null;
+	}
 	@RequestMapping("/order_history")
 	public String orderHistory() {
 		return "order/orderHistory";

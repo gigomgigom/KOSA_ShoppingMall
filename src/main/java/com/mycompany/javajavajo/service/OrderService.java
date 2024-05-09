@@ -61,6 +61,7 @@ public class OrderService {
 		recipient.setOrdno(ordno);
 		int recipientResult = recipientDao.insert(recipient);
 		
+	
 		//사용한 포인트가 0 이상이라면
 		if(order.getDiscprice() != 0) {
 			// 멤버 포인트 차감
@@ -73,6 +74,13 @@ public class OrderService {
 			pointDtl.setAmount(order.getDiscprice());
 			int pointDtlResult = pointDtlDao.insert(pointDtl);
 		}
+		
+		//결제 금액의 5퍼센트를 point로 적립
+		PointDtl pointDtl = new PointDtl();
+		pointDtl.setOrdno(ordno);
+		pointDtl.setAction(0);
+		pointDtl.setAmount(order.getFinprice()/100 * 5);
+		int pointDtlResult = pointDtlDao.insert(pointDtl);
 		
 		//memno에 해당하는 cartitem을 얻어 온 후 ordprod추가 및 cartitem삭제
 		List<CartItem> cartItemList = cartItemDao.selectByMemno(memno);
@@ -97,5 +105,26 @@ public class OrderService {
 		int carItemDeleteResult = cartItemDao.deleteCartItems(memno, prodnos);
 		
 	}
+
+	public Order getOrderByOrdno(int ordno) {
+		Order order = orderDao.selectOrderByOrdno(ordno);
+		return order;
+	}
+
+	public List<OrdProd> getOrdProdListByOrdno(int ordno) {
+		List<OrdProd> ordProd = ordProdDao.selectOrdProdListByOrdno(ordno);
+		return ordProd;
+	}
+
+	public Orderer getOrdererByOrdno(int ordno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Recipient getRecipientByOrdno(int ordno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
