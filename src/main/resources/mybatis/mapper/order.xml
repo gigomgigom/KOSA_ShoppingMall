@@ -18,4 +18,4 @@
 	<select id="selectOrderByOrdno" parameterType="int" resultType="Order">
 		select * from ord where ordno = #{ordno}
 	</select>
-</mapper>
+</mapper>	
