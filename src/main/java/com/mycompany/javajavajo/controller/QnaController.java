@@ -1,5 +1,7 @@
 package com.mycompany.javajavajo.controller;
 
+import static org.junit.jupiter.api.Assumptions.assumingThat;
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -32,9 +34,6 @@ public class QnaController {
 		
 		if (pageNo == null) {
 			pageNo = (String) session.getAttribute("pageNo");
-			if (pageNo == null) {
-				pageNo = "1";
-			}
 		}
 		
 		if(keyword == null) {
@@ -92,6 +91,8 @@ public class QnaController {
 	public String qnaDetail(int qnano, Model model, HttpSession session) {
 		String keyword = (String) session.getAttribute("keyword");
 		Qna qna = qnaService.getQna(qnano,keyword); // dto를 통해서 한 게시물의 정보를 가져옴
+		int pageNo = (qna.getRnum() - 1) / 3 + 1;
+		session.setAttribute("pageNo", pageNo + "");
 		model.addAttribute("qna", qna);
 		return "qna/detail";
 	}

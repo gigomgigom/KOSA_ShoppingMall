@@ -14,8 +14,12 @@
 
 	<select id="selectByQnano" parameterType="int" resultType="Qna">
 		select *
+		from(
+		select	rownum as rnum, qnano, memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, qnawriter,
+				pretitle, preno, prememno, prelock, nexttitle, nextno, nextmemno, nextlock
 		from (
-			select qnano, qna.memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, memid as qnawriter,
+			select 
+			qnano, qna.memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, memid as qnawriter,
 			lag(qnatitle,1,-1) over(order by qnano) as pretitle,  lag(qnano,1,-1) over(order by qnano) as preno,
 			lag(qna.memno,1,-1) over(order by qnano) as prememno, 	lag(qnalock,1,-1) over(order by qnano) as prelock,
 			lead(qnatitle,1,-1) over(order by qnano) as nexttitle,lead(qnano,1,-1) over(order by qnano) as nextno,
@@ -26,6 +30,8 @@
 				and (qnatitle like '%' || #{keyword} || '%'
 				or qnacontent like '%' || #{keyword} || '%')
 			</if>
+			order by qnano desc
+		)
 		)
 		where qnano = #{qnano}
 	</select>

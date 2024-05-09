@@ -20,6 +20,7 @@ public class Qna {
 	private byte[] qnaattachdata;
 	private int qnalock;
 	
+	private int rnum;
 	private String qnawriter;
 	
 	private String pretitle;
