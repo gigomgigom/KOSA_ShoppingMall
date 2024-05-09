@@ -74,11 +74,17 @@ public class OrderController {
 	
 	//권우상 - 주문 상세 페이지
 	@RequestMapping("/order_detail")
-	public String orderDetail(int ordno) {
+	public String orderDetail(int ordno, Model model) {
 		Order order = orderService.getOrderByOrdno(ordno);
 		List<OrdProd> ordProdList = orderService.getOrdProdListByOrdno(ordno);
 		Orderer orderer = orderService.getOrdererByOrdno(ordno);
 		Recipient recipient = orderService.getRecipientByOrdno(ordno);
+		
+		model.addAttribute("order", order);
+		model.addAttribute("ordProdList", ordProdList);
+		model.addAttribute("orderer", orderer);
+		model.addAttribute("recipient", recipient);
+		
 		return "order/orderDetail";
 	}
 	
@@ -87,6 +93,7 @@ public class OrderController {
 	public String writeReview(Review review) {
 		return null;
 	}
+	
 	@RequestMapping("/order_history")
 	public String orderHistory(Model model, Authentication authentication) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();

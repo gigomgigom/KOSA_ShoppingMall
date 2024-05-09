@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -36,54 +38,51 @@
 				
 				<div
 					class="mb-3 container-fluid d-flex justify-content-between w-100 pt-3">
-					<span><b>주문번호 2024041817582685</b></span>
-					<span>주문 날짜 2024-05-09</span>
+					<span><b>주문번호 ${order.ordno}</b></span>
+					<span>주문 날짜 <fmt:formatDate value="${order.orddate}" pattern="yyyy-MM-dd"/></span>
 				</div>
 		</div>
 
-
+		<c:forEach var="ordprod" items="${ordProdList}" >
 		<div class="card mb-3 d-flex justify-content-center container-fluid">
 			<div class="row g-0">
 				<div class="col-md-1 mt-5">
 					<img
-						src="${pageContext.request.contextPath}/resources/image/item/snack.png"
-						width="80" height="80" class="img rounded-start" alt="...">
+						src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${ordprod.prodno}"
+						width="80" height="80" class="img rounded-start"/>
 				</div>
 				<div class="col-md-11">
-					<div class="card-body">
-						<div class="col text-end">
-							<div>배송 완료</div>
-						</div>
-						<h5 class="card-title">굿데이 건강한육포 닭가슴살 스틱 300g</h5>
-						<div class="mx-100%">
-							<hr />
-							<p class="card-text">선택: 스틱</p>
-							<div class="col text-end">
-								<button type="button" class="btn btn-dark btn-sm"
-									data-bs-toggle="modal" data-bs-target="#myModal">사용후기
-									쓰기</button>
+						<div class="card-body">
+							<h5 class="card-title">${ordprod.prodname}</h5>
+							<div class="mx-100%">
 								<hr />
-								<div class="container mt-3">
-									<div class="d-flex">
-										<div class="container-fluid d-flex justify-content-between">
-											<span>판매가
-												<div>배송비</div>
-											</span> <span>8,450
-												<div>선불</div>
-											</span>
+								<div class="col text-end">
+									<button type="button" class="btn btn-dark btn-sm"
+										data-bs-toggle="modal" data-bs-target="#myModal">사용후기
+										쓰기</button>
+									<hr />
+									<div class="container mt-3">
+										<div class="d-flex">
+											<div class="container-fluid d-flex justify-content-between">
+												<span>판매가
+													
+												</span> <span><fmt:formatNumber value="${ordprod.prodprice}" pattern="#,###" />원
+													
+												</span>
+											</div>
+											<div class="container-fluid d-flex justify-content-between">
+												<span>수량
+													
+												</span> <span>${ordprod.qty}개
+													
+												</span>
+											</div>
+	
 										</div>
-										<div class="container-fluid d-flex justify-content-between">
-											<span>수량
-												<div>적립포인트</div>
-											</span> <span>3
-												<div>528</div>
-											</span>
+										<div
+											class="container-fluid d-flex justify-content-between border bg-light p-2">
+											<span>주문금액</span> <span><fmt:formatNumber value="${ordprod.subtot}" pattern="#,###" />원</span>
 										</div>
-
-									</div>
-									<div
-										class="container-fluid d-flex justify-content-between border bg-light p-2">
-										<span>주문금액</span> <span>25,350</span>
 									</div>
 								</div>
 							</div>
@@ -91,35 +90,30 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</c:forEach>
 		<div class="border border-2 container-fluid"></div>
-
-
-
-
 
 		<div class="mt-4">
 			<h5>주문하신 분</h5>
 			<hr />
 			<div class="container-fluid d-flex justify-content-between">
-				<span>이 름</span> <span>심영조</span>
+				<span>이 름</span> <span>${orderer.ordname}</span>
 			</div>
 			<hr />
 			<div class="container-fluid d-flex justify-content-between">
-				<span>전화번호</span> <span>01028104870</span>
+				<span>핸드폰</span> <span>${orderer.ordtel}</span>
 			</div>
 			<hr />
 			<div class="container-fluid d-flex justify-content-between">
-				<span>핸드폰</span> <span>010 2810 4870</span>
+				<span>우편번호</span> <span>${orderer.ordpostno}</span>
 			</div>
 			<hr />
 			<div class="container-fluid d-flex justify-content-between">
-				<span>주소</span> <span>(22734)인천 서구 어쩌구 저쩌구 131, 200동
-					400호(이리동, 중앙플스)</span>
+				<span>주소</span> <span>${orderer.ordadr}${orderer.ordadrdtl}</span>
 			</div>
 			<hr />
 			<div class="container-fluid d-flex justify-content-between">
-				<span>E-mail</span> <span>baboda@naver.com</span>
+				<span>E-mail</span> <span>${orderer.ordemail}</span>
 			</div>
 			<hr />
 
@@ -130,20 +124,23 @@
 			<h5>받으시는 분</h5>
 			<hr />
 			<div class="container-fluid d-flex justify-content-between">
-				<span>이 름</span> <span>심영조</span>
+				<span>이 름</span> <span>${recipient.rcptname}</span>
 			</div>
 			<hr />
 			<div class="container-fluid d-flex justify-content-between">
-				<span>전화번호</span> <span>01028104870</span>
+				<span>핸드폰</span> <span>${recipient.rcpttel}</span>
 			</div>
 			<hr />
 			<div class="container-fluid d-flex justify-content-between">
-				<span>핸드폰</span> <span>010 2810 4870</span>
+				<span>우편번호</span> <span>${recipient.rcptpostno}</span>
 			</div>
 			<hr />
 			<div class="container-fluid d-flex justify-content-between">
-				<span>주소</span> <span>(22734)인천 서구 어쩌구 저쩌구 131, 200동
-					400호(이리동, 중앙플스)</span>
+				<span>주소</span> <span>${recipient.rcptadr}${recipient.rcptadrdtl}</span>
+			</div>
+			<hr />
+			<div class="container-fluid d-flex justify-content-between">
+				<span>E-mail</span> <span>${recipient.rcptemail}</span>
 			</div>
 			<hr />
 		</div>
@@ -167,17 +164,20 @@
 
 				<div class="container-fluid border bg-light m-2 p-2">
 					<div class="container-fluid d-flex justify-content-between p-2">
-						<span>주문총액</span> <span>25,350원</span>
+						<span>주문총액</span> <span><fmt:formatNumber value="${order.ordprice}" pattern="#,###" />원</span>
 					</div>
 					<div class="container-fluid d-flex justify-content-between p-2">
-						<span>배송비</span> <span>2,500원</span>
+						<span>배달비</span> <span><fmt:formatNumber value="${order.ordprice>100000 ? 0: 3000}" pattern="#,###" />원</span>
 					</div>
 					<div class="container-fluid d-flex justify-content-between p-2">
-						<span>적립포인트</span> <span>528점</span>
+						<span>할인 금액</span> <span><fmt:formatNumber value="${order.discprice}" pattern="#,###" />원</span>
+					</div>
+					<div class="container-fluid d-flex justify-content-between p-2">
+						<span>적립포인트</span> <span><fmt:formatNumber value="${order.finprice/100 * 5}" pattern="#,###" />원</span>
 					</div>
 					<hr />
 					<div class="container-fluid d-flex justify-content-between p-2">
-						<span class="fw-bold">총계</span> <span class="fw-bold">25,350원</span>
+						<span class="fw-bold">총계</span> <span class="fw-bold"><fmt:formatNumber value="${order.finprice}" pattern="#,###" />원</span>
 					</div>
 				</div>
 

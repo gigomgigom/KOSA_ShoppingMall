@@ -6,4 +6,9 @@
 			values
 			(#{ordno}, #{ordname}, #{ordtel}, #{ordpostno}, #{ordadr}, #{ordadrdtl}, #{ordemail})
 		</insert>
+		
+		<select id="selectOrdererByOrdno" parameterType="int" resultType="Orderer">
+			select * from orderer
+			where ordno = #{ordno}
+		</select>
 </mapper>

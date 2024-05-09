@@ -14,7 +14,6 @@ import com.mycompany.javajavajo.dao.PointDtlDao;
 import com.mycompany.javajavajo.dao.ProductDao;
 import com.mycompany.javajavajo.dao.RecipientDao;
 import com.mycompany.javajavajo.dto.CartItem;
-import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Orderer;
@@ -118,13 +117,13 @@ public class OrderService {
 	}
 
 	public Orderer getOrdererByOrdno(int ordno) {
-		// TODO Auto-generated method stub
-		return null;
+		Orderer orderer = ordererDao.selectOrdererByOrdno(ordno);
+		return orderer;
 	}
 
 	public Recipient getRecipientByOrdno(int ordno) {
-		// TODO Auto-generated method stub
-		return null;
+		Recipient recipient = recipientDao.selectRecipientByOrdno(ordno);
+		return recipient;
 	}
 
 	public List<Order> getMemberByMemno(int memno) {
