@@ -42,7 +42,6 @@ public class MemberService {
 		MemberAdr memberAdr = memberAdrDao.selectByMemno(memno);
 		return memberAdr;
 	}
-
 	public Member getMemberByMid(String mid) {
 		return memberDao.selectByMid(mid);
 	}
