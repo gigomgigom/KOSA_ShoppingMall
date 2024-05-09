@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.mycompany.javajavajo.dto.Member;
+import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Product;
 
@@ -29,6 +30,12 @@ public interface ProductDao {
 	
 	//심영조-Admin-Product관리 상품의 재고 수치를 수정하기
 	int updateProdStock(Product product);
+
+	
+	
+
+	
+	
 
 	
 	
