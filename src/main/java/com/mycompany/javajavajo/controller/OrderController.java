@@ -88,19 +88,15 @@ public class OrderController {
 		return "order/orderDetail";
 	}
 	
-	@PostMapping(value="/write_review", produces="application/json; charset=UTF-8")
-	@ResponseBody
-	public String writeReview(Review review) {
-		return null;
+/*	@PostMapping(value="/write_review", produces="application/json; charset=UTF-8")
+	@ResponseBody*/
+	@PostMapping("/write_review")
+	public void writeReview(Review review) {
+		log.info("들어와지나요?");
+		
 	}
 	
-	@RequestMapping("/order_history")
-	public String orderHistory(Model model, Authentication authentication) {
-		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
-		int memno = t1UserDetails.getMember().getMemno();
-		List<Order> memberList = orderService.getMemberByMemno(memno);
-		return "order/orderHistory";
-	}
+
 }
 
 

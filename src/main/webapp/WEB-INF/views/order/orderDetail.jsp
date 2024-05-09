@@ -17,7 +17,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=divice-width, initial-scale=1.0">
+<meta name="viewport", initial-scale=1.0">
 <title>Insert title here</title>
 </head>
 
@@ -57,8 +57,8 @@
 							<div class="mx-100%">
 								<hr />
 								<div class="col text-end">
-									<button type="button" class="btn btn-dark btn-sm"
-										data-bs-toggle="modal" data-bs-target="#myModal">사용후기
+									<button type="button" class="btn btn-dark btn-sm" onclick="showModal(${ordprod.prodno})"
+										 data-bs-toggle="modal" data-bs-target="#myModal">사용후기
 										쓰기</button>
 									<hr />
 									<div class="container mt-3">
@@ -198,5 +198,5 @@
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<%@ include file="/WEB-INF/views/order/write_review_modal.jsp"%>
 </body>
-
+<script src="/javajavajo_mini_web/resources/js/order/orderDetail.js"></script>>
 </html>
