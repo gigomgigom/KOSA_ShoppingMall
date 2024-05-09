@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
+
 <!-- jQuery 외부 라이브러리 설정 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
@@ -50,10 +52,10 @@
 						<form method="get" action=""
 							class="d-flex justify-content-between align-items-center">
 							<div class="d-flex">
-								<div class="form-group d-flex align-items-center" style="width: 250px">
-									<label for="ctg" style="width: 100px">카테고리</label> 
-									<select class="form-control"
-										id="ctg" name="ctgno">
+								<div class="form-group d-flex align-items-center"
+									style="width: 250px">
+									<label for="ctg" style="width: 100px">카테고리</label> <select
+										class="form-control" id="ctg" name="ctgno">
 										<option value="0" selected>전체</option>
 										<option value="1">사료</option>
 										<option value="2">간식</option>
@@ -85,34 +87,52 @@
 									</tr>
 								</thead>
 								<tbody style="vertical-align: middle;">
-									<tr>	
-										<td onclick="openProductDetail()">간식</td>
-										<td onclick="openProductDetail()">1</td>
-										<td onclick="openProductDetail()">개껌</td>
-										<td onclick="openProductDetail()">20000원</td>
-										<td onclick="openProductDetail()">2024. 04. 29.</td>
-										<td>
-											<form action=""  class="d-flex justify-content-center">
-												<input type="number" value="30" style="width:50px">
-												<a href="" class="btn btn-primary btn-sm">재고 수정</a>
-											</form>
-										</td>
-									</tr>
+									<c:forEach var="product" items="${productList}">
+										<tr>
+											<td class="productCell" data-prodno="${product.prodno}">${product.ctgno==1?'사료':product.ctgno==2?'간식':'영양제'}</td>
+											<td class="productCell" data-prodno="${product.prodno}">${product.prodno}</td>
+											<td class="productCell" data-prodno="${product.prodno}">${product.prodname}</td>
+											<td class="productCell" data-prodno="${product.prodno}">${product.prodprice}원</td>
+											<td class="productCell" data-prodno="${product.prodno}"><fmt:formatDate value="${product.proddate}" pattern="yyyy-MM-dd"/></td>
+											<td>
+												<form action="updateProdStock" class="d-flex justify-content-center" method="post">
+													<input type="number" style="width: 50px" value="${product.prodstock}" name="prodstock">
+													<input type="hidden" value="${product.prodno}" name="prodno">
+													<button type="submit" class="btn btn-primary btn-sm">재고 수정</button>
+												</form>
+											</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 							<div class="d-flex justify-content-center mt-5">
-								<ul class="pagination">
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">이전</a></li>
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">1</a></li>
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">2</a></li>
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">3</a></li>
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">다음</a></li>
-								</ul>
+								<div>
+									<a class="btn btn-outline-primary btn-sm"
+										href="product_list?pageNo=1">처음</a>
+									<c:if test="${pager.groupNo>1}">
+										<a class="btn btn-outline-info btn-sm"
+											href="product_list?pageNo=${pager.startPageNo-1}">이전</a>
+									</c:if>
+
+									<c:forEach var="i" begin="${pager.startPageNo}"
+										end="${pager.endPageNo}">
+										<c:if test="${pager.pageNo != i}">
+											<a class="btn btn-outline-success btn-sm"
+												href="product_list?pageNo=${i}">${i}</a>
+										</c:if>
+										<c:if test="${pager.pageNo == i}">
+											<a class="btn btn-danger btn-sm"
+												href="product_list?pageNo=${i}">${i}</a>
+										</c:if>
+									</c:forEach>
+
+									<c:if test="${pager.groupNo<pager.totalGroupNo}">
+										<a class="btn btn-outline-info btn-sm"
+											href="product_list?pageNo=${pager.endPageNo+1}">다음</a>
+									</c:if>
+									<a class="btn btn-outline-primary btn-sm"
+										href="product_list?pageNo=${pager.totalPageNo}">맨끝</a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -120,5 +140,7 @@
 			</div>
 		</div>
 	</div>
+	<script
+	src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 </body>
 </html>

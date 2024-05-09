@@ -23,4 +23,31 @@
 		order by prodstock
 		]]>
 	</select>
+	
+	<select id="selectTotalProductCnt" resultType="int">
+		select count(*)
+		from product
+	</select>
+	
+	<select id="selectProductByPager" parameterType="Pager">
+		<![CDATA[
+		select rnum, prodno, ctgno, prodname, prodprice, proddate, prodstock
+		from (
+		select rownum as rnum, prodno, ctgno, prodname, prodprice, proddate, prodstock
+		from (
+		select prodno, ctgno, prodname, prodprice, proddate, prodstock
+		from product
+		order by prodno desc
+		)
+		where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
+	</select>
+	
+	<update id="updateProdStock" parameterType="Product">
+		update product
+		set prodstock = #{prodstock}
+		where prodno = #{prodno}
+	</update>
 </mapper>
