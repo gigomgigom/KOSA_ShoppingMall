@@ -74,6 +74,14 @@
 			<version>${springframework-version}</version>
 		</dependency>
 		
+		<!-- json 라이브러리 사용 -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20240303</version>
+		</dependency>
+		
+		
 		<!-- jackson 라이브러리 사용 @resonsbody에서 리턴된 객체를 json으로 변환하기 위해서 -->
 		<dependency>
     		<groupId>com.fasterxml.jackson.core</groupId>

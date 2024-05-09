@@ -57,9 +57,11 @@
 							<div class="mx-100%">
 								<hr />
 								<div class="col text-end">
+									<div id="reviewButton${ordprod.prodno}">
 									<button type="button" class="btn btn-dark btn-sm" onclick="showModal(${ordprod.prodno})"
-										 data-bs-toggle="modal" data-bs-target="#myModal">사용후기
+										  data-bs-toggle="modal" data-bs-target="#myModal">사용후기
 										쓰기</button>
+									</div>
 									<hr />
 									<div class="container mt-3">
 										<div class="d-flex">

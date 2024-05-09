@@ -14,6 +14,7 @@
 			<!-- Modal body -->
 			<div class="modal-body">
 				<!-- 후기 추가 매핑메소드 구현하고 action에서 요청 경로 작성 -->
+					<input type="hidden" id="ordno" name="ordno" value="${order.ordno}">
 					<input type="hidden" id="prodno" name="prodno">
 					<div class="form-group">
 						<label for="review-title" class="col-form-label">제목:</label> <input

@@ -13,6 +13,7 @@ import com.mycompany.javajavajo.dao.OrdererDao;
 import com.mycompany.javajavajo.dao.PointDtlDao;
 import com.mycompany.javajavajo.dao.ProductDao;
 import com.mycompany.javajavajo.dao.RecipientDao;
+import com.mycompany.javajavajo.dao.ReviewDao;
 import com.mycompany.javajavajo.dto.CartItem;
 import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Order;
@@ -42,6 +43,8 @@ public class OrderService {
 	private ProductDao productDao;
 	@Autowired
 	private OrdProdDao ordProdDao;
+	@Autowired
+	private ReviewDao reviewDao;
 	
 	//권우상 - 주문서 폼 내용 db 등록 실행  
 	public void createOrder(int memno, Order order, Orderer orderer, Recipient recipient) {
@@ -105,33 +108,47 @@ public class OrderService {
 		int carItemDeleteResult = cartItemDao.deleteCartItems(memno, prodnos);
 		
 	}
-
+	
+	//권우상 - 주문번호로 주문자의 정보를 얻어옴
 	public Order getOrderByOrdno(int ordno) {
 		Order order = orderDao.selectOrderByOrdno(ordno);
 		return order;
 	}
-
+	
+	//수정해야함(변수명)
+	//권우상 - 주문번호로 주문에 해당하는 주문상품의 목록을 불러옴
 	public List<OrdProd> getOrdProdListByOrdno(int ordno) {
 		List<OrdProd> ordProd = ordProdDao.selectOrdProdListByOrdno(ordno);
+		
+		//주문상품에 리뷰를 쓴 기록이 있는지 확인
+		for(OrdProd ord : ordProd) {
+			int prodno = ord.getProdno();
+			
+			
+		}
+		
 		return ordProd;
 	}
-
+	
+	
+	//권우상 - 주문번호로 주문자의 정보를 얻어옴
 	public Orderer getOrdererByOrdno(int ordno) {
 		Orderer orderer = ordererDao.selectOrdererByOrdno(ordno);
 		return orderer;
 	}
-
+	
+	//권우상 - 주문번호로 수령인의 정보를 받아옴
 	public Recipient getRecipientByOrdno(int ordno) {
 		Recipient recipient = recipientDao.selectRecipientByOrdno(ordno);
 		return recipient;
 	}
+	
 	// momno에 해당하는 order의 정보를 얻어옴
 	public List<Order> getOrderListByMemno(int memno) {
 		List<Order> orderList = orderDao.selectOrderByMemno(memno);
+		
 		return orderList;
 	}
-
-	
 
 	public Product getProductByProdNo(int oneofordproduct) {
 		return productDao.selectByProdno(oneofordproduct);
