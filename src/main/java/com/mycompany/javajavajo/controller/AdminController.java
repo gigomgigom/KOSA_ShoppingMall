@@ -88,6 +88,8 @@ public class AdminController {
 			Product oneOfProduct = adminService.getProductByProdNo(outlineOrderProduct.getOneofordproduct());
 			order.setOneproduct(oneOfProduct);
 			
+			
+			
 			//주문번호를 주어졌을때 포인트 이력(사용, 적립)을 가져온다.
 			PointDtl usedPointDtl = adminService.getPointDtlListByOrdno(order.getOrdno(), 1);
 			PointDtl rewardPointDtl = adminService.getPointDtlListByOrdno(order.getOrdno(), 0);

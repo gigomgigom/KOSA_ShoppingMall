@@ -43,4 +43,8 @@ public class MemberService {
 		return memberAdr;
 	}
 
+	public Member getMemberByMid(String mid) {
+		return memberDao.selectByMid(mid);
+	}
+
 }

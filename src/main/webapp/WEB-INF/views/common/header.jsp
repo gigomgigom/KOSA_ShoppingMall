@@ -15,6 +15,9 @@
 			</b></li>
 			<li class="nav-item border-start border-end"><a
 				class="fw-bold nav-link text-black"
+				href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
+			<li class="nav-item border-start border-end"><a
+				class="fw-bold nav-link text-black"
 				href="${pageContext.request.contextPath}/logout">로그아웃</a></li>
 			<li class="nav-item border-start border-end"><a
 				class="fw-bold nav-link text-black"
