@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/order")
 public class OrderController {
-	
+
 	@Autowired
 	private CartService cartService;
 	@Autowired
@@ -39,55 +39,54 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired
 	private AdminService adminService;
-	
-	//오더 폼 정보 불러오는 곳 - 권우상
+
+	// 오더 폼 정보 불러오는 곳 - 권우상
 	@PostMapping("/order_form")
 	public String orderForm(int itemsPrice, int deliveryPrice, Authentication authentication, Model model) {
 		model.addAttribute("itemsPrice", itemsPrice);
 		model.addAttribute("deliveryPrice", deliveryPrice);
-		
+
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
-	    int memno = t1UserDetails.getMember().getMemno();
-	    Member member = adminService.getMemberByMemno(memno);
+		int memno = t1UserDetails.getMember().getMemno();
+		Member member = adminService.getMemberByMemno(memno);
 		model.addAttribute("member", member);
-		
+
 		List<CartItem> cartItemList = cartService.findCartItems(memno);
 		model.addAttribute("cartItemList", cartItemList);
-				
+
 		MemberAdr memberAdr = memberService.getMemberAdr(memno);
 		model.addAttribute("memberAdr", memberAdr);
-		
+
 		return "order/orderForm";
 	}
-	
-	//권우상 - 주문 데이터를 데이터 베이스에 등록
+
+	// 권우상 - 주문 데이터를 데이터 베이스에 등록
 	@PostMapping("/create_order")
 	public String createOrder(Order order, Orderer orderer, Recipient recipient, Authentication authentication) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
-	    Member member = t1UserDetails.getMember();
-	    int memno = member.getMemno();
-		
-		orderService.createOrder(memno, order, orderer,recipient);
-		
+		Member member = t1UserDetails.getMember();
+		int memno = member.getMemno();
+
+		orderService.createOrder(memno, order, orderer, recipient);
+
 		return "redirect:/order/order_detail?ordno=" + order.getOrdno();
 	}
-	
-	//권우상 - 주문 상세 페이지
+
+	// 권우상 - 주문 상세 페이지
 	@RequestMapping("/order_detail")
 	public String orderDetail(int ordno, Model model) {
 		Order order = orderService.getOrderByOrdno(ordno);
 		List<OrdProd> ordProdList = orderService.getOrdProdListByOrdno(ordno);
 		Orderer orderer = orderService.getOrdererByOrdno(ordno);
 		Recipient recipient = orderService.getRecipientByOrdno(ordno);
-		
+
 		model.addAttribute("order", order);
 		model.addAttribute("ordProdList", ordProdList);
 		model.addAttribute("orderer", orderer);
 		model.addAttribute("recipient", recipient);
-		
+
 		return "order/orderDetail";
 	}
-	
 	/*
 	 * @PostMapping(value="/write_review",
 	 * produces="application/json; charset=UTF-8")
@@ -124,8 +123,3 @@ public class OrderController {
 		return "order/orderHistory";
 	}
 }
-
-
-
-
-

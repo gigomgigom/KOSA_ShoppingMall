@@ -51,6 +51,15 @@
 		where prodno = #{prodno}
 	</update>
 	
-	
+	<update id="updateProductInfo" parameterType="Product">
+		update product
+		set	
+			ctgno=#{ctgno},
+			prodname=#{prodname},
+			prodprice=#{prodprice},
+			prodstock=#{prodstock}
+		where prodno = #{prodno}
+		
+	</update>
 	
 </mapper>
