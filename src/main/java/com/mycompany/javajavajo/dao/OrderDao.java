@@ -12,7 +12,7 @@ public interface OrderDao {
 	public int insert(Order order);
 	
 	//심영조 - memno를 통해 해당 회원의 주문내역을 불러온다.
-	public List<Order> selectOrderByMemno(int memno);
+	public List<Order> selectOrderByMemno(int memno); 
 
 	//심영조 - ordno를 통해 해당 주문정보들을 받아온다.
 	public Order selectOrderByOrdno(int ordno);

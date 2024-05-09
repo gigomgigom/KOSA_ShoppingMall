@@ -88,17 +88,27 @@ public class OrderController {
 		return "order/orderDetail";
 	}
 	
-	@PostMapping(value="/write_review", produces="application/json; charset=UTF-8")
-	@ResponseBody
-	public String writeReview(Review review) {
-		return null;
+/*	@PostMapping(value="/write_review", produces="application/json; charset=UTF-8")
+	@ResponseBody*/
+	@PostMapping("/write_review")
+	public void writeReview(Review review) {
+		log.info("들어와지나요?");
+		
 	}
 	
 	@RequestMapping("/order_history")
+	// 인증된 객체 확인 - 신우호
 	public String orderHistory(Model model, Authentication authentication) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 		int memno = t1UserDetails.getMember().getMemno();
-		List<Order> memberList = orderService.getMemberByMemno(memno);
+		// memno를 통해 order정보를 얻어옴 
+		List<Order> orderList = orderService.getOrderListByMemno(memno); 
+		log.info("" + memno);
+		// order 정보가 제대로 얻어와졌는지 확인
+		for(Order order : orderList) {
+			log.info("" + order);
+		}
+		model.addAttribute("orderList", orderList);
 		return "order/orderHistory";
 	}
 }
