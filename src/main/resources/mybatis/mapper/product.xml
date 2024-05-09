@@ -50,4 +50,7 @@
 		set prodstock = #{prodstock}
 		where prodno = #{prodno}
 	</update>
+	
+	
+	
 </mapper>

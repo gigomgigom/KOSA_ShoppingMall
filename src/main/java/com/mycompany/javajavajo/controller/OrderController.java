@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.javajavajo.dto.CartItem;
 import com.mycompany.javajavajo.dto.Member;
@@ -16,6 +15,7 @@ import com.mycompany.javajavajo.dto.MemberAdr;
 import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Orderer;
+import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.Recipient;
 import com.mycompany.javajavajo.dto.Review;
 import com.mycompany.javajavajo.security.Tm1UserDetails;
@@ -101,6 +101,8 @@ public class OrderController {
 	public String orderHistory(Model model, Authentication authentication) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 		int memno = t1UserDetails.getMember().getMemno();
+		
+		
 		// memno를 통해 order정보를 얻어옴 
 		List<Order> orderList = orderService.getOrderListByMemno(memno); 
 		log.info("" + memno);
@@ -108,6 +110,8 @@ public class OrderController {
 		for(Order order : orderList) {
 			log.info("" + order);
 		}
+		
+		
 		model.addAttribute("orderList", orderList);
 		return "order/orderHistory";
 	}
