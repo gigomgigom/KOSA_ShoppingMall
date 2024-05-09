@@ -26,9 +26,7 @@ public class MyPageController {
 	private MemberService service;
 	
 	@RequestMapping("")
-	public String myPageMain(int memno, Model model) {
-		Member member = service.getMemberInfo(memno);
-		model.addAttribute("member", member);
+	public String myPageMain() {
 		return "mypage/mypage";
 	}
 	
