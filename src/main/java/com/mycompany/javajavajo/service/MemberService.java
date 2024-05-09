@@ -21,8 +21,7 @@ public class MemberService {
 	private MemberAdrDao memberAdrDao;
 
 	public void auth(Member member, MemberAdr memberAdr) {
-		PasswordEncoder passwordEncoder = 
-				PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		member.setMempw(passwordEncoder.encode(member.getMempw())); // 암호화해서 다시 반환
 		member.setMemenabled(true);
 		

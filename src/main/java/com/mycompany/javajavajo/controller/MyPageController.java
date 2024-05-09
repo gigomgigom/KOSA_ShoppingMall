@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.javajavajo.dto.Member;
+import com.mycompany.javajavajo.dto.MemberAdr;
 import com.mycompany.javajavajo.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,14 +27,20 @@ public class MyPageController {
 	@Autowired
 	private MemberService service;
 	
+	//황세림 - member를 받아 회원의 주소를 출력하는 경로
 	@RequestMapping("")
 	public String myPageMain(Authentication authentication, Model model) {
 		String mid = authentication.getName();
 		Member member = service.getMemberByMid(mid);
+		int memno = member.getMemno();
+		MemberAdr memberAdr = service.getMemberAdr(memno);
 		model.addAttribute("member", member);
+		model.addAttribute("memberAdr", memberAdr);
 		log.info(member.toString());
+		
 		return "mypage/mypage";
 	}
+	
 	
 	//멤버 이미지 다운로드
 	@GetMapping("/downloadMemImg")

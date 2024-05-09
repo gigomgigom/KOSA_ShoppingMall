@@ -82,8 +82,7 @@
 					class="d-flex flex-column justify-content-center align-items-center w-100 border m-0 p-0 py-3">
 					<div class="w-75 m-0 p-0">
 						<p class="w-100 m-0 p-0">주소</p>
-						<p class="w-100 m-0 p-0" style="font-size: 0.75rem;">사랑시 고백구
-							행복동</p>
+						<p class="w-100 m-0 p-0" style="font-size: 0.75rem;">${memberAdr.adr}</p>
 					</div>
 				</div>
 
