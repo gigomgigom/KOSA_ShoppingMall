@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,9 +35,9 @@
 				<div class="form-group mb-2">
 					<label for="ctg">카테고리</label> <select class="form-control" id="ctg"
 						name="ctgno">
-						<option value="1">사료</option>
-						<option value="2">간식</option>
-						<option value="3">영양제</option>
+						<c:forEach var="ctg" items="${ctgList}">
+							<option value="${ctg.ctgno}" ${ctg.ctgno==product.ctgno?'selected':''}>${ctg.ctgnm}</option>
+						</c:forEach>
 					</select>
 				</div>
 			</div>
@@ -58,7 +59,7 @@
 			</div>
 			<div class="border d-flex justify-content-center"
 				style="width: 100px">
-				<img id="repimg-container" src="${pageContext.request.contextPath}/downloadRepimg?prodno=${product.prodno}"
+				<img id="repimg-container" src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${product.prodno}"
 					style="width: 100px; height: 100px" />
 			</div>
 			<div class="mt-3">

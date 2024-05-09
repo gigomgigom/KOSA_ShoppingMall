@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mycompany.javajavajo.dto.Category;
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Pager;
@@ -178,6 +179,8 @@ public class AdminController {
 	@GetMapping("/product_detail")
 	public String productDetail(int prodno, Model model) {
 		Product product = adminService.getProductByProdno(prodno);
+		List<Category> ctg = adminService.getAllCategory();
+		model.addAttribute("ctgList", ctg);
 		model.addAttribute("product", product);
 		model.addAttribute("menuNum", 1);
 		return "admin/modal/admin_product_detail";
