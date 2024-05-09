@@ -29,13 +29,16 @@
 		<div class="d-flex justify-content-center p-2 m-2">
 			<h5>주문상세내역</h5>
 		</div>
-		<div class="container-fluid d-flex justify-content-center bg-light">
-			<div class="d-flex flex-column">
-
-				<div class="mb-3 d-flex justify-content-center pt-3">
-					<span>주문번호 2024041817582685</span>
+		<div class="container-fluid d-flex flex-column justify-content-center bg-light">
+				<div class="p-3 d-flex justify-content-center">
+					<span>완료</span>
 				</div>
-			</div>
+				
+				<div
+					class="mb-3 container-fluid d-flex justify-content-between w-100 pt-3">
+					<span><b>주문번호 2024041817582685</b></span>
+					<span>주문 날짜 2024-05-09</span>
+				</div>
 		</div>
 
 
@@ -56,7 +59,8 @@
 							<hr />
 							<p class="card-text">선택: 스틱</p>
 							<div class="col text-end">
-								<button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">사용후기
+								<button type="button" class="btn btn-dark btn-sm"
+									data-bs-toggle="modal" data-bs-target="#myModal">사용후기
 									쓰기</button>
 								<hr />
 								<div class="container mt-3">
@@ -90,150 +94,109 @@
 		</div>
 		<div class="border border-2 container-fluid"></div>
 
-		<div class="container-fluid border bg-light m-2 p-2">
-			<div class="container-fluid d-flex justify-content-between p-2">
-				<span>주문총액</span>
-				<span>25,350원</span>
-			</div>
-			<div class="container-fluid d-flex justify-content-between p-2">
-				<span>배송비</span>
-				<span>2,500원</span>
-			</div>
-			<div class="container-fluid d-flex justify-content-between p-2">
-				<span>적립포인트</span> <span>528점</span>
+
+
+
+
+		<div class="mt-4">
+			<h5>주문하신 분</h5>
+			<hr />
+			<div class="container-fluid d-flex justify-content-between">
+				<span>이 름</span> <span>심영조</span>
 			</div>
 			<hr />
-			<div class="container-fluid d-flex justify-content-between p-2">
-				<span class="fw-bold">총계</span> <span class="fw-bold">25,350원</span>
+			<div class="container-fluid d-flex justify-content-between">
+				<span>전화번호</span> <span>01028104870</span>
 			</div>
+			<hr />
+			<div class="container-fluid d-flex justify-content-between">
+				<span>핸드폰</span> <span>010 2810 4870</span>
+			</div>
+			<hr />
+			<div class="container-fluid d-flex justify-content-between">
+				<span>주소</span> <span>(22734)인천 서구 어쩌구 저쩌구 131, 200동
+					400호(이리동, 중앙플스)</span>
+			</div>
+			<hr />
+			<div class="container-fluid d-flex justify-content-between">
+				<span>E-mail</span> <span>baboda@naver.com</span>
+			</div>
+			<hr />
+
+
 		</div>
-		<div class="mt-3 container-fluid">
-			<h5>결제정보</h5>
-			<hr />
 
+		<div class="mt-4">
+			<h5>받으시는 분</h5>
+			<hr />
 			<div class="container-fluid d-flex justify-content-between">
-				<span>주문번호</span> <span>2024041817582658</span>
+				<span>이 름</span> <span>심영조</span>
 			</div>
 			<hr />
 			<div class="container-fluid d-flex justify-content-between">
-				<span>주문일시</span> <span>2024 04 18 17:59:05</span>
+				<span>전화번호</span> <span>01028104870</span>
 			</div>
 			<hr />
 			<div class="container-fluid d-flex justify-content-between">
-				<span>결제방식</span> <span>2024 04 18 17:59:05</span>
+				<span>핸드폰</span> <span>010 2810 4870</span>
 			</div>
 			<hr />
 			<div class="container-fluid d-flex justify-content-between">
-				<span>결제금액</span> <span>무통장</span>
+				<span>주소</span> <span>(22734)인천 서구 어쩌구 저쩌구 131, 200동
+					400호(이리동, 중앙플스)</span>
 			</div>
 			<hr />
-			<div class="container-fluid d-flex justify-content-between">
-				<span>입금자명</span> <span>심영조</span>
-			</div>
-			<hr />
-			<div class="container-fluid d-flex justify-content-between">
-				<span>입금계좌</span> <span>농협은행 351 1037 2016 53(주)에이투젯(ATOZ)</span>
-			</div>
-			<hr />
+		</div>
 
+		<div class="mt-4">
+			<h5>배송정보</h5>
+			<hr />
+			<div class="container-fluid d-flex justify-content-between">
+				<span>배송회사</span> <span>우체국 배송조회(문의전화: 1855-1300)</span>
+			</div>
+			<hr />
+			<div class="container-fluid d-flex justify-content-between">
+				<span>운송장번호</span> <span>6861581676379</span>
+			</div>
+			<hr />
+			<div class="container-fluid d-flex justify-content-between">
+				<span>배송일시</span> <span>2024-03-21 13:14:11</span>
+			</div>
+			<hr />
 			<div class="mt-4">
-				<h5>주문하신 분</h5>
-				<hr />
-				<div class="container-fluid d-flex justify-content-between">
-					<span>이 름</span> <span>심영조</span>
-				</div>
-				<hr />
-				<div class="container-fluid d-flex justify-content-between">
-					<span>전화번호</span> <span>01028104870</span>
-				</div>
-				<hr />
-				<div class="container-fluid d-flex justify-content-between">
-					<span>핸드폰</span> <span>010 2810 4870</span>
-				</div>
-				<hr />
-				<div class="container-fluid d-flex justify-content-between">
-					<span>주소</span> <span>(22734)인천 서구 어쩌구 저쩌구 131, 200동
-						400호(이리동, 중앙플스)</span>
-				</div>
-				<hr />
-				<div class="container-fluid d-flex justify-content-between">
-					<span>E-mail</span> <span>baboda@naver.com</span>
-				</div>
-				<hr />
 
+				<div class="container-fluid border bg-light m-2 p-2">
+					<div class="container-fluid d-flex justify-content-between p-2">
+						<span>주문총액</span> <span>25,350원</span>
+					</div>
+					<div class="container-fluid d-flex justify-content-between p-2">
+						<span>배송비</span> <span>2,500원</span>
+					</div>
+					<div class="container-fluid d-flex justify-content-between p-2">
+						<span>적립포인트</span> <span>528점</span>
+					</div>
+					<hr />
+					<div class="container-fluid d-flex justify-content-between p-2">
+						<span class="fw-bold">총계</span> <span class="fw-bold">25,350원</span>
+					</div>
+				</div>
 
-			</div>
-
-			<div class="mt-4">
-				<h5>받으시는 분</h5>
-				<hr />
-				<div class="container-fluid d-flex justify-content-between">
-					<span>이 름</span> <span>심영조</span>
-				</div>
-				<hr />
-				<div class="container-fluid d-flex justify-content-between">
-					<span>전화번호</span> <span>01028104870</span>
-				</div>
-				<hr />
-				<div class="container-fluid d-flex justify-content-between">
-					<span>핸드폰</span> <span>010 2810 4870</span>
-				</div>
-				<hr />
-				<div class="container-fluid d-flex justify-content-between">
-					<span>주소</span> <span>(22734)인천 서구 어쩌구 저쩌구 131, 200동
-						400호(이리동, 중앙플스)</span>
-				</div>
-				<hr />
-			</div>
-
-			<div class="mt-4">
-				<h5>배송정보</h5>
-				<hr />
-				<div class="container-fluid d-flex justify-content-between">
-					<span>배송회사</span> <span>우체국 배송조회(문의전화: 1855-1300)</span>
-				</div>
-				<hr />
-				<div class="container-fluid d-flex justify-content-between">
-					<span>운송장번호</span> <span>6861581676379</span>
-				</div>
-				<hr />
-				<div class="container-fluid d-flex justify-content-between">
-					<span>배송일시</span> <span>2024-03-21 13:14:11</span>
-				</div>
-				<hr />
-				<div class="mt-4">
-					<h5>결제합계</h5>
-					<div class="text-white">
-						<div
-							class="container-fluid d-flex justify-content-between mt-3 bg-secondary p-1">
-							<span>총 구매액</span> <span>25,350원</span>
-						</div>
-
-						<div
-							class="container-fluid d-flex justify-content-between bg-secondary mt-1 p-1">
-							<span>미결제액</span> <span>25,350원</span>
-						</div>
-
-						<div
-							class="container-fluid d-flex justify-content-between bg-secondary mt-1 p-1">
-							<span>결제액</span> <span>0원</span>
-						</div>
-						<div class="mt-3">
-							<div class="border border-2"></div>
-							<div class="container-fluid d-flex justify-content-center mb-3">
-							</div>
-							<div class="container-fluid">
-								<button type="button" class="btn w-100 mb-3">주문취소하기</button>
-							</div>
-						</div>
+				<div class="mt-3">
+					<div class="border border-2"></div>
+					<div class="container-fluid d-flex justify-content-center mb-3">
+					</div>
+					<div class="container-fluid">
+						<button type="submit" class="btn btn-secondary w-100 mb-3">주문취소하기</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	</div>
+	</div>
 	<!-- Footer -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
-	<%@ include file="/WEB-INF/views/order/write_review_modal.jsp" %>
+	<%@ include file="/WEB-INF/views/order/write_review_modal.jsp"%>
 </body>
 
 </html>

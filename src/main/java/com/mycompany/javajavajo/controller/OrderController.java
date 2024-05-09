@@ -76,7 +76,15 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/order_history")
-	public String orderHistory() {
+	public String orderHistory(Model model, Authentication authentication) {
+		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
+		int memno = t1UserDetails.getMember().getMemno();
+		List<Order> memberList = orderService.getMemberByMemno(memno);
 		return "order/orderHistory";
 	}
 }
+
+
+
+
+
