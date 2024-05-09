@@ -15,8 +15,9 @@
 	</select>
 	
 	<select id="selectOrdProdListByOrdno" parameterType="int" resultType="OrdProd">
-		select * 
-		from ordprod
-		where ordno = #{ordno}
+		select ordno, ordprod.prodno as prodno, qty, subtot, prodprice, prodname
+		from ordprod, product
+		where ordprod.prodno = product.prodno
+		and ordno = #{ordno}
 	</select>
 </mapper>

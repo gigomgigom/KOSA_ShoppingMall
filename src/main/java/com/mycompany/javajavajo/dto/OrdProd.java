@@ -8,4 +8,7 @@ public class OrdProd {
 	private int prodno;
 	private int qty;
 	private int subtot;
+	
+	private String prodname;
+	private int prodprice;
 }
