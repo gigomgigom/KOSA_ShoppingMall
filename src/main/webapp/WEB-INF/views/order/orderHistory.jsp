@@ -45,7 +45,9 @@
 							<a class="text-dark"
 								href="${pageContext.request.contextPath}/order/order_detail?ordno=${order.ordno}">${order.ordno}</a>
 						</p>
-						<p class="m-0 mb-2 p-0">상품3</p>
+						<c:forEach var="ordProd" items="${ordProdList}">
+							<p class="m-0 mb-2 p-0">${ordProd.prodname}</p> 
+						</c:forEach>
 						<p class="m-0 mb-2 p-0">${order.ordprice}</p>
 					</div>
 					<div class="d-flex flex-column">

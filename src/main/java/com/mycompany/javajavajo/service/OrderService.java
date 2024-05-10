@@ -143,7 +143,7 @@ public class OrderService {
 		return recipient;
 	}
 	
-	// momno에 해당하는 order의 정보를 얻어옴
+	// 신우호 - momno에 해당하는 order의 정보를 얻어옴
 	public List<Order> getOrderListByMemno(int memno) {
 		List<Order> orderList = orderDao.selectOrderByMemno(memno);
 		

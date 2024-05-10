@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,9 +16,7 @@ import com.mycompany.javajavajo.dto.MemberAdr;
 import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Orderer;
-import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.Recipient;
-import com.mycompany.javajavajo.dto.Review;
 import com.mycompany.javajavajo.security.Tm1UserDetails;
 import com.mycompany.javajavajo.service.AdminService;
 import com.mycompany.javajavajo.service.CartService;
@@ -89,7 +88,7 @@ public class OrderController {
 	}
 
 	@RequestMapping("/order_history")
-	// 인증된 객체 확인 - 신우호
+	// 신우호 - 인증된 객체 확인 
 	public String orderHistory(Model model, Authentication authentication) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 		int memno = t1UserDetails.getMember().getMemno();
@@ -99,16 +98,24 @@ public class OrderController {
 		// order 정보가 제대로 얻어와졌는지 확인
 		for (Order order : orderList) {
 			log.info("" + order);
-			// ordProdList에서 order을 통해 order안의 orderNo를 얻음
+			// 신우호 - ordProdList에서 order을 통해 order안의 orderNo를 얻음,(상품이름 얻기) 
 			List<OrdProd> ordProdList = orderService.getOrdProdListByOrdno(order.getOrdno());
 			for(OrdProd ordProd : ordProdList) {
 				log.info("" + ordProd);
 			}
-			model.addAttribute("ordProd", ordProdList);
+			model.addAttribute("ordProdList", ordProdList);
 		}
-		
+
 		model.addAttribute("orderList", orderList);
-		
+
 		return "order/orderHistory";
+	}
+
+	//권우상 - 주문 취소
+	@GetMapping("cancel_order")
+	public String cancelOrder(int ordno) {
+		String ordstts = "주문 취소";
+		int reuslt = orderService.changeOrdStts(ordno, ordstts);
+		return "redirect:/order/order_detail?ordno=" + ordno;
 	}
 }
