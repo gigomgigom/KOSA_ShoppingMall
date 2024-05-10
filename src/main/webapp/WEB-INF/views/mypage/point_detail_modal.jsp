@@ -16,30 +16,18 @@
 				<table class="table">
 					<thead class="thead-dark">
 						<tr>
-							<th scope="col">No</th>
+							<th scope="col">주문번호</th>
 							<th scope="col">일자</th>
 							<th scope="col">포인트 적립/사용</th>
-							<th scope="col">내용</th>
+							<th scope="col">금액</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<th scope="row">1</th>
 							<td>2024-04-27</td>
-							<td>-1000</td>
-							<td>포인트 할인 사용</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>2024-04-27</td>
-							<td>5000</td>
-							<td>포인트 할인 사용</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>2024-04-27</td>
-							<td>-1050</td>
-							<td>포인트 할인 사용</td>
+							<td>사용</td>
+							<td>1000</td>
 						</tr>
 					</tbody>
 				</table>

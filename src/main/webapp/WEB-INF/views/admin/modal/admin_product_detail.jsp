@@ -6,9 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <!-- jQuery 외부 라이브러리 설정 -->
-<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Latest compiled and minified CSS -->
@@ -30,7 +31,7 @@
 		</h5>
 		<hr class="w-100" />
 		<form class="d-flex flex-column w-100 justify-content-center"
-			action="edit_product" method="post" id="editForm" enctype="multipart/form-data">
+			id="editForm" enctype="multipart/form-data">
 			<input type="hidden" value="${product.prodno}" name="prodno">
 			<div class="my-3">
 				<div class="form-group mb-2">

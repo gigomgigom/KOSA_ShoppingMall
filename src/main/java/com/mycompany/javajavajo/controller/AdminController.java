@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@Secured("ROLE_ADMIN")
+//@Secured("ROLE_ADMIN")
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -85,7 +85,8 @@ public class AdminController {
 		//주문에 상품의 수 그리고 그 들중 한 상품에 대한 정보를 찾아서 Order객체에 넣어준다.
 		for(Order order : orderList) {
 			//주문마다 몇개의 상품을 구매했는지 찾는다.
-			Order outlineOrderProduct = adminService.getOrderProductCnt(order.getOrdno());
+			int ordno = order.getOrdno();
+			Order outlineOrderProduct = adminService.getOrderProductCnt(ordno);
 			//주문의 총상품 수를 Order객체에 넣어준다.
 			order.setOrdproductcnt(outlineOrderProduct.getOrdproductcnt());
 			//주문한 상품들 중 하나를 찾아서 oneOfProduct에 넣어준다.
@@ -216,7 +217,7 @@ public class AdminController {
 		product.setProductImg(prodimg);
 		
 		int result = adminService.editProduct(product);
-		return "redirect:/admin/main";
+		return "null";
 	}
 
 	@GetMapping("/add_product")
