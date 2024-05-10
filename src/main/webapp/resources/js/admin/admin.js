@@ -1,6 +1,12 @@
 //폼 제출 버튼 클릭 이벤트 처리
 function editProductDetail() {
-	
+	var prodno = document.querySelector('#productno');
+	var ctgno = document.querySelector('#ctg');
+	var prodname = document.querySelector('#productname');
+	var prodprice = document.querySelector('#productprice');
+	var prodstock = document.querySelector('#productstock');
+	var repattach = document.querySelector('#attach1');
+	var dtlattach = document.querySelector('#attach2');
 }
 
 

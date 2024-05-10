@@ -32,7 +32,7 @@
 		<hr class="w-100" />
 		<form class="d-flex flex-column w-100 justify-content-center"
 			id="editForm" enctype="multipart/form-data">
-			<input type="hidden" value="${product.prodno}" name="prodno">
+			<input type="hidden" value="${product.prodno}" name="prodno" id="productno">
 			<div class="my-3">
 				<div class="form-group mb-2">
 					<label for="ctg">카테고리</label> <select class="form-control" id="ctg"
@@ -66,7 +66,7 @@
 			</div>
 			<div class="mt-3">
 				<div class="input-group">
-					<input type="file" class="form-control" name="repattach"
+					<input type="file" class="form-control" name="repattach" id="attach1"
 						onchange="setThumbnail(event)">
 				</div>
 			</div>
@@ -75,7 +75,7 @@
 			</div>
 			<div>
 				<div class="input-group">
-					<input type="file" class="form-control" name="dtlattach">
+					<input type="file" class="form-control" name="dtlattach" id="attach2">
 				</div>
 			</div>
 			<div class="w-100 d-flex flex-column align-items-center">
