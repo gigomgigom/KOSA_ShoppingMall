@@ -5,4 +5,9 @@
 		insert into review (ordno, prodno, rvtitle, rvdate, rvcontent, rvrating)
 		values(#{ordno}, #{prodno}, #{rvtitle}, sysdate, #{rvcontent}, #{rvrating})
 	</insert>
+	
+	<select id="count" resultType="int">
+		select count(*) from review
+		where ordno = #{ordno} and prodno = #{prodno}
+	</select>
 </mapper>

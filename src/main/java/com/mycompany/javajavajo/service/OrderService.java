@@ -123,8 +123,9 @@ public class OrderService {
 		//주문상품에 리뷰를 쓴 기록이 있는지 확인
 		for(OrdProd ordProd : ordProdList) {
 			int prodno = ordProd.getProdno();
-			
-			
+			int result = reviewDao.count(ordno, prodno);
+			boolean hasReview = (result > 0) ? true : false;
+			ordProd.setHasReview(hasReview);
 		}
 		
 		return ordProdList;
@@ -152,6 +153,11 @@ public class OrderService {
 
 	public Product getProductByProdNo(int oneofordproduct) {
 		return productDao.selectByProdno(oneofordproduct);
+	}
+
+	public int changeOrdStts(int ordno, String ordstts) {
+		int result = orderDao.updateOrdStts(ordno, ordstts);
+		return result;
 	}
 
 	

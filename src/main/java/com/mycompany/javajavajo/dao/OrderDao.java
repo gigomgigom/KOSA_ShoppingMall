@@ -3,6 +3,7 @@ package com.mycompany.javajavajo.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.javajavajo.dto.Order;
 
@@ -16,5 +17,8 @@ public interface OrderDao {
 
 	//심영조 - ordno를 통해 해당 주문정보들을 받아온다.
 	public Order selectOrderByOrdno(int ordno);
+	
+	//권우상 - 주문 번호와 주문 상태를 받아서 변경 한다
+	public int updateOrdStts(@Param("ordno") int ordno, @Param("ordstts") String ordstts);
 
 }

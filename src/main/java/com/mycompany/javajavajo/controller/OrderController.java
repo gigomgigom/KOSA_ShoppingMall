@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,9 +16,7 @@ import com.mycompany.javajavajo.dto.MemberAdr;
 import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Orderer;
-import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.Recipient;
-import com.mycompany.javajavajo.dto.Review;
 import com.mycompany.javajavajo.security.Tm1UserDetails;
 import com.mycompany.javajavajo.service.AdminService;
 import com.mycompany.javajavajo.service.CartService;
@@ -110,5 +109,13 @@ public class OrderController {
 		model.addAttribute("orderList", orderList);
 		
 		return "order/orderHistory";
+	}
+	
+	//권우상 - 주문 취소
+	@GetMapping("cancel_order")
+	public String cancelOrder(int ordno) {
+		String ordstts = "주문 취소";
+		int reuslt = orderService.changeOrdStts(ordno, ordstts);
+		return "redirect:/order/order_detail?ordno=" + ordno;
 	}
 }

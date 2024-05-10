@@ -11,4 +11,5 @@
 			select * from orderer
 			where ordno = #{ordno}
 		</select>
+		
 </mapper>
