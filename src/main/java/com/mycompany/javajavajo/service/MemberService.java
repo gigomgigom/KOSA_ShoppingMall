@@ -45,4 +45,10 @@ public class MemberService {
 		return memberDao.selectByMid(mid);
 	}
 
+	public Member getMemberPoint(int memno) {
+		Member memPoint = memberDao.selectByMemno(memno);
+		return memPoint;
+	}
+
+
 }
