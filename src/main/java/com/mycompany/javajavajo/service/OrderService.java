@@ -176,10 +176,17 @@ public class OrderService {
 		int orderResult = orderDao.updateOrdStts(ordno, ordstts);
 		return orderResult;
 	}
+		// 주문상품의 수를 가져옴, 상품의 1개의 상품번호를 가져옴
+	public Order getOrderProductCnt(int ordno) {
+		return ordProdDao.selectOutlineOfOrdProd(ordno);
+	}
+
+	public Product getProductByproduct(int oneofordproduct) {
+		return productDao.selectByProdno(oneofordproduct);
+	}
+
 
 	
-
-
 
 
 }

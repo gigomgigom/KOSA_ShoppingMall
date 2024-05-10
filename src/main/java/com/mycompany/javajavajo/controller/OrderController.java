@@ -16,6 +16,7 @@ import com.mycompany.javajavajo.dto.MemberAdr;
 import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Orderer;
+import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.Recipient;
 import com.mycompany.javajavajo.security.Tm1UserDetails;
 import com.mycompany.javajavajo.service.AdminService;
@@ -100,14 +101,21 @@ public class OrderController {
 			log.info("" + order);
 			// 신우호 - ordProdList에서 order을 통해 order안의 orderNo를 얻음,(상품이름 얻기) 
 			List<OrdProd> ordProdList = orderService.getOrdProdListByOrdno(order.getOrdno());
-			for(OrdProd ordProd : ordProdList) {
-				log.info("" + ordProd);
-			}
+			int ordno = order.getOrdno();
+			 
 			model.addAttribute("ordProdList", ordProdList);
 		}
-
+		Order oneOrder = orderList.get(0);
+		// order에서 orderno를 얻어옴
+		Order ordproductcnt = orderService.getOrderProductCnt(oneOrder.getOrdno());
+		log.info("" + ordproductcnt);
 		model.addAttribute("orderList", orderList);
-
+		Product product = orderService.getProductByproduct(ordproductcnt.getOneofordproduct());
+		model.addAttribute("product", product);
+		log.info("" + product);
+		for(Order order : orderList) {
+			// order(dto)의 ordproductcnt와 oneproduct를 개수만큼 돌려줘야 함
+		}
 		return "order/orderHistory";
 	}
 	//권우상 - 주문 취소
