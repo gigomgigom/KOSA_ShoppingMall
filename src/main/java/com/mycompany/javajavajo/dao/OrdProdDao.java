@@ -17,4 +17,6 @@ public interface OrdProdDao {
 
 	public List<OrdProd> selectOrdProdListByOrdno(int ordno);
 
+	
+
 }
