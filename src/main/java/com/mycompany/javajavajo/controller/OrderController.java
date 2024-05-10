@@ -110,7 +110,6 @@ public class OrderController {
 
 		return "order/orderHistory";
 	}
-
 	//권우상 - 주문 취소
 	@GetMapping("cancel_order")
 	public String cancelOrder(int ordno) {

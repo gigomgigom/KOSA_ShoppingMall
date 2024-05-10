@@ -18,4 +18,10 @@
 	<select id="selectOrderByOrdno" parameterType="int" resultType="Order">
 		select * from ord where ordno = #{ordno}
 	</select>
+	
+	<update id="updateOrdStts">
+		update ord
+		set ordstts = #{ordstts}
+		where ordno = #{ordno}
+	</update>
 </mapper>	
