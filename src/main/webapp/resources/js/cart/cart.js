@@ -29,7 +29,7 @@ const cancelAllCheck = () => {
 };
 
 const updateItemData = (prodno, operator) => {
-    const itemElement = ul.querySelector(`#item${prodno}`);
+	const itemElement = ul.querySelector(`#item${prodno}`);
 	const qtyItemElement = itemElement.querySelector(`#qty${prodno}`);
     const priceItemElement = itemElement.querySelector(`#price${prodno}`);
     const totalPriceItemElement = itemElement.querySelector(`#totalPrice${prodno}`);
@@ -38,19 +38,9 @@ const updateItemData = (prodno, operator) => {
     let priceItem = priceItemElement.innerText.slice(0,-1) * 1;
     let totalPriceItem = totalPriceItemElement.innerText.slice(0,-1) * 1;
     
-    if(operator === "+"){
-        qtyItemElement.innerText = (qtyItem + 1) + "개";
-        totalPriceItemElement.innerText = (totalPriceItem + priceItem) + "원";
-    }else if(operator === "-"){
-        if(qtyItem === 1){
-            return;
-        }else{
-            qtyItemElement.innerText = (qtyItem - 1) + "개";
-            totalPriceItemElement.innerText = (totalPriceItem - priceItem) + "원";
-        }
+    if(qtyItem === 1 && operator === "-"){
+    	return
     }
-    
-    resultBoxUpdate();
     
 	let params = {prodno,operator};
 	
@@ -58,6 +48,18 @@ const updateItemData = (prodno, operator) => {
 		url:"cart/update_cart",
 		method:"post",
 		data: params,
+		success: function(data){
+			if(data["result"] == "success"){
+				if(operator === "+"){
+			        qtyItemElement.innerText = (qtyItem + 1) + "개";
+			        totalPriceItemElement.innerText = (totalPriceItem + priceItem) + "원";
+			    }else if(operator === "-"){
+			         qtyItemElement.innerText = (qtyItem - 1) + "개";
+			         totalPriceItemElement.innerText = (totalPriceItem - priceItem) + "원";
+			    }
+			    resultBoxUpdate();
+			}
+		}
 	});
 };
 
@@ -70,7 +72,6 @@ const deleteSelect = () => {
         if(cBox.checked === true){
         	const prodno = li.id.slice(4) *1 ; 
         	prodnos.push(prodno)
-        	li.remove();
         }
     }
     
@@ -82,16 +83,26 @@ const deleteSelect = () => {
     		url:"cart/delete_cart_items",
     		method:"post",
     		data: params,
+    		success: function(data){
+    			if(data["result"] == "success"){
+    				const ul = document.querySelector("#cartItemList");
+    
+    				for(let prodno of prodnos){
+    						li = ul.querySelector("#item" + prodno);
+    						li.remove();
+    					}
+    			    
+    				if(!ul.children.length){
+    			        document.querySelector("#shoppingcart").innerHTML = `<img src=${NOITEMIMG} class= \"w-75'\">`;
+    			        return
+    			    }
+    				
+    			    resultBoxUpdate();
+    			}
+    		}
     	});
     }
-    
-    if(!ul.children.length){
-        document.querySelector("#shoppingcart").innerHTML = `<img src=${NOITEMIMG} class= \"w-75'\">`;
-        return
-    }
-    
-    resultBoxUpdate();
-}
+};
 
 const resultBoxUpdate = () => {
 	let itemsPrice = 0;
@@ -125,7 +136,9 @@ const resultBoxUpdate = () => {
 
 if(!ul.children.length){
     document.querySelector("#shoppingcart").innerHTML = `<img src=${NOITEMIMG} class= \"w-75'\">`;
+}else{
+	resultBoxUpdate();
 }
-resultBoxUpdate();
+
 
 

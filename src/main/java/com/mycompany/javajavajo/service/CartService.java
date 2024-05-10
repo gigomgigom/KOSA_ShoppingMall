@@ -51,17 +51,15 @@ public class CartService {
 	}
 
 	//권우상 - operator에 따라서  memeno와 prodno를 둘다 만족한는 cartitem에 "+"나 "-" 연산을 해준다 
-	public void updateCart(int memno, int prodno, String operator) {
+	public int updateCart(int memno, int prodno, String operator) {
 		int result = cartItemDao.updateCart(memno, prodno, operator);;
-	
-
-
+		return result;
 	}
 	
 	//권우상 - memno에 해당하면서 prodnos안에 있는 prodno에 해당하는 cartitem을 전부 삭제한다
-	public void deleteCartItems(int memno, int[] prodnos) {
+	public	int deleteCartItems(int memno, int[] prodnos) {
 		int result = cartItemDao.deleteCartItems(memno, prodnos);
-		
+		return result;
 	}
 
 }

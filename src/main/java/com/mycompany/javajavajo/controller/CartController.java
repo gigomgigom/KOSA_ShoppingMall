@@ -2,6 +2,7 @@ package com.mycompany.javajavajo.controller;
 
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.javajavajo.dto.Cart;
 import com.mycompany.javajavajo.dto.CartItem;
@@ -41,20 +43,32 @@ public class CartController {
 	}
 	
 	//권우상 - 카트아이템 수량 업데이트 컨트롤러
-	@PostMapping("/update_cart")
-	public void updateCart(Authentication authentication, int prodno, String operator) {
+	@PostMapping(value="/update_cart", produces="application/json; charset=UTF-8")
+	@ResponseBody()
+	public String updateCart(Authentication authentication, int prodno, String operator) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 	    Member member = t1UserDetails.getMember();
 	    int memno = member.getMemno();
-		service.updateCart(memno, prodno, operator);
+		int result = service.updateCart(memno, prodno, operator);
+		
+		String jsonResult = (result > 0) ? "success" : "fail";
+		JSONObject jo = new JSONObject();
+		jo.put("result", jsonResult);
+		return jo.toString();
 	}
 	
 	//권우상 - 카트아이템 삭제 컨트롤러
-	@PostMapping("/delete_cart_items")
-	public void deleteCartItems(Authentication authentication, @RequestParam(value="prodnos[]")int[] prodnos) {
+	@PostMapping(value="/delete_cart_items", produces="application/json; charset=UTF-8")
+	@ResponseBody()
+	public String deleteCartItems(Authentication authentication, @RequestParam(value="prodnos[]")int[] prodnos) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 	    Member member = t1UserDetails.getMember();
 	    int memno = member.getMemno();
-		service.deleteCartItems(memno, prodnos);
+		int result = service.deleteCartItems(memno, prodnos);
+		
+		String jsonResult = (result > 0) ? "success" : "fail";
+		JSONObject jo = new JSONObject();
+		jo.put("result", jsonResult);
+		return jo.toString();
 	}
 }

@@ -39,7 +39,7 @@
 			<label class="form-check-label">전체 선택</label>
 		</div>
 
-		<ul class="w-75 my-1 p-0 list-unstyled">
+		<ul id="cartItemList" class="w-75 my-1 p-0 list-unstyled">
 			<c:forEach var="cartItem" items="${cartItems}" >
 				<li id="item${cartItem.prodno}" class="row border-top border-bottom m-0 py-1">
 					<div class="col-2 row border-end m-0 p-0">
