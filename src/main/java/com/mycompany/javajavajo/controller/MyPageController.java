@@ -3,6 +3,7 @@ package com.mycompany.javajavajo.controller;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.MemberAdr;
+import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +42,7 @@ public class MyPageController {
 		
 		return "mypage/mypage";
 	}
+
 	
 	
 	//멤버 이미지 다운로드

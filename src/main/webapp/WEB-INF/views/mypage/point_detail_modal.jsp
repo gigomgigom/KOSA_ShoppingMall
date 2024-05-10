@@ -25,22 +25,11 @@
 					<tbody>
 						<tr>
 							<th scope="row">1</th>
-							<td>2024-04-27</td>
-							<td>-1000</td>
+							<td></td>
+							<td></td>
 							<td>포인트 할인 사용</td>
 						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>2024-04-27</td>
-							<td>5000</td>
-							<td>포인트 할인 사용</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>2024-04-27</td>
-							<td>-1050</td>
-							<td>포인트 할인 사용</td>
-						</tr>
+						
 					</tbody>
 				</table>
 			</div>
