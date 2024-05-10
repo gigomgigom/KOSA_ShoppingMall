@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -217,7 +216,7 @@ public class AdminController {
 		product.setProductImg(prodimg);
 		
 		int result = adminService.editProduct(product);
-		return "null";
+		return "redirect:/admin/main";
 	}
 
 	@GetMapping("/add_product")
