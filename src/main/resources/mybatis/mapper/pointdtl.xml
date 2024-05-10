@@ -9,4 +9,9 @@
 	<select id="selectPointDtlByOrdnoAndAction" parameterType="int" resultType="PointDtl">
 		select * from pointdtl where ordno = #{ordno} and action = #{action}
 	</select>
+	
+	<delete id="delete">
+		delete pointdtl
+		where ordno = #{ordno}
+	</delete>
 </mapper>

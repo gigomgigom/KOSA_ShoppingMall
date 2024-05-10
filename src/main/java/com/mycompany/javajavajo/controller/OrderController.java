@@ -112,9 +112,10 @@ public class OrderController {
 	}
 	//권우상 - 주문 취소
 	@GetMapping("cancel_order")
-	public String cancelOrder(int ordno) {
-		String ordstts = "주문 취소";
-		int reuslt = orderService.changeOrdStts(ordno, ordstts);
+	public String cancelOrder(int ordno, Authentication authentication) {
+		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
+		int memno = t1UserDetails.getMember().getMemno();
+		int reuslt = orderService.cancelOrder(memno,ordno);
 		return "redirect:/order/order_detail?ordno=" + ordno;
 	}
 }

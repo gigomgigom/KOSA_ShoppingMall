@@ -71,19 +71,21 @@ public class OrderService {
 			memberDao.updatePoint(memno, order.getDiscprice(), "-");
 	
 			// pointDtl 삽입
-			PointDtl pointDtl = new PointDtl();
-			pointDtl.setOrdno(ordno);
-			pointDtl.setAction(1);
-			pointDtl.setAmount(order.getDiscprice());
-			int pointDtlResult = pointDtlDao.insert(pointDtl);
+			PointDtl pointMinus = new PointDtl();
+			pointMinus.setOrdno(ordno);
+			pointMinus.setAction(1);
+			pointMinus.setAmount(order.getDiscprice());
+			int pointDtlResult = pointDtlDao.insert(pointMinus);
 		}
 		
 		//결제 금액의 5퍼센트를 point로 적립
-		PointDtl pointDtl = new PointDtl();
-		pointDtl.setOrdno(ordno);
-		pointDtl.setAction(0);
-		pointDtl.setAmount(order.getFinprice()/100 * 5);
-		int pointDtlResult = pointDtlDao.insert(pointDtl);
+		PointDtl pointPlus = new PointDtl();
+		pointPlus.setOrdno(ordno);
+		pointPlus.setAction(0);
+		pointPlus.setAmount(order.getFinprice()/100 * 5);
+		int pointDtlResult = pointDtlDao.insert(pointPlus);
+		
+		memberDao.updatePoint(memno, pointPlus.getAmount(), "+");
 		
 		//memno에 해당하는 cartitem을 얻어 온 후 ordprod추가 및 cartitem삭제
 		List<CartItem> cartItemList = cartItemDao.selectByMemno(memno);
@@ -155,9 +157,24 @@ public class OrderService {
 		return productDao.selectByProdno(oneofordproduct);
 	}
 
-	public int changeOrdStts(int ordno, String ordstts) {
-		int result = orderDao.updateOrdStts(ordno, ordstts);
-		return result;
+	public int cancelOrder(int memno, int ordno) {
+		String ordstts = "주문 취소";
+		
+		//포인트 적립내역을 가져와서 멤버에서 빼줌
+		PointDtl pointPlus = pointDtlDao.selectPointDtlByOrdnoAndAction(ordno, 0);
+		int memberPointResult = memberDao.updatePoint(memno, pointPlus.getAmount(), "-");
+		
+		//포인트 사용내역을 가져와서 멤버에 다시 넣어 줌
+		PointDtl pointMinus = pointDtlDao.selectPointDtlByOrdnoAndAction(ordno, 1);
+		if(pointMinus != null) {
+			memberPointResult = memberDao.updatePoint(memno, pointMinus.getAmount(), "+");
+		}
+		
+		//주문이 취소 되어서 포인트 내역도 삭제
+		int poinDtlDeleteResult = pointDtlDao.delete(ordno);
+		
+		int orderResult = orderDao.updateOrdStts(ordno, ordstts);
+		return orderResult;
 	}
 
 	

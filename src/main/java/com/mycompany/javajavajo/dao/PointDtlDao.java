@@ -12,5 +12,8 @@ public interface PointDtlDao {
 	
 	//심영조-ordno와 action을 주었을때 해당하는 PointDtl데이터를 찾아와라
 	public PointDtl selectPointDtlByOrdnoAndAction(@Param("ordno")int ordno, @Param("action")int action);
+	
+	//권우상 - 회원 번호에 해당하는 포인트 내역 전부 삭제
+	public int delete(int ordno);
 
 }
