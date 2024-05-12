@@ -3,6 +3,7 @@ package com.mycompany.javajavajo.controller;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.MemberAdr;
 import com.mycompany.javajavajo.dto.Order;
+import com.mycompany.javajavajo.dto.PointDtl;
 import com.mycompany.javajavajo.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MyPageController {
 	@Autowired
 	private MemberService service;
-	
+
 	//황세림 - member를 받아 회원의 주소를 출력하는 경로
 	@RequestMapping("")
 	public String myPageMain(Authentication authentication, Model model) {
@@ -38,29 +40,34 @@ public class MyPageController {
 		MemberAdr memberAdr = service.getMemberAdr(memno);
 		model.addAttribute("member", member);
 		model.addAttribute("memberAdr", memberAdr);
+		Member memberImg = service.getMemberImage(memno);
+		//회원 이미지 출력
+		model.addAttribute("memberImg", memberImg);
+		model.addAttribute("memno", memno);
 		log.info(member.toString());
-		
-		return "mypage/mypage";
-	}
 
-	
-	
-	//멤버 이미지 다운로드
-	@GetMapping("/downloadMemImg")
-	public void downloadMemberImg(int memno, HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
-		Member member = service.getMemberImage(memno);
-		byte[] memImgData = member.getMemimg();
 		
-		response.setContentType(member.getMemimgtype());
-		String fileName = new String(member.getMemimgoname().getBytes("UTF-8"),"ISO-8859-1");
-		response.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
-		if(memImgData == null) {
-			log.info("null"); 
-		}
-		log.info("run2");
-		OutputStream os = response.getOutputStream();
-		os.write(memImgData);
-		os.flush();
-		os.close();
+	return "mypage/mypage";
+}
+
+
+
+//멤버 이미지 다운로드
+@GetMapping("/downloadMemImg")
+public void downloadMemberImg(int memno, HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+	Member member = service.getMemberImage(memno);
+	byte[] memImgData = member.getMemimg();
+
+	response.setContentType(member.getMemimgtype());
+	String fileName = new String(member.getMemimgoname().getBytes("UTF-8"),"ISO-8859-1");
+	response.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
+	if(memImgData == null) {
+		log.info("null"); 
 	}
+	log.info("run2");
+	OutputStream os = response.getOutputStream();
+	os.write(memImgData);
+	os.flush();
+	os.close();
+}
 }

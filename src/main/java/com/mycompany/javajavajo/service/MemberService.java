@@ -9,6 +9,7 @@ import com.mycompany.javajavajo.dao.MemberAdrDao;
 import com.mycompany.javajavajo.dao.MemberDao;
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.MemberAdr;
+import com.mycompany.javajavajo.dto.PointDtl;
 
 import lombok.extern.slf4j.Slf4j;
 
