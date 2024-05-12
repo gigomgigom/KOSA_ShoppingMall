@@ -1,7 +1,6 @@
 package com.mycompany.javajavajo.dto;
 
 import java.util.Date;
-import java.util.List;
 
 import lombok.Data;
 
@@ -21,4 +20,8 @@ public class Order {
 	//주문 상품들중 하나에 대한 정보
 	private int oneofordproduct;
 	private Product oneproduct;
+	
+	//주문자, 수령자 정보
+	private Orderer orderer;
+	private Recipient recipient;
 }

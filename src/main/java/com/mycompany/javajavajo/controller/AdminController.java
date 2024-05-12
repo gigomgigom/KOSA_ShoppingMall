@@ -283,9 +283,37 @@ public class AdminController {
 		}
 		return result;
 	}
+	
+	//----------------------------------------------------------------------------
 	//주문관리 컨트롤러
+	//미완료 주문 리스트 화면으로 이동
 	@GetMapping("/uncom_order")
-	public String uncomOrder(Model model) {
+	public String uncomOrder(Model model, String pageNo, HttpSession session) {
+		if(pageNo == null) {
+			//pageNo를 받지 못했을 경우 세션에 저장되어 있는 값을 가져와서 확인한다.
+			pageNo = (String) session.getAttribute("uncomPageNo");
+			if(pageNo == null) {
+				//세션에 마저도 pageNo가 저장되어있지 않다면 "1"로 강제 세팅
+				pageNo="1";
+			}
+		}
+		//세션에 pageNo 저장
+		session.setAttribute("uncomPageNo", pageNo);
+		int intPageNo = Integer.parseInt(pageNo);
+
+		int rowsPagingTarget = adminService.getTotalUncomRows();
+		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
+
+		List<Order> ordList = adminService.getUncomOrderList(pager);
+		
+		for(Order order : ordList) {
+			order.setOrderer(adminService.getOrdererByOrdno(order.getOrdno()));
+			order.setRecipient(adminService.getRcptByOrdno(order.getOrdno()));
+			order.setOrdproductcnt(adminService.getOrderProductCnt(order.getOrdno()).getOrdproductcnt());
+		}
+		model.addAttribute("totRows", rowsPagingTarget);
+		model.addAttribute("pager", pager);
+		model.addAttribute("ordList", ordList);
 		model.addAttribute("menuNum", 2);
 		return "admin/order/admin_uncom_order";
 	}

@@ -11,15 +11,19 @@ import com.mycompany.javajavajo.dao.CategoryDao;
 import com.mycompany.javajavajo.dao.MemberDao;
 import com.mycompany.javajavajo.dao.OrdProdDao;
 import com.mycompany.javajavajo.dao.OrderDao;
+import com.mycompany.javajavajo.dao.OrdererDao;
 import com.mycompany.javajavajo.dao.PointDtlDao;
 import com.mycompany.javajavajo.dao.ProductDao;
 import com.mycompany.javajavajo.dao.ProductImgDao;
+import com.mycompany.javajavajo.dao.RecipientDao;
 import com.mycompany.javajavajo.dto.Category;
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.Order;
+import com.mycompany.javajavajo.dto.Orderer;
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.PointDtl;
 import com.mycompany.javajavajo.dto.Product;
+import com.mycompany.javajavajo.dto.Recipient;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +39,10 @@ public class AdminService {
 	private MemberDao memberDao;
 	@Autowired
 	private OrderDao orderDao;
+	@Autowired
+	private OrdererDao ordererDao;
+	@Autowired
+	private RecipientDao recipientDao;
 	@Autowired
 	private OrdProdDao ordProdDao;
 	@Autowired
@@ -159,12 +167,32 @@ public class AdminService {
 		int deletedRow = productDao.deleteProductByProdno(prodno);
 		return deletedRow;
 	}
-
+	//심영조-admin-product 추가 페이지 - 상품을 목록에 추가한다.
 	public int addProduct(Product product) {
 		int insertedProductRow = productDao.insertProduct(product);
 		int insertedProductImgRow = productDao.insertProductImg(product);
 		int result = insertedProductRow + insertedProductImgRow;
 		return result;
+	}
+	//심영조-admin-Uncom Order - 완료/취소되지않은 주문들의 총 갯수를 찾는다.
+	public int getTotalUncomRows() {
+		int totalUncomRows = orderDao.getTotalUncomOrders();
+		return totalUncomRows;
+	}
+	//심영조-admin-Uncom Order - 완료/취소되지않은 주문들의 목록을 찾아!
+	public List<Order> getUncomOrderList(Pager pager) {
+		List<Order> orderList = orderDao.selectUncomOrderByPager(pager);
+		return orderList;
+	}
+	//심영조-admin-Uncom Order - 주문번호를 통해 주문자 정보 가져오기
+	public Orderer getOrdererByOrdno(int ordno) {
+		Orderer orderer = ordererDao.selectOrdererByOrdno(ordno);
+		return orderer;
+	}
+	//심영조-admin-Uncom Order - 주문번호를 통해 수령인 정보 가져오기
+	public Recipient getRcptByOrdno(int ordno) {
+		Recipient rcpt = recipientDao.selectRecipientByOrdno(ordno);
+		return rcpt;
 	}
 
 }

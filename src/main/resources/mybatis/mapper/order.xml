@@ -24,4 +24,25 @@
 		set ordstts = #{ordstts}
 		where ordno = #{ordno}
 	</update>
+	
+	<select id="getTotalUncomOrders">
+		select count(*)	from ord where ordstts != '취소' and ordstts != '완료'
+	</select>
+	
+	<select id="selectUncomOrderByPager" parameterType="Pager" resultType="Order">
+		<![CDATA[
+		select rnum, ordno, memno, ordstts, orddate, ordprice, discprice, finprice
+		from (
+		select rownum as rnum, ordno, memno, ordstts, orddate, ordprice, discprice, finprice
+		from (
+		select ordno, memno, ordstts, orddate, ordprice, discprice, finprice
+		from ord
+		where ordstts != '취소' and ordstts != '완료'
+		order by ordno desc
+		)
+		where rownum <= #{endRowNo}
+		)
+		where rnum >= #{startRowNo}
+		]]>
+	</select>
 </mapper>	

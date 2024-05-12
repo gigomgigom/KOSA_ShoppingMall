@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +77,7 @@
 							</div>
 							<div class="d-flex justify-content-between align-items-end mt-2">
 								<div>
-									<span>검색 결과 n건</span>
+									<span>검색 결과 ${totRows}건</span>
 								</div>
 								<div class="d-flex">
 									<div class="d-flex">
@@ -115,31 +117,48 @@
 									</tr>
 								</thead>
 								<tbody style="vertical-align: middle;">
-									<tr onclick="location.href='${pageContext.request.contextPath}/admin/order_detail'">
-										<td>2024-05-04</td>
-										<td>202405042030</td>
-										<td>배송대기중</td>
-										<td>심영조</td>
-										<td>4건</td>
-										<td>01028104870</td>
-										<td>심영우</td>
-										<td>25000원</td>
-									</tr>
+									<c:forEach var="order" items="${ordList}">
+										<tr
+											onclick="location.href='${pageContext.request.contextPath}/admin/order_detail'">
+											<td><fmt:formatDate value="${order.orddate}"
+													pattern="yyyy-MM-dd" /></td>
+											<td>${order.ordno}</td>
+											<td>${order.ordstts}</td>
+											<td>${order.orderer.ordname}</td>
+											<td>${order.ordproductcnt}개</td>
+											<td>${order.orderer.ordtel}</td>
+											<td>${order.recipient.rcptname}</td>
+											<td>${order.finprice}원</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
-							<div class="d-flex justify-content-center mt-5">
-								<ul class="pagination">
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">이전</a></li>
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">1</a></li>
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">2</a></li>
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">3</a></li>
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">다음</a></li>
-								</ul>
+							<div class="d-flex justify-content-center">
+								<a class="btn btn-outline-primary btn-sm"
+									href="uncom_order?pageNo=1">처음</a>
+								<c:if test="${pager.groupNo>1}">
+									<a class="btn btn-outline-info btn-sm"
+										href="uncom_order?pageNo=${pager.startPageNo-1}">이전</a>
+								</c:if>
+
+								<c:forEach var="i" begin="${pager.startPageNo}"
+									end="${pager.endPageNo}">
+									<c:if test="${pager.pageNo != i}">
+										<a class="btn btn-outline-success btn-sm"
+											href="uncom_order?pageNo=${i}">${i}</a>
+									</c:if>
+									<c:if test="${pager.pageNo == i}">
+										<a class="btn btn-danger btn-sm"
+											href="uncom_order?pageNo=${i}">${i}</a>
+									</c:if>
+								</c:forEach>
+
+								<c:if test="${pager.groupNo<pager.totalGroupNo}">
+									<a class="btn btn-outline-info btn-sm"
+										href="uncom_order?pageNo=${pager.endPageNo+1}">다음</a>
+								</c:if>
+								<a class="btn btn-outline-primary btn-sm"
+									href="uncom_order?pageNo=${pager.totalPageNo}">맨끝</a>
 							</div>
 						</div>
 					</div>
