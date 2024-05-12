@@ -49,7 +49,7 @@
 						<h5>
 							<b>주문 상세 정보</b>
 						</h5>
-						<button class="btn">변경사항 저장</button>
+						<button class="btn" ${orderInfoMap.order.ordstts < 3?'':'style="display:none"'}>변경사항 저장</button>
 					</div>
 					<hr class="w-100" />
 					<div class="d-flex flex-row">

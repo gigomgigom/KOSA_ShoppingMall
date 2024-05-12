@@ -325,13 +325,13 @@ public class AdminController {
 		model.addAttribute("menuNum", 2);
 		return "admin/order/admin_uncom_order";
 	}
-
+	//완료 및 취소된 주문 리스트 페이지 이동
 	@GetMapping("/com_order")
 	public String comOrder(Model model) {
 		model.addAttribute("menuNum", 2);
 		return "admin/order/admin_com_order";
 	}
-
+	//주문 상세 페이지 이동
 	@GetMapping("/order_detail")
 	public String orderDetail(int ordno, Model model) {
 		
