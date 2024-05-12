@@ -25,7 +25,7 @@ function setThumbnail(event) {
 
 //상품 추가, 수정[팝업화면]에서 작업이 끝난 후 팝업창을 닫고 원래 페이지에서 새로고침하는 메소드
 function closePopupAndRefresh(response) {
-	if(response == success) {
+	if(response == 'success') {
 		// 팝업 창을 닫음
 		window.close();
 		// 원래 페이지를 새로 고침
@@ -35,23 +35,18 @@ function closePopupAndRefresh(response) {
 //폼 제출 버튼 클릭 이벤트 처리
 const editProductDetail = () => {
 	console.log('---');
-	const prodno = document.querySelector('#productno').value;
-	const ctgno = document.querySelector('#ctg').value;
-	const prodname = document.querySelector('#productname').value;
-	const prodprice = document.querySelector('#productprice').value;
-	const prodstock = document.querySelector('#productstock').value;
 	
-	const product = {
-			prodno, ctgno, prodname, prodprice, prodstock
-			};
+	var formData = new FormData(document.getElementById('editproductform'));
 	
-	console.error(product);
+	console.error(formData);
 	
 	$.ajax({
 		url:"edit_product",
 		type:"post",
-		data: product,
-		success: closePopupAndRefresh,
+		data: formData,
+		contentType: false,
+        processData: false,
+        success: closePopupAndRefresh,
 		error: function(xhr, status, error) {
 			// 오류가 발생했을 때 실행할 코드
 			console.error(xhr.responseText); // 오류 내용을 콘솔에 출력

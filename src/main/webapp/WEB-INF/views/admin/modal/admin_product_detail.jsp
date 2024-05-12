@@ -8,7 +8,6 @@
 <!-- jQuery 외부 라이브러리 설정 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Latest compiled and minified CSS -->
@@ -29,7 +28,7 @@
 			<b>상품 정보 수정</b>
 		</h5>
 		<hr class="w-100" />
-		<form class="d-flex flex-column w-100 justify-content-center" enctype="multipart/form-data">
+		<form id="editproductform" class="d-flex flex-column w-100 justify-content-center" enctype="multipart/form-data">
 			<input type="hidden" value="${product.prodno}" name="prodno" id="productno">
 			<div class="my-3">
 				<div class="form-group mb-2">
@@ -84,6 +83,8 @@
 			</div>
 		</form>
 	</div>
+	
+<script src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 </body>
 
 </html>

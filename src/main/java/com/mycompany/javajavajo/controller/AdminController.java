@@ -1,5 +1,6 @@
 package com.mycompany.javajavajo.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -189,14 +190,15 @@ public class AdminController {
 		return "admin/modal/admin_product_detail";
 	}
 	
-	@PostMapping(value="/edit_product", produces="application/json; charset=UTF-8")
+	@PostMapping(value="/edit_product")
 	@ResponseBody
-	public String edit_product(Product product) {
+	public String edit_product(Product product, ProductImg prodimg) {
 		log.info(product.toString());
 		////DTO에 추가 설정(첨부파일의 정보들을 DB에 저장)
-		/*//대표사진 추가 설정, @RequestBody ProductImg prodimg
+		//대표사진 추가 설정
 		if(prodimg.getRepattach() != null && !prodimg.getRepattach().isEmpty()) {
 			prodimg.setRepimgoname(prodimg.getRepattach().getOriginalFilename());
+			log.info(prodimg.getRepimgoname());
 			prodimg.setRepimgtype(prodimg.getRepattach().getContentType());
 			try {
 				prodimg.setRepimg(prodimg.getRepattach().getBytes());
@@ -215,10 +217,15 @@ public class AdminController {
 				e.printStackTrace();
 			}
 		}
-		product.setProductImg(prodimg);*/
+		product.setProductImg(prodimg);
 		
-		//int result = adminService.editProduct(product);
-		return "success";
+		String result = "fail";
+		int updatedRows = adminService.editProduct(product);
+		
+		if(updatedRows > 0) {
+			result = "success";
+		}
+		return result;
 	}
 
 	@GetMapping("/add_product")
