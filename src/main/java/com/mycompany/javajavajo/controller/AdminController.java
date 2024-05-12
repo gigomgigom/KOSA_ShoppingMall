@@ -1,6 +1,5 @@
 package com.mycompany.javajavajo.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.javajavajo.dto.Category;
 import com.mycompany.javajavajo.dto.Member;
@@ -189,10 +189,12 @@ public class AdminController {
 		return "admin/modal/admin_product_detail";
 	}
 	
-	@RequestMapping("/edit_product")
-	public String edit_product(Product product, ProductImg prodimg) {
+	@PostMapping(value="/edit_product", produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public String edit_product(Product product) {
+		log.info(product.toString());
 		////DTO에 추가 설정(첨부파일의 정보들을 DB에 저장)
-		//대표사진 추가 설정
+		/*//대표사진 추가 설정, @RequestBody ProductImg prodimg
 		if(prodimg.getRepattach() != null && !prodimg.getRepattach().isEmpty()) {
 			prodimg.setRepimgoname(prodimg.getRepattach().getOriginalFilename());
 			prodimg.setRepimgtype(prodimg.getRepattach().getContentType());
@@ -213,10 +215,10 @@ public class AdminController {
 				e.printStackTrace();
 			}
 		}
-		product.setProductImg(prodimg);
+		product.setProductImg(prodimg);*/
 		
-		int result = adminService.editProduct(product);
-		return "redirect:/admin/main";
+		//int result = adminService.editProduct(product);
+		return "success";
 	}
 
 	@GetMapping("/add_product")

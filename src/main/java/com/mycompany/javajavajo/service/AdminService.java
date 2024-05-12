@@ -144,7 +144,7 @@ public class AdminService {
 	
 	//심영조-admin-product 수정 페이지 - 선택한 상품의 정보와 사진들을 수정해줘
 	public int editProduct(Product product) {
-		log.info(product.getProdname() + product.getProductImg().getRepimgoname());
+		//log.info(product.getProdname() + product.getProductImg().getRepimgoname());
 		
 		//상품정보 수정 (PRODUCT 테이블)
 		//int info = productDao.updateProductInfo(product);

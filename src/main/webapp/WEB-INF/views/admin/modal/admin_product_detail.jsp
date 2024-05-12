@@ -29,7 +29,7 @@
 			<b>상품 정보 수정</b>
 		</h5>
 		<hr class="w-100" />
-		<form class="d-flex flex-column w-100 justify-content-center" method="post" action="edit_product">
+		<form class="d-flex flex-column w-100 justify-content-center" enctype="multipart/form-data">
 			<input type="hidden" value="${product.prodno}" name="prodno" id="productno">
 			<div class="my-3">
 				<div class="form-group mb-2">
@@ -46,7 +46,7 @@
 					class="form-control" id="productname" name="prodname" value="${product.prodname}">
 			</div>
 			<div class="mb-3">
-				<label for="productprice" class="form-label">상품 가격</label> <input type="text"
+				<label for="productprice" class="form-label">상품 가격</label> <input type="number"
 					class="form-control" id="productprice" name="prodprice" value="${product.prodprice}">
 			</div>
 			<div class="mb-3">
@@ -77,7 +77,7 @@
 				</div>
 			</div>
 			<div class="w-100 d-flex flex-column align-items-center">
-				<button type="submit" class="btn w-50 border my-4">수정</button>
+				<button type="button" onclick="editProductDetail()" class="btn w-50 border my-4">수정</button>
 			</div>
 			<div class="w-100 d-flex flex-column align-items-center">
 				<button type="button" class="btn w-50 border mb-4">삭제</button>

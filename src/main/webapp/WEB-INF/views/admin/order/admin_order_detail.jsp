@@ -50,7 +50,7 @@
 						<button class="btn">변경사항 저장</button>
 					</div>
 					<hr class="w-100" />
-					<div class="d-flex flex-row">
+					<div class="d-flex flex-row">'\
 						<div class="d-flex flex-column col-4">
 							<form class="d-flex flex-column w-100 justify-content-center" id="orderdetail"
 								action="#" method="post">
