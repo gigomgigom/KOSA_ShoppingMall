@@ -8,8 +8,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.javajavajo.dao.CategoryDao;
+import com.mycompany.javajavajo.dao.DeliveryComDao;
+import com.mycompany.javajavajo.dao.DeliveryDao;
 import com.mycompany.javajavajo.dao.MemberDao;
 import com.mycompany.javajavajo.dao.OrdProdDao;
+import com.mycompany.javajavajo.dao.OrdSttsDao;
 import com.mycompany.javajavajo.dao.OrderDao;
 import com.mycompany.javajavajo.dao.OrdererDao;
 import com.mycompany.javajavajo.dao.PointDtlDao;
@@ -17,7 +20,11 @@ import com.mycompany.javajavajo.dao.ProductDao;
 import com.mycompany.javajavajo.dao.ProductImgDao;
 import com.mycompany.javajavajo.dao.RecipientDao;
 import com.mycompany.javajavajo.dto.Category;
+import com.mycompany.javajavajo.dto.Delivery;
+import com.mycompany.javajavajo.dto.DeliveryCom;
 import com.mycompany.javajavajo.dto.Member;
+import com.mycompany.javajavajo.dto.OrdProd;
+import com.mycompany.javajavajo.dto.OrdStts;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Orderer;
 import com.mycompany.javajavajo.dto.Pager;
@@ -40,6 +47,8 @@ public class AdminService {
 	@Autowired
 	private OrderDao orderDao;
 	@Autowired
+	private OrdSttsDao sttsDao;
+	@Autowired
 	private OrdererDao ordererDao;
 	@Autowired
 	private RecipientDao recipientDao;
@@ -49,6 +58,10 @@ public class AdminService {
 	private PointDtlDao pointDtlDao;
 	@Autowired
 	private CategoryDao categoryDao;
+	@Autowired
+	private DeliveryDao delDao;
+	@Autowired
+	private DeliveryComDao delComDao;
 
 	//심영조-admin-Category 정보들을 전부 가져와줘
 	public List<Category> getAllCategory() {
@@ -193,6 +206,26 @@ public class AdminService {
 	public Recipient getRcptByOrdno(int ordno) {
 		Recipient rcpt = recipientDao.selectRecipientByOrdno(ordno);
 		return rcpt;
+	}
+	//심영조-admin-Uncom Order - 주문번호를 통해 해당 주문의 상품들의 리스트를 가져오기
+	public List<OrdProd> getOrdProdList(int ordno) {
+		List<OrdProd> ordProdList = ordProdDao.selectOrdProdListByOrdno(ordno);
+		return ordProdList;
+	}
+	//심영조-admin-Uncom Order - 주문상태의 목록을 가져와!
+	public List<OrdStts> getOrdSttsList() {
+		List<OrdStts> ordSttsList = sttsDao.selectAllStts();
+		return ordSttsList;
+	}
+	//심영조-admin-Uncom Order - 주문의 배송정보를 가져와!
+	public Delivery getDeliveryInfoByOrdno(int ordno) {
+		Delivery del = delDao.selectDeliveryByOrdno(ordno);
+		return del;
+	}
+	//심영조-admin-OrderDetail - 배송회사들의 정보들을 가져와줘!
+	public List<DeliveryCom> getDelComList() {
+		List<DeliveryCom> delComList = delComDao.selectDelComList();
+		return delComList;
 	}
 
 }

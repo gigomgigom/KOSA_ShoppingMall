@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="modal fade" id="myModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -15,9 +16,9 @@
 				<form>
 					<label for="selcom"></label> <select class="form-control my-4"
 						id="selcom" name="comno">
-						<option value="0">CJ대한통운</option>
-						<option value="1">우체국택배</option>
-						<option value="2">한진택배</option>
+						<c:forEach var="delCom" items="${orderInfoMap.delComList}">
+							<option value="${delCom.comno}">${delCom.comname}</option>
+						</c:forEach>
 					</select>
 					<div class="form-group my-4">
 						<label for="trackingNum">운송장번호</label> <input type="text"

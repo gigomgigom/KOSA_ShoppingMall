@@ -9,4 +9,7 @@ public class Delivery {
 	private String trckno;
 	private String deldate;
 	private String delrqst;
+	
+	private String comname;
+	private String comtel;
 }

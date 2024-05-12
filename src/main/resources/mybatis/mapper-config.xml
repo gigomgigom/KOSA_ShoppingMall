@@ -20,5 +20,8 @@
 		<typeAlias type="com.mycompany.javajavajo.dto.Product" alias="Product"/>
 		<typeAlias type="com.mycompany.javajavajo.dto.PointDtl" alias="PointDtl"/>
 		<typeAlias type="com.mycompany.javajavajo.dto.Review" alias="Review"/>
+		<typeAlias type="com.mycompany.javajavajo.dto.OrdStts" alias="OrdStts"/>
+		<typeAlias type="com.mycompany.javajavajo.dto.Delivery" alias="Delivery"/>
+		<typeAlias type="com.mycompany.javajavajo.dto.DeliveryCom" alias="DeliveryCom"/>
 	</typeAliases>
 </configuration>

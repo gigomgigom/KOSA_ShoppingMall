@@ -119,7 +119,7 @@
 								<tbody style="vertical-align: middle;">
 									<c:forEach var="order" items="${ordList}">
 										<tr
-											onclick="location.href='${pageContext.request.contextPath}/admin/order_detail'">
+											onclick="location.href='${pageContext.request.contextPath}/admin/order_detail?ordno=${order.ordno}'">
 											<td><fmt:formatDate value="${order.orddate}"
 													pattern="yyyy-MM-dd" /></td>
 											<td>${order.ordno}</td>

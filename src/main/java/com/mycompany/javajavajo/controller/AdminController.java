@@ -2,7 +2,9 @@ package com.mycompany.javajavajo.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,12 +17,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.javajavajo.dto.Category;
+import com.mycompany.javajavajo.dto.Delivery;
+import com.mycompany.javajavajo.dto.DeliveryCom;
 import com.mycompany.javajavajo.dto.Member;
+import com.mycompany.javajavajo.dto.OrdProd;
+import com.mycompany.javajavajo.dto.OrdStts;
 import com.mycompany.javajavajo.dto.Order;
+import com.mycompany.javajavajo.dto.Orderer;
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.PointDtl;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.ProductImg;
+import com.mycompany.javajavajo.dto.Recipient;
 import com.mycompany.javajavajo.service.AdminService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -325,7 +333,41 @@ public class AdminController {
 	}
 
 	@GetMapping("/order_detail")
-	public String orderDetail(Model model) {
+	public String orderDetail(int ordno, Model model) {
+		
+		Map<String, Object> orderInfoMap = new HashMap<String, Object>();
+		
+		//주문상태 종류 가져오기
+		List<OrdStts> ordSttsList = adminService.getOrdSttsList();
+		orderInfoMap.put("ordSttsList", ordSttsList);
+		
+		//주문정보 가져오기
+		Order order = adminService.getOrderByOrdno(ordno);
+		orderInfoMap.put("order", order);
+		
+		//주문상품목록 가져오기
+		List<OrdProd> ordProdList = adminService.getOrdProdList(ordno);
+		orderInfoMap.put("ordProdList", ordProdList);
+		
+		//주문자정보 가져오기
+		Orderer orderer = adminService.getOrdererByOrdno(ordno);
+		orderInfoMap.put("orderer", orderer);
+		
+		//수령인정보 가져오기
+		Recipient rcpt = adminService.getRcptByOrdno(ordno);
+		orderInfoMap.put("rcpt", rcpt);
+		
+		//배송정보 가져오기
+		Delivery del = adminService.getDeliveryInfoByOrdno(ordno);
+		if(del != null) {
+			orderInfoMap.put("delivery", del);
+		}
+		
+		//배송회사 정보 가져오기
+		List<DeliveryCom> delComList = adminService.getDelComList();
+		orderInfoMap.put("delComList", delComList);
+		
+		model.addAttribute("orderInfoMap", orderInfoMap);
 		model.addAttribute("menuNum", 2);
 		return "admin/order/admin_order_detail";
 	}

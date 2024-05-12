@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,34 +52,55 @@
 						<button class="btn">변경사항 저장</button>
 					</div>
 					<hr class="w-100" />
-					<div class="d-flex flex-row">'\
+					<div class="d-flex flex-row">
 						<div class="d-flex flex-column col-4">
-							<form class="d-flex flex-column w-100 justify-content-center" id="orderdetail"
-								action="#" method="post">
+							<form class="d-flex flex-column w-100 justify-content-center"
+								id="orderdetail" action="#" method="post">
 								<div class="my-3">
 									<label for="mno" class="form-label">주문번호</label> <input
 										type="text" class="form-control" id="mno" name="memno"
-										readonly value="202405033232">
+										readonly value="${orderInfoMap.order.ordno}">
 								</div>
 								<div class="mb-3">
 									<label for="ord_date" class="form-label">주문 일자</label> <input
 										type="text" class="form-control" id="ord_date" name=""
-										value="2024-05-04">
+										value='<fmt:formatDate value="${orderInfoMap.order.orddate}" pattern="yyyy-MM-dd"/>'>
 								</div>
 								<div class="w-100 d-flex flex-column mb-3">
 									<label for="status" class="form-label">주문 상태</label>
 									<div class="w-100 d-flex">
-										<div class="w-75 form-group align-items-center">
-											<select class="form-control" id="status" name="searchindex">
-												<option value="0">주문</option>
-												<option value="1">입금</option>
-												<option value="2">배송</option>
-											</select>
-										</div>
-										<div class="w-25">
-											<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#myModal">운송장 입력</button>
-											<%@ include file="/WEB-INF/views/admin/modal/modal_select_del_com.jsp"%>
-										</div>
+										<c:if test="${orderInfoMap.order.ordstts < 3}">
+											<div class="w-75 form-group align-items-center">
+												<select class="form-control" id="status" name="searchindex">
+													<c:forEach var="ordStts"
+														items="${orderInfoMap.ordSttsList}">
+														<option value="${ordStts.ordsttsno}"
+															${ordStts.ordsttsno < orderInfoMap.order.ordstts?'hidden':''}
+															${ordStts.ordsttsno == orderInfoMap.order.ordstts?'selected':''}>${ordStts.ordsttschar}</option>
+													</c:forEach>
+												</select>
+											</div>
+											<div class="w-25">
+												<button type="button" class="btn" data-bs-toggle="modal"
+													data-bs-target="#myModal">운송장 입력</button>
+												<%@ include
+													file="/WEB-INF/views/admin/modal/modal_select_del_com.jsp"%>
+											</div>
+										</c:if>
+										<c:if test="${orderInfoMap.order.ordstts > 2}">
+											<c:if test="${orderInfoMap.order.ordstts < 5}">
+												<div class="w-100 form-group align-items-center">
+													<input type="text" class="form-control"
+														value="${orderInfoMap.order.ordsttschar}  (${orderInfoMap.delivery.comname} : ${orderInfoMap.delivery.trckno})" readonly>
+												</div>
+											</c:if>
+											<c:if test="${orderInfoMap.order.ordstts == 5}">
+												<div class="w-100 form-group align-items-center">
+													<input type="text" class="form-control"
+														value="${orderInfoMap.order.ordsttschar}" readonly>
+												</div>
+											</c:if>
+										</c:if>
 									</div>
 								</div>
 								<div class="w-100 border d-flex flex-column align-items-center"
@@ -92,12 +115,14 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>1</td>
-												<td>개껌</td>
-												<td>5개</td>
-												<td>5000원</td>
-											</tr>
+											<c:forEach var="ordProd" items="${orderInfoMap.ordProdList}">
+												<tr>
+													<td>${ordProd.prodno}</td>
+													<td>${ordProd.prodname}</td>
+													<td>${ordProd.qty}개</td>
+													<td>${ordProd.subtot}원</td>
+												</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -112,9 +137,9 @@
 										</thead>
 										<tbody>
 											<tr>
-												<td>25000원</td>
-												<td>5000원</td>
-												<td>20000원</td>
+												<td>${orderInfoMap.order.ordprice}원</td>
+												<td>${orderInfoMap.order.discprice}원</td>
+												<td>${orderInfoMap.order.finprice}원</td>
 											</tr>
 										</tbody>
 									</table>
@@ -124,34 +149,35 @@
 						<div class="col-8">
 							<!-- 주문내역 사용내역 -->
 							<div class="container-fluid py-3">
-								<div class="container-fluid d-flex flex-column justify-content-center align-items-center"
+								<div
+									class="container-fluid d-flex flex-column justify-content-center align-items-center"
 									style="overflow: auto;">
 									<h4>주문자 정보</h4>
 									<table class="table border table-hover">
 										<tbody>
 											<tr>
 												<th scope="row">주문자 명</th>
-												<td>심영조</td>
+												<td>${orderInfoMap.orderer.ordname}</td>
 											</tr>
 											<tr>
 												<th scope="row">주문자 연락처</th>
-												<td>01028104870</td>
+												<td>${orderInfoMap.orderer.ordtel}</td>
 											</tr>
 											<tr>
 												<th scope="row">주문자 이메일</th>
-												<td>tlarlrma@naver.com</td>
+												<td>${orderInfoMap.orderer.ordemail}</td>
 											</tr>
 											<tr>
 												<th scope="row">주문자 우편번호</th>
-												<td>244234</td>
+												<td>${orderInfoMap.orderer.ordpostno}</td>
 											</tr>
 											<tr>
 												<th scope="row">주문자 주소</th>
-												<td>사랑시 고백구 행복동</td>
+												<td>${orderInfoMap.orderer.ordadr}</td>
 											</tr>
 											<tr>
 												<th scope="row">주문자 상세주소</th>
-												<td>263동 403호</td>
+												<td>${orderInfoMap.orderer.ordadrdtl}</td>
 											</tr>
 										</tbody>
 									</table>
@@ -160,27 +186,27 @@
 										<tbody>
 											<tr>
 												<th scope="row">수령인 명</th>
-												<td>심영조</td>
+												<td>${orderInfoMap.rcpt.rcptname}</td>
 											</tr>
 											<tr>
 												<th scope="row">수령인 연락처</th>
-												<td>01028104870</td>
+												<td>${orderInfoMap.rcpt.rcpttel}</td>
 											</tr>
 											<tr>
 												<th scope="row">수령인 이메일</th>
-												<td>tlarlrma@naver.com</td>
+												<td>${orderInfoMap.rcpt.rcptemail}</td>
 											</tr>
 											<tr>
 												<th scope="row">수령인 우편번호</th>
-												<td>244234</td>
+												<td>${orderInfoMap.rcpt.rcptpostno}</td>
 											</tr>
 											<tr>
 												<th scope="row">수령인 주소</th>
-												<td>사랑시 고백구 행복동</td>
+												<td>${orderInfoMap.rcpt.rcptadr}</td>
 											</tr>
 											<tr>
 												<th scope="row">수령인 상세주소</th>
-												<td>263동 403호</td>
+												<td>${orderInfoMap.rcpt.rcptadrdtl}</td>
 											</tr>
 										</tbody>
 									</table>
@@ -193,6 +219,6 @@
 		</div>
 	</div>
 	<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,35 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mycompany.javajavajo.dao.OrderDao">
-	
+
 	<insert id="insert" parameterType="Order">
-		<selectKey keyProperty="ordno" order="BEFORE" resultType="int"> 
-			select order_seq.nextval from dual 
+		<selectKey keyProperty="ordno" order="BEFORE"
+			resultType="int">
+			select order_seq.nextval from dual
 		</selectKey>
-			insert into ord (ordno, memno, ordstts, orddate, ordprice, discprice, finprice)
-			values
-			(#{ordno}, #{memno}, #{ordstts}, sysdate, #{ordprice}, #{discprice}, #{finprice})
+		insert into ord (ordno, memno, ordstts, orddate, ordprice, discprice,
+		finprice)
+		values
+		(#{ordno}, #{memno}, #{ordstts}, sysdate, #{ordprice}, #{discprice},
+		#{finprice})
 	</insert>
-	
-	<select id="selectOrderByMemno" parameterType="int" resultType="Order">
-		select * from ord where memno = #{memno} order by orddate desc
+
+	<select id="selectOrderByMemno" parameterType="int"
+		resultType="Order">
+		select * from ord where memno = #{memno} order by orddate
+		desc
 	</select>
-	
-	<select id="selectOrderByOrdno" parameterType="int" resultType="Order">
-		select * from ord where ordno = #{ordno}
+
+	<select id="selectOrderByOrdno" parameterType="int"
+		resultType="Order">
+		select ordno, memno, ord.ordstts, ordstts.ordsttschar,
+		orddate, ordprice, discprice, finprice, rqst
+		from ord, ordstts
+		where ord.ordstts = ordstts.ordsttsno and ord.ordno = #{ordno}
 	</select>
-	
+
 	<update id="updateOrdStts">
 		update ord
 		set ordstts = #{ordstts}
-		where ordno = #{ordno}
+		where ordno =
+		#{ordno}
 	</update>
-	
+
 	<select id="getTotalUncomOrders">
-		select count(*)	from ord where ordstts != '취소' and ordstts != '완료'
+		select count(*) from ord where ordstts != 4 and
+		ordstts != 5
 	</select>
-	
-	<select id="selectUncomOrderByPager" parameterType="Pager" resultType="Order">
+
+	<select id="selectUncomOrderByPager" parameterType="Pager"
+		resultType="Order">
 		<![CDATA[
 		select rnum, ordno, memno, ordstts, orddate, ordprice, discprice, finprice
 		from (
@@ -37,7 +49,7 @@
 		from (
 		select ordno, memno, ordstts, orddate, ordprice, discprice, finprice
 		from ord
-		where ordstts != '취소' and ordstts != '완료'
+		where ordstts != 4 and ordstts != 5
 		order by ordno desc
 		)
 		where rownum <= #{endRowNo}

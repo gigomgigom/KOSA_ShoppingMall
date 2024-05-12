@@ -12,4 +12,5 @@ public class OrdProd {
 	private String prodname;
 	private int prodprice;
 	private boolean hasReview;
+
 }

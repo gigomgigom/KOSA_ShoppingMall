@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mycompany.javajavajo.dao.DeliveryDao">
+	<select id="selectDeliveryByOrdno" parameterType="int"
+		resultType="Delivery">
+		select ordno, delivery.comno, trckno, deldate,
+		deliverycom.comname, deliverycom.comtel
+		from delivery, deliverycom
+		where ordno = ${ordno} and delivery.comno = deliverycom.comno
+	</select>
+</mapper>

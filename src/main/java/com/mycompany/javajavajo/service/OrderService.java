@@ -51,7 +51,7 @@ public class OrderService {
 
 		// order 삽입
 		order.setMemno(memno);
-		order.setOrdstts("배달 준비 중");
+		order.setOrdstts(1);
 		order.setFinprice(order.getFinprice() - order.getDiscprice());
 		int orderResult = orderDao.insert(order);
 
@@ -158,7 +158,7 @@ public class OrderService {
 	}
 
 	public int cancelOrder(int memno, int ordno) {
-		String ordstts = "주문 취소";
+		int ordstts = 5;
 		
 		//포인트 적립내역을 가져와서 멤버에서 빼줌
 		PointDtl pointPlus = pointDtlDao.selectPointDtlByOrdnoAndAction(ordno, 0);

@@ -20,7 +20,7 @@ public interface OrderDao {
 	public Order selectOrderByOrdno(int ordno);
 	
 	//권우상 - 주문 번호와 주문 상태를 받아서 변경 한다
-	public int updateOrdStts(@Param("ordno") int ordno, @Param("ordstts") String ordstts);
+	public int updateOrdStts(@Param("ordno") int ordno, @Param("ordstts") int ordstts);
 
 	//심영조 - 완료/취소가 되지않은 주문들의 수를 조회한다.
 	public int getTotalUncomOrders();
