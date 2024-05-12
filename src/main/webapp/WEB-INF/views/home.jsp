@@ -165,8 +165,8 @@
 		<div id="rcmd-product-list"
 			class="p-3 mt-4 w-75 d-flex justify-content-center">
 			<div id="rcmd-product-1" class="w-25 p-3">
-				<a href="#" class="d-flex flex-column align-items-center"> <img
-					src="https://i.ibb.co/Sc0bSjY/dogicecream.jpg"
+				<a href="#" class="d-flex flex-column align-items-center"> 
+				<img src="https://i.ibb.co/Sc0bSjY/dogicecream.jpg"
 					class="w-75 img-thumbnail" />
 				</a>
 				<div class="p-2 d-flex flex-column align-items-center">

@@ -95,7 +95,7 @@
 					</div>
 					<div class="w-75 m-0 my-2 p-0 py-2 text-center rounded"
 						style="background-color: #27374D;">
-						<a class="text-decoration-none text-white m-0 p-0" href="#">로그아웃</a>
+						<a class="text-decoration-none text-white m-0 p-0" href="${pageContext.request.contextPath}/logout">로그아웃</a>
 					</div>
 					<div class="w-75 m-0 my-2 p-0 py-2 text-center rounded"
 						style="background-color: #27374D;">
