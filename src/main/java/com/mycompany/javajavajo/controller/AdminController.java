@@ -190,6 +190,7 @@ public class AdminController {
 		return "admin/modal/admin_product_detail";
 	}
 	
+	//상품 수정 삭제
 	@PostMapping(value="/edit_product")
 	@ResponseBody
 	public String edit_product(Product product, ProductImg prodimg) {
@@ -227,13 +228,61 @@ public class AdminController {
 		}
 		return result;
 	}
-
+	//상품 삭제 작업
+	@PostMapping("/delete_product")
+	@ResponseBody
+	public String deleteProduct(int prodno) {
+		
+		String result = "fail";
+		int deletedRow = adminService.deleteProduct(prodno);
+		
+		if(deletedRow > 0) {
+			result = "success";
+		}
+		return result;
+	}
+	//상품 추가 페이지 이동
 	@GetMapping("/add_product")
 	public String addProduct(Model model) {
 		model.addAttribute("menuNum", 1);
 		return "admin/product/admin_add_product";
 	}
-
+	//상품 추가 작업
+	@PostMapping("/adding_product")
+	@ResponseBody
+	public String addingProduct(Product product, ProductImg prodimg) {
+		log.info(product.toString());
+		if(prodimg.getRepattach() != null && !prodimg.getRepattach().isEmpty()) {
+			prodimg.setRepimgoname(prodimg.getRepattach().getOriginalFilename());
+			log.info(prodimg.getRepimgoname());
+			prodimg.setRepimgtype(prodimg.getRepattach().getContentType());
+			try {
+				prodimg.setRepimg(prodimg.getRepattach().getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		//상세사진 추가 설정
+		if(prodimg.getDtlattach() != null && !prodimg.getDtlattach().isEmpty()) {
+			prodimg.setDtlimgoname(prodimg.getDtlattach().getOriginalFilename());
+			prodimg.setDtlimgtype(prodimg.getDtlattach().getContentType());
+		
+			try {
+				prodimg.setDtlimg(prodimg.getDtlattach().getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		product.setProductImg(prodimg);
+		
+		String result = "fail";
+		int insertedRow = adminService.addProduct(product);
+		
+		if(insertedRow > 0) {
+			result = "success";
+		}
+		return result;
+	}
 	//주문관리 컨트롤러
 	@GetMapping("/uncom_order")
 	public String uncomOrder(Model model) {

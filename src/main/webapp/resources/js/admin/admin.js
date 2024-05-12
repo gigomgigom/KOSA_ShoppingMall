@@ -1,4 +1,3 @@
-
 //PopUp
 //상품 상세 확인 및 정보 수정
 function openProductDetail(prodno){
@@ -32,7 +31,7 @@ function closePopupAndRefresh(response) {
 		window.opener.location.reload();
 	}
 }
-//폼 제출 버튼 클릭 이벤트 처리
+//상품 수정 데이터 전송
 const editProductDetail = () => {
 	console.log('---');
 	
@@ -47,6 +46,44 @@ const editProductDetail = () => {
 		contentType: false,
         processData: false,
         success: closePopupAndRefresh,
+		error: function(xhr, status, error) {
+			// 오류가 발생했을 때 실행할 코드
+			console.error(xhr.responseText); // 오류 내용을 콘솔에 출력
+			// 오류 처리 등을 수행할 수 있음
+		}
+	});
+}
+// 상품 삭제
+const deleteProduct = () => {
+	
+	var prodno = document.getElementById('productno').value;
+	
+	var prodnoParam = {prodno};
+	
+	$.ajax({
+		url:"delete_product",
+		type:"post",
+		data: prodnoParam,
+		success: closePopupAndRefresh,
+		error: function(xhr, status, error) {
+			// 오류가 발생했을 때 실행할 코드
+			console.error(xhr.responseText); // 오류 내용을 콘솔에 출력
+			// 오류 처리 등을 수행할 수 있음
+		}
+	});
+}
+//상품 추가
+const addProduct = () => {
+	
+	var formData = new FormData(document.getElementById('addProduct'));
+	
+	$.ajax({
+		url:"adding_product",
+		type:"post",
+		data: formData,
+		contentType: false,
+        processData: false,
+		success: closePopupAndRefresh,
 		error: function(xhr, status, error) {
 			// 오류가 발생했을 때 실행할 코드
 			console.error(xhr.responseText); // 오류 내용을 콘솔에 출력

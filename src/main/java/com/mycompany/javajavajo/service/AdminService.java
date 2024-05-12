@@ -154,5 +154,17 @@ public class AdminService {
 		int result = info+img;
 		return result;
 	}
+	//심영조-admin-product 수정 페이지 - 선택한 상품을 목록에서 삭제한다.
+	public int deleteProduct(int prodno) {
+		int deletedRow = productDao.deleteProductByProdno(prodno);
+		return deletedRow;
+	}
+
+	public int addProduct(Product product) {
+		int insertedProductRow = productDao.insertProduct(product);
+		int insertedProductImgRow = productDao.insertProductImg(product);
+		int result = insertedProductRow + insertedProductImgRow;
+		return result;
+	}
 
 }

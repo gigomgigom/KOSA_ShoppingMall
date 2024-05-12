@@ -28,8 +28,7 @@
 			<b>상품 추가</b>
 		</h5>
 		<hr class="w-100" />
-		<form class="d-flex flex-column w-100 justify-content-center"
-			action="#" method="post">
+		<form id="addProduct" class="d-flex flex-column w-100 justify-content-center">
 			<div class="my-3">
 				<div class="form-group mb-2">
 					<label for="ctg">카테고리</label> <select class="form-control" id="ctg"
@@ -41,16 +40,16 @@
 				</div>
 			</div>
 			<div class="mb-3">
-				<label for="mno" class="form-label">상품명</label> <input type="text"
-					class="form-control" id="mno" name="memno">
+				<label for="productname" class="form-label">상품명</label> <input type="text"
+					class="form-control" id="productname" name="prodname">
 			</div>
 			<div class="mb-3">
-				<label for="mid" class="form-label">상품 가격</label> <input type="text"
-					class="form-control" id="mid" name="memid">
+				<label for="productprice" class="form-label">상품 가격</label> <input type="text"
+					class="form-control" id="productprice" name="prodprice">
 			</div>
 			<div class="mb-3">
-				<label for="memail" class="form-label">입고할 수량</label> <input
-					type="number" class="form-control" id="memail" name="mememail"
+				<label for="productstock" class="form-label">입고할 수량</label> <input
+					type="number" class="form-control" id="productstock" name="prodstock"
 					value="0">
 			</div>
 			<div>
@@ -76,7 +75,7 @@
 				</div>
 			</div>
 			<div class="w-100 d-flex flex-column align-items-center">
-				<button class="btn w-50 border my-4">추가</button>
+				<button class="btn w-50 border my-4" type="button" onclick="addProduct()">추가</button>
 			</div>
 		</form>
 	</div>
