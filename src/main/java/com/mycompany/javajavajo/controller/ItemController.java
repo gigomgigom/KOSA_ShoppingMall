@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.ProductImg;
 import com.mycompany.javajavajo.service.ItemService;
@@ -59,11 +61,36 @@ public class ItemController {
 	
 	//위 경로로 요청했을 때 카테고리번호를 넘겨받는다.
 	//Service의 메소드 이름은 getItemListByCtgno이다.
-	//세림 : 아래 경로를 요청하여 카테고리 번호를 넘겨 받음
+	//권우상 - 카테고리 번호, 페이지 번호, 검색어, 정렬 조건을 받아 그에 맞게 상품 리스트를 받아옴
 	@RequestMapping("/item_list")
-	public String itemList(int ctgno, Model model) {
-		List<Product> itemList = service.getItemListByCtgno(ctgno);
+	public String itemList(int ctgno, String pageNo, String keyword, String sorting,
+				HttpSession session,Model model) {
+		if (pageNo == null) {
+			pageNo = (String) session.getAttribute("pageNo");
+		}
+		
+		if(keyword == null) {
+			keyword = (String) session.getAttribute("keyword");
+		}
+		
+		if(sorting == null) {
+			sorting = (String) session.getAttribute("sorting");
+		}
+		
+		// 세션에 페이지 번호, 검색어, 정려조건 변수를 선언하고 값을 할당
+		session.setAttribute("pageNo", pageNo);
+		session.setAttribute("keyword", keyword);
+		session.setAttribute("sorting", sorting);
+		
+		// pageNo를 정수형으로 변환
+		int intPageNo = Integer.parseInt(pageNo);
+		// Pager 객체 생성
+		int rowsPagingTarget = service.getTotalRows(ctgno,keyword);
+		log.info(rowsPagingTarget+"");
+		Pager pager = new Pager(8, 5, rowsPagingTarget, intPageNo);
+		List<Product> itemList = service.getItemListByCtgno(ctgno,keyword,sorting,pager);
 		model.addAttribute("ctgno", ctgno);
+		model.addAttribute("pager",pager);
 		model.addAttribute("itemList", itemList);
 		return "item/itemList";
 	}

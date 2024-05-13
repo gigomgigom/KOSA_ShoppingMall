@@ -3,9 +3,8 @@ package com.mycompany.javajavajo.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
-import com.mycompany.javajavajo.dto.Member;
-import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Product;
 
@@ -40,6 +39,10 @@ public interface ProductDao {
 	//심영조-Admin-Product관리 - 상품 추가
 	int insertProduct(Product product);
 	int insertProductImg(Product product);
+
+	int countbyCtgKeyword(@Param("ctgno")int ctgno, @Param("keyword")String keyword);
+
+	List<Product> selectItemList(@Param("ctgno") int ctgno, @Param("keyword") String keyword,@Param("sorting") String sorting, @Param("pager") Pager pager);
 
 	
 	

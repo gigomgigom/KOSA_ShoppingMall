@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.javajavajo.dao.ProductDao;
 import com.mycompany.javajavajo.dao.ProductImgDao;
+import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.ProductImg;
 
@@ -29,9 +30,9 @@ public class ItemService {
 	}
 	
 	
-	// 세림 : 카테고리를 매개변수로 받음 -> 카테고리별로 상품 리스트 가져오기
-	public List<Product> getItemListByCtgno(int ctgno) {
-		List<Product> itemList = productDao.selectByCtgno(ctgno);
+	// 권우상 - 카테고리 번호, 페이지 번호, 검색어, 정렬 조건을 받아 그에 맞게 상품 리스트를 받아옴
+	public List<Product> getItemListByCtgno(int ctgno, String keyword, String sorting, Pager pager) {
+		List<Product> itemList = productDao.selectItemList(ctgno,keyword,sorting,pager);
 		return itemList;
 	}
 
@@ -44,6 +45,11 @@ public class ItemService {
 	public Product getProductByProdno(int prodno) {
 		Product product = productDao.selectByProdno(prodno);
 		return product;
+	}
+
+	//권우상 - 카테고리와 검색어에 맞는 총 상품 데이터수를 받아옴
+	public int getTotalRows(int ctgno, String keyword) {
+		return productDao.countbyCtgKeyword(ctgno, keyword);
 	}
 
 
