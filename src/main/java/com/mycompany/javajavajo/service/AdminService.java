@@ -235,7 +235,6 @@ public class AdminService {
 			log.info(del.getTrckno());
 			delResult = delDao.insertDeliveryInfo(del);
 		}
-		
 		return orderResult+delResult;
 	}
 

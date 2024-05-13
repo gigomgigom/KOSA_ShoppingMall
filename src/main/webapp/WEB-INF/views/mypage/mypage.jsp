@@ -91,7 +91,7 @@
 					class="d-flex flex-column justify-content-between align-items-center border w-100 m-0 p-0 py-3">
 					<div class="w-75 m-0 my-2 p-0 py-2 text-center rounded"
 						style="background-color: #27374D;">
-						<a class="text-decoration-none text-white m-0 p-0" href="#">회원정보
+						<a class="text-decoration-none text-white m-0 p-0" href="${pageContext.request.contextPath}/mypage/edit_user_info">회원정보
 							수정</a>
 					</div>
 					<div class="w-75 m-0 my-2 p-0 py-2 text-center rounded"

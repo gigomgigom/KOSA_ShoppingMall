@@ -3,6 +3,7 @@ package com.mycompany.javajavajo.dto;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -23,4 +24,6 @@ public class Member {
 	private String memimgoname;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date memdate;
+	
+	private MultipartFile memimgattach;
 }
