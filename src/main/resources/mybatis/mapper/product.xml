@@ -94,16 +94,22 @@
 	<select id="selectItemList" resultType="Product">
 		select *
 		from (
-		    select rownum as rnum, prodno, prodname, prodprice
+		    select rownum as rnum, prodno, prodname, prodprice, ordcount, rvcount, avgrating
 		    from (
-		        select prodno, prodname, prodprice
-		        from product
+		        select product.prodno as prodno, prodname, prodprice, ordcount, rvcount, avgrating 
+		        from product,
+		        (select count(qty) as ordcount, prodno from ordprod group by prodno)  o,
+		        (select count(rvrating) as rvcount, avg(nvl(rvrating,0)) as avgrating, prodno from review group by prodno)  r
 		        where ctgno = #{ctgno}
+		        and product.prodno = o.prodno(+)
+		        and product.prodno = r.prodno(+)
 		        <if test="keyword != null">
 		        	and prodname like '%' || #{keyword} || '%'
 				</if>
+				group by product.prodno, prodname, prodprice, ordcount, rvcount, avgrating
+				
 				<if test="sorting == 'newItem'">
-		        order by prodno desc
+		        order by product.prodno desc
 		        </if>
 		        <if test="sorting == 'highPrice'">
 		        order by prodprice desc

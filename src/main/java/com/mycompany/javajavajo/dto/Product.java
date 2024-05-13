@@ -14,4 +14,7 @@ public class Product {
 	private int prodstock;
 	
 	private ProductImg productImg;
+	private int ordcount;
+	private int rvcount;
+	private double avgrating;
 }
