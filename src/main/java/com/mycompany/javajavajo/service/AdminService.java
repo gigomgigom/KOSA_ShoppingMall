@@ -227,5 +227,16 @@ public class AdminService {
 		List<DeliveryCom> delComList = delComDao.selectDelComList();
 		return delComList;
 	}
+	//심영조-admin-OrderStts Update - 주문상태 및 배송정보를 업데이트해줘!
+	public int updateStatus(Order order, Delivery del) {
+		int orderResult = orderDao.updateOrdStts(order.getOrdno(), order.getOrdstts());
+		int delResult = 0;
+		if(!del.getTrckno().equals("")) {
+			log.info(del.getTrckno());
+			delResult = delDao.insertDeliveryInfo(del);
+		}
+		
+		return orderResult+delResult;
+	}
 
 }

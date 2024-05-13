@@ -8,4 +8,9 @@
 		from delivery, deliverycom
 		where ordno = ${ordno} and delivery.comno = deliverycom.comno
 	</select>
+	
+	<insert id="insertDeliveryInfo" parameterType="Delivery">
+		insert into delivery
+		values (#{ordno}, #{comno}, #{trckno}, sysdate, null)	
+	</insert>
 </mapper>

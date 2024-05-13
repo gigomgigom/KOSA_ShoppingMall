@@ -91,3 +91,20 @@ const addProduct = () => {
 		}
 	});
 }
+//주문상태 변경
+const updateOrderStts = () => {
+	console.log('----');
+	var formData = new FormData(document.getElementById('orderdetail'));
+	
+	$.ajax({
+		url:"updateStatus",
+		type:"post",
+		data:formData,
+		contentType: false,
+        processData: false,
+		success: function(responst) {
+			location.reload();
+		}
+	})
+	
+}

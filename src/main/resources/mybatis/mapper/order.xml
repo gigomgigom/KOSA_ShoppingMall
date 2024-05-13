@@ -43,13 +43,13 @@
 	<select id="selectUncomOrderByPager" parameterType="Pager"
 		resultType="Order">
 		<![CDATA[
-		select rnum, ordno, memno, ordstts, orddate, ordprice, discprice, finprice
+		select rnum, ordno, memno, ordstts, ordsttschar, orddate, ordprice, discprice, finprice
 		from (
-		select rownum as rnum, ordno, memno, ordstts, orddate, ordprice, discprice, finprice
+		select rownum as rnum, ordno, memno, ordstts, ordsttschar, orddate, ordprice, discprice, finprice
 		from (
-		select ordno, memno, ordstts, orddate, ordprice, discprice, finprice
-		from ord
-		where ordstts != 4 and ordstts != 5
+		select ordno, memno, ord.ordstts, ordstts.ordsttschar, orddate, ordprice, discprice, finprice
+		from ord, ordstts
+		where ordstts != 4 and ordstts != 5 and ord.ordstts = ordstts.ordsttsno
 		order by ordno desc
 		)
 		where rownum <= #{endRowNo}
@@ -57,4 +57,5 @@
 		where rnum >= #{startRowNo}
 		]]>
 	</select>
+	
 </mapper>	

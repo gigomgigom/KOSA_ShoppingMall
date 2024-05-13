@@ -371,4 +371,18 @@ public class AdminController {
 		model.addAttribute("menuNum", 2);
 		return "admin/order/admin_order_detail";
 	}
+	//주문 상태 및 배송정보 수정
+	@PostMapping("/updateStatus")
+	@ResponseBody
+	public String updateStatus(Order order, Delivery del) {
+		log.info(order.toString() + del.toString());
+		int updatedRow = adminService.updateStatus(order, del);
+		
+		String result = "fail";
+		
+		if(updatedRow > 0) {
+			result = "success";
+		}
+		return result;
+	}
 }

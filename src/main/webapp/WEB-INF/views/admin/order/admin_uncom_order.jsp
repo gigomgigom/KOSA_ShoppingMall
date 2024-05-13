@@ -123,7 +123,7 @@
 											<td><fmt:formatDate value="${order.orddate}"
 													pattern="yyyy-MM-dd" /></td>
 											<td>${order.ordno}</td>
-											<td>${order.ordstts}</td>
+											<td>${order.ordsttschar}</td>
 											<td>${order.orderer.ordname}</td>
 											<td>${order.ordproductcnt}개</td>
 											<td>${order.orderer.ordtel}</td>

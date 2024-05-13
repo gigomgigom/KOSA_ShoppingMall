@@ -49,21 +49,21 @@
 						<h5>
 							<b>주문 상세 정보</b>
 						</h5>
-						<button class="btn" ${orderInfoMap.order.ordstts < 3?'':'style="display:none"'}>변경사항 저장</button>
+						<button class="btn" onclick="updateOrderStts()" ${orderInfoMap.order.ordstts < 3?'':'style="display:none"'}>변경사항 저장</button>
 					</div>
 					<hr class="w-100" />
 					<div class="d-flex flex-row">
 						<div class="d-flex flex-column col-4">
 							<form class="d-flex flex-column w-100 justify-content-center"
-								id="orderdetail" action="#" method="post">
+								id="orderdetail">
 								<div class="my-3">
-									<label for="mno" class="form-label">주문번호</label> <input
-										type="text" class="form-control" id="mno" name="memno"
+									<label for="orderno" class="form-label">주문번호</label> <input
+										type="text" class="form-control" id="orderno" name="ordno"
 										readonly value="${orderInfoMap.order.ordno}">
 								</div>
 								<div class="mb-3">
 									<label for="ord_date" class="form-label">주문 일자</label> <input
-										type="text" class="form-control" id="ord_date" name=""
+										type="text" class="form-control" id="ord_date" name="orddate"
 										value='<fmt:formatDate value="${orderInfoMap.order.orddate}" pattern="yyyy-MM-dd"/>'>
 								</div>
 								<div class="w-100 d-flex flex-column mb-3">
@@ -71,7 +71,7 @@
 									<div class="w-100 d-flex">
 										<c:if test="${orderInfoMap.order.ordstts < 3}">
 											<div class="w-75 form-group align-items-center">
-												<select class="form-control" id="status" name="searchindex">
+												<select class="form-control" id="status" name="ordstts">
 													<c:forEach var="ordStts"
 														items="${orderInfoMap.ordSttsList}">
 														<option value="${ordStts.ordsttsno}"

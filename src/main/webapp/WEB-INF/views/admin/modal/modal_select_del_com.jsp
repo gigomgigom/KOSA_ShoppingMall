@@ -13,7 +13,7 @@
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<form>
+				<div>
 					<label for="selcom"></label> <select class="form-control my-4"
 						id="selcom" name="comno">
 						<c:forEach var="delCom" items="${orderInfoMap.delComList}">
@@ -24,7 +24,7 @@
 						<label for="trackingNum">운송장번호</label> <input type="text"
 							class="form-control" id="trackingNum" name="trckno">
 					</div>
-				</form>
+				</div>
 			</div>
 
 			<!-- Modal footer -->
