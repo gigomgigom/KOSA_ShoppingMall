@@ -110,19 +110,32 @@
 									</tr>
 								</tbody>
 							</table>
-							<div class="d-flex justify-content-center mt-5">
-								<ul class="pagination">
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">이전</a></li>
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">1</a></li>
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">2</a></li>
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">3</a></li>
-									<li class="page-item"><a class="page-link text-dark"
-										href="#">다음</a></li>
-								</ul>
+							<div class="d-flex justify-content-center">
+								<a class="btn btn-outline-primary btn-sm"
+									href="uncom_order?pageNo=1">처음</a>
+								<c:if test="${pager.groupNo>1}">
+									<a class="btn btn-outline-info btn-sm"
+										href="uncom_order?pageNo=${pager.startPageNo-1}">이전</a>
+								</c:if>
+
+								<c:forEach var="i" begin="${pager.startPageNo}"
+									end="${pager.endPageNo}">
+									<c:if test="${pager.pageNo != i}">
+										<a class="btn btn-outline-success btn-sm"
+											href="uncom_order?pageNo=${i}">${i}</a>
+									</c:if>
+									<c:if test="${pager.pageNo == i}">
+										<a class="btn btn-danger btn-sm"
+											href="uncom_order?pageNo=${i}">${i}</a>
+									</c:if>
+								</c:forEach>
+
+								<c:if test="${pager.groupNo<pager.totalGroupNo}">
+									<a class="btn btn-outline-info btn-sm"
+										href="uncom_order?pageNo=${pager.endPageNo+1}">다음</a>
+								</c:if>
+								<a class="btn btn-outline-primary btn-sm"
+									href="uncom_order?pageNo=${pager.totalPageNo}">맨끝</a>
 							</div>
 						</div>
 					</div>
