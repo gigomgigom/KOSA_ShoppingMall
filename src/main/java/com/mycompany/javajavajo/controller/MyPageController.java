@@ -20,6 +20,7 @@ import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.MemberAdr;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.PointDtl;
+import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MyPageController {
 	@Autowired
 	private MemberService service;
+	
 
 	//황세림 - member를 받아 회원의 주소를 출력하는 경로
 	@RequestMapping("")
@@ -44,8 +46,41 @@ public class MyPageController {
 		//회원 이미지 출력
 		model.addAttribute("memberImg", memberImg);
 		model.addAttribute("memno", memno);
-		log.info(member.toString());
+		
+		// 회원 주문정보 리스트 가져오기
+		List<Order> orderList = service.getOrderListByMemno(memno);
+		log.info("주문내역" + orderList);
+		List<PointDtl> pointDtlList = new ArrayList<>();
+		if(orderList.size() != 0) {
+			// 주문에 상품의 수 그리고 그 들중 한 상품에 대한 정보를 찾아서 Order객체에 넣어준다.
+			for (Order order : orderList) {
+				// 주문마다 몇개의 상품을 구매했는지 찾는다.
+				int ordno = order.getOrdno();
+				//주문번호를 주어졌을때 포인트 이력(사용, 적립)을 가져온다.
+				PointDtl usedPointDtl = service.getPointDtlListByOrdno(order.getOrdno(), 1);
+				
+				PointDtl rewardPointDtl = service.getPointDtlListByOrdno(order.getOrdno(), 0);
+				
+				// 포인트 이력에서 일자를 찾기 위해 주문번호를 넘겨 해당 주문정보를 받아오는 메소드를 호출한다.
+				Order orderForDate = service.getOrderByOrdno(order.getOrdno());
+				
 
+				if (usedPointDtl != null) {
+					usedPointDtl.setDate(orderForDate.getOrddate());
+					usedPointDtl.setActionStr("사용");
+					log.info("사용내역" + usedPointDtl);
+					pointDtlList.add(usedPointDtl);
+				}
+				if (rewardPointDtl != null) {
+					rewardPointDtl.setDate(orderForDate.getOrddate());
+					rewardPointDtl.setActionStr("적립");
+					log.info("사용내역" + rewardPointDtl);
+					pointDtlList.add(rewardPointDtl);
+				}
+			}
+			model.addAttribute("orderList", orderList);
+			model.addAttribute("pointDtlList", pointDtlList);
+		}
 		
 	return "mypage/mypage";
 }

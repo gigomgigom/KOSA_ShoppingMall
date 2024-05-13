@@ -1,5 +1,7 @@
 package com.mycompany.javajavajo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,8 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.javajavajo.dao.MemberAdrDao;
 import com.mycompany.javajavajo.dao.MemberDao;
+import com.mycompany.javajavajo.dao.OrderDao;
+import com.mycompany.javajavajo.dao.PointDtlDao;
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.MemberAdr;
+import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.PointDtl;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +25,10 @@ public class MemberService {
 	private MemberDao memberDao;
 	@Autowired
 	private MemberAdrDao memberAdrDao;
+	@Autowired
+	private OrderDao orderDao;
+	@Autowired
+	private PointDtlDao pointDtlDao;
 
 	public void auth(Member member, MemberAdr memberAdr) {
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -50,6 +59,16 @@ public class MemberService {
 		Member memPoint = memberDao.selectByMemno(memno);
 		return memPoint;
 	}
-
-
+	public List<Order> getOrderListByMemno(int memno) {
+		List<Order> orderList = orderDao.selectOrderByMemno(memno);
+		return orderList;
+	}
+	public PointDtl getPointDtlListByOrdno(int ordno, int action) {
+		PointDtl pointDtl = pointDtlDao.selectPointDtlByOrdnoAndAction(ordno, action);
+		return pointDtl;
+	}
+	public Order getOrderByOrdno(int ordno) {
+		Order order = orderDao.selectOrderByOrdno(ordno);
+		return order;
+	}
 }
