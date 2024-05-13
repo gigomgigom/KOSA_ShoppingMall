@@ -81,4 +81,40 @@
 		</selectKey>
 		insert into productimg values (#{prodno}, #{productImg.repimg}, #{productImg.dtlimg}, #{productImg.repimgoname}, #{productImg.repimgtype}, #{productImg.dtlimgoname}, #{productImg.dtlimgtype})
 	</insert>
+	
+	<select id="countbyCtgKeyword">
+		select count(*)
+		from product
+		where ctgno = #{ctgno}
+		<if test="keyword != null">
+		and prodname like '%' || #{keyword} || '%'
+		</if>
+	</select>
+	
+	<select id="selectItemList" resultType="Product">
+		select *
+		from (
+		    select rownum as rnum, prodno, prodname, prodprice
+		    from (
+		        select prodno, prodname, prodprice
+		        from product
+		        where ctgno = #{ctgno}
+		        <if test="keyword != null">
+		        	and prodname like '%' || #{keyword} || '%'
+				</if>
+				<if test="sorting == 'newItem'">
+		        order by prodno desc
+		        </if>
+		        <if test="sorting == 'highPrice'">
+		        order by prodprice desc
+		        </if>
+		        <if test="sorting == 'lowPrice'">
+		        order by prodprice
+		        </if>
+		    )
+		    <![CDATA[where rownum <= #{pager.endRowNo}
+		)
+		where rnum >= #{pager.startRowNo}
+		]]>
+	</select>
 </mapper>

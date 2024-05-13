@@ -42,19 +42,21 @@ public class QnaController {
 		// 세션에 pageNo변수를 선언하고 값을 할당
 		session.setAttribute("pageNo", pageNo);
 		session.setAttribute("keyword", keyword);
-	
+		
+		
 		// pageNo를 정수형으로 변환
 		int intPageNo = Integer.parseInt(pageNo);
 		// Pager 객체 생성
 		int rowsPagingTarget = qnaService.getTotalRows(keyword);
 		log.info(rowsPagingTarget+"");
-		Pager pager = new Pager(3, 3, rowsPagingTarget, intPageNo);
+		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
 
 		// Service에서 게시물 목록 요청
 		List<Qna> qnaList = qnaService.getQnaList(pager, keyword);
 
 		model.addAttribute("pager", pager);
 		model.addAttribute("qnaList", qnaList);
+		model.addAttribute("keyword", keyword);
 		
 		return "qna/list";
 
@@ -92,7 +94,7 @@ public class QnaController {
 	public String qnaDetail(int qnano, Model model, HttpSession session) {
 		String keyword = (String) session.getAttribute("keyword");
 		Qna qna = qnaService.getQna(qnano,keyword); // dto를 통해서 한 게시물의 정보를 가져옴
-		int pageNo = (qna.getRnum() - 1) / 3 + 1;
+		int pageNo = (qna.getRnum() - 1) / 5 + 1;
 		session.setAttribute("pageNo", pageNo + "");
 		model.addAttribute("qna", qna);
 		return "qna/detail";

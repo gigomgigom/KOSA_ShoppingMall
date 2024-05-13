@@ -38,7 +38,7 @@ public class Pager {
 			startPageNo = (groupNo-1) * pagesPerGroup + 1;
 
 			endPageNo = startPageNo + pagesPerGroup - 1;
-			if(groupNo == totalGroupNo) endPageNo = totalPageNo;
+			if(groupNo == totalGroupNo || totalGroupNo == 0) endPageNo = totalPageNo;
 
 			startRowNo = (pageNo - 1) * rowsPerPage + 1;
 			startRowIndex = startRowNo - 1;
