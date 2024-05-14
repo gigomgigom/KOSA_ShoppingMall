@@ -61,5 +61,22 @@ public class CartService {
 		int result = cartItemDao.deleteCartItems(memno, prodnos);
 		return result;
 	}
+	
+	// 신우호 - 회원번호를 사용하여 cartItem의 정보들을 불러옴
+		public List<CartItem> getCartItemListByMemNo(int memNo) {
+			
+			return cartItemDao.selectByMemno(memNo);
+		}
+		
+		// 신우호 - 
+		public Product getproductByprodNo(int prodNo) {
+			return cartItemDao.selectProductByprodNo(prodNo);
+		}
+		public void registCartItem(CartItem cartItem) {
+			int result= cartItemDao.insertCartItems(cartItem);
+		}
+		
+	}
 
-}
+
+

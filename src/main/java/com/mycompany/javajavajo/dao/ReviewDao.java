@@ -14,6 +14,8 @@ public interface ReviewDao {
 
 	int select(Review review);
 
+	Review getReviewByProdno(int prodno);
+
 	
 
 	

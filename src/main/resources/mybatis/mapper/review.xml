@@ -17,4 +17,10 @@
 		where ordno=#{ordno}
 	</select>
 	
+	<select id="getReviewByProdno" resultType="int">
+		select rvrating
+		from review
+		where prodno = #{prodno}
+	</select>
+	
 </mapper>
