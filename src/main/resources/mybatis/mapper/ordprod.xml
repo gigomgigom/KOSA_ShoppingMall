@@ -20,4 +20,5 @@
 		where ordprod.prodno = product.prodno
 		and ordno = #{ordno}
 	</select>
+
 </mapper>

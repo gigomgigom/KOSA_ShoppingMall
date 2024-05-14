@@ -99,7 +99,7 @@
 		        select product.prodno as prodno, prodname, prodprice, ordcount, rvcount, avgrating 
 		        from product,
 		        (select count(qty) as ordcount, prodno from ordprod group by prodno)  o,
-		        (select count(rvrating) as rvcount, avg(nvl(rvrating,0)) as avgrating, prodno from review group by prodno)  r
+		        (select count(rvrating) as rvcount, round(avg(nvl(rvrating,0)),1) as avgrating, prodno from review group by prodno)  r
 		        where ctgno = #{ctgno}
 		        and product.prodno = o.prodno(+)
 		        and product.prodno = r.prodno(+)
@@ -122,5 +122,19 @@
 		)
 		where rnum >= #{pager.startRowNo}
 		]]>
+	</select>
+	
+	<select id="selectBestProduct" resultType="Product">
+		select rownum as rnum, prodno, prodname, prodprice, ordcount, rvcount, avgrating
+		    from (
+		        select product.prodno as prodno, prodname, prodprice, ordcount, rvcount, avgrating 
+		        from product,
+		        (select count(qty) as ordcount, prodno from ordprod group by prodno)  o,
+		        (select count(rvrating) as rvcount, round(avg(nvl(rvrating,0)),1) as avgrating, prodno from review group by prodno)  r
+		        where product.prodno = o.prodno(+)
+		        and product.prodno = r.prodno(+)
+		        order by ordcount desc nulls last
+		    )
+		<![CDATA[where rownum <= 4]]>
 	</select>
 </mapper>

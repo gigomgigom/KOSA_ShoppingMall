@@ -44,6 +44,8 @@ public interface ProductDao {
 
 	List<Product> selectItemList(@Param("ctgno") int ctgno, @Param("keyword") String keyword,@Param("sorting") String sorting, @Param("pager") Pager pager);
 
+	List<Product> selectBestProduct();
+
 	
 	
 

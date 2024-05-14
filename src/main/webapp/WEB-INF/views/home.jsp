@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,72 +70,31 @@
 		<div class="bg-black" style="height: 2px; width: 30px"></div>
 		<div id="rcmd-product-list"
 			class="p-3 mt-4 w-75 d-flex justify-content-center">
-			<div id="rcmd-product-1" class="w-25 p-3">
-				<a href="#" class="d-flex flex-column align-items-center"> <img
-					src="https://i.ibb.co/Sc0bSjY/dogicecream.jpg"
-					class="w-75 img-thumbnail hover-shadow" />
-				</a>
-				<div class="p-2">
-					<a href="#"
-						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
-						<p class="text-center"></p>
+			<c:forEach var="prod" items="${prodList}">
+				<div id="rcmd-product-1" class="w-25 p-3">
+					<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${prod.prodno}" class="d-flex flex-column align-items-center"> 
+					<img src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${prod.prodno}"
+						class="w-75 img-thumbnail hover-shadow" />
 					</a>
-					<hr />
-					<p style="font-size: 0.75rem;">평점 5.0 - 리뷰 n개</p>
-					<p style="font-size: 0.75rem;">⭐⭐⭐⭐</p>
-					<p>n원</p>
+					<div class="p-2">
+						<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${prod.prodno}"
+							class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
+							<p class="text-center">${prod.prodname}</p>
+						</a>
+						<hr />
+						<p style="font-size: 0.75rem;">평점: ${prod.avgrating}</p>
+						<p style="font-size: 0.75rem;">
+							<c:if test="${prod.avgrating >= 1 && prod.avgrating < 2}">⭐</c:if>
+							<c:if test="${prod.avgrating >= 2 && prod.avgrating < 3}">⭐⭐</c:if>
+							<c:if test="${prod.avgrating >= 3 && prod.avgrating < 4}">⭐⭐⭐</c:if>
+							<c:if test="${prod.avgrating >= 4 && prod.avgrating < 5}">⭐⭐⭐⭐</c:if>
+							<c:if test="${prod.avgrating == 5}">⭐⭐⭐⭐⭐</c:if>
+							(${prod.rvcount})
+						</p>
+						<p><fmt:formatNumber value="${prod.prodprice}" pattern="#,###" />원</p>
+					</div>
 				</div>
-			</div>
-			<div id="rcmd-product-2" class="w-25 p-3">
-				<a href="${pageContext.request.contextPath}/item/item_detail"
-					class="d-flex flex-column align-items-center"> <img
-					src="https://i.ibb.co/f9yTBG2/doggum.png"
-					class="w-75 img-thumbnail" />
-				</a>
-				<div class="p-2">
-					<a href="${pageContext.request.contextPath}/item/item_detail"
-						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
-						<p class="text-center">멍뭉이 쭈압쭈압 개껌</p>
-					</a>
-					<hr />
-					<p style="font-size: 0.75rem;">평점 3.0 - 리뷰 n개</p>
-					<p style="font-size: 0.75rem;">⭐⭐⭐</p>
-					<p>n원</p>
-				</div>
-			</div>
-			<div id="rcmd-product-3" class="w-25 p-3">
-				<a href="#" class="d-flex flex-column align-items-center"> <img
-					src="https://i.ibb.co/VNhrhcX/chickenbreast.jpg"
-					class="w-75 img-thumbnail" />
-				</a>
-
-				<div class="p-2">
-					<a href="#"
-						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
-						<p class="text-center">득근득근 웅장한 닭가슴살</p>
-					</a>
-					<hr />
-					<p style="font-size: 0.75rem;">평점 1.0 - 리뷰 n개</p>
-					<p style="font-size: 0.75rem;">⭐</p>
-					<p>n원</p>
-				</div>
-			</div>
-			<div id="rcmd-product-4" class="w-25 p-3">
-				<a href="#" class="d-flex flex-column align-items-center"> <img
-					src="https://i.ibb.co/7zD4Gqb/dogfood.jpg"
-					class="w-75 img-thumbnail" />
-				</a>
-				<div class="p-2">
-					<a href="#"
-						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
-						<p class="text-center">멍멍냠냠 영양만점 강아지사료</p>
-					</a>
-					<hr />
-					<p style="font-size: 0.75rem;">평점 3.0 - 리뷰 n개</p>
-					<p style="font-size: 0.75rem;">⭐⭐⭐</p>
-					<p>n원</p>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 		<div style="height: 20px"></div>
 	</div>

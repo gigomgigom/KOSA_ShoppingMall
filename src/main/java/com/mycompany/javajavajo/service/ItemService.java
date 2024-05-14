@@ -53,4 +53,9 @@ public class ItemService {
 	}
 
 
+	public List<Product> getBestProduct() {
+		return productDao.selectBestProduct();
+	}
+
+
 }
