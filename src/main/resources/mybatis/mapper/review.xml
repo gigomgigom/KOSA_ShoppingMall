@@ -14,7 +14,7 @@
 	<select id="select" resultType="int">
 		select *
 		from review
-		where ordno=#{ordno}
+	
 	</select>
 	
 	<select id="getReviewByProdno" resultType="int">

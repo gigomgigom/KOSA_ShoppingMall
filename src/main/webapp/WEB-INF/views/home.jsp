@@ -76,7 +76,7 @@
 				<div class="p-2">
 					<a href="#"
 						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
-						<p class="text-center">혀가 시려워 샤베트</p>
+						<p class="text-center">${review.ordno}</p>
 					</a>
 					<hr />
 					<p style="font-size: 0.75rem;">평점 5.0 - 리뷰 n개</p>

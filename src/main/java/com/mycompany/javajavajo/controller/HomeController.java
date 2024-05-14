@@ -12,8 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/")
 public class HomeController {
+	
 	@RequestMapping("")
-	public String index() {
+	public String reviewResponse(Model model, Review review) {
+		int ordno = review.getOrdno();
+		model.addAttribute("Review", review);
+		model.addAttribute("ordno", ordno);
 		log.info("실행");
 		return "home";
 	}
