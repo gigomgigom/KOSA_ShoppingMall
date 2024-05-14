@@ -78,15 +78,6 @@ public class OrderService {
 			int pointDtlResult = pointDtlDao.insert(pointMinus);
 		}
 		
-		//결제 금액의 5퍼센트를 point로 적립
-		PointDtl pointPlus = new PointDtl();
-		pointPlus.setOrdno(ordno);
-		pointPlus.setAction(0);
-		pointPlus.setAmount(order.getFinprice()/100 * 5);
-		int pointDtlResult = pointDtlDao.insert(pointPlus);
-		
-		memberDao.updatePoint(memno, pointPlus.getAmount(), "+");
-		
 		//memno에 해당하는 cartitem을 얻어 온 후 ordprod추가 및 cartitem삭제
 		List<CartItem> cartItemList = cartItemDao.selectByMemno(memno);
 		int[] prodnos = new int[cartItemList.size()];
@@ -160,14 +151,10 @@ public class OrderService {
 	public int cancelOrder(int memno, int ordno) {
 		int ordstts = 5;
 		
-		//포인트 적립내역을 가져와서 멤버에서 빼줌
-		PointDtl pointPlus = pointDtlDao.selectPointDtlByOrdnoAndAction(ordno, 0);
-		int memberPointResult = memberDao.updatePoint(memno, pointPlus.getAmount(), "-");
-		
 		//포인트 사용내역을 가져와서 멤버에 다시 넣어 줌
 		PointDtl pointMinus = pointDtlDao.selectPointDtlByOrdnoAndAction(ordno, 1);
 		if(pointMinus != null) {
-			memberPointResult = memberDao.updatePoint(memno, pointMinus.getAmount(), "+");
+			int memberPointResult = memberDao.updatePoint(memno, pointMinus.getAmount(), "+");
 		}
 		
 		//주문이 취소 되어서 포인트 내역도 삭제
@@ -176,6 +163,7 @@ public class OrderService {
 		int orderResult = orderDao.updateOrdStts(ordno, ordstts);
 		return orderResult;
 	}
+	
 		// 주문상품의 수를 가져옴, 상품의 1개의 상품번호를 가져옴
 	public Order getOrderProductCnt(int ordno) {
 		return ordProdDao.selectOutlineOfOrdProd(ordno);
@@ -183,6 +171,20 @@ public class OrderService {
 
 	public Product getProductByproduct(int oneofordproduct) {
 		return productDao.selectByProdno(oneofordproduct);
+	}
+
+	public int completeOrder(int memno, int ordno, int amount) {
+	    //결제 금액의 5퍼센트를 point로 적립
+		PointDtl pointPlus = new PointDtl();
+		pointPlus.setOrdno(ordno);
+		pointPlus.setAction(0);
+		pointPlus.setAmount(amount/100 * 5);
+		int pointDtlResult = pointDtlDao.insert(pointPlus);
+		memberDao.updatePoint(memno, pointPlus.getAmount(), "+");
+		
+		int ordstts = 4;
+		int ordsttsresult = orderDao.updateOrdStts(ordno, ordstts);
+		return pointDtlResult;
 	}
 
 

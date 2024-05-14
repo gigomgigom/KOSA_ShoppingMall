@@ -145,4 +145,13 @@ public class OrderController {
 		int reuslt = orderService.cancelOrder(memno,ordno);
 		return "redirect:/order/order_detail?ordno=" + ordno;
 	}
+	
+	@PostMapping("complete_order")
+	public String completeOrder(int ordno,int amount,Authentication authentication) {
+		log.info("실행1");
+		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
+		int memno = t1UserDetails.getMember().getMemno();
+		int reuslt = orderService.completeOrder(memno,ordno,amount);
+		return "redirect:/order/order_detail?ordno=" + ordno;
+	}
 }
