@@ -13,4 +13,6 @@
 		from cart
 		where memno = #{memno}
 	</select>
+	
+	
 </mapper>

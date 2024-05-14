@@ -75,27 +75,41 @@ public class CartController {
 	
 	// 신우호 - 장바구니 추가할 시 카트페이지 이동
 		@PostMapping("/cartAdd")
+		// cartItem(jsp에서 form으로 전달받은 cartItem)
 		public String cartCart(Authentication authentiaction, Model model, CartItem cartItem) {
 			Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentiaction.getPrincipal();
 			int memNo = t1UserDetails.getMember().getMemno();
-			Product product = service.getproductByprodNo(cartItem.getProdno());
-			cartItem.setProduct(product);
-			cartItem.setMemno(memNo);
-			service.registCartItem(cartItem);
-			//카트아이템을 리스트로 가져오기(멤버의 기본키를 이용해서)
-			/*List<CartItem> cartItemList = service.getCartItemListByMemNo(memNo);
-			//카트 리스트를 for문을 돌려서 product를 set해주기
-			for(CartItem cartItem1 : cartItemList) {
-				//카트아이템의 prodno를 int타입 변수에 저장해준다.
-				int prodNo = cartItem1.getProdno();
-				//prodno을 이용해서 product를 찾아준다.
-				Product product = service.getproductByprodNo(prodNo);
-				//찾은 product를 카트아이템의 product에 세팅해준다.
-				cartItem.setProduct(product);
-				log.info("ww" + cartItem);
+			log.info("" + memNo);
+			log.info("" + cartItem);
+			Cart cart = service.getCartByMemNo(memNo);
+			if(cart == null) {
+				// 카트가 없을경우 카트를 새로 만들어 줘야 함
+				service.createCart(memNo);
+				cart = service.getCartByMemNo(memNo);
 			}
-			model.addAttribute("cartItemList", cartItemList);*/
+			// 들어온 아이템이 카트에 있는지 알기위함 (dto객체로 받은 CartItem)
+			List<CartItem> cartItemList = service.getCartItemListByMemNo(memNo);
+			
+			// 중복인 상품이 들어있을 경우 (여기 다시 복습해야할 듯 합니다. 너무 이해가 안됩니다.)
+			boolean productCheck = false;
+			for(CartItem cartItemIn : cartItemList) {
+			// prodNo = 기본키 (유니크), 같으면 같은 아이템을 의미, 다르면 서로 다른 아이템을 의미
+				if(cartItem.getProdno() == cartItemIn.getProdno()) {
+					// 들어있는 상품이라고 알려준다.
+					productCheck = true;
+				}
+			}
+			// 기존에 있던 상품이라면 선택한 수량만큼 카트아이템의 수량을 증가시킴 (update해줌)
+			if(productCheck == true) {
+				cartItem.setMemno(memNo);
+				service.addQty(cartItem);
+			// 기존에 있던 상품이 아니라면 새로운 데이터를 추가 후 수량을 넣어줌
+				// update , insert  cartItem(dto) cartItem에 회원번호를 담아야 함.
+			}else {
+				cartItem.setMemno(memNo);
+				// cartItem (dto = 수량, 회원번호, 상품번호를 보내줌)
+				service.addCartItem(cartItem);
+			}
 			return "redirect:/cart";
 		}
-
 }

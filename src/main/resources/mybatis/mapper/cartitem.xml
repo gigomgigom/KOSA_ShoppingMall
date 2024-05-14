@@ -31,4 +31,28 @@
   		</foreach>
 	</delete>
 	
+	<insert id="insertCartItems" parameterType="cartItem">
+		insert into cartItem (memno, prodno, qty)
+		values(#{memno}, #{prodno}, #{qty})
+	</insert>
+	
+	<update id="updateByAddQty">
+		update cartItem
+		set qty = #{qty}+1
+		where memno = #{memno}
+		and prodno = #{prodno}
+	</update>
+	
+	<insert id="insertCartItem" parameterType="cartItem">
+		insert into cartItem (memno, prodno, qty)
+		values(#{memno}, #{prodno}, #{qty})
+	</insert>
+	
+	<update id="updateCartItem">
+		update cartItem
+		set qty = qty + #{qty}
+		where memno = #{memno} and prodno = #{prodno}
+		
+	</update>
+	
 </mapper>

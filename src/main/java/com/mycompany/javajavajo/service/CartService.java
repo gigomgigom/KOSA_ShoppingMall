@@ -63,20 +63,40 @@ public class CartService {
 	}
 	
 	// 신우호 - 회원번호를 사용하여 cartItem의 정보들을 불러옴
-		public List<CartItem> getCartItemListByMemNo(int memNo) {
-			
-			return cartItemDao.selectByMemno(memNo);
-		}
-		
-		// 신우호 - 
-		public Product getproductByprodNo(int prodNo) {
-			return cartItemDao.selectProductByprodNo(prodNo);
-		}
-		public void registCartItem(CartItem cartItem) {
-			int result= cartItemDao.insertCartItems(cartItem);
-		}
-		
+	public List<CartItem> getCartItemListByMemNo(int memNo) {
+		return cartItemDao.selectByMemno(memNo);
 	}
+		
+	// 신우호 - 상품번호를 사용해서 상품의 정보들을 불러옴
+	public Product getproductByprodNo(int prodNo) {
+		return cartItemDao.selectProductByprodNo(prodNo);
+	}
+		
+	// 신우호 - 회원번호를 사용해서 카트목록을 불러옴
+	public List<Cart> getCartListByMemNo(int memNo) {
+		return cartDao.selectByMemNo(memNo);
+	}
+		
+	// 신우호 - 회원번호를 사용해 카트의 정보들을 불러옴
+	public Cart getCartByMemNo(int memNo) {
+		return cartDao.selectByMemno(memNo);
+	}
+
+	// 신우호 - 회원번호를 사용해 카트가 없을 경우 카트를 새로 만들어줌
+	public int createCart(int memNo) {
+		return cartDao.insert(memNo);
+	}
+
+	// 신우호 - 장바구니 카트 아이템 추가
+	public int addCartItem(CartItem cartItem) {
+		return cartItemDao.insertCartItem(cartItem);
+	}
+		
+	// 신우호 - 장바구니 같은 아이템 추가 시 업데이트
+	public int addQty(CartItem cartItem) {
+		return cartItemDao.updateCartItem(cartItem);
+	}	
+}
 
 
 

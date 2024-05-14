@@ -1,5 +1,3 @@
-item_detail.jsp
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -96,7 +94,7 @@ item_detail.jsp
 
 	<div class="container-fluid my-2">
 		<!--data전달을 위한 form-->
-		<form method="post" action="${pageContext.request.contextPath}/cart" >
+		<form method="post" action="${pageContext.request.contextPath}/cart/cartAdd" >
 			<div id="wrapper" class="d-flex flex-column">
 				<div class="container d-flex justify-content-center">
 					<div class="w-75 d-flex justify-content-center">
