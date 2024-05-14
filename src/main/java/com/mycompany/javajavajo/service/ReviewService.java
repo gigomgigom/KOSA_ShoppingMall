@@ -19,5 +19,11 @@ public class ReviewService {
 		int result = reviewDao.insert(review);
 		return  result;
 	}
+	
+	//황세림 - 메인 페이지에 리뷰 데이터 출력
+	public int reviewResponse(Review review) {
+		int reviewResponse = reviewDao.select(review);
+		return reviewResponse;
+	}
 
 }

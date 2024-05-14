@@ -1,7 +1,10 @@
 package com.mycompany.javajavajo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.mycompany.javajavajo.dto.Review;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,4 +23,5 @@ public class HomeController {
 	public String logout() {
 		return "/signin";
 	}
+
 }

@@ -172,7 +172,7 @@
 				<div class="p-2 d-flex flex-column align-items-center">
 					<a href="#"
 						class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
-						혀가 시려워 샤베트 </a>
+						${review.rvtitle}</a>
 					<hr />
 					<p>사르르 녹아내려요</p>
 					<p>⭐⭐⭐⭐⭐</p>

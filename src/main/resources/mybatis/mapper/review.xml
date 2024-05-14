@@ -10,4 +10,11 @@
 		select count(*) from review
 		where ordno = #{ordno} and prodno = #{prodno}
 	</select>
+	
+	<select id="select" resultType="int">
+		select *
+		from review
+		where ordno=#{ordno}
+	</select>
+	
 </mapper>
