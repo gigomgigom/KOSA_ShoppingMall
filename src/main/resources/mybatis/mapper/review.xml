@@ -2,25 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mycompany.javajavajo.dao.ReviewDao">
 	<insert id="insert" parameterType="Review">
-		insert into review (ordno, prodno, rvtitle, rvdate, rvcontent, rvrating)
-		values(#{ordno}, #{prodno}, #{rvtitle}, sysdate, #{rvcontent}, #{rvrating})
+		insert into review (ordno,
+		prodno, rvtitle, rvdate, rvcontent, rvrating)
+		values(#{ordno},
+		#{prodno}, #{rvtitle}, sysdate, #{rvcontent}, #{rvrating})
 	</insert>
-	
+
 	<select id="count" resultType="int">
 		select count(*) from review
-		where ordno = #{ordno} and prodno = #{prodno}
+		where
+		ordno = #{ordno} and prodno = #{prodno}
 	</select>
 	
-	<select id="select" resultType="int">
-		select *
-		from review
 	
-	</select>
-	
-	<select id="getReviewByProdno" resultType="int">
-		select rvrating
-		from review
-		where prodno = #{prodno}
+	<select id="selectRecentReviews" resultType="Review">
+		<![CDATA[
+		select ordno, prodno, rvtitle, rvdate, rvcontent, rvrating 
+		from (
+			select rownum rnum, ordno, prodno, rvtitle, rvdate, rvcontent, rvrating
+			from review
+			order by rvdate desc
+		)
+		where rnum < 5
+	]]>
 	</select>
 	
 </mapper>

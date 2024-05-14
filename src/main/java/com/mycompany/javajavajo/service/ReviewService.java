@@ -1,9 +1,12 @@
 package com.mycompany.javajavajo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.javajavajo.dao.ReviewDao;
+import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.Review;
 
 import lombok.extern.slf4j.Slf4j;
@@ -21,15 +24,12 @@ public class ReviewService {
 	}
 	
 	//황세림 - 메인 페이지에 리뷰 데이터 출력
-	public int reviewResponse(Review review) {
-		int reviewResponse = reviewDao.select(review);
-		return reviewResponse;
+	public List<Review> review() {
+		List<Review> review = reviewDao.selectRecentReviews();
+		return review;
 	}
 
-	public Review getReviewByProdno(int prodno) {
-		
-		return reviewDao.getReviewByProdno(prodno);
-	}
+
 
 	
 }

@@ -1,5 +1,7 @@
 package com.mycompany.javajavajo.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,9 +14,8 @@ public interface ReviewDao {
 
 	int count(@Param("ordno") int ordno, @Param("prodno") int prodno);
 
-	int select(Review review);
 
-	Review getReviewByProdno(int prodno);
+	public List<Review> selectRecentReviews();
 
 	
 

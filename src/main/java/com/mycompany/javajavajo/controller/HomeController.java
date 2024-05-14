@@ -1,10 +1,15 @@
 package com.mycompany.javajavajo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.javajavajo.dto.Review;
+import com.mycompany.javajavajo.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,12 +17,15 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/")
 public class HomeController {
+	@Autowired
+	ReviewService reviewService;
 	
 	@RequestMapping("")
-	public String reviewResponse(Model model, Review review) {
-		int ordno = review.getOrdno();
-		model.addAttribute("Review", review);
-		model.addAttribute("ordno", ordno);
+	public String reviewResponse(Model model) {
+		List<Review> review = new ArrayList<>();
+		review = reviewService.review();
+		model.addAttribute("review", review);
+
 		log.info("실행");
 		return "home";
 	}
