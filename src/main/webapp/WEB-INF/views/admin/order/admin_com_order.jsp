@@ -101,15 +101,15 @@
 								</thead>
 								<tbody style="vertical-align: middle;">
 									<c:forEach var="order" items="${ordList}">
-										<tr>
-										<td><>${order.orddate}</td>
-										<td>${order.ordno}</td>
-										<td>${order.ordsttschar}</td>
-										<td>${order.orderer.ordname}</td>
-										<td>${order.ordproductcnt}건</td>
-										<td>${order.orderer.ordtel}</td>
-										<td>${order.recipient.rcptname}</td>
-										<td>${order.finprice}원</td>
+										<tr onclick="location.href='${pageContext.request.contextPath}/admin/order_detail?ordno=${order.ordno}'">
+											<td><>${order.orddate}</td>
+											<td>${order.ordno}</td>
+											<td>${order.ordsttschar}</td>
+											<td>${order.orderer.ordname}</td>
+											<td>${order.ordproductcnt}건</td>
+											<td>${order.orderer.ordtel}</td>
+											<td>${order.recipient.rcptname}</td>
+											<td>${order.finprice}원</td>
 										</tr>
 									</c:forEach>
 								</tbody>

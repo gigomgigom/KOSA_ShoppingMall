@@ -24,7 +24,7 @@
 				<div class="accordion-body">
 					<div class="d-flex flex-column">
 						<a class="btn row-1"
-							href="admin_member_view">회원조회</a>
+							href="move_nav_location?url=admin_member_view">회원조회</a>
 						<a class="btn row-1">관리자
 							계정 관리</a>
 					</div>
@@ -45,7 +45,7 @@
 				aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
 				<div class="accordion-body">
 					<div class="d-flex flex-column">
-						<a class="btn row-1" href="product_list">상품 조회</a>
+						<a class="btn row-1" href="move_nav_location?url=product_list">상품 조회</a>
 						<a class="btn row-1" onclick="openAddProduct()">상품 추가</a>
 					</div>
 				</div>
@@ -65,8 +65,8 @@
 				aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 				<div class="accordion-body">
 					<div class="d-flex flex-column">
-						<a class="btn row-1" href="uncom_order">미완료된 주문</a>
-						<a class="btn row-1" href="com_order">완료된 주문</a>
+						<a class="btn row-1" href="move_nav_location?url=uncom_order">미완료된 주문</a>
+						<a class="btn row-1" href="move_nav_location?url=com_order">완료된 주문</a>
 					</div>
 				</div>
 			</div>

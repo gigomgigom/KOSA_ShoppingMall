@@ -50,26 +50,25 @@
 						<b>회원 리스트</b>
 					</h5>
 					<hr class="w-100" />
-					<form method="get" action=""
+					<form id="memberSearchIndex" method="get" action="admin_member_view"
 						class="d-flex justify-content-end align-items-center">
 						<div class="form-check">
 							<input type="radio" class="form-check-input" id="radio1"
-								name="srcradio" value="name" checked>이름 <label
-								class="form-check-label" for="radio1"></label>
+								name="searchindex" value="1" ${searchIndex.searchindex==1?'checked':''}> 
+								<label	class="form-check-label" for="radio1">이름</label>
 						</div>
 						<div class="form-check">
 							<input type="radio" class="form-check-input" id="radio1"
-								name="srcradio" value="email">이메일 <label
-								class="form-check-label" for="radio1"></label>
+								name="searchindex" value="2" ${searchIndex.searchindex==2?'checked':''}> <label class="form-check-label" for="radio1">이메일</label>
 						</div>
 						<input type="text" class="form-control ms-4" placeholder="검색어 입력"
-							name="검색" style="width: 15%;">
-						<div
+							name="searchkeyword" style="width: 15%;" value="${searchIndex.searchkeyword}">
+						<button type="submit"
 							class="btn ms-1 d-flex justify-content-center align-items-center">
 							<img
 								src="${pageContext.request.contextPath}/resources/image/icon/search_icon.png"
 								width="20px">
-						</div>
+						</button>
 					</form>
 					<div class="mt-4">
 						<table class="table table-hover text-center">
@@ -100,29 +99,29 @@
 						<div class="d-flex justify-content-center mt-5">
 							<div>
 								<a class="btn btn-outline-primary btn-sm"
-									href="admin_member_view?pageNo=1">처음</a>
+									href="admin_member_view?pageno=1">처음</a>
 								<c:if test="${pager.groupNo>1}">
 									<a class="btn btn-outline-info btn-sm"
-										href="admin_member_view?pageNo=${pager.startPageNo-1}">이전</a>
+										href="admin_member_view?pageno=${pager.startPageNo-1}">이전</a>
 								</c:if>
 
 								<c:forEach var="i" begin="${pager.startPageNo}"
 									end="${pager.endPageNo}">
 									<c:if test="${pager.pageNo != i}">
 										<a class="btn btn-outline-success btn-sm"
-											href="admin_member_view?pageNo=${i}">${i}</a>
+											href="admin_member_view?pageno=${i}">${i}</a>
 									</c:if>
 									<c:if test="${pager.pageNo == i}">
-										<a class="btn btn-danger btn-sm" href="admin_member_view?pageNo=${i}">${i}</a>
+										<a class="btn btn-danger btn-sm" href="admin_member_view?pageno=${i}">${i}</a>
 									</c:if>
 								</c:forEach>
 
 								<c:if test="${pager.groupNo<pager.totalGroupNo}">
 									<a class="btn btn-outline-info btn-sm"
-										href="admin_member_view?pageNo=${pager.endPageNo+1}">다음</a>
+										href="admin_member_view?pageno=${pager.endPageNo+1}">다음</a>
 								</c:if>
 								<a class="btn btn-outline-primary btn-sm"
-									href="admin_member_view?pageNo=${pager.totalPageNo}">맨끝</a>
+									href="admin_member_view?pageno=${pager.totalPageNo}">맨끝</a>
 							</div>
 						</div>
 					</div>

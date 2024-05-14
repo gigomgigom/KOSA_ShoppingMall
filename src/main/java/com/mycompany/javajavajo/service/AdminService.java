@@ -31,6 +31,7 @@ import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.PointDtl;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.Recipient;
+import com.mycompany.javajavajo.dto.SearchIndex;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -77,14 +78,14 @@ public class AdminService {
 	//--------------------------------------------------------
 	//Admin-Member관리
 	//심영조-admin-memberList페이지-조건에 맞는 member들의 총 갯수를 가져옴
-	public int getTotalMemberRows() {
-		int totalRows = memberDao.selectTotalRows();
+	public int getTotalMemberRows(SearchIndex searchIndex) {
+		int totalRows = memberDao.selectTotalRows(searchIndex);
 		return totalRows;
 	}
 
 	//심영조-admin-memberList페이지-Pager 조건에 맞는 데이터(List<Member>)를 받아와라
-	public List<Member> getMemberList(Pager pager) {
-		List<Member> memberList = memberDao.selectByPage(pager);
+	public List<Member> getMemberList(SearchIndex searchIndex) {
+		List<Member> memberList = memberDao.selectByPage(searchIndex);
 		return memberList;
 	}
 

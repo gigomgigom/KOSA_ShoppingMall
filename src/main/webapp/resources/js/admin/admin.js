@@ -102,9 +102,8 @@ const updateOrderStts = () => {
 		data:formData,
 		contentType: false,
         processData: false,
-		success: function(responst) {
+		success: function(response) {
 			location.reload();
 		}
 	})
-	
 }

@@ -1,0 +1,23 @@
+package com.mycompany.javajavajo.dto;
+
+import java.util.Date;
+
+import lombok.Data;
+
+@Data
+public class SearchIndex {
+	//페이지 번호
+	private String pageno;
+	
+	private int sortindex; //정렬
+	private int ctgindex; //분류
+	
+	private String searchkeyword; //검색키워드
+	private int searchindex; //검색키워드 인덱스(만약 제목으로 검색할거야 그럼 제목 선택, 내용물로 검색할거야 그럼 내용물 선택)
+	
+	//기간별
+	private Date startdate; // 시작일자
+	private Date enddate; //종료일자
+	
+	private Pager pager;
+}
