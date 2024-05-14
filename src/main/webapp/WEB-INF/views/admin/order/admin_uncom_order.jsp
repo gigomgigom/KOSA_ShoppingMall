@@ -115,6 +115,7 @@
 										<th>수령자</th>
 										<th>금액</th>
 									</tr>
+									
 								</thead>
 								<tbody style="vertical-align: middle;">
 									<c:forEach var="order" items="${ordList}">
