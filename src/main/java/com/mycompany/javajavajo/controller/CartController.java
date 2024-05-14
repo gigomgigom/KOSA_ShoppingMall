@@ -110,6 +110,7 @@ public class CartController {
 				// cartItem (dto = 수량, 회원번호, 상품번호를 보내줌)
 				service.addCartItem(cartItem);
 			}
+			
 			return "redirect:/cart";
 		}
 }

@@ -119,7 +119,7 @@
 								<!--  -->
 								
 									<div class="mt-4 px-5 d-flex justify-content-between">
-										<span class="fw-bold">수량</span> <input type="number" value="0" min="0" name="qty"
+										<span class="fw-bold">수량</span> <input type="number" value="1" min="1" name="qty"
 											style="text-align: center;">
 									</div>
 	

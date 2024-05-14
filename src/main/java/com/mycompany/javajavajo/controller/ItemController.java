@@ -38,6 +38,7 @@ public class ItemController {
 	@RequestMapping("/item_detail")
 	public String itemDetail(int prodno, Model model) {
 		Product product = service.getProductByProdno(prodno);
+		log.info("상품 정보", product);
 		model.addAttribute("product", product);
 		return "item/item_detail";
 	}
