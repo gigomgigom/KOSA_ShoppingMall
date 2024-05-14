@@ -33,7 +33,7 @@
 		</div>
 		<div class="container-fluid d-flex flex-column justify-content-center bg-light">
 				<div class="p-3 d-flex justify-content-center">
-					<span>${order.ordstts }</span>
+					<span>${order.ordsttschar }</span>
 				</div>
 				
 				<div
@@ -58,12 +58,12 @@
 								<hr />
 								<div class="col text-end">
 									<div id="reviewButton${ordprod.prodno}">
-									<c:if test="${ordprod.hasReview == false and order.ordstts == '완료'}">
+									<c:if test="${ordprod.hasReview == false and order.ordsttschar == '완료'}">
 										<button type="button" class="btn btn-dark btn-sm" onclick="showModal(${ordprod.prodno})"
 											  data-bs-toggle="modal" data-bs-target="#myModal">사용후기 쓰기</button>
 									</c:if>
 									
-									<c:if test="${ordprod.hasReview == true or order.ordstts != '완료'}">
+									<c:if test="${ordprod.hasReview == true or order.ordsttschar != '완료'}">
 										<a prodno=${ordprod.prodno} href='${pageContext.request.contextPath}/item/item_detail?prodno=${ordprod.prodno}' 
 											class='btn btn-dark btn-sm'>상품으로 이동</a>
 									</c:if>
@@ -194,7 +194,7 @@
 					<div class="border border-2"></div>
 					<div class="container-fluid d-flex justify-content-center mb-3">
 					</div>
-					<c:if test="${order.ordstts != '주문 취소' and order.ordstts != '완료'}">
+					<c:if test="${order.ordsttschar != '주문 취소' and order.ordsttschar != '완료'}">
 						<div class="container-fluid">
 							<a href="${pageContext.request.contextPath}/order/cancel_order?ordno=${order.ordno}" 
 								class="btn btn-secondary w-100 mb-3">주문취소하기</a>

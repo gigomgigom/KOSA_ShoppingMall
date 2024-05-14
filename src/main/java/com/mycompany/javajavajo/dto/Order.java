@@ -33,4 +33,5 @@ public class Order {
 	//주문자, 수령자 정보
 	private Orderer orderer;
 	private Recipient recipient;
+	
 }
