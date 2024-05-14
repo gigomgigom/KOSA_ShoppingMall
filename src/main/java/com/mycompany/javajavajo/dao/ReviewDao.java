@@ -12,6 +12,8 @@ public interface ReviewDao {
 
 	int count(@Param("ordno") int ordno, @Param("prodno") int prodno);
 
+	Review getReviewByProdno(int prodno);
+
 	
 
 	

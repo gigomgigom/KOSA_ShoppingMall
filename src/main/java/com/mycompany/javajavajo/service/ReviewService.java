@@ -20,4 +20,10 @@ public class ReviewService {
 		return  result;
 	}
 
+	public Review getReviewByProdno(int prodno) {
+		
+		return reviewDao.getReviewByProdno(prodno);
+	}
+
+	
 }

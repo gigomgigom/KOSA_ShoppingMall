@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.javajavajo.dto.CartItem;
+import com.mycompany.javajavajo.dto.Product;
 
 @Mapper
 public interface CartItemDao {
@@ -18,5 +19,12 @@ public interface CartItemDao {
 	
 	//권우상 - int형 배열에 prodno를 담아 memno에 해당하면서 배열에 들어있는 prodno도 만족하는 모든 cartitem을 삭제한다
 	int deleteCartItems(@Param("memno") int memno, @Param("prodnos")int[] prodnos);
+
+	List<CartItem> selectCartItemByMemNo(int memNo);
+
+	Product selectProductByprodNo(int prodNo);
+
+	int insertCartItems(CartItem cartItem);
+
 
 }

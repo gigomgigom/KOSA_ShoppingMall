@@ -9,4 +9,7 @@ public interface CartDao {
 	public int insert(int memno);
 
 	public Cart selectByMemno(int memno);
+	
+	
+	
 }

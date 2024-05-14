@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mycompany.javajavajo.dto.Cart;
 import com.mycompany.javajavajo.dto.CartItem;
 import com.mycompany.javajavajo.dto.Member;
+import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.security.Tm1UserDetails;
 import com.mycompany.javajavajo.service.CartService;
 
@@ -71,4 +72,30 @@ public class CartController {
 		jo.put("result", jsonResult);
 		return jo.toString();
 	}
+	
+	// 신우호 - 장바구니 추가할 시 카트페이지 이동
+		@PostMapping("/cartAdd")
+		public String cartCart(Authentication authentiaction, Model model, CartItem cartItem) {
+			Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentiaction.getPrincipal();
+			int memNo = t1UserDetails.getMember().getMemno();
+			Product product = service.getproductByprodNo(cartItem.getProdno());
+			cartItem.setProduct(product);
+			cartItem.setMemno(memNo);
+			service.registCartItem(cartItem);
+			//카트아이템을 리스트로 가져오기(멤버의 기본키를 이용해서)
+			/*List<CartItem> cartItemList = service.getCartItemListByMemNo(memNo);
+			//카트 리스트를 for문을 돌려서 product를 set해주기
+			for(CartItem cartItem1 : cartItemList) {
+				//카트아이템의 prodno를 int타입 변수에 저장해준다.
+				int prodNo = cartItem1.getProdno();
+				//prodno을 이용해서 product를 찾아준다.
+				Product product = service.getproductByprodNo(prodNo);
+				//찾은 product를 카트아이템의 product에 세팅해준다.
+				cartItem.setProduct(product);
+				log.info("ww" + cartItem);
+			}
+			model.addAttribute("cartItemList", cartItemList);*/
+			return "redirect:/cart";
+		}
+
 }

@@ -1,5 +1,6 @@
 package com.mycompany.javajavajo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.MemberAdr;
 import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Order;
+import com.mycompany.javajavajo.dto.OrderList;
 import com.mycompany.javajavajo.dto.Orderer;
-import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.Recipient;
 import com.mycompany.javajavajo.security.Tm1UserDetails;
 import com.mycompany.javajavajo.service.AdminService;
@@ -87,37 +88,55 @@ public class OrderController {
 
 		return "order/orderDetail";
 	}
-
+	
+	
+	// 신우호 - 주문 내역 페이지
 	@RequestMapping("/order_history")
-	// 신우호 - 인증된 객체 확인 
 	public String orderHistory(Model model, Authentication authentication) {
+		// 인증된 객체를 확인한다.
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
-		int memno = t1UserDetails.getMember().getMemno();
-		// memno를 통해 order정보를 얻어옴
-		List<Order> orderList = orderService.getOrderListByMemno(memno);
-		log.info("" + memno);
-		// order 정보가 제대로 얻어와졌는지 확인
-		for (Order order : orderList) {
-			log.info("" + order);
-			// 신우호 - ordProdList에서 order을 통해 order안의 orderNo를 얻음,(상품이름 얻기) 
-			List<OrdProd> ordProdList = orderService.getOrdProdListByOrdno(order.getOrdno());
-			int ordno = order.getOrdno();
-			 
-			model.addAttribute("ordProdList", ordProdList);
-		}
-		Order oneOrder = orderList.get(0);
-		// order에서 orderno를 얻어옴
-		Order ordproductcnt = orderService.getOrderProductCnt(oneOrder.getOrdno());
-		log.info("" + ordproductcnt);
-		model.addAttribute("orderList", orderList);
-		Product product = orderService.getProductByproduct(ordproductcnt.getOneofordproduct());
-		model.addAttribute("product", product);
-		log.info("" + product);
-		for(Order order : orderList) {
-			// order(dto)의 ordproductcnt와 oneproduct를 개수만큼 돌려줘야 함
+		int memNo = t1UserDetails.getMember().getMemno();
+		
+		// orderDtoList를 선언한다.
+		List<OrderList> orderDtoList = new ArrayList<>();
+		
+		// 해당 유저의 주문목록을 돌려준다.
+		List<Order> orderList = orderService.getOrderListByMemno(memNo);
+		// orderList Null Check
+		if(orderList != null) {
+			for(Order order : orderList) {
+				// 주문한건에 대한 주문상품 목록을 돌려준다.
+				List<OrdProd> ordProdList = orderService.getOrdProdListByOrdno(order.getOrdno());
+				if(ordProdList.size() != 0) {
+					// 주문건에 대한 주문상품 갯수를 돌려준다. 상품명 외 몇건 이기 때문에 -1을 해줘야한다.
+					int ordCount = ordProdList.size() - 1;
+					// OrderList DTO 객체를 생성한다.
+					OrderList orderListDto = new OrderList();
+					orderListDto.setOrdNo(order.getOrdno());
+					orderListDto.setProdName(ordProdList.get(0).getProdname());
+					orderListDto.setTotalPrice(order.getFinprice());
+					orderListDto.setOrdDate(order.getOrddate());
+					orderListDto.setProdCnt(ordCount);
+					int ordSttsNum = order.getOrdstts();
+					if(ordSttsNum == 1) {
+						orderListDto.setProdStatus("주문");
+					}else if(ordSttsNum == 2) {
+						orderListDto.setProdStatus("입금");
+					}else if(ordSttsNum == 3) {
+						orderListDto.setProdStatus("배송");
+					}else if(ordSttsNum == 4) {
+						orderListDto.setProdStatus("완료");
+					}else if(ordSttsNum == 5) {
+						orderListDto.setProdStatus("취소");
+					}
+					orderDtoList.add(orderListDto); // orderDto 객체를 넣어준다.
+				}
+			}
+			model.addAttribute("orderList", orderDtoList);
 		}
 		return "order/orderHistory";
 	}
+
 	//권우상 - 주문 취소
 	@GetMapping("cancel_order")
 	public String cancelOrder(int ordno, Authentication authentication) {
