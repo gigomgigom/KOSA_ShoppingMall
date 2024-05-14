@@ -12,7 +12,6 @@ public class Order {
 	private int ordno;
 	private int memno;
 	private int ordstts;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date orddate;
 	private int ordprice;
 	private int discprice;

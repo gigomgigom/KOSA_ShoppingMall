@@ -27,5 +27,11 @@ public interface OrderDao {
 
 	//심영조 - Pager에 따른 주문 데이터를 조회하라
 	public List<Order> selectUncomOrderByPager(Pager pager);
+	
+	//심영조 - 완료 또는 취소된 주문들의 총 갯수를 알려줘
+	public int getTotalComOrder();
+	
+	//심영조 - 페이저 정보에 따라서 완료 또는 취소된 주문들의 리스트를 가져다줘
+	public List<Order> getComOrderListByPager(Pager pager);
 
 }

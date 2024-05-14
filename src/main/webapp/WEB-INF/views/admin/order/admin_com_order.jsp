@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,7 +60,7 @@
 							</div>
 							<div class="d-flex justify-content-between align-items-end mt-2">
 								<div>
-									<span>검색 결과 n건</span>
+									<span>검색 결과 ${totRows}건</span>
 								</div>
 								<div class="d-flex">
 									<div class="d-flex">
@@ -98,16 +100,18 @@
 									</tr>
 								</thead>
 								<tbody style="vertical-align: middle;">
-									<tr>
-										<td>2024-05-04</td>
-										<td>202405042030</td>
-										<td>배송대기중</td>
-										<td>심영조</td>
-										<td>4건</td>
-										<td>01028104870</td>
-										<td>심영우</td>
-										<td>25000원</td>
-									</tr>
+									<c:forEach var="order" items="${ordList}">
+										<tr>
+										<td><>${order.orddate}</td>
+										<td>${order.ordno}</td>
+										<td>${order.ordsttschar}</td>
+										<td>${order.orderer.ordname}</td>
+										<td>${order.ordproductcnt}건</td>
+										<td>${order.orderer.ordtel}</td>
+										<td>${order.recipient.rcptname}</td>
+										<td>${order.finprice}원</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 							<div class="d-flex justify-content-center">

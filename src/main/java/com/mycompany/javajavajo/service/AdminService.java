@@ -237,5 +237,15 @@ public class AdminService {
 		}
 		return orderResult+delResult;
 	}
+	//심영조-admin-Order-완료, 취소된 주문의 총 갯수를 가져와줘!
+	public int getTotalComRows() {
+		int totalComRows = orderDao.getTotalComOrder();
+		return totalComRows;
+	}
+	//심영조-admin-Order-완료, 취소된 주문의 리스트를 가져와줘!
+	public List<Order> getComOrderList(Pager pager) {
+		List<Order> comOrderList = orderDao.getComOrderListByPager(pager);
+		return comOrderList;
+	}
 
 }
