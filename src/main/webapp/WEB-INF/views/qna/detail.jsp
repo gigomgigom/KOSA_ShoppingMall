@@ -55,6 +55,12 @@
 			</div>
 
 			<div class="w-100 m-0 p-0 p-5 mb-5">
+				<c:if test="${qna.qnaattachoname != null }">
+					<div class="d-flex justify-content-end align-items-center m-0 mb-1 p-0">
+						첨부파일: <a class="text-dark"
+						href="${pageContext.request.contextPath}/qna/downloadQnaAttach?qnano=${qna.qnano}">${qna.qnaattachoname}</a>
+					</div>
+				</c:if>
 				<p class="m-0 p-0 ps-3">
 					 ${qna.qnacontent}
 				</p>

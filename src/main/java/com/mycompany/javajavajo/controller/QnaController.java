@@ -1,11 +1,15 @@
 package com.mycompany.javajavajo.controller;
 
-import static org.junit.jupiter.api.Assumptions.assumingThat;
-
+import java.io.IOException;
+import java.io.OutputStream;
+import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -13,10 +17,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Qna;
+import com.mycompany.javajavajo.security.Tm1UserDetails;
 import com.mycompany.javajavajo.service.QnaService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -71,7 +77,10 @@ public class QnaController {
 	// 글쓰기 페이지에서 dto로 게시물 작성에 필요한 정보들을 얻어옴
 	// Controller에서 Service로 요청
 	@PostMapping("/write_qna")
-	public String writeQna(Qna qna) {
+	public String writeQna(Qna qna, Authentication authentication) {
+		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
+		Member member  = t1UserDetails.getMember();
+		qna.setMemno(member.getMemno());
 		// 첨부파일이 null값이 아니고 비어있지 않으면 첨부파일의 오리지널 네임과, 타입을 세팅해줌
 		if (qna.getQnaattach() != null && !qna.getQnaattach().isEmpty()) {
 
@@ -83,7 +92,7 @@ public class QnaController {
 			} catch (Exception e) {
 			}
 		}
-
+		
 		qnaService.writeBoard(qna);
 
 		return "redirect:/qna/qna_list";
@@ -97,6 +106,7 @@ public class QnaController {
 		int pageNo = (qna.getRnum() - 1) / 5 + 1;
 		session.setAttribute("pageNo", pageNo + "");
 		model.addAttribute("qna", qna);
+		log.info(qna.getQnaattachtype());
 		return "qna/detail";
 	}
 
@@ -106,12 +116,24 @@ public class QnaController {
 		String keyword = "";
 		Qna qna = qnaService.getQna(qnano,keyword);
 		model.addAttribute("qna", qna);
-		return "qna/writeQna";
+		return "qna/updateQna";
 	}
 
 	// 글수정된 페이지로 이동
 	@PostMapping("/update_qna")
 	public String updateQna(Qna qna) {
+		
+		if (qna.getQnaattach() != null && !qna.getQnaattach().isEmpty()) {
+
+			qna.setQnaattachoname(qna.getQnaattach().getOriginalFilename());
+			qna.setQnaattachtype(qna.getQnaattach().getContentType());
+
+			try {
+				qna.setQnaattachdata(qna.getQnaattach().getBytes());
+			} catch (Exception e) {
+			}
+		}
+		
 		qnaService.updateQna(qna);
 		
 		return "redirect:/qna/qna_detail?qnano=" + qna.getQnano();
@@ -122,5 +144,36 @@ public class QnaController {
 		qnaService.deleteQna(qnano);
 		return "redirect:/qna/qna_list";
 	}
-
+	
+	//대표이미지를 다운로드
+	@GetMapping("/downloadQnaAttach")
+	public void downloadQnaAttach(int qnano, HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
+		Qna qnaAttach = qnaService.getQnaAttach(qnano);
+		log.info("run");
+		byte[] qnaAttachData = qnaAttach.getQnaattachdata();
+		
+		
+		response.setContentType(qnaAttach.getQnaattachtype());
+		String fileName = new String(qnaAttach.getQnaattachoname().getBytes("UTF-8"),"ISO-8859-1");
+		response.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
+		if(qnaAttachData == null) {
+			log.info("null"); 
+		}
+		log.info("run2");
+		OutputStream os = response.getOutputStream();
+		os.write(qnaAttachData);
+		os.flush();
+		os.close();
+	}
+	
+	@PostMapping(value="/delete_attach", produces="application/json; charset=UTF-8")
+	@ResponseBody()
+	public String deleteAttach(int qnano) {
+		int result = qnaService.deleteAttach(qnano);
+		
+		String jsonResult = (result > 0) ? "success" : "fail";
+		JSONObject jo = new JSONObject();
+		jo.put("result", jsonResult);
+		return jo.toString();
+	}
 }

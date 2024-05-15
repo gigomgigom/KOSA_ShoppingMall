@@ -63,4 +63,16 @@ public class QnaService {
 		int rowNum = qnaDao.deleteQna(qnano);
 	}
 
+	public Qna getQnaAttach(int qnano) {
+		
+		return qnaDao.selectQnaImgByqnano(qnano);
+	}
+
+	public int deleteAttach(int qnano) {
+		Qna qna = new Qna();
+		qna.setQnano(qnano);
+		int result = qnaDao.updateAttach(qna);
+		return result;
+	}
+
 }

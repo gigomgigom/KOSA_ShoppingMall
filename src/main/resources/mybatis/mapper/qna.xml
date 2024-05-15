@@ -15,11 +15,11 @@
 	<select id="selectByQnano" parameterType="int" resultType="Qna">
 		select *
 		from(
-		select	rownum as rnum, qnano, memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, qnawriter,
+		select	rownum as rnum, qnano, memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, qnawriter, qnaattachoname,
 				pretitle, preno, prememno, prelock, nexttitle, nextno, nextmemno, nextlock
 		from (
 			select 
-			qnano, qna.memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, memid as qnawriter,
+			qnano, qna.memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, memid as qnawriter, qnaattachoname,
 			lag(qnatitle,1,-1) over(order by qnano) as pretitle,  lag(qnano,1,-1) over(order by qnano) as preno,
 			lag(qna.memno,1,-1) over(order by qnano) as prememno, 	lag(qnalock,1,-1) over(order by qnano) as prelock,
 			lead(qnatitle,1,-1) over(order by qnano) as nexttitle,lead(qnano,1,-1) over(order by qnano) as nextno,
@@ -48,6 +48,12 @@
 		update qna set
 			qnatitle=#{qnatitle},
 			qnacontent=#{qnacontent}
+		    <if test="qnaattachoname != null">
+		    	, 
+				qnaattachoname=#{qnaattachoname}, 
+				qnaattachtype=#{qnaattachtype},
+				qnaattachdata=#{qnaattachdata}
+			</if>
 			where qnano = #{qnano}
 	</update>
 
@@ -90,7 +96,20 @@
 		where rnum >= #{pager.startRowNo}
 		]]>
 	</select>
-
+	
+	<select id="selectQnaImgByqnano">
+		select qnaattachoname, qnaattachtype, qnaattachdata
+		from qna
+		where qnano = #{qnano}
+	</select>
+	
+	<update id="updateAttach">
+		update qna
+		set qnaattachoname = #{qnaattachoname},
+		    qnaattachtype = #{qnaattachtype},
+		    qnaattachdata = #{qnaattachdata}
+		where qnano = #{qnano}
+	</update>
 </mapper>
 
 

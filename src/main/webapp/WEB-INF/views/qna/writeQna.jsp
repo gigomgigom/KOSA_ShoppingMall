@@ -20,13 +20,11 @@
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	</header>
 
-	<c:if test="${qna == null}">
-		<form action="write_qna" method="post" enctype="multipart/form-data">
-	</c:if>
+	
+	<form action="write_qna" method="post" enctype="multipart/form-data">
 
-	<c:if test="${qna != null}">
-		<form action="update_qna" method="post" enctype="multipart/form-data">
-	</c:if>
+
+
 	<div
 		class="container-fluid  d-flex flex-column align-items-center m-0 my-5 p-0">
 
@@ -40,9 +38,7 @@
 		<hr class="w-25 m-0 mb-5 p-0" />
 
 		<div class="row w-50 border-top border-bottom m-0 p-0">
-			<c:if test="${qna != null}">
-				<input type="hidden" name="qnano" value="${qna.qnano}">
-			</c:if>
+
 
 			<div
 				class="col-2 d-flex justify-content-center align-items-center border-end m-0 p-0 py-2"
@@ -52,23 +48,10 @@
 			<div
 				class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-2">
 				<input id='qnatitle' name="qnatitle" type="text"
-					class="form-control w-75" value="${qna.qnatitle}">
+					class="form-control w-75">
 			</div>
 		</div>
 
-		<div class="row w-50 border-bottom m-0 p-0">
-			<div
-				class="col-2 d-flex justify-content-center align-items-center border-end m-0 p-0 py-2"
-				style="background-color: #27374D; color: white">
-				<p class="m-0 p-0">작성자</p>
-			</div>
-			<div
-				class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-2">
-				<input id='memno' name="memno" readonly
-					class="w-75 text-center m-0 p-0" value='2'>
-				</p>
-			</div>
-		</div>
 
 		<div class="row w-50 border-bottom m-0 p-0">
 			<div
@@ -79,7 +62,7 @@
 			<div
 				class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-2">
 				<textarea id='content' name="qnacontent" class="form-control w-75"
-					rows="5">${qna.qnacontent}</textarea>
+					rows="5"></textarea>
 			</div>
 		</div>
 
@@ -102,15 +85,10 @@
 		</div>
 		<div
 			class="d-flex justify-conten-center align-items-center m-0 my-5 p-0">
-			<c:if test="${qna == null}">
-				<button id="btn-save" class="btn me-2"
+			<button id="btn-save" class="btn me-2"
 					style="background-color: #273740; color: white">저장</button>
-			</c:if>
-			<c:if test="${qna != null}">
-				<button id="btn-save" class="btn me-2"
-					style="background-color: #273740; color: white">수정</button>
-			</c:if>
-			<a href="list" class="btn border text-decoration-none text-dark">취소</a>
+	
+			<a href="qna_list" class="btn border text-decoration-none text-dark">취소</a>
 		</div>
 	</div>
 	</form>
