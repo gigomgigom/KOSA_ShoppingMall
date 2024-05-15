@@ -317,7 +317,7 @@ public class AdminController {
 		
 		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
 		
-		log.info(searchIndex.getStartdate()+"");
+		log.info("입력된 시작일" + searchIndex.getStartdate());
 		
 		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
 		

@@ -44,7 +44,7 @@
 		<if test="ctgindex != 0">
 			and ordstts = #{ctgindex}
 			<if test="startdate != null">
-				and (between to_date(#{startdate}, 'YYYY-MM-DD') and to_date(#{enddate}, 'YYYY-MM-DD'))
+				and orddate between #{startdate} and #{enddate}
 			</if>
 			<if test="searchkeyword!=null and !searchkeyword.equals('')">
 				<if test="searchindex == 1">
@@ -58,7 +58,7 @@
 		<if test="ctgindex == 0">
 			and ordstts in(1, 2, 3)
 			<if test="startdate != null">
-				and (between #{startdate} and #{enddate})
+				and orddate between #{startdate} and #{enddate}
 			</if>
 			<if test="searchkeyword!=null and !searchkeyword.equals('')">
 				<if test="searchindex == 1">
@@ -85,7 +85,7 @@
 		<if test="ctgindex != 0">
 			and ordstts = #{ctgindex}
 			<if test="startdate != null">
-				and (between #{startdate} and #{enddate})
+				and orddate between #{startdate} and #{enddate}
 			</if>
 			<if test="searchkeyword!=null and !searchkeyword.equals('')">
 				<if test="searchindex == 1">
@@ -99,7 +99,7 @@
 		<if test="ctgindex == 0">
 			and ordstts in(1, 2, 3)
 			<if test="startdate != null">
-				and (between #{startdate} and #{enddate})
+				and orddate between #{startdate} and #{enddate}
 			</if>
 			<if test="searchkeyword!=null and !searchkeyword.equals('')">
 				<if test="searchindex == 1">
