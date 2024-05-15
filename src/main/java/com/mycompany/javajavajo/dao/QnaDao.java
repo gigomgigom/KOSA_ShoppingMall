@@ -23,5 +23,9 @@ public interface QnaDao {
 	public int deleteQna(int qnano);
 
 	public int count(String keyword);
+
+	public Qna selectQnaImgByqnano(int qnano);
+
+	public int updateAttach(Qna qna);
 	
 }
