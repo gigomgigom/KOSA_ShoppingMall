@@ -137,4 +137,18 @@
 		    )
 		<![CDATA[where rownum <= 4]]>
 	</select>
+	
+	<select id="selectReviewByProdNo" parameterType="int" resultType="Product">
+		select * 
+		from (
+			select product.prodno, ctgno, prodname, prodprice, ordcount, rvcount, avgrating
+			from product,
+			(select count(qty) as ordcount, prodno from ordprod group by prodno) o,
+			(select count(rvrating) as rvcount, round(avg(nvl(rvrating,0)),1) as avgrating, prodno from review group by prodno) r
+			where product.prodno = o.prodno(+)
+			and product.prodno = r.prodno(+)
+			)
+		where prodno = #{prodno}
+	</select>
+	
 </mapper>

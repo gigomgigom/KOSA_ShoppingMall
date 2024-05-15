@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,7 +109,12 @@
 								<!--상품정보(상품명, 구매후기, 가격, 배송비)-->
 								<div class="d-flex flex-column border-bottom">
 									<h5 class="fw-bold">${product.prodname}</h5>
-									<span>구매후기 n건 | ⭐⭐⭐⭐</span> <span class="mt-4 fw-bold">소비자가
+									<span>구매후기 ${product.rvcount}건 | <c:if test="${product.avgrating >= 1 && product.avgrating < 2}">⭐</c:if>
+													<c:if test="${product.avgrating >= 2 && product.avgrating < 3}">⭐⭐</c:if>
+													<c:if test="${product.avgrating >= 3 && product.avgrating < 4}">⭐⭐⭐</c:if>
+													<c:if test="${product.avgrating >= 4 && product.avgrating < 5}">⭐⭐⭐⭐</c:if>
+													<c:if test="${product.avgrating == 5}">⭐⭐⭐⭐⭐</c:if>
+									</span> <span class="mt-4 fw-bold">소비자가
 										${product.prodprice}원</span> 
 										
 										<span class="mt-2" style="font-size: 0.75rem;">배송비

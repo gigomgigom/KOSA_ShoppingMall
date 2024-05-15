@@ -46,17 +46,8 @@ public interface ProductDao {
 
 	List<Product> selectBestProduct();
 
-	
-	
+	// 신우호 - prodno를 사용해서 product정보 불러옴
+	Product selectReviewByProdNo(int prodno);
 
-	
-	
-
-	
-	
-
-	
-
-	
 	
 }

@@ -7,11 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.mycompany.javajavajo.dao.ProductDao;
 import com.mycompany.javajavajo.dao.ProductImgDao;
+import com.mycompany.javajavajo.dao.ReviewDao;
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.ProductImg;
+import com.mycompany.javajavajo.dto.Review;
 
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -22,6 +23,9 @@ public class ItemService {
 	
 	@Autowired
 	private ProductDao productDao;
+	
+	@Autowired
+	private ReviewDao reviewDao;
 	
 	//번호에 해당하는 productimg 객체 받아오기
 	public ProductImg getProductImages(int prodno) {
@@ -42,8 +46,9 @@ public class ItemService {
 	//2. Dao객체의 메소드를 호출됬을 때 반환하는 타입은 무엇일까?
 	//3. Dao의 추상메소드를 resources/mybatis/mapper/product.xml에서 구현이 됬습니둥
 	//다음단계는 mybatis에서의 product.xml로 이동!
+	// Prodno를 사용해서 product의 정보들을 불러옴
 	public Product getProductByProdno(int prodno) {
-		Product product = productDao.selectByProdno(prodno);
+		Product product = productDao.selectReviewByProdNo(prodno);
 		return product;
 	}
 
@@ -56,6 +61,27 @@ public class ItemService {
 	public List<Product> getBestProduct() {
 		return productDao.selectBestProduct();
 	}
+
+
+	public List<Review> getReviewListByProdNo(int prodno) {
+		
+		return reviewDao.selectReviewListByProdNo(prodno);
+	}
+
+
+	public Review getReviceByProdNo(int prodno) {
+		Review review = reviewDao.selectReviewByProdNo(prodno);
+		return review;
+	}
+
+
+	
+
+
+	
+	
+	// 상품번호를 사용해서 리뷰정보를 불러옴
+	
 
 
 }
