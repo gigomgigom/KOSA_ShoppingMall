@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Pager;
+import com.mycompany.javajavajo.dto.SearchIndex;
 
 @Mapper
 public interface OrderDao {
@@ -23,10 +24,10 @@ public interface OrderDao {
 	public int updateOrdStts(@Param("ordno") int ordno, @Param("ordstts") int ordstts);
 
 	//심영조 - 완료/취소가 되지않은 주문들의 수를 조회한다.
-	public int getTotalUncomOrders();
+	public int getTotalUncomOrders(SearchIndex searchIndex);
 
 	//심영조 - Pager에 따른 주문 데이터를 조회하라
-	public List<Order> selectUncomOrderByPager(Pager pager);
+	public List<Order> selectUncomOrderByPager(SearchIndex searchIndex);
 	
 	//심영조 - 완료 또는 취소된 주문들의 총 갯수를 알려줘
 	public int getTotalComOrder();

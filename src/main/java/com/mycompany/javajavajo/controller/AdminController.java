@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mycompany.javajavajo.dto.Category;
@@ -32,6 +31,7 @@ import com.mycompany.javajavajo.dto.ProductImg;
 import com.mycompany.javajavajo.dto.Recipient;
 import com.mycompany.javajavajo.dto.SearchIndex;
 import com.mycompany.javajavajo.service.AdminService;
+import com.mycompany.javajavajo.service.PagerService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,9 +40,11 @@ import lombok.extern.slf4j.Slf4j;
 //@Secured("ROLE_ADMIN")
 @RequestMapping("/admin")
 public class AdminController {
-
+	
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private PagerService pagerService;
 
 	//메뉴바를 눌렀을때 세션에 저장되어있는 페이저 인덱스 초기화 를 위한 요청 메소드
 	@GetMapping("/move_nav_location")
@@ -72,28 +74,7 @@ public class AdminController {
 		//세션에 저장되어있는 SearchIndex 데이터를 가져오기
 		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
 		
-		if(searchIndex.getPageno() == null) {
-			if(sessionSearchIndex == null) {
-				searchIndex.setPageno("1");
-			} else {
-				searchIndex.setPageno(sessionSearchIndex.getPageno());
-			}
-		}
-
-		if(searchIndex.getSearchkeyword() == null) {
-			if(sessionSearchIndex != null) {
-				searchIndex.setSearchkeyword(sessionSearchIndex.getSearchkeyword());
-			}
-		}
-
-		if(searchIndex.getSearchindex() == 0) {
-			if(sessionSearchIndex != null) {
-				searchIndex.setSearchindex(sessionSearchIndex.getSearchindex());
-			}
-		}
-
-		//세션에 pageNo 저장
-		session.setAttribute("searchIndex", searchIndex);
+		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
 
 		int intPageNo = Integer.parseInt(searchIndex.getPageno());
 		
@@ -103,6 +84,7 @@ public class AdminController {
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
 
 		searchIndex.setPager(pager);
+		session.setAttribute("searchIndex", searchIndex);
 
 		List<Member> memberList = adminService.getMemberList(searchIndex);
 
@@ -192,35 +174,16 @@ public class AdminController {
 		
 		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
 		
-		if(searchIndex.getPageno() == null) {
-			if(sessionSearchIndex == null) {
-				searchIndex.setPageno("1");
-			} else {
-				searchIndex.setPageno(sessionSearchIndex.getPageno());
-			}
-		}
-		//전체 긁어오는건 -1입니다 오해 ㄴㄴ
-		if(searchIndex.getCtgindex() == 0) {
-			if(sessionSearchIndex != null) {
-				searchIndex.setCtgindex(sessionSearchIndex.getCtgindex());
-			}
-		}
-		
-		if(searchIndex.getSearchkeyword() == null) {
-			if(sessionSearchIndex != null) {
-				searchIndex.setSearchkeyword(sessionSearchIndex.getSearchkeyword());
-			}
-		}
-		
-		//세션에 pageNo 저장
-		session.setAttribute("searchIndex", searchIndex);
+		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
 		
 		int intPageNo = Integer.parseInt(searchIndex.getPageno());
 		
 		int rowsPagingTarget = adminService.getTotalProductRows(searchIndex);
 		
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
+		
 		searchIndex.setPager(pager);
+		session.setAttribute("searchIndex", searchIndex);
 
 		List<Product> productList = adminService.getProductList(searchIndex);
 		
@@ -350,32 +313,30 @@ public class AdminController {
 	//주문관리 컨트롤러
 	//미완료 주문 리스트 화면으로 이동
 	@GetMapping("/uncom_order")
-	public String uncomOrder(Model model, String pageNo, HttpSession session) {
-		if(pageNo == null) {
-			log.info(pageNo);
-			//pageNo를 받지 못했을 경우 세션에 저장되어 있는 값을 가져와서 확인한다.
-			pageNo = (String) session.getAttribute("uncomPageNo");
-			if(pageNo == null) {
-				log.info(pageNo);
-				//세션에 마저도 pageNo가 저장되어있지 않다면 "1"로 강제 세팅
-				pageNo="1";
-			}
-		}
-		log.info(pageNo);
-		//세션에 pageNo 저장
-		session.setAttribute("uncomPageNo", pageNo);
-		int intPageNo = Integer.parseInt(pageNo);
-
-		int rowsPagingTarget = adminService.getTotalUncomRows();
+	public String uncomOrder(SearchIndex searchIndex, Model model, HttpSession session) {
+		
+		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
+		
+		log.info(searchIndex.getStartdate()+"");
+		
+		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
+		
+		int intPageNo = Integer.parseInt(searchIndex.getPageno());
+		
+		int rowsPagingTarget = adminService.getTotalUncomRows(searchIndex);
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
-
-		List<Order> ordList = adminService.getUncomOrderList(pager);
-
+		
+		searchIndex.setPager(pager);
+		session.setAttribute("searchIndex", searchIndex);
+		
+		List<Order> ordList = adminService.getUncomOrderList(searchIndex);
+		
 		for(Order order : ordList) {
 			order.setOrderer(adminService.getOrdererByOrdno(order.getOrdno()));
 			order.setRecipient(adminService.getRcptByOrdno(order.getOrdno()));
 			order.setOrdproductcnt(adminService.getOrderProductCnt(order.getOrdno()).getOrdproductcnt());
 		}
+		
 		model.addAttribute("totRows", rowsPagingTarget);
 		model.addAttribute("pager", pager);
 		model.addAttribute("ordList", ordList);

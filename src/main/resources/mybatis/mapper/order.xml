@@ -10,7 +10,8 @@
 		insert into ord (ordno, memno, ordstts, orddate, ordprice, discprice,
 		finprice)
 		values
-		(#{ordno}, #{memno}, #{ordstts}, sysdate, #{ordprice}, #{discprice},
+		(#{ordno}, #{memno}, #{ordstts}, sysdate, #{ordprice},
+		#{discprice},
 		#{finprice})
 	</insert>
 
@@ -25,7 +26,8 @@
 		select ordno, memno, ord.ordstts, ordstts.ordsttschar,
 		orddate, ordprice, discprice, finprice, rqst
 		from ord, ordstts
-		where ord.ordstts = ordstts.ordsttsno and ord.ordno = #{ordno}
+		where
+		ord.ordstts = ordstts.ordsttsno and ord.ordno = #{ordno}
 	</select>
 
 	<update id="updateOrdStts">
@@ -35,33 +37,94 @@
 		#{ordno}
 	</update>
 
-	<select id="getTotalUncomOrders">
-		select count(*) from ord where ordstts in(1, 2, 3)
+	<select id="getTotalUncomOrders" parameterType="SearchIndex">
+		select count(*)
+		from ord, orderer
+		where ord.ordno = orderer.ordno
+		<if test="ctgindex != 0">
+			and ordstts = #{ctgindex}
+			<if test="startdate != null">
+				and (between to_date(#{startdate}, 'YYYY-MM-DD') and to_date(#{enddate}, 'YYYY-MM-DD'))
+			</if>
+			<if test="searchkeyword!=null and !searchkeyword.equals('')">
+				<if test="searchindex == 1">
+					and ord.ordno = #{searchkeyword}
+				</if>
+				<if test="searchindex == 2">
+					and ordname = #{searchkeyword}
+				</if>
+			</if>
+		</if>
+		<if test="ctgindex == 0">
+			and ordstts in(1, 2, 3)
+			<if test="startdate != null">
+				and (between #{startdate} and #{enddate})
+			</if>
+			<if test="searchkeyword!=null and !searchkeyword.equals('')">
+				<if test="searchindex == 1">
+					and ord.ordno = #{searchkeyword}
+				</if>
+				<if test="searchindex == 2">
+					and ordname = #{searchkeyword}
+				</if>
+			</if>
+		</if>
+
 	</select>
 
-	<select id="selectUncomOrderByPager" parameterType="Pager"
+	<select id="selectUncomOrderByPager" parameterType="SearchIndex"
 		resultType="Order">
-		<![CDATA[
+		
 		select rnum, ordno, memno, ordstts, ordsttschar, orddate, ordprice, discprice, finprice
 		from (
 		select rownum as rnum, ordno, memno, ordstts, ordsttschar, orddate, ordprice, discprice, finprice
 		from (
-		select ordno, memno, ord.ordstts, ordstts.ordsttschar, orddate, ordprice, discprice, finprice
+		select ord.ordno, ord.memno, ord.ordstts, ordstts.ordsttschar, ord.orddate, ord.ordprice, ord.discprice, ord.finprice
 		from ord, ordstts
-		where ord.ordstts = ordstts.ordsttsno and ordstts in(1, 2, 3)
+		where ord.ordstts = ordstts.ordsttsno
+		<if test="ctgindex != 0">
+			and ordstts = #{ctgindex}
+			<if test="startdate != null">
+				and (between #{startdate} and #{enddate})
+			</if>
+			<if test="searchkeyword!=null and !searchkeyword.equals('')">
+				<if test="searchindex == 1">
+					and ord.ordno = #{searchkeyword}
+				</if>
+				<if test="searchindex == 2">
+					and ordname = #{searchkeyword}
+				</if>
+			</if>
+		</if>
+		<if test="ctgindex == 0">
+			and ordstts in(1, 2, 3)
+			<if test="startdate != null">
+				and (between #{startdate} and #{enddate})
+			</if>
+			<if test="searchkeyword!=null and !searchkeyword.equals('')">
+				<if test="searchindex == 1">
+					and ord.ordno = #{searchkeyword}
+				</if>
+				<if test="searchindex == 2">
+					and ordname = #{searchkeyword}
+				</if>
+			</if>
+		</if>
 		order by ordno desc
 		)
-		where rownum <= #{endRowNo}
+		where rownum <![CDATA[<]]>= #{pager.endRowNo}
 		)
-		where rnum >= #{startRowNo}
-		]]>
+		where rnum <![CDATA[>]]>= #{pager.startRowNo}
+		
 	</select>
-	
+
 	<select id="getTotalComOrder" resultType="int">
-		select count(*) from ord where ordstts in(4, 5)
+		select count(*) from
+		ord where ordstts in(4, 5)
 	</select>
-	
-	<select id="getComOrderListByPager" parameterType="Pager" resultType="Order">
+
+	<select id="getComOrderListByPager" parameterType="Pager"
+		resultType="Order">
 		<![CDATA[
 		select rnum, ordno, memno, ordstts, ordsttschar, orddate, ordprice, discprice, finprice
 		from (

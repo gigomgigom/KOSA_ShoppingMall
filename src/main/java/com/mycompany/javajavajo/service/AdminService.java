@@ -189,13 +189,13 @@ public class AdminService {
 		return result;
 	}
 	//심영조-admin-Uncom Order - 완료/취소되지않은 주문들의 총 갯수를 찾는다.
-	public int getTotalUncomRows() {
-		int totalUncomRows = orderDao.getTotalUncomOrders();
+	public int getTotalUncomRows(SearchIndex searchIndex) {
+		int totalUncomRows = orderDao.getTotalUncomOrders(searchIndex);
 		return totalUncomRows;
 	}
 	//심영조-admin-Uncom Order - 완료/취소되지않은 주문들의 목록을 찾아!
-	public List<Order> getUncomOrderList(Pager pager) {
-		List<Order> orderList = orderDao.selectUncomOrderByPager(pager);
+	public List<Order> getUncomOrderList(SearchIndex searchIndex) {
+		List<Order> orderList = orderDao.selectUncomOrderByPager(searchIndex);
 		return orderList;
 	}
 	//심영조-admin-Uncom Order - 주문번호를 통해 주문자 정보 가져오기
