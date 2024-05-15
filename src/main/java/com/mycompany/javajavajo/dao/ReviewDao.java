@@ -17,6 +17,17 @@ public interface ReviewDao {
 
 	public List<Review> selectRecentReviews();
 
+
+	List<Review> selectReviewListByProdNo(int prodno);
+
+	Review selectReviewByProdNo(int prodno);
+
+	
+
+	
+
+	
+
 	
 
 	
