@@ -188,28 +188,48 @@ public class AdminController {
 	//상품관리 컨트롤러
 	//상품 리스트 출력하기
 	@GetMapping("/product_list")
-	public String productList(Model model, String pageNo, HttpSession session) {
-		if(pageNo == null) {
-			//pageNo를 받지 못했을 경우 세션에 저장되어 있는 값을 가져와서 확인한다.
-			pageNo = (String) session.getAttribute("productPageNo");
-			if(pageNo == null) {
-				//세션에 마저도 pageNo가 저장되어있지 않다면 "1"로 강제 세팅
-				pageNo="1";
+	public String productList(SearchIndex searchIndex, Model model, HttpSession session) {
+		
+		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
+		
+		if(searchIndex.getPageno() == null) {
+			if(sessionSearchIndex == null) {
+				searchIndex.setPageno("1");
+			} else {
+				searchIndex.setPageno(sessionSearchIndex.getPageno());
 			}
 		}
+		//전체 긁어오는건 -1입니다 오해 ㄴㄴ
+		if(searchIndex.getCtgindex() == 0) {
+			if(sessionSearchIndex != null) {
+				searchIndex.setCtgindex(sessionSearchIndex.getCtgindex());
+			}
+		}
+		
+		if(searchIndex.getSearchkeyword() == null) {
+			if(sessionSearchIndex != null) {
+				searchIndex.setSearchkeyword(sessionSearchIndex.getSearchkeyword());
+			}
+		}
+		
 		//세션에 pageNo 저장
-		session.setAttribute("productPageNo", pageNo);
-		int intPageNo = Integer.parseInt(pageNo);
-
-		int rowsPagingTarget = adminService.getTotalProductRows();
+		session.setAttribute("searchIndex", searchIndex);
+		
+		int intPageNo = Integer.parseInt(searchIndex.getPageno());
+		
+		int rowsPagingTarget = adminService.getTotalProductRows(searchIndex);
+		
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
+		searchIndex.setPager(pager);
 
-		List<Product> productList = adminService.getProductList(pager);
-
-
+		List<Product> productList = adminService.getProductList(searchIndex);
+		
 		model.addAttribute("pager", pager);
 		model.addAttribute("productList", productList);
 
+		List<Category> ctgList = adminService.getAllCategory();
+		model.addAttribute("ctgList", ctgList);
+		
 		model.addAttribute("menuNum", 1);
 		return "admin/product/admin_product_list";
 	}

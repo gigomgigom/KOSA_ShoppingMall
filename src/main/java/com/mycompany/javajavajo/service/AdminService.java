@@ -145,13 +145,13 @@ public class AdminService {
 	//--------------------------------------------------------
 	//Admin-Product관리
 	//심영조-admin-product관리 페이지 - 상품들의 갯수를 가져와
-	public int getTotalProductRows() {
-		return productDao.selectTotalProductCnt();
+	public int getTotalProductRows(SearchIndex searchIndex) {
+		return productDao.selectTotalProductCnt(searchIndex);
 	}
 
 	//심영조-admin-product관리 페이지 - 페이지 상태 별 상품들의 리스트를 가져와
-	public List<Product> getProductList(Pager pager) {
-		List<Product> productList = productDao.selectProductByPager(pager);
+	public List<Product> getProductList(SearchIndex searchIndex) {
+		List<Product> productList = productDao.selectProductByPager(searchIndex);
 		return productList;
 	}
 

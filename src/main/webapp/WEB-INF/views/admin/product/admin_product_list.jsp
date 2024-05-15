@@ -49,29 +49,29 @@
 					</h5>
 					<hr class="w-100" />
 					<div class="d-flex flex-column">
-						<form method="get" action=""
+						<form method="get" action="product_list"
 							class="d-flex justify-content-between align-items-center">
 							<div class="d-flex">
 								<div class="form-group d-flex align-items-center"
 									style="width: 250px">
 									<label for="ctg" style="width: 100px">카테고리</label> <select
-										class="form-control" id="ctg" name="ctgno">
-										<option value="0" selected>전체</option>
-										<option value="1">사료</option>
-										<option value="2">간식</option>
-										<option value="3">영양제</option>
+										class="form-control" id="ctg" name="ctgindex">
+										<option value="-1" ${searchIndex.ctgindex == 0?'selected':''}>전체</option>
+										<c:forEach var="ctg" items="${ctgList}">
+											<option value="${ctg.ctgno}" ${searchIndex.ctgindex == ctg.ctgno?'selected':''}>${ctg.ctgnm}</option>
+										</c:forEach>
 									</select>
 								</div>
 							</div>
 							<div class="d-flex">
 								<input type="text" class="form-control ms-4"
-									placeholder="검색어 입력" name="검색" style="width: 300px;">
-								<div
+									placeholder="상품명 입력" name="searchkeyword" style="width: 300px;" value="${searchIndex.searchkeyword}">
+								<button type="submit"
 									class="btn ms-1 d-flex justify-content-center align-items-center">
 									<img
 										src="${pageContext.request.contextPath}/resources/image/icon/search_icon.png"
 										width="20px">
-								</div>
+								</button>
 							</div>
 						</form>
 						<div class="mt-4">
