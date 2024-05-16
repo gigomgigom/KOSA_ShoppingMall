@@ -8,7 +8,7 @@
 		destroy-method="close">
 		<!-- Setter주입(연결 객체 안에 들어갈 연결정보들을 Setter주입을 통해 입력한다.) -->
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@kosa163.iptime.org:1521:orcl"/>
+		<property name="url" value="jdbc:oracle:thin:@kosa164.iptime.org:1521:orcl"/>
 		<property name="username" value="user_mini_team1"/>
 		<property name="password" value="oracle"/>
 		
