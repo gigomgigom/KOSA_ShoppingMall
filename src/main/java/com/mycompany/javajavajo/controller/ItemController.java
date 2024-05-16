@@ -39,23 +39,28 @@ public class ItemController {
 	@RequestMapping("/item_detail")
 	public String itemDetail(int prodno, Model model) {
 		Product product = service.getProductByProdno(prodno);
-		if(product == null) {
-			log.info("실행 진행시켜");
-		}
-		log.info("평점" + product.getAvgrating());
 		model.addAttribute("product", product);
-		
 		return "item/item_detail";
 	}
+	
 	
 	@RequestMapping("/item_info")
 	public String itemInfo(Model model) {
 		return "item/item_info";
 	}
+	// 신우호 - 
 	@RequestMapping("/item_review")
-	public String itemReview(Model model) {
+	public String itemReview(Model model, int prodno) {
+		log.info("aJax" + prodno);
+		List<Review> reviewList = service.getReviewListByProdNo(prodno);
+		for(Review review : reviewList) {
+			log.info("내용: " + review.getRvcontent());
+		}
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("prodno", prodno);
 		return "item/item_review";
 	}
+	
 	@RequestMapping("/item_qa")
 	public String itemQa(Model model) {
 		return "item/item_qa";
@@ -139,5 +144,6 @@ public class ItemController {
 		os.flush();
 		os.close();
 	}
+	
 	
 }
