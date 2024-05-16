@@ -58,14 +58,16 @@
 										class="form-control" id="ctg" name="ctgindex">
 										<option value="-1" ${searchIndex.ctgindex == 0?'selected':''}>전체</option>
 										<c:forEach var="ctg" items="${ctgList}">
-											<option value="${ctg.ctgno}" ${searchIndex.ctgindex == ctg.ctgno?'selected':''}>${ctg.ctgnm}</option>
+											<option value="${ctg.ctgno}"
+												${searchIndex.ctgindex == ctg.ctgno?'selected':''}>${ctg.ctgnm}</option>
 										</c:forEach>
 									</select>
 								</div>
 							</div>
 							<div class="d-flex">
 								<input type="text" class="form-control ms-4"
-									placeholder="상품명 입력" name="searchkeyword" style="width: 300px;" value="${searchIndex.searchkeyword}">
+									placeholder="상품명 입력" name="searchkeyword" style="width: 300px;"
+									value="${searchIndex.searchkeyword}">
 								<button type="submit"
 									class="btn ms-1 d-flex justify-content-center align-items-center">
 									<img
@@ -93,47 +95,54 @@
 											<td onclick="openProductDetail(${product.prodno})">${product.prodno}</td>
 											<td onclick="openProductDetail(${product.prodno})">${product.prodname}</td>
 											<td onclick="openProductDetail(${product.prodno})">${product.prodprice}원</td>
-											<td onclick="openProductDetail(${product.prodno})"><fmt:formatDate value="${product.proddate}" pattern="yyyy-MM-dd"/></td>
+											<td onclick="openProductDetail(${product.prodno})"><fmt:formatDate
+													value="${product.proddate}" pattern="yyyy-MM-dd" /></td>
 											<td>
-												<form action="updateProdStock" class="d-flex justify-content-center" method="post">
-													<input type="number" style="width: 50px" value="${product.prodstock}" name="prodstock">
-													<input type="hidden" value="${product.prodno}" name="prodno">
-													<button type="submit" class="btn btn-primary btn-sm">재고 수정</button>
+												<form action="updateProdStock"
+													class="d-flex justify-content-center" method="post">
+													<input type="number" style="width: 50px"
+														value="${product.prodstock}" name="prodstock"> <input
+														type="hidden" value="${product.prodno}" name="prodno">
+													<button type="submit" class="btn btn-primary btn-sm">재고
+														수정</button>
 												</form>
 											</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-							<div class="d-flex justify-content-center mt-5">
-								<div>
-									<a class="btn btn-outline-primary btn-sm"
-										href="product_list?pageno=1">처음</a>
-									<c:if test="${searchIndex.pager.groupNo>1}">
-										<a class="btn btn-outline-info btn-sm"
-											href="product_list?pageno=${searchIndex.pager.startPageNo-1}">이전</a>
-									</c:if>
-
-									<c:forEach var="i" begin="${searchIndex.pager.startPageNo}"
-										end="${searchIndex.pager.endPageNo}">
-										<c:if test="${searchIndex.pager.pageNo != i}">
-											<a class="btn btn-outline-success btn-sm"
-												href="product_list?pageno=${i}">${i}</a>
+							<c:if test="${searchIndex.pager.totalPageNo > 1}">
+								<div class="d-flex justify-content-center mt-5">
+									<div>
+										<a class="btn btn-outline-primary btn-sm"
+											href="product_list?pageno=1">처음</a>
+										<c:if test="${searchIndex.pager.groupNo>1}">
+											<a class="btn btn-outline-info btn-sm"
+												href="product_list?pageno=${searchIndex.pager.startPageNo-1}">이전</a>
 										</c:if>
-										<c:if test="${searchIndex.pager.pageNo == i}">
-											<a class="btn btn-danger btn-sm"
-												href="product_list?pageno=${i}">${i}</a>
-										</c:if>
-									</c:forEach>
 
-									<c:if test="${searchIndex.pager.groupNo<searchIndex.pager.totalGroupNo}">
-										<a class="btn btn-outline-info btn-sm"
-											href="product_list?pageno=${searchIndex.pager.endPageNo+1}">다음</a>
-									</c:if>
-									<a class="btn btn-outline-primary btn-sm"
-										href="product_list?pageno=${searchIndex.pager.totalPageNo}">맨끝</a>
+										<c:forEach var="i" begin="${searchIndex.pager.startPageNo}"
+											end="${searchIndex.pager.endPageNo}">
+											<c:if test="${searchIndex.pager.pageNo != i}">
+												<a class="btn btn-outline-success btn-sm"
+													href="product_list?pageno=${i}">${i}</a>
+											</c:if>
+											<c:if test="${searchIndex.pager.pageNo == i}">
+												<a class="btn btn-danger btn-sm"
+													href="product_list?pageno=${i}">${i}</a>
+											</c:if>
+										</c:forEach>
+
+										<c:if
+											test="${searchIndex.pager.groupNo<searchIndex.pager.totalGroupNo}">
+											<a class="btn btn-outline-info btn-sm"
+												href="product_list?pageno=${searchIndex.pager.endPageNo+1}">다음</a>
+										</c:if>
+										<a class="btn btn-outline-primary btn-sm"
+											href="product_list?pageno=${searchIndex.pager.totalPageNo}">맨끝</a>
+									</div>
 								</div>
-							</div>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -141,6 +150,6 @@
 		</div>
 	</div>
 	<script
-	src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
+		src="${pageContext.request.contextPath}/resources/js/admin/admin.js"></script>
 </body>
 </html>

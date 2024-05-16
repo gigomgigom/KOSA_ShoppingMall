@@ -178,7 +178,7 @@ public class AdminController {
 		
 		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
 		
-		if(searchIndex.getSearchkeyword() != null && searchIndex.getSearchkeyword().equals("")) {
+		if(searchIndex.getSearchkeyword() != null && !searchIndex.getSearchkeyword().equals("") && searchIndex.getCtgindex() != sessionSearchIndex.getCtgindex()) {
 			searchIndex.setPageno("1");
 		}
 		
