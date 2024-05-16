@@ -31,6 +31,7 @@ import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.PointDtl;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.Recipient;
+import com.mycompany.javajavajo.dto.SearchIndex;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -77,14 +78,14 @@ public class AdminService {
 	//--------------------------------------------------------
 	//Admin-Member관리
 	//심영조-admin-memberList페이지-조건에 맞는 member들의 총 갯수를 가져옴
-	public int getTotalMemberRows() {
-		int totalRows = memberDao.selectTotalRows();
+	public int getTotalMemberRows(SearchIndex searchIndex) {
+		int totalRows = memberDao.selectTotalRows(searchIndex);
 		return totalRows;
 	}
 
 	//심영조-admin-memberList페이지-Pager 조건에 맞는 데이터(List<Member>)를 받아와라
-	public List<Member> getMemberList(Pager pager) {
-		List<Member> memberList = memberDao.selectByPage(pager);
+	public List<Member> getMemberList(SearchIndex searchIndex) {
+		List<Member> memberList = memberDao.selectByPage(searchIndex);
 		return memberList;
 	}
 
@@ -144,13 +145,13 @@ public class AdminService {
 	//--------------------------------------------------------
 	//Admin-Product관리
 	//심영조-admin-product관리 페이지 - 상품들의 갯수를 가져와
-	public int getTotalProductRows() {
-		return productDao.selectTotalProductCnt();
+	public int getTotalProductRows(SearchIndex searchIndex) {
+		return productDao.selectTotalProductCnt(searchIndex);
 	}
 
 	//심영조-admin-product관리 페이지 - 페이지 상태 별 상품들의 리스트를 가져와
-	public List<Product> getProductList(Pager pager) {
-		List<Product> productList = productDao.selectProductByPager(pager);
+	public List<Product> getProductList(SearchIndex searchIndex) {
+		List<Product> productList = productDao.selectProductByPager(searchIndex);
 		return productList;
 	}
 
@@ -188,13 +189,13 @@ public class AdminService {
 		return result;
 	}
 	//심영조-admin-Uncom Order - 완료/취소되지않은 주문들의 총 갯수를 찾는다.
-	public int getTotalUncomRows() {
-		int totalUncomRows = orderDao.getTotalUncomOrders();
+	public int getTotalUncomRows(SearchIndex searchIndex) {
+		int totalUncomRows = orderDao.getTotalUncomOrders(searchIndex);
 		return totalUncomRows;
 	}
 	//심영조-admin-Uncom Order - 완료/취소되지않은 주문들의 목록을 찾아!
-	public List<Order> getUncomOrderList(Pager pager) {
-		List<Order> orderList = orderDao.selectUncomOrderByPager(pager);
+	public List<Order> getUncomOrderList(SearchIndex searchIndex) {
+		List<Order> orderList = orderDao.selectUncomOrderByPager(searchIndex);
 		return orderList;
 	}
 	//심영조-admin-Uncom Order - 주문번호를 통해 주문자 정보 가져오기

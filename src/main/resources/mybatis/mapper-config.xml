@@ -24,6 +24,7 @@
 		<typeAlias type="com.mycompany.javajavajo.dto.Delivery" alias="Delivery"/>
 		<typeAlias type="com.mycompany.javajavajo.dto.DeliveryCom" alias="DeliveryCom"/>
 		<typeAlias type="com.mycompany.javajavajo.dto.CartItem" alias="CartItem"/>
+		<typeAlias type="com.mycompany.javajavajo.dto.SearchIndex" alias="SearchIndex"/>
 	</typeAliases>
 </configuration>
 

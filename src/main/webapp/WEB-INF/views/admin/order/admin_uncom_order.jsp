@@ -50,29 +50,29 @@
 					</h5>
 					<hr class="w-100" />
 					<div class="d-flex flex-column">
-						<form method="get" action="" class="d-flex flex-column">
+						<form method="get" action="uncom_order" class="d-flex flex-column">
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="d-flex">
 									<div class="form-check mx-2">
-										<input class="form-check-input" type="radio" name="status"
-											id="ready"> <label class="form-check-label"
+										<input class="form-check-input" type="radio" name="ctgindex"
+											id="ready" value=1> <label class="form-check-label"
 											for="ready"> 주문</label>
 									</div>
 									<div class="form-check me-2">
-										<input class="form-check-input" type="radio" name="status"
-											id="paid"> <label class="form-check-label" for="paid">
+										<input class="form-check-input" type="radio" name="ctgindex"
+											id="paid" value=2> <label class="form-check-label" for="paid">
 											입금</label>
 									</div>
 									<div class="form-check">
-										<input class="form-check-input" type="radio" name="status"
-											id="delievery"> <label class="form-check-label"
+										<input class="form-check-input" type="radio" name="ctgindex"
+											id="delievery" value=3> <label class="form-check-label"
 											for="delievery"> 배송</label>
 									</div>
 								</div>
 								<div>
-									<label for="start">시작일자</label> <input class="me-4" id="start"
-										type="date"> <label for="end">종료일자</label> <input
-										type="date" id="end" placeholder="EndDate">
+									<label for="start">시작일자</label> <input class="me-4" id="start" name="startdate"
+										type="date"> <label for="end">종료일자</label> <input name="enddate"
+										type="date" id="end">
 								</div>
 							</div>
 							<div class="d-flex justify-content-between align-items-end mt-2">
@@ -84,20 +84,20 @@
 										<div class="form-group d-flex align-items-center"
 											style="width: 100px">
 											<select class="form-control" name="searchindex">
-												<option value="0" selected>주문번호</option>
-												<option value="1">주문자</option>
+												<option value="1" selected>주문번호</option>
+												<option value="2">주문자</option>
 											</select>
 										</div>
 									</div>
 									<div class="d-flex">
 										<input type="text" class="form-control ms-1"
-											placeholder="검색어 입력" name="검색" style="width: 300px;">
-										<div
+											placeholder="검색어 입력" name="searchkeyword" style="width: 300px;">
+										<button type="submit"
 											class="btn ms-1 d-flex justify-content-center align-items-center">
 											<img
 												src="${pageContext.request.contextPath}/resources/image/icon/search_icon.png"
 												width="20px">
-										</div>
+										</button>
 									</div>
 								</div>
 							</div>

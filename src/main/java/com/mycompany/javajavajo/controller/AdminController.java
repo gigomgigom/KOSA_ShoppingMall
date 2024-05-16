@@ -29,7 +29,9 @@ import com.mycompany.javajavajo.dto.PointDtl;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.ProductImg;
 import com.mycompany.javajavajo.dto.Recipient;
+import com.mycompany.javajavajo.dto.SearchIndex;
 import com.mycompany.javajavajo.service.AdminService;
+import com.mycompany.javajavajo.service.PagerService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,9 +40,22 @@ import lombok.extern.slf4j.Slf4j;
 //@Secured("ROLE_ADMIN")
 @RequestMapping("/admin")
 public class AdminController {
-
+	
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private PagerService pagerService;
+
+	//메뉴바를 눌렀을때 세션에 저장되어있는 페이저 인덱스 초기화 를 위한 요청 메소드
+	@GetMapping("/move_nav_location")
+	public String moveNavLocation(String url, HttpSession session) {
+
+		//세션 데이터 삭제
+		session.removeAttribute("searchIndex");
+
+		String requestUrl = "redirect:/admin/"+url;
+		return requestUrl;
+	}
 
 	//Main페이지 이동 컨트롤러(DashBoard)
 	@RequestMapping("/main")
@@ -54,27 +69,28 @@ public class AdminController {
 	//-----------------------------------------------------------------------------------------
 	//회원관리 컨트롤러
 	@GetMapping("/admin_member_view")
-	public String adminMemberView(String pageNo, Model model, HttpSession session) {
-		if(pageNo == null) {
-			//pageNo를 받지 못했을 경우 세션에 저장되어 있는 값을 가져와서 확인한다.
-			pageNo = (String) session.getAttribute("memberPageNo");
-			if(pageNo == null) {
-				//세션에 마저도 pageNo가 저장되어있지 않다면 "1"로 강제 세팅
-				pageNo="1";
-			}
-		}
-		//세션에 pageNo 저장
-		session.setAttribute("memberPageNo", pageNo);
-		int intPageNo = Integer.parseInt(pageNo);
+	public String adminMemberView(Model model, HttpSession session, SearchIndex searchIndex) {
+		
+		//세션에 저장되어있는 SearchIndex 데이터를 가져오기
+		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
+		
+		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
 
-		int rowsPagingTarget = adminService.getTotalMemberRows();
+		int intPageNo = Integer.parseInt(searchIndex.getPageno());
+		
+		log.info(searchIndex.toString());
+		int rowsPagingTarget = adminService.getTotalMemberRows(searchIndex);
+		
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
 
+		searchIndex.setPager(pager);
+		session.setAttribute("searchIndex", searchIndex);
 
-		List<Member> memberList = adminService.getMemberList(pager);
+		List<Member> memberList = adminService.getMemberList(searchIndex);
 
 		model.addAttribute("pager", pager);
 		model.addAttribute("memberList", memberList);
+		model.addAttribute("searchIndex", searchIndex);
 
 		model.addAttribute("menuNum", 0);
 		return "admin/member/admin_member";
@@ -116,7 +132,7 @@ public class AdminController {
 			if(rewardPointDtl != null) {
 				rewardPointDtl.setDate(orderForDate.getOrddate());
 				pointDtlList.add(rewardPointDtl);
-				
+
 			}
 		}
 
@@ -154,39 +170,40 @@ public class AdminController {
 	//상품관리 컨트롤러
 	//상품 리스트 출력하기
 	@GetMapping("/product_list")
-	public String productList(Model model, String pageNo, HttpSession session) {
-		if(pageNo == null) {
-			//pageNo를 받지 못했을 경우 세션에 저장되어 있는 값을 가져와서 확인한다.
-			pageNo = (String) session.getAttribute("productPageNo");
-			if(pageNo == null) {
-				//세션에 마저도 pageNo가 저장되어있지 않다면 "1"로 강제 세팅
-				pageNo="1";
-			}
-		}
-		//세션에 pageNo 저장
-		session.setAttribute("productPageNo", pageNo);
-		int intPageNo = Integer.parseInt(pageNo);
-
-		int rowsPagingTarget = adminService.getTotalProductRows();
+	public String productList(SearchIndex searchIndex, Model model, HttpSession session) {
+		
+		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
+		
+		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
+		
+		int intPageNo = Integer.parseInt(searchIndex.getPageno());
+		
+		int rowsPagingTarget = adminService.getTotalProductRows(searchIndex);
+		
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
+		
+		searchIndex.setPager(pager);
+		session.setAttribute("searchIndex", searchIndex);
 
-		List<Product> productList = adminService.getProductList(pager);
-
-
+		List<Product> productList = adminService.getProductList(searchIndex);
+		
 		model.addAttribute("pager", pager);
 		model.addAttribute("productList", productList);
 
+		List<Category> ctgList = adminService.getAllCategory();
+		model.addAttribute("ctgList", ctgList);
+		
 		model.addAttribute("menuNum", 1);
 		return "admin/product/admin_product_list";
 	}
-	
+
 	//상품 재고 수정
 	@PostMapping("/updateProdStock")
 	public String editProdStock(Product product) {
 		adminService.editProdStock(product);
 		return "redirect:/admin/product_list";
 	}
-	
+
 	//상품 수정 화면으로 이동
 	@GetMapping("/product_detail")
 	public String productDetail(int prodno, Model model) {
@@ -197,7 +214,7 @@ public class AdminController {
 		model.addAttribute("menuNum", 1);
 		return "admin/modal/admin_product_detail";
 	}
-	
+
 	//상품 수정 삭제
 	@PostMapping(value="/edit_product")
 	@ResponseBody
@@ -219,7 +236,7 @@ public class AdminController {
 		if(prodimg.getDtlattach() != null && !prodimg.getDtlattach().isEmpty()) {
 			prodimg.setDtlimgoname(prodimg.getDtlattach().getOriginalFilename());
 			prodimg.setDtlimgtype(prodimg.getDtlattach().getContentType());
-		
+
 			try {
 				prodimg.setDtlimg(prodimg.getDtlattach().getBytes());
 			} catch (IOException e) {
@@ -227,10 +244,10 @@ public class AdminController {
 			}
 		}
 		product.setProductImg(prodimg);
-		
+
 		String result = "fail";
 		int updatedRows = adminService.editProduct(product);
-		
+
 		if(updatedRows > 0) {
 			result = "success";
 		}
@@ -240,10 +257,10 @@ public class AdminController {
 	@PostMapping("/delete_product")
 	@ResponseBody
 	public String deleteProduct(int prodno) {
-		
+
 		String result = "fail";
 		int deletedRow = adminService.deleteProduct(prodno);
-		
+
 		if(deletedRow > 0) {
 			result = "success";
 		}
@@ -274,7 +291,7 @@ public class AdminController {
 		if(prodimg.getDtlattach() != null && !prodimg.getDtlattach().isEmpty()) {
 			prodimg.setDtlimgoname(prodimg.getDtlattach().getOriginalFilename());
 			prodimg.setDtlimgtype(prodimg.getDtlattach().getContentType());
-		
+
 			try {
 				prodimg.setDtlimg(prodimg.getDtlattach().getBytes());
 			} catch (IOException e) {
@@ -282,46 +299,44 @@ public class AdminController {
 			}
 		}
 		product.setProductImg(prodimg);
-		
+
 		String result = "fail";
 		int insertedRow = adminService.addProduct(product);
-		
+
 		if(insertedRow > 0) {
 			result = "success";
 		}
 		return result;
 	}
-	
+
 	//----------------------------------------------------------------------------
 	//주문관리 컨트롤러
 	//미완료 주문 리스트 화면으로 이동
 	@GetMapping("/uncom_order")
-	public String uncomOrder(Model model, String pageNo, HttpSession session) {
-		if(pageNo == null) {
-			log.info(pageNo);
-			//pageNo를 받지 못했을 경우 세션에 저장되어 있는 값을 가져와서 확인한다.
-			pageNo = (String) session.getAttribute("uncomPageNo");
-			if(pageNo == null) {
-				log.info(pageNo);
-				//세션에 마저도 pageNo가 저장되어있지 않다면 "1"로 강제 세팅
-				pageNo="1";
-			}
-		}
-		log.info(pageNo);
-		//세션에 pageNo 저장
-		session.setAttribute("uncomPageNo", pageNo);
-		int intPageNo = Integer.parseInt(pageNo);
-
-		int rowsPagingTarget = adminService.getTotalUncomRows();
+	public String uncomOrder(SearchIndex searchIndex, Model model, HttpSession session) {
+		
+		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
+		
+		log.info("입력된 시작일" + searchIndex.getStartdate());
+		
+		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
+		
+		int intPageNo = Integer.parseInt(searchIndex.getPageno());
+		
+		int rowsPagingTarget = adminService.getTotalUncomRows(searchIndex);
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
 		
-		List<Order> ordList = adminService.getUncomOrderList(pager);
+		searchIndex.setPager(pager);
+		session.setAttribute("searchIndex", searchIndex);
+		
+		List<Order> ordList = adminService.getUncomOrderList(searchIndex);
 		
 		for(Order order : ordList) {
 			order.setOrderer(adminService.getOrdererByOrdno(order.getOrdno()));
 			order.setRecipient(adminService.getRcptByOrdno(order.getOrdno()));
 			order.setOrdproductcnt(adminService.getOrderProductCnt(order.getOrdno()).getOrdproductcnt());
 		}
+		
 		model.addAttribute("totRows", rowsPagingTarget);
 		model.addAttribute("pager", pager);
 		model.addAttribute("ordList", ordList);
@@ -337,22 +352,22 @@ public class AdminController {
 				pageNo="1";
 			}
 		}
-		
+
 		session.setAttribute("comPageNo", pageNo);
 		int intPageNo = Integer.parseInt(pageNo);
-		
+
 		int rowsPagingTarget = adminService.getTotalComRows();
 		log.info(rowsPagingTarget+"");
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
-		
+
 		List<Order> ordList = adminService.getComOrderList(pager);
-		
+
 		for(Order order : ordList) {
 			order.setOrderer(adminService.getOrdererByOrdno(order.getOrdno()));
 			order.setRecipient(adminService.getRcptByOrdno(order.getOrdno()));
 			order.setOrdproductcnt(adminService.getOrderProductCnt(order.getOrdno()).getOrdproductcnt());
 		}
-		
+
 		model.addAttribute("totRows", rowsPagingTarget);
 		model.addAttribute("pager", pager);
 		model.addAttribute("ordList", ordList);
@@ -362,39 +377,39 @@ public class AdminController {
 	//주문 상세 페이지 이동
 	@GetMapping("/order_detail")
 	public String orderDetail(int ordno, Model model) {
-		
+
 		Map<String, Object> orderInfoMap = new HashMap<String, Object>();
-		
+
 		//주문상태 종류 가져오기
 		List<OrdStts> ordSttsList = adminService.getOrdSttsList();
 		orderInfoMap.put("ordSttsList", ordSttsList);
-		
+
 		//주문정보 가져오기
 		Order order = adminService.getOrderByOrdno(ordno);
 		orderInfoMap.put("order", order);
-		
+
 		//주문상품목록 가져오기
 		List<OrdProd> ordProdList = adminService.getOrdProdList(ordno);
 		orderInfoMap.put("ordProdList", ordProdList);
-		
+
 		//주문자정보 가져오기
 		Orderer orderer = adminService.getOrdererByOrdno(ordno);
 		orderInfoMap.put("orderer", orderer);
-		
+
 		//수령인정보 가져오기
 		Recipient rcpt = adminService.getRcptByOrdno(ordno);
 		orderInfoMap.put("rcpt", rcpt);
-		
+
 		//배송정보 가져오기
 		Delivery del = adminService.getDeliveryInfoByOrdno(ordno);
 		if(del != null) {
 			orderInfoMap.put("delivery", del);
 		}
-		
+
 		//배송회사 정보 가져오기
 		List<DeliveryCom> delComList = adminService.getDelComList();
 		orderInfoMap.put("delComList", delComList);
-		
+
 		model.addAttribute("orderInfoMap", orderInfoMap);
 		model.addAttribute("menuNum", 2);
 		return "admin/order/admin_order_detail";
@@ -405,9 +420,9 @@ public class AdminController {
 	public String updateStatus(Order order, Delivery del) {
 		log.info(order.toString() + del.toString());
 		int updatedRow = adminService.updateStatus(order, del);
-		
+
 		String result = "fail";
-		
+
 		if(updatedRow > 0) {
 			result = "success";
 		}

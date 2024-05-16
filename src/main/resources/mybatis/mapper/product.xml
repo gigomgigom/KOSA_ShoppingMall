@@ -24,25 +24,49 @@
 		]]>
 	</select>
 	
-	<select id="selectTotalProductCnt" resultType="int">
+	<select id="selectTotalProductCnt" parameterType="SearchIndex" resultType="int">
 		select count(*)
 		from product
+		<if test="searchkeyword != null">
+			<if test="ctgindex == 0">
+				where prodname like '%' || #{searchkeyword} || '%'
+			</if>
+			<if test="ctgindex != 0">
+				where prodname like '%' || #{searchkeyword} || '%' and ctgno = #{ctgindex}
+			</if>
+		</if>
+		<if test="ctgindex != 0 and searchkeyword == null">
+			where ctgno = #{ctgindex}
+		</if>
 	</select>
 	
-	<select id="selectProductByPager" parameterType="Pager">
-		<![CDATA[
+	<select id="selectProductByPager" parameterType="searchIndex">
+		
 		select rnum, prodno, ctgno, prodname, prodprice, proddate, prodstock
 		from (
 		select rownum as rnum, prodno, ctgno, prodname, prodprice, proddate, prodstock
 		from (
 		select prodno, ctgno, prodname, prodprice, proddate, prodstock
 		from product
+		<if test="searchkeyword != null and ctgindex != 0">
+			<if test="ctgindex == -1">
+				where prodname like '%' || #{searchkeyword} || '%'
+			</if>
+			<if test="ctgindex != -1">
+				where prodname like '%' || #{searchkeyword} || '%' and ctgno = #{ctgindex}
+			</if>
+		</if>
+		<if test="ctgindex != 0 and searchkeyword == null">
+			<if test="ctgindex != -1">
+				where ctgno = #{ctgindex}
+			</if>
+		</if>
 		order by prodno desc
 		)
-		where rownum <= #{endRowNo}
+		where rownum <![CDATA[<]]>= #{pager.endRowNo}
 		)
-		where rnum >= #{startRowNo}
-		]]>
+		where rnum <![CDATA[>]]>= #{pager.startRowNo}
+		
 	</select>
 	
 	<update id="updateProdStock" parameterType="Product">
@@ -137,4 +161,18 @@
 		    )
 		<![CDATA[where rownum <= 4]]>
 	</select>
+	
+	<select id="selectReviewByProdNo" parameterType="int" resultType="Product">
+		select * 
+		from (
+			select product.prodno, ctgno, prodname, prodprice, ordcount, rvcount, avgrating
+			from product,
+			(select count(qty) as ordcount, prodno from ordprod group by prodno) o,
+			(select count(rvrating) as rvcount, round(avg(nvl(rvrating,0)),1) as avgrating, prodno from review group by prodno) r
+			where product.prodno = o.prodno(+)
+			and product.prodno = r.prodno(+)
+			)
+		where prodno = #{prodno}
+	</select>
+	
 </mapper>

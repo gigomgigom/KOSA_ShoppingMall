@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Product;
+import com.mycompany.javajavajo.dto.SearchIndex;
 
 @Mapper
 public interface ProductDao {
@@ -22,10 +23,10 @@ public interface ProductDao {
 	List<Product> selectLackStock();
 	
 	//심영조-Admin-Product관리 - 상품들의 총 갯수를 가져와
-	int selectTotalProductCnt();
+	int selectTotalProductCnt(SearchIndex searchIndex);
 	
 	//심영조-Admin-Product관리 - Pager에 따른 상품들의 리스트를 가져오기 (사용자화면에서도 사용가능할듯? 해보고 안되면 말씀좀)
-	List<Product> selectProductByPager(Pager pager);
+	List<Product> selectProductByPager(SearchIndex searchIndex);
 	
 	//심영조-Admin-Product관리 - 상품의 재고 수치를 수정하기
 	int updateProdStock(Product product);
@@ -46,17 +47,8 @@ public interface ProductDao {
 
 	List<Product> selectBestProduct();
 
-	
-	
+	// 신우호 - prodno를 사용해서 product정보 불러옴
+	Product selectReviewByProdNo(int prodno);
 
-	
-	
-
-	
-	
-
-	
-
-	
 	
 }

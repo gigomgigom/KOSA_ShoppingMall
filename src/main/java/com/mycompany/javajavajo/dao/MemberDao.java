@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.Pager;
+import com.mycompany.javajavajo.dto.SearchIndex;
 
 
 @Mapper
@@ -24,10 +25,10 @@ public interface MemberDao {
 	public Member selectByMemnoMemImg(int memno);
 
 	//심영조 - Admin-회원관리-memberList에서 총 회원수를 가져오기 위한 메소드
-	public int selectTotalRows();
+	public int selectTotalRows(SearchIndex searchIndex);
 
 	//심영조 - Admin-회원관리-memberList에서 사용자가 요청한 페이지정보에 따라 List<Member>를 가져오기
-	public List<Member> selectByPage(Pager pager);
+	public List<Member> selectByPage(SearchIndex searchIndex);
 
 	//심영조 - MemberDTO에 담겨진 데이터로 변경해라
 	public int updateMemberInfo(Member member);

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.ProductImg;
+import com.mycompany.javajavajo.dto.Review;
 import com.mycompany.javajavajo.service.ItemService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -38,8 +39,12 @@ public class ItemController {
 	@RequestMapping("/item_detail")
 	public String itemDetail(int prodno, Model model) {
 		Product product = service.getProductByProdno(prodno);
-		log.info("상품 정보", product);
+		if(product == null) {
+			log.info("실행 진행시켜");
+		}
+		log.info("평점" + product.getAvgrating());
 		model.addAttribute("product", product);
+		
 		return "item/item_detail";
 	}
 	
