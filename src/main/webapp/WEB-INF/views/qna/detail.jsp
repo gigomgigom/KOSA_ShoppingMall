@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,11 +88,13 @@
 						</p>
 					</c:if>
 				</div>
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<c:if test="${qna.admrply == null}">
 					<div class="d-flex justify-content-center align-items-center w-100 m-0 mb-5 p-0 px-5" >
 						<a onclick="writeReply()" class="btn" style="background-color: #273740; color: white">답변달기</a>
 					</div>
 				</c:if>
+				</sec:authorize>
 			</div>
 
 		</div>
