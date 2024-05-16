@@ -50,5 +50,7 @@ public interface ProductDao {
 	// 신우호 - prodno를 사용해서 product정보 불러옴
 	Product selectReviewByProdNo(int prodno);
 
+	List<Product> selectProductListByProdNo(int prodno);
+
 	
 }
