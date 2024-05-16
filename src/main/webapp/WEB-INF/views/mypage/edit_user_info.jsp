@@ -56,7 +56,8 @@
 				value="${member.memid}" readonly>
 			<div class="my-2 ms-2"></div>
 			<div class="my-2">
-				<label for="mempw">비밀번호 변경</label> <input type="password"
+				<label for="mempw">비밀번호 변경</label> 
+				<input type="password"
 					class="form-control w-100" id="mempw" name="mempw"
 					placeholder="새 비밀번호 입력(필수)">
 				<div class="mx-2 mt-2">
@@ -80,7 +81,7 @@
 					src="${pageContext.request.contextPath}/mypage/downloadMemImg?memno=${member.memno}"
 					width="100px">
 				<div class="d-flex flex-column mt-3">
-					<!-- <input type="file" class="form-control" name="memimgattach"> -->
+					 <input type="file" class="form-control" name="memimgattach"> 
 				</div>
 			</div> 
 			
@@ -145,6 +146,7 @@
 
 			<input type="text" class="form-control w-100" id="adrdtl"
 				placeholder="상세주소" name="adrdtl" value="${memberAdr.adrdtl}">
+				
 			<div class="w-100 d-flex justify-content-center p-5">
 				<input type="submit" class="btn text-white btn-sm w-100"
 					style="background-color: #27374D;" value="회원정보수정" />

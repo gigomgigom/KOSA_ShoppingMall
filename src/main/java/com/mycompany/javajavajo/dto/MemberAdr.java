@@ -8,4 +8,6 @@ public class MemberAdr {
 	private String postno;
 	private String adr;
 	private String adrdtl;
+	private int adrno;
+	private boolean isdef;
 }

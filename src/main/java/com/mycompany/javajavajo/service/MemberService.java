@@ -72,19 +72,17 @@ public class MemberService {
 		return order;
 	}
 
-	public int updateMemberByMemno(Member member) {
-		if (member.getMempw() != null && !member.getMempw().isEmpty()) {
-		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		member.setMempw(passwordEncoder.encode(member.getMempw())); // 암호화해서 다시 반환
+	public void updateMemberByMemno(Member member) {
 		//mempw가 공백란일 경우 암호화 하지 않음
-		
-	}
-		int memberInfo = memberDao.updateMemberInformation(member);
-		return memberInfo;
+		if (member.getMempw() != null && !member.getMempw().isEmpty()) {
+			PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+			member.setMempw(passwordEncoder.encode(member.getMempw())); 
+		}
+		memberDao.updateMemberInformation(member);
 	}
 
-	public int updateMemberAdr(MemberAdr memberAdr) {
-		int memberAdr1 = memberAdrDao.updateMemberAddress(memberAdr);
-		return memberAdr1;
+	public void updateMemberAdr(MemberAdr memberAdr) {
+		memberAdrDao.updateMemberAddress(memberAdr);
+		
 	}
 }

@@ -1,8 +1,8 @@
 package com.mycompany.javajavajo.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.MemberAdr;
@@ -32,7 +31,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MyPageController {
 	@Autowired
 	private MemberService memberService;
-	
+
+
 
 
 	//황세림 - member를 받아 회원의 주소를 출력하는 경로
@@ -48,6 +48,9 @@ public class MyPageController {
 		//회원 이미지 출력
 		model.addAttribute("memberImg", memberImg);
 		model.addAttribute("memno", memno);
+
+
+
 
 		// 회원 주문정보 리스트 가져오기
 		List<Order> orderList = memberService.getOrderListByMemno(memno);
@@ -107,7 +110,7 @@ public class MyPageController {
 		os.flush();
 		os.close();
 	}
-	
+
 	//사용자 정보 수정
 	@GetMapping("/edit_user_info")
 	public String editUserInfo(Authentication authentication, Model model) {
@@ -115,27 +118,40 @@ public class MyPageController {
 		Member member = memberService.getMemberByMid(mid);
 		MemberAdr memberAdr = memberService.getMemberAdr(member.getMemno());
 
-		
+
 		model.addAttribute("member", member);
 		model.addAttribute("memberAdr", memberAdr);
 
 		return "mypage/edit_user_info";
 	}
-	
+
 	//황세림 - 사용자 정보 수정
 	@RequestMapping("/update_user_info")
-	public String updateMemberInformation(MultipartFile memimgattach, Member member, MemberAdr memberadr, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		log.info(member.getMempw().equals("") + "|" + (member.getMempw() == null));
+	public String updateMemberInformation(Member member, MemberAdr memberadr, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		log.info(member.toString());
+		log.info(memberadr.toString());
+
+		//이미지 수정
+		if(member.getMemimgattach() !=null && !member.getMemimgattach().isEmpty()) {
+			member.setMemimgoname(member.getMemimgattach().getOriginalFilename());
+			member.setMemimgtype(member.getMemimgattach().getContentType());
+			try {
+				member.setMemimg(member.getMemimgattach().getBytes());
+			} catch (Exception e) {
+			}
+		}
+
 		memberService.updateMemberByMemno(member);
 		memberService.updateMemberAdr(memberadr);
-		 return  "redirect:/mypage";
 
-	}
-	
-		
-	
 
+		return  "redirect:/mypage";
 	}
-	
-	
+
+
+
+
+}
+
+
 

@@ -124,16 +124,17 @@
 	<update id="updateMemberInformation" parameterType="Member">
 		update member
 		set
-		memid = #{memid},
-		<if test="mempw!=null and !mempw.equals('')">
+		<if test="mempw!=''">
 		mempw = #{mempw},
 		</if> 
 		memname = #{memname},
 		memimg = #{memimg},
+		memimgoname =#{memimgoname},
+		memimgtype=#{memimgtype},
 		memnicknm = #{memnicknm},
 		mememail = #{mememail},
 		memtel = #{memtel}
-		where memno = #{memno}
+		where memid = #{memid}
 	</update>
 
 

@@ -117,7 +117,7 @@
 					<div class="d-flex justify-content-between m-0 mb-2 p-0">
 						<p class="m-0 p-0">
 							<a class="text-dark"
-								href="${pageContext.request.contextPath}/order/order_detail">202404181758268</a>
+								href="${pageContext.request.contextPath}/order/order_detail">0516</a>
 						</p>
 						<p class="m-0  p-0" style="font-size: 0.75rem;">24-04-18
 							17:59:05</p>
