@@ -1,5 +1,5 @@
 const replyArea = document.querySelector("#replyArea");
-const existReply = replyArea.querySelector("p").innerText;
+let existReply = replyArea.querySelector("p").innerText;
 const writeReply = () =>
 	{	
 		replyArea.innerHTML= `
@@ -111,6 +111,8 @@ const saveEditReply = () =>{
 					</div>
 					`;
 					replyArea.querySelector("p").innerHTML= reply;
+					existReply = reply;
+					console.log(reply);
 				}
 			}
 		});
