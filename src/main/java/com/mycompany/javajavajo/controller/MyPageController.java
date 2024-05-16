@@ -2,6 +2,7 @@ package com.mycompany.javajavajo.controller;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,6 @@ import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.MemberAdr;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.PointDtl;
-import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MyPageController {
 	@Autowired
 	private MemberService memberService;
+	
 
 
 	//황세림 - member를 받아 회원의 주소를 출력하는 경로
@@ -112,9 +113,39 @@ public class MyPageController {
 		String mid = authentication.getName();
 		Member member = memberService.getMemberByMid(mid);
 		MemberAdr memberAdr = memberService.getMemberAdr(member.getMemno());
+
 		
 		model.addAttribute("member", member);
 		model.addAttribute("memberAdr", memberAdr);
+
 		return "mypage/edit_user_info";
 	}
+	
+	//황세림 - 사용자 정보 수정
+	@RequestMapping("/update_user_info")
+	public String updateMemberInformation(Member member, MemberAdr memberadr, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		log.info(member.getMempw());
+		memberService.updateMemberByMemno(member);
+		memberService.updateMemberAdr(memberadr);
+	
+		
+		byte[] memImgData = member.getMemimg();
+
+		response.setContentType(member.getMemimgtype());
+		String fileName = new String(member.getMemimgoname().getBytes("UTF-8"),"ISO-8859-1");
+		response.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
+		if(memImgData == null) {
+			log.info("null"); 
+		}
+		log.info("run2");
+		OutputStream os = response.getOutputStream();
+		os.write(memImgData);
+		os.flush();
+		os.close();
+		return  "redirect:/mypage";
+		
+	}
+
+	
+	
 }

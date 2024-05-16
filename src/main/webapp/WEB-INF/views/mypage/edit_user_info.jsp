@@ -11,155 +11,7 @@
 </style>
 <!-- 사용자 정의 자바스크립트 -->
 <script>
-	/* 데이터 유효성을 확인 해당 데이터 처리하는 메소드 */
-	function handleCheckData() {
-		// 브라우저가 기본적으로 수행하는 동작을 취소하고 원하는 동작을 수행하도록 하기 위함.
-		event.preventDefault();
-		// 회원가입의 모든 유효성 검사가 통과되었는지 여부를 판단
-		totalResult = true;
 
-		// ID 검사
-		var memidPattern = /^[a-zA-z0-9]{3,12}$/;
-		var el_memid = document.querySelector("#memid");
-		console.log(el_memid);
-		let memidResult = memidPattern.test(el_memid.value);
-		let el_memid_span = document.querySelector("#memidSpan");
-
-		if (el_memid.value.length === 0) {
-			el_memid_span.innerHTML = '아이디를 입력해주세요.';
-			el_memid_span.classList.add("text-danger");
-			totalResult = false;
-		} else if (el_memid.value.length <= 2 || !memidResult) {
-			el_memid_span.innerHTML = '3자 이상 12자이하로 작성해주세요.';
-			el_memid_span.classList.add("text-danger");
-			totalResult = false;
-		} else {
-			el_memid_span.innerHTML = '';
-			el_memid_span.classList.remove("text-danger");
-		}
-
-		// password 검사 
-		var el_mempw = document.querySelector("#mempw");
-		var el_mempwRe = document.querySelector("#mempwRe");
-		var mempwPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/;
-		var mempwResult = mempwPattern.test(el_mempw.value);
-		var el_mempw_span = document.querySelector("#mempwSpan");
-		var el_mempwRe_span = document.querySelector("#mempwReSpan");
-
-		console.log(mempw.value.length);
-
-		if (el_mempw.value.length === 0) {
-			el_mempw_span.innerHTML = '비밀번호를 입력해주세요.';
-			el_mempw_span.classList.add("text-danger");
-			totalResult = false;
-		} else if (el_mempw.value.length <= 7 || !mempwResult) {
-			el_mempw_span.innerHTML = '대, 소문자를 포함한 8자이상 15자이하 입력해주세요.';
-			el_mempw_span.classList.add("text-danger");
-			totalResult = false;
-		} else {
-			el_mempw_span.innerHTML = '';
-			el_mempw_span.classList.remove("text-danger");
-		}
-
-		// 비밀번호 확인 검사
-		if (el_mempwRe.value.length === 0) {
-			el_mempwRe_span.innerHTML = '비밀번호를 입력해주세요.';
-			el_mempwRe_span.classList.add("text-danger");
-			totalResult = false;
-		} else if (el_mempw.value !== el_mempwRe.value) {
-			el_mempwRe_span.innerHTML = '비밀번호가 일치하지 않습니다.';
-			el_mempwRe_span.classList.add("text-danger");
-			totalResult = false;
-		} else {
-			el_mempwRe_span.innerHTML = '';
-			el_mempwRe_span.classList.remove("text-danger");
-		}
-
-		// 이름 유효성 검사
-		var el_memname = document.querySelector("#memname");
-		// 한글로 2~4글자의 정규표현식 검사
-		var memnamePattern = /^[가-힣]{2,4}$/;
-		var memnameResult = memnamePattern.test(el_memname.value);
-		var el_memname_span = document.querySelector("#memnameSpan");
-
-		if (memnameResult) {
-			el_memname_span.innerHTML = '';
-			el_memname_span.classList.remove("text-danger");
-		} else {
-			el_memname_span.classList.add("text-danger");
-			el_memname_span.innerHTML = '공백 없이 한글, 영문, 숫자만 입력가능(한글 2자, 영문 4자 이상)';
-			totalResult = false;
-		}
-
-		// 닉네임 유효성 검사
-		var el_memnicknm = document.querySelector("#memnicknm");
-
-		var memnicknmPattern = /^[A-Z][a-zA-Z]{2,7}$/;
-		var memnicknmResult = memnicknmPattern.test(el_memnicknm.value);
-		var el_memnicknm_span = document.querySelector("#memnicknmSpan");
-
-		if (memnicknmResult) {
-			el_memnicknm_span.innerHTML = '';
-			el_memnicknm_span.classList.remove("text-danger");
-		} else {
-			el_memnicknm_span.innerHTML = '닉네임 첫 글자는 대문자로 시작하며 3자이상 8자이하로 작성해주세요.';
-			el_memnicknm_span.classList.add("text-danger");
-			totalResult = false;
-		}
-
-		// Email 검사
-		var el_mememail = document.querySelector("#mememail");
-
-		var mememailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
-		var mememailResult = mememailPattern.test(el_mememail.value);
-		var el_mememail_span = document.querySelector("#mememailSpan");
-
-		if (mememailResult) {
-			el_mememail_span.innerHTML = '';
-			el_mememail_span.classList.remove("text-danger");
-		} else {
-			el_mememail_span.innerHTML = '이메일 형식에 맞게 입력해주세요.';
-			el_mememail_span.classList.add("text-danger");
-			totalResult = false;
-		}
-		//휴대폰 번호 검사
-		var el_memtel = document.querySelector("#memtel");
-
-		var memtelPattern = /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
-		var memtelResult = memtelPattern.test(el_memtel.value);
-		var el_memtel_span = document.querySelector("#memtelSpan");
-
-		if (memtelResult) {
-			el_memtel_span.innerHTML = '';
-			el_memtel_span.classList.remove("text-danger");
-		} else {
-			el_memtel_span.innerHTML = '전화번호 형식이 올바르지 않습니다.';
-			el_memtel_span.classList.add("text-danger");
-			totalResult = false;
-		}
-		// 우편번호 검사
-		/* var el_postno = document.querySelector("#postno");
-
-		var postnoPattern = /^\d{3}-\d{2}$/;
-		var postnoResult = postnoPattern.test(el_postno.value);
-		var el_postno_span = document.querySelector("#postnoSpan");
-
-		if(postnoResult) {
-		    el_postno_span.innerHTML='';
-		    el_postno_span.classList.remove("text-danger");
-		} else {
-		    el_postno_span.innerHTML='우편번호 형식이 올바르지 않습니다.';
-		    el_postno_span.classList.add("text-danger"); 
-		    totalResult = false;
-		} */
-
-		//총 유효성 검사가 true 일때
-		if (totalResult) {
-			$("#joinForm")[0].submit();
-			console.log("#joinForm");
-			alert('가입을 환영합니다.');
-		}
-	}
 </script>
 <!-- jQuery 외부 라이브러리 설정 -->
 <script
@@ -185,10 +37,13 @@
 
 
 	<div class="container-fluid d-flex justify-content-center">
+	
 		<form id="joinForm" name="joinForm"
-			action="${pageContext.request.contextPath}/auth/auth" method="post"
-			onsubmit="handleCheckData()" novalidate style="width: 400px;"
-			class="d-flex flex-column">
+			action="${pageContext.request.contextPath}/mypage/update_user_info" method="post"
+			novalidate style="width: 400px;"
+			class="d-flex flex-column" enctype="multipart/form-data">
+			 <input type="hidden" class="form-control w-100" id="memno" name="memno"
+				value="${member.memno}" readonly>
 			<!-- handleCheckData()를 사용하여 사용자 정의 유효성 검사를 수행함, novalidate속성을 사용하여 기본 브라우저의  유효성 검사를 막음 -->
 			<div class="container-fluid d-flex justify-content-center p-5 m-3">
 				<h2>사용자 정보 수정</h2>
@@ -210,14 +65,16 @@
 				</div>
 			</div>
 			<input type="password" class="form-control w-100" id="mempwRe"
-				placeholder="비밀번호확인 (필수)" name="passwordRePattern">
+				placeholder="비밀번호확인 (필수)">
 			<div class="mx-2 mt-2">
 				<span id="mempwReSpan" class="form-text" style="font-size: 11px;">비밀번호가
 					일치하지 않습니다.</span>
 			</div>
-			<div class="mt-2">
+			
+		 <div class="mt-2">
 				<span>이미지 변경</span>
 			</div>
+			
 			<div class="border p-3 d-flex flex-column align-items-center">
 				<img class="img-fluid rounded-circle"
 					src="${pageContext.request.contextPath}/mypage/downloadMemImg?memno=${member.memno}"
@@ -225,7 +82,8 @@
 				<div class="d-flex flex-column mt-3">
 					<input type="file" class="form-control" name="memimgattach">
 				</div>
-			</div>
+			</div> 
+			
 			<div class="pt-5">
 				<h5>개인정보</h5>
 			</div>

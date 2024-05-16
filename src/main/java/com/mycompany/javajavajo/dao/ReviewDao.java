@@ -14,11 +14,8 @@ public interface ReviewDao {
 
 	int count(@Param("ordno") int ordno, @Param("prodno") int prodno);
 
-
+	//메인 페이지에 리뷰를 가져오기 위함
 	public List<Review> selectRecentReviews();
 
-	
-
-	
 
 }

@@ -3,17 +3,26 @@
 <mapper namespace="com.mycompany.javajavajo.dao.MemberAdrDao">
 
 	<insert id="insertAdr" parameterType="MemberAdr">
-		insert into memberAdr (memno, postno, adr, adrdtl)
-		values(#{memno}, #{postno}, #{adr}, #{adrdtl}) 
+		insert into memberAdr
+		(memno, postno, adr, adrdtl)
+		values(#{memno}, #{postno}, #{adr},
+		#{adrdtl})
 	</insert>
-	
+
 	<select id="selectByMemno" parameterType="int">
 		select *
 		from memberadr
 		where memno = #{memno}
 	</select>
 
-
+	<update id="updateMemberAddress" parameterType="MemberAdr">
+		update memberadr
+		set
+		postno = #{postno},
+		adr = #{adr},
+		adrdtl = #{adrdtl}
+		where memno = #{memno}
+	</update>
 
 
 </mapper>

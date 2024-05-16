@@ -34,7 +34,7 @@ public class MemberService {
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		member.setMempw(passwordEncoder.encode(member.getMempw())); // 암호화해서 다시 반환
 		member.setMemenabled(true);
-		
+
 		memberDao.insert(member);
 		// member의 memno를 불러와서 memberAdr의 setting
 		memberAdr.setMemno(member.getMemno());
@@ -70,5 +70,17 @@ public class MemberService {
 	public Order getOrderByOrdno(int ordno) {
 		Order order = orderDao.selectOrderByOrdno(ordno);
 		return order;
+	}
+
+	public int updateMemberByMemno(Member member) {
+		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		member.setMempw(passwordEncoder.encode(member.getMempw())); // 암호화해서 다시 반환
+		int memberInfo = memberDao.updateMemberInformation(member);
+		return memberInfo;
+	}
+
+	public int updateMemberAdr(MemberAdr memberAdr) {
+		int memberAdr1 = memberAdrDao.updateMemberAddress(memberAdr);
+		return memberAdr1;
 	}
 }

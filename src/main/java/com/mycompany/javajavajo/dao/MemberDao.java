@@ -42,6 +42,10 @@ public interface MemberDao {
 	//심영조 - Admin-회원관리-memberDetail에서 회원의 포인트를 관리자가 수정할 때 사용함
 	public int updatePointByAdmin(Member member);
 	
+	//황세림 - MemberDTO에 담겨진 데이터로 변경해라 ver2
+	public int updateMemberInformation(Member member);
+	
+
 
 	
 }
