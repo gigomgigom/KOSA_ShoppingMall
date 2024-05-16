@@ -178,6 +178,10 @@ public class AdminController {
 		
 		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
 		
+		if(searchIndex.getSearchkeyword() != null && searchIndex.getSearchkeyword().equals("")) {
+			searchIndex.setPageno("1");
+		}
+		
 		int intPageNo = Integer.parseInt(searchIndex.getPageno());
 		
 		int rowsPagingTarget = adminService.getTotalProductRows(searchIndex);
@@ -188,8 +192,6 @@ public class AdminController {
 		session.setAttribute("searchIndex", searchIndex);
 
 		List<Product> productList = adminService.getProductList(searchIndex);
-		
-		model.addAttribute("pager", pager);
 		model.addAttribute("productList", productList);
 
 		List<Category> ctgList = adminService.getAllCategory();

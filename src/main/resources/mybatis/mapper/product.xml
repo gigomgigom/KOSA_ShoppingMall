@@ -27,16 +27,18 @@
 	<select id="selectTotalProductCnt" parameterType="SearchIndex" resultType="int">
 		select count(*)
 		from product
-		<if test="searchkeyword != null">
-			<if test="ctgindex == 0">
+		<if test="searchkeyword != null and ctgindex != 0">
+			<if test="ctgindex == -1">
 				where prodname like '%' || #{searchkeyword} || '%'
 			</if>
-			<if test="ctgindex != 0">
+			<if test="ctgindex != -1">
 				where prodname like '%' || #{searchkeyword} || '%' and ctgno = #{ctgindex}
 			</if>
 		</if>
 		<if test="ctgindex != 0 and searchkeyword == null">
-			where ctgno = #{ctgindex}
+			<if test="ctgindex != -1">
+				where ctgno = #{ctgindex}
+			</if>
 		</if>
 	</select>
 	

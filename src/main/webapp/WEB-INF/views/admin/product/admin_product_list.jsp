@@ -109,29 +109,29 @@
 								<div>
 									<a class="btn btn-outline-primary btn-sm"
 										href="product_list?pageno=1">처음</a>
-									<c:if test="${pager.groupNo>1}">
+									<c:if test="${searchIndex.pager.groupNo>1}">
 										<a class="btn btn-outline-info btn-sm"
-											href="product_list?pageno=${pager.startPageNo-1}">이전</a>
+											href="product_list?pageno=${searchIndex.pager.startPageNo-1}">이전</a>
 									</c:if>
 
-									<c:forEach var="i" begin="${pager.startPageNo}"
-										end="${pager.endPageNo}">
-										<c:if test="${pager.pageNo != i}">
+									<c:forEach var="i" begin="${searchIndex.pager.startPageNo}"
+										end="${searchIndex.pager.endPageNo}">
+										<c:if test="${searchIndex.pager.pageNo != i}">
 											<a class="btn btn-outline-success btn-sm"
 												href="product_list?pageno=${i}">${i}</a>
 										</c:if>
-										<c:if test="${pager.pageNo == i}">
+										<c:if test="${searchIndex.pager.pageNo == i}">
 											<a class="btn btn-danger btn-sm"
 												href="product_list?pageno=${i}">${i}</a>
 										</c:if>
 									</c:forEach>
 
-									<c:if test="${pager.groupNo<pager.totalGroupNo}">
+									<c:if test="${searchIndex.pager.groupNo<searchIndex.pager.totalGroupNo}">
 										<a class="btn btn-outline-info btn-sm"
-											href="product_list?pageno=${pager.endPageNo+1}">다음</a>
+											href="product_list?pageno=${searchIndex.pager.endPageNo+1}">다음</a>
 									</c:if>
 									<a class="btn btn-outline-primary btn-sm"
-										href="product_list?pageno=${pager.totalPageNo}">맨끝</a>
+										href="product_list?pageno=${searchIndex.pager.totalPageNo}">맨끝</a>
 								</div>
 							</div>
 						</div>
