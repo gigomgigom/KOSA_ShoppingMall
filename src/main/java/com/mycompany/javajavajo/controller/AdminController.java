@@ -61,7 +61,10 @@ public class AdminController {
 	@RequestMapping("/main")
 	public String adminMain(Model model) {
 		List<Product> lackProducts = adminService.getOutOfStock();
-
+		
+		List<Product> bestProducts = adminService.getBestSoldProducts();
+		
+		model.addAttribute("bestProducts", bestProducts);
 		model.addAttribute("lackproducts", lackProducts);
 		model.addAttribute("menuNum", -1);
 		return "admin/adminMain";

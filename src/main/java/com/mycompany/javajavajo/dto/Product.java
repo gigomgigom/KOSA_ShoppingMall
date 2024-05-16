@@ -17,4 +17,7 @@ public class Product {
 	private int ordcount;
 	private int rvcount;
 	private double avgrating;
+	
+	//판매량 
+	private int soldcnt;
 }

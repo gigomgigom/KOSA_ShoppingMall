@@ -49,6 +49,9 @@ public interface ProductDao {
 
 	// 신우호 - prodno를 사용해서 product정보 불러옴
 	Product selectReviewByProdNo(int prodno);
+	
+	//심영조 - 판매량 순 베스트상품을 가져와!
+	List<Product> selectBestProductFromAdmin();
 
 	
 }
