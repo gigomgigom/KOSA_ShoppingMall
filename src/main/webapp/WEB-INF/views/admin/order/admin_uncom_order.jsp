@@ -46,33 +46,29 @@
 			<div class="d-flex" style="width: 90%; height: 91vh;">
 				<div class="mt-5 w-100 d-flex flex-column">
 					<h5>
-						<b>미완료된 주문</b>
+						<b>주문조회</b>
 					</h5>
 					<hr class="w-100" />
 					<div class="d-flex flex-column">
 						<form method="get" action="uncom_order" class="d-flex flex-column">
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="d-flex">
-									<div class="form-check mx-2">
-										<input class="form-check-input" type="radio" name="ctgindex"
-											id="ready" value=1> <label class="form-check-label"
-											for="ready"> 주문</label>
-									</div>
-									<div class="form-check me-2">
-										<input class="form-check-input" type="radio" name="ctgindex"
-											id="paid" value=2> <label class="form-check-label" for="paid">
-											입금</label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="ctgindex"
-											id="delievery" value=3> <label class="form-check-label"
-											for="delievery"> 배송</label>
+									<div class="form-group d-flex align-items-center"
+										style="width: 250px">
+										<label for="ctg" style="width: 100px">카테고리</label> <select
+											class="form-control" id="ctg" name="ctgindex">
+											<option value="-1" ${searchIndex.ctgindex == 0?'selected':''}>전체</option>
+											<c:forEach var="ordStts" items="${ordSttsList}">
+												<option value="${ordStts.ordsttsno}"
+													${searchIndex.ctgindex == ordStts.ordsttsno?'selected':''}>${ordStts.ordsttschar}</option>
+											</c:forEach>
+										</select>
 									</div>
 								</div>
 								<div>
-									<label for="start">시작일자</label> <input class="me-4" id="start" name="startdate"
-										type="date"> <label for="end">종료일자</label> <input name="enddate"
-										type="date" id="end">
+									<label for="start">시작일자</label> <input class="me-4" id="start"
+										name="startdate" type="date"> <label for="end">종료일자</label>
+									<input name="enddate" type="date" id="end">
 								</div>
 							</div>
 							<div class="d-flex justify-content-between align-items-end mt-2">
@@ -91,7 +87,8 @@
 									</div>
 									<div class="d-flex">
 										<input type="text" class="form-control ms-1"
-											placeholder="검색어 입력" name="searchkeyword" style="width: 300px;">
+											placeholder="검색어 입력" name="searchkeyword"
+											style="width: 300px;">
 										<button type="submit"
 											class="btn ms-1 d-flex justify-content-center align-items-center">
 											<img
@@ -115,7 +112,7 @@
 										<th>수령자</th>
 										<th>금액</th>
 									</tr>
-									
+
 								</thead>
 								<tbody style="vertical-align: middle;">
 									<c:forEach var="order" items="${ordList}">
@@ -136,30 +133,30 @@
 							</table>
 							<div class="d-flex justify-content-center">
 								<a class="btn btn-outline-primary btn-sm"
-									href="uncom_order?pageNo=1">처음</a>
+									href="uncom_order?pageno=1">처음</a>
 								<c:if test="${pager.groupNo>1}">
 									<a class="btn btn-outline-info btn-sm"
-										href="uncom_order?pageNo=${pager.startPageNo-1}">이전</a>
+										href="uncom_order?pageno=${pager.startPageNo-1}">이전</a>
 								</c:if>
 
 								<c:forEach var="i" begin="${pager.startPageNo}"
 									end="${pager.endPageNo}">
 									<c:if test="${pager.pageNo != i}">
 										<a class="btn btn-outline-success btn-sm"
-											href="uncom_order?pageNo=${i}">${i}</a>
+											href="uncom_order?pageno=${i}">${i}</a>
 									</c:if>
 									<c:if test="${pager.pageNo == i}">
 										<a class="btn btn-danger btn-sm"
-											href="uncom_order?pageNo=${i}">${i}</a>
+											href="uncom_order?pageno=${i}">${i}</a>
 									</c:if>
 								</c:forEach>
 
 								<c:if test="${pager.groupNo<pager.totalGroupNo}">
 									<a class="btn btn-outline-info btn-sm"
-										href="uncom_order?pageNo=${pager.endPageNo+1}">다음</a>
+										href="uncom_order?pageno=${pager.endPageNo+1}">다음</a>
 								</c:if>
 								<a class="btn btn-outline-primary btn-sm"
-									href="uncom_order?pageNo=${pager.totalPageNo}">맨끝</a>
+									href="uncom_order?pageno=${pager.totalPageNo}">맨끝</a>
 							</div>
 						</div>
 					</div>

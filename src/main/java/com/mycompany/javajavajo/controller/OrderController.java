@@ -60,6 +60,16 @@ public class OrderController {
 
 		return "order/orderForm";
 	}
+	
+	// 신우호 - 바로구매 시  오더 폼으로 바로 이동 
+	@GetMapping("/direct")
+	public String direct(Authentication authentication) {
+		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
+		Member member = t1UserDetails.getMember();
+		int memno = member.getMemno();
+		return "order/orderForm";
+	}
+	
 
 	// 권우상 - 주문 데이터를 데이터 베이스에 등록
 	@PostMapping("/create_order")

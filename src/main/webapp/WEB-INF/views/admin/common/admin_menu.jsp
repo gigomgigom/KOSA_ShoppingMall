@@ -65,8 +65,8 @@
 				aria-labelledby="headingThree" data-bs-parent="#accordionExample">
 				<div class="accordion-body">
 					<div class="d-flex flex-column">
-						<a class="btn row-1" href="move_nav_location?url=uncom_order">미완료된 주문</a>
-						<a class="btn row-1" href="move_nav_location?url=com_order">완료된 주문</a>
+						<a class="btn row-1" href="move_nav_location?url=uncom_order">주문 조회</a>
+						<!-- <a class="btn row-1" href="move_nav_location?url=com_order"></a> -->
 					</div>
 				</div>
 			</div>

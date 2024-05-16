@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,19 +50,24 @@
 						<b>회원 리스트</b>
 					</h5>
 					<hr class="w-100" />
-					<form id="memberSearchIndex" method="get" action="admin_member_view"
+					<form id="memberSearchIndex" method="get"
+						action="admin_member_view"
 						class="d-flex justify-content-end align-items-center">
 						<div class="form-check">
 							<input type="radio" class="form-check-input" id="radio1"
-								name="searchindex" value="1" ${searchIndex.searchindex==1?'checked':''}> 
-								<label	class="form-check-label" for="radio1">이름</label>
+								name="searchindex" value="1"
+								${searchIndex.searchindex==1?'checked':''}> <label
+								class="form-check-label" for="radio1">이름</label>
 						</div>
 						<div class="form-check">
 							<input type="radio" class="form-check-input" id="radio1"
-								name="searchindex" value="2" ${searchIndex.searchindex==2?'checked':''}> <label class="form-check-label" for="radio1">이메일</label>
+								name="searchindex" value="2"
+								${searchIndex.searchindex==2?'checked':''}> <label
+								class="form-check-label" for="radio1">이메일</label>
 						</div>
 						<input type="text" class="form-control ms-4" placeholder="검색어 입력"
-							name="searchkeyword" style="width: 15%;" value="${searchIndex.searchkeyword}">
+							name="searchkeyword" style="width: 15%;"
+							value="${searchIndex.searchkeyword}">
 						<button type="submit"
 							class="btn ms-1 d-flex justify-content-center align-items-center">
 							<img
@@ -91,39 +96,44 @@
 										<td>${member.memname}</td>
 										<td>${member.mememail}</td>
 										<td>${member.memtel}</td>
-										<td><fmt:formatDate value="${member.memdate}" pattern="yyyy-MM-dd" /></td>
+										<td><fmt:formatDate value="${member.memdate}"
+												pattern="yyyy-MM-dd" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-						<div class="d-flex justify-content-center mt-5">
-							<div>
-								<a class="btn btn-outline-primary btn-sm"
-									href="admin_member_view?pageno=1">처음</a>
-								<c:if test="${pager.groupNo>1}">
-									<a class="btn btn-outline-info btn-sm"
-										href="admin_member_view?pageno=${pager.startPageNo-1}">이전</a>
-								</c:if>
-
-								<c:forEach var="i" begin="${pager.startPageNo}"
-									end="${pager.endPageNo}">
-									<c:if test="${pager.pageNo != i}">
-										<a class="btn btn-outline-success btn-sm"
-											href="admin_member_view?pageno=${i}">${i}</a>
+						<c:if test="${searchIndex.pager.totalPageNo > 1}">
+							<div class="d-flex justify-content-center mt-5">
+								<div>
+									<a class="btn btn-outline-primary btn-sm"
+										href="admin_member_view?pageno=1">처음</a>
+									<c:if test="${searchIndex.pager.groupNo>1}">
+										<a class="btn btn-outline-info btn-sm"
+											href="admin_member_view?pageno=${searchIndex.pager.startPageNo-1}">이전</a>
 									</c:if>
-									<c:if test="${pager.pageNo == i}">
-										<a class="btn btn-danger btn-sm" href="admin_member_view?pageno=${i}">${i}</a>
-									</c:if>
-								</c:forEach>
 
-								<c:if test="${pager.groupNo<pager.totalGroupNo}">
-									<a class="btn btn-outline-info btn-sm"
-										href="admin_member_view?pageno=${pager.endPageNo+1}">다음</a>
-								</c:if>
-								<a class="btn btn-outline-primary btn-sm"
-									href="admin_member_view?pageno=${pager.totalPageNo}">맨끝</a>
+									<c:forEach var="i" begin="${searchIndex.pager.startPageNo}"
+										end="${searchIndex.pager.endPageNo}">
+										<c:if test="${searchIndex.pager.pageNo != i}">
+											<a class="btn btn-outline-success btn-sm"
+												href="admin_member_view?pageno=${i}">${i}</a>
+										</c:if>
+										<c:if test="${searchIndex.pager.pageNo == i}">
+											<a class="btn btn-danger btn-sm"
+												href="admin_member_view?pageno=${i}">${i}</a>
+										</c:if>
+									</c:forEach>
+
+									<c:if
+										test="${searchIndex.pager.groupNo<searchIndex.pager.totalGroupNo}">
+										<a class="btn btn-outline-info btn-sm"
+											href="admin_member_view?pageno=${searchIndex.pager.endPageNo+1}">다음</a>
+									</c:if>
+									<a class="btn btn-outline-primary btn-sm"
+										href="admin_member_view?pageno=${searchIndex.pager.totalPageNo}">맨끝</a>
+								</div>
 							</div>
-						</div>
+						</c:if>
 					</div>
 				</div>
 			</div>

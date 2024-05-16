@@ -56,7 +56,6 @@
 			</if>
 		</if>
 		<if test="ctgindex == 0">
-			and ordstts in(1, 2, 3)
 			<if test="startdate != null">
 				and orddate between #{startdate} and #{enddate}
 			</if>
@@ -97,7 +96,6 @@
 			</if>
 		</if>
 		<if test="ctgindex == 0">
-			and ordstts in(1, 2, 3)
 			<if test="startdate != null">
 				and orddate between #{startdate} and #{enddate}
 			</if>
