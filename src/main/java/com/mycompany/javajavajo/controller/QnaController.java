@@ -106,7 +106,6 @@ public class QnaController {
 		int pageNo = (qna.getRnum() - 1) / 5 + 1;
 		session.setAttribute("pageNo", pageNo + "");
 		model.addAttribute("qna", qna);
-		log.info(qna.getQnaattachtype());
 		return "qna/detail";
 	}
 
@@ -170,6 +169,17 @@ public class QnaController {
 	@ResponseBody()
 	public String deleteAttach(int qnano) {
 		int result = qnaService.deleteAttach(qnano);
+		
+		String jsonResult = (result > 0) ? "success" : "fail";
+		JSONObject jo = new JSONObject();
+		jo.put("result", jsonResult);
+		return jo.toString();
+	}
+	
+	@PostMapping(value="/write_reply", produces="application/json; charset=UTF-8")
+	@ResponseBody()
+	public String writeReply(int qnano, String reply) {
+		int result = qnaService.writeReply(qnano, reply);
 		
 		String jsonResult = (result > 0) ? "success" : "fail";
 		JSONObject jo = new JSONObject();

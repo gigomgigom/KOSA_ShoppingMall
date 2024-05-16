@@ -15,11 +15,11 @@
 	<select id="selectByQnano" parameterType="int" resultType="Qna">
 		select *
 		from(
-		select	rownum as rnum, qnano, memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, qnawriter, qnaattachoname,
+		select	rownum as rnum, qnano, memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, qnawriter, qnaattachoname, admrply,
 				pretitle, preno, prememno, prelock, nexttitle, nextno, nextmemno, nextlock
 		from (
 			select 
-			qnano, qna.memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, memid as qnawriter, qnaattachoname,
+			qnano, qna.memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, memid as qnawriter, qnaattachoname, admrply,
 			lag(qnatitle,1,-1) over(order by qnano) as pretitle,  lag(qnano,1,-1) over(order by qnano) as preno,
 			lag(qna.memno,1,-1) over(order by qnano) as prememno, 	lag(qnalock,1,-1) over(order by qnano) as prelock,
 			lead(qnatitle,1,-1) over(order by qnano) as nexttitle,lead(qnano,1,-1) over(order by qnano) as nextno,
@@ -108,6 +108,12 @@
 		set qnaattachoname = #{qnaattachoname},
 		    qnaattachtype = #{qnaattachtype},
 		    qnaattachdata = #{qnaattachdata}
+		where qnano = #{qnano}
+	</update>
+	
+	<update id="updateAdmrply">
+		update qna
+		set admrply = #{reply}
 		where qnano = #{qnano}
 	</update>
 </mapper>

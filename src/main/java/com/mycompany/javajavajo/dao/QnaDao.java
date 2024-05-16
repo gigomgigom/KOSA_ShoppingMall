@@ -27,5 +27,7 @@ public interface QnaDao {
 	public Qna selectQnaImgByqnano(int qnano);
 
 	public int updateAttach(Qna qna);
+
+	public int updateAdmrply(@Param("qnano") int qnano, @Param("reply") String reply);
 	
 }

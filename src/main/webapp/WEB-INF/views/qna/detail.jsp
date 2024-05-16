@@ -20,7 +20,7 @@
 	<header>
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	</header>
-
+	<input id="qnano" type="hidden" value="${qna.qnano}">
 	<div
 		class="container-fluid d-flex flex-column align-items-center m-0 my-5 p-0">
 		<div
@@ -66,20 +66,32 @@
 				</p>
 			</div>
 
-			<div
-				class="d-flex justify-content-start align-items-center w-100 m-0 p-0 px-5">
+			<div id="replyArea"
+				class="d-flex flex-column justify-content-start align-items-center w-100 m-0 p-0 px-5">
 				<div
 					class="d-flex flex-column justify-content-center align-items-start border border-2 border-secondary-subtle w-100  m-0 mb-5 p-0"
 					style="position: relative;">
-					<span class="m-0  px-3 py-2 rounded-pill text-center"
-						style="color: white; background-color: #27374D; position: absolute; top: -10%; left: -1%;">답변
-						대기 중입니다</span>
-					<p class="m-0 px-3 py-5">
-						답변이 없습니다 <br /> <br />없다니까요 <br />없어요 없어 <br />돌아가요
-
-					</p>
+					<c:if test="${qna.admrply == null}">
+						<span class="m-0  px-3 py-2 rounded-pill text-center"
+							style="color: white; background-color: #27374D; position: absolute; top: -10%; left: -1%;">답변
+							대기 중입니다</span>
+						<p class="m-0 px-3 py-5">
+							답변이 없습니다 <br /> <br />없다니까요 <br />없어요 없어 <br />돌아가요
+						</p>
+					</c:if>
+					<c:if test="${qna.admrply != null}">
+							<span class="m-0  px-3 py-2 rounded-pill text-center"
+							style="color: white; background-color: #27374D; position: absolute; top: -10%; left: -1%;">관리자의 답변</span>
+						<p class="m-0 px-3 py-5">
+							${qna.admrply}
+						</p>
+					</c:if>
 				</div>
-
+				<c:if test="${qna.admrply == null}">
+					<div class="d-flex justify-content-center align-items-center w-100 m-0 mb-5 p-0 px-5" >
+						<a onclick="writeReply()" class="btn" style="background-color: #273740; color: white">답변달기</a>
+					</div>
+				</c:if>
 			</div>
 
 		</div>
@@ -172,4 +184,5 @@
 	</footer>
 
 </body>
+<script src="/javajavajo_mini_web/resources/js/qna/detail.js"></script>
 </html>

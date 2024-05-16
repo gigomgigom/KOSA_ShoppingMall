@@ -178,7 +178,7 @@ public class OrderService {
 		PointDtl pointPlus = new PointDtl();
 		pointPlus.setOrdno(ordno);
 		pointPlus.setAction(0);
-		pointPlus.setAmount(amount/100 * 5);
+		pointPlus.setAmount(amount * 5 / 100);
 		int pointDtlResult = pointDtlDao.insert(pointPlus);
 		memberDao.updatePoint(memno, pointPlus.getAmount(), "+");
 		

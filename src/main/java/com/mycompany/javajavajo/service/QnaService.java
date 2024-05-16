@@ -75,4 +75,10 @@ public class QnaService {
 		return result;
 	}
 
+	public int writeReply(int qnano, String reply) {
+		int result = qnaDao.updateAdmrply(qnano,reply);
+		return result;
+	}
+
+
 }
