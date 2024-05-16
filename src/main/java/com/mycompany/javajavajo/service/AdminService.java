@@ -253,5 +253,24 @@ public class AdminService {
 		List<Product> bestProducts = productDao.selectBestProductFromAdmin();
 		return bestProducts;
 	}
-
+	//심영조 - admin-main에서 사용할 주문 현황 데이터 가져오기 
+	public int getWeeklyTotalOrd() {
+		return orderDao.getWeeklyTotalOrd();
+	}
+	public int getWeeklyNonDel() {
+		return orderDao.getWeeklyNonDel();
+	}
+	public int getWeeklyRdyDel() {
+		return orderDao.getWeeklyRdyDel();
+	}
+	//심영조-admin-main에서 사용할 매출 현황 데이터 가져오기
+	public int getTodaySales() {
+		return orderDao.getTodaySales();
+	}
+	public int getMonthSales() {
+		return orderDao.getMonthSales();
+	}
+	public int getMaxDaySales() {
+		return orderDao.getMaxDaySales();
+	}
 }

@@ -60,10 +60,33 @@ public class AdminController {
 	//Main페이지 이동 컨트롤러(DashBoard)
 	@RequestMapping("/main")
 	public String adminMain(Model model) {
+		//재고 부족 상품 가져오기
 		List<Product> lackProducts = adminService.getOutOfStock();
-		
+		//판매량 기준 베스트 상품 가져오기
 		List<Product> bestProducts = adminService.getBestSoldProducts();
 		
+		//이번 주 주문 현황 데이터 가져오기
+		int weeklyTotOrd = adminService.getWeeklyTotalOrd();
+		int weeklyNoneDelivery = adminService.getWeeklyNonDel();
+		int weeklyRdyDelivery = adminService.getWeeklyRdyDel();
+		
+		//매출 현황 데이터 가져오기
+		int todaySales = adminService.getTodaySales();
+		int monthSales = adminService.getMonthSales();
+		int maxDaySales = adminService.getMaxDaySales();
+		
+		Map<String, Integer> thisWeekOrdInfo = new HashMap<>();
+		thisWeekOrdInfo.put("weeklyTotOrd", weeklyTotOrd);
+		thisWeekOrdInfo.put("weeklyNoneDelivery", weeklyNoneDelivery);
+		thisWeekOrdInfo.put("weeklyRdyDelivery", weeklyRdyDelivery);
+		
+		Map<String, Integer> salesInfo = new HashMap<>();
+		salesInfo.put("todaySales", todaySales);
+		salesInfo.put("monthSales", monthSales);
+		salesInfo.put("maxDaySales", maxDaySales);
+		
+		model.addAttribute("thisWeekOrdInfo", thisWeekOrdInfo);
+		model.addAttribute("salesInfo", salesInfo);
 		model.addAttribute("bestProducts", bestProducts);
 		model.addAttribute("lackproducts", lackProducts);
 		model.addAttribute("menuNum", -1);
@@ -77,11 +100,12 @@ public class AdminController {
 		//세션에 저장되어있는 SearchIndex 데이터를 가져오기
 		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
 		
+		log.info("세션"+sessionSearchIndex);
+		log.info("DTO"+searchIndex);
+		
 		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
-
-		if(searchIndex.getSearchkeyword() != null && !searchIndex.getSearchkeyword().equals("")) {
-			searchIndex.setPageno("1");
-		}
+		
+		log.info("세팅된DTO"+searchIndex);
 		
 		int intPageNo = Integer.parseInt(searchIndex.getPageno());
 		

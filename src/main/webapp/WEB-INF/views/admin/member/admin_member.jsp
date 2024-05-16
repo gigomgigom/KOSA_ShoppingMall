@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,12 +37,11 @@
 				style="width: 100%; height: 75px; background-color: #27374D;">
 				<h4 class="my-0 ms-5 ps-5 text-white">회원 조회</h4>
 				<div class="d-flex flex-row align-items-center">
-					<button type="button" class="btn me-5 text-white fw-bold"
-						style="background-color: #526D82;">로그아웃</button>
-					<span class="text-white fw-bold">환영합니다. 관리자 심영조님</span>
-					<div class="mx-3"
-						style="border-radius: 50%; width: 60px; height: 60px; background-color: aqua;">
-					</div>
+					<a href="${pageContext.request.contextPath}/" class="btn me-5 text-white fw-bold"
+						style="background-color: #526D82;">쇼핑몰 페이지 이동</a>
+					<a class="btn me-5 text-white fw-bold"
+						style="background-color: #526D82;" href="${pageContext.request.contextPath}/logout">로그아웃</a>
+					<span class="text-white me-5 fw-bold">환영합니다. <sec:authentication property="principal.username"/>님</span>
 				</div>
 			</div>
 			<div class="d-flex" style="width: 90%; height: 91vh;">
@@ -102,7 +102,6 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						<c:if test="${searchIndex.pager.totalPageNo > 1}">
 							<div class="d-flex justify-content-center mt-5">
 								<div>
 									<a class="btn btn-outline-primary btn-sm"
@@ -133,7 +132,6 @@
 										href="admin_member_view?pageno=${searchIndex.pager.totalPageNo}">맨끝</a>
 								</div>
 							</div>
-						</c:if>
 					</div>
 				</div>
 			</div>

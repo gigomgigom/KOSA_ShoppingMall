@@ -41,7 +41,7 @@
 		select count(*)
 		from ord, orderer
 		where ord.ordno = orderer.ordno
-		<if test="ctgindex != 0">
+		<if test="ctgindex != -1 and ctgindex != 0">
 			and ordstts = #{ctgindex}
 			<if test="startdate != null">
 				and orddate between #{startdate} and #{enddate}
@@ -55,7 +55,7 @@
 				</if>
 			</if>
 		</if>
-		<if test="ctgindex == 0">
+		<if test="ctgindex == -1 or ctgindex == 0">
 			<if test="startdate != null">
 				and orddate between #{startdate} and #{enddate}
 			</if>
@@ -73,15 +73,20 @@
 
 	<select id="selectUncomOrderByPager" parameterType="SearchIndex"
 		resultType="Order">
-		
-		select rnum, ordno, memno, ordstts, ordsttschar, orddate, ordprice, discprice, finprice
+
+		select rnum, ordno, memno, ordstts, ordsttschar, orddate, ordprice,
+		discprice, finprice
 		from (
-		select rownum as rnum, ordno, memno, ordstts, ordsttschar, orddate, ordprice, discprice, finprice
+		select rownum as rnum, ordno, memno, ordstts,
+		ordsttschar, orddate, ordprice, discprice, finprice
 		from (
-		select ord.ordno, ord.memno, ord.ordstts, ordstts.ordsttschar, ord.orddate, ord.ordprice, ord.discprice, ord.finprice
-		from ord, ordstts
-		where ord.ordstts = ordstts.ordsttsno
-		<if test="ctgindex != 0">
+		select
+		ord.ordno, ord.memno, ord.ordstts, ordstts.ordsttschar, ord.orddate,
+		ord.ordprice, ord.discprice, ord.finprice
+		from ord, ordstts, orderer
+		where
+		ord.ordstts = ordstts.ordsttsno and ord.ordno = orderer.ordno
+		<if test="ctgindex != -1 and ctgindex != 0">
 			and ordstts = #{ctgindex}
 			<if test="startdate != null">
 				and orddate between #{startdate} and #{enddate}
@@ -95,7 +100,7 @@
 				</if>
 			</if>
 		</if>
-		<if test="ctgindex == 0">
+		<if test="ctgindex == -1 or ctgindex == 0">
 			<if test="startdate != null">
 				and orddate between #{startdate} and #{enddate}
 			</if>
@@ -110,10 +115,12 @@
 		</if>
 		order by ordno desc
 		)
-		where rownum <![CDATA[<]]>= #{pager.endRowNo}
+		where rownum <![CDATA[<]]>=
+		#{pager.endRowNo}
 		)
-		where rnum <![CDATA[>]]>= #{pager.startRowNo}
-		
+		where rnum <![CDATA[>]]>=
+		#{pager.startRowNo}
+
 	</select>
 
 	<select id="getTotalComOrder" resultType="int">
@@ -137,5 +144,57 @@
 		)
 		where rnum >= #{startRowNo}
 		]]>
+	</select>
+
+	<select id="getWeeklyTotalOrd" resultType="int">
+		select count(*)
+		from
+		ord
+		where orddate between trunc(sysdate, 'iw') and trunc(sysdate,
+		'iw')+6
+	</select>
+
+	<select id="getWeeklyNonDel" resultType="int">
+		select count(*)
+		from ord
+		where orddate between trunc(sysdate, 'iw') and
+		trunc(sysdate, 'iw')+6
+		and ordstts <![CDATA[<]]>
+		3
+	</select>
+
+	<select id="getWeeklyRdyDel" resultType="int">
+		select count(*)
+		from ord
+		where orddate between trunc(sysdate, 'iw') and
+		trunc(sysdate, 'iw')+6
+		and ordstts <![CDATA[>]]>
+		2
+	</select>
+
+	<select id="getTodaySales" resultType="int">
+		select sum(finprice)
+		from ord
+		where orddate between sysdate-1 and sysdate
+	</select>
+
+	<select id="getMonthSales" resultType="int">
+		select sum(finprice)
+		from ord
+		where orddate between TRUNC(SYSDATE, 'MM') and last_day(sysdate)
+	</select>
+
+	<select id="getMaxDaySales" resultType="int">
+		select max(sum)
+		from
+		(
+		select orddate, sum(finprice) as sum
+		from (
+		select trunc(orddate, 'DD') as orddate, finprice
+		from ord
+		where orddate between TRUNC(SYSDATE, 'MM') and last_day(sysdate)
+		)
+		group by orddate
+		)
 	</select>
 </mapper>	

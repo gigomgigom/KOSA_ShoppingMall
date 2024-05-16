@@ -34,5 +34,14 @@ public interface OrderDao {
 	
 	//심영조 - 페이저 정보에 따라서 완료 또는 취소된 주문들의 리스트를 가져다줘
 	public List<Order> getComOrderListByPager(Pager pager);
+	
+	//심영조 - 이번 주 주문 현황 가져오기
+	public int getWeeklyTotalOrd();
+	public int getWeeklyNonDel();
+	public int getWeeklyRdyDel();
+	//심영조 - 매출 정보 가져오기
+	public int getTodaySales();
+	public int getMonthSales();
+	public int getMaxDaySales();
 
 }

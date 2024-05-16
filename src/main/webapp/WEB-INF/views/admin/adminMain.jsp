@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,12 +42,11 @@
 				style="width: 100%; height: 75px; background-color: #27374D;">
 				<h4 class="my-0 ms-5 ps-5 text-white">대쉬보드</h4>
 				<div class="d-flex flex-row align-items-center">
-					<button type="button" class="btn me-5 text-white fw-bold"
-						style="background-color: #526D82;">로그아웃</button>
-					<span class="text-white fw-bold">환영합니다. 관리자 심영조님</span>
-					<div class="mx-3"
-						style="border-radius: 50%; width: 60px; height: 60px; background-color: aqua;">
-					</div>
+					<a href="${pageContext.request.contextPath}/" class="btn me-5 text-white fw-bold"
+						style="background-color: #526D82;">쇼핑몰 페이지 이동</a>
+					<a class="btn me-5 text-white fw-bold"
+						style="background-color: #526D82;" href="${pageContext.request.contextPath}/logout">로그아웃</a>
+					<span class="text-white me-5 fw-bold">환영합니다. <sec:authentication property="principal.username"/>님</span>
 				</div>
 			</div>
 			<div class="d-flex" style="width: 90%; height: 91vh;">
@@ -56,35 +56,35 @@
 					<div class="w-100 my-1">
 						<div class="d-flex flex-column justify-content-start">
 							<h5>
-								<b>오늘 주문 현황</b>
+								<b>이번 주 주문 현황</b>
 							</h5>
 							<div class="border my-4 p-3" style="width: 90%;">
 								<div class="d-flex w-100 p-1">
 									<div class="col-4 text-center">
 										<h5>
-											<b>결제완료 주문</b>
+											<b>접수된 주문</b>
 										</h5>
 									</div>
 									<div class="col-4 text-center">
 										<h5>
-											<b>배송대기 중</b>
+											<b>미배송 처리</b>
 										</h5>
 									</div>
 									<div class="col-4 text-center">
 										<h5>
-											<b>완료된 주문</b>
+											<b>배송 처리</b>
 										</h5>
 									</div>
 								</div>
 								<div class="d-flex w-100 p-1">
 									<div class="col-4 text-center">
-										<h5>15건</h5>
+										<h5>${thisWeekOrdInfo.weeklyTotOrd}건</h5>
 									</div>
 									<div class="col-4 text-center">
-										<h5>4건</h5>
+										<h5>${thisWeekOrdInfo.weeklyNoneDelivery}건</h5>
 									</div>
 									<div class="col-4 text-center">
-										<h5>30건</h5>
+										<h5>${thisWeekOrdInfo.weeklyRdyDelivery}건</h5>
 									</div>
 								</div>
 							</div>
@@ -109,19 +109,19 @@
 									</div>
 									<div class="col-4 text-center">
 										<h5>
-											<b>최고 매출액</b>
+											<b>이번달 최고 매출액</b>
 										</h5>
 									</div>
 								</div>
 								<div class="d-flex w-100 p-1">
 									<div class="col-4 text-center">
-										<h5>1,500,000원</h5>
+										<h5>${salesInfo.todaySales}원</h5>
 									</div>
 									<div class="col-4 text-center">
-										<h5>560,700,400원</h5>
+										<h5>${salesInfo.monthSales}원</h5>
 									</div>
 									<div class="col-4 text-center">
-										<h5>5,030,000원</h5>
+										<h5>${salesInfo.maxDaySales}원</h5>
 									</div>
 								</div>
 							</div>
