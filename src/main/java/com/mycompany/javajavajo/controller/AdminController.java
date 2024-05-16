@@ -76,21 +76,23 @@ public class AdminController {
 		
 		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
 
+		if(searchIndex.getSearchkeyword() != null && !searchIndex.getSearchkeyword().equals("")) {
+			searchIndex.setPageno("1");
+		}
+		
 		int intPageNo = Integer.parseInt(searchIndex.getPageno());
 		
-		log.info(searchIndex.toString());
 		int rowsPagingTarget = adminService.getTotalMemberRows(searchIndex);
 		
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
 
 		searchIndex.setPager(pager);
-		session.setAttribute("searchIndex", searchIndex);
 
 		List<Member> memberList = adminService.getMemberList(searchIndex);
-
-		model.addAttribute("pager", pager);
+		
+		session.setAttribute("searchIndex", searchIndex);
+		
 		model.addAttribute("memberList", memberList);
-		model.addAttribute("searchIndex", searchIndex);
 
 		model.addAttribute("menuNum", 0);
 		return "admin/member/admin_member";
@@ -145,7 +147,7 @@ public class AdminController {
 
 	//회원 상세정보 보기 - 회원 정보 변경(수정)
 	@RequestMapping("/update_member")
-	public String updateMember(Member member,  Model model) {
+	public String updateMember(Member member) {
 		adminService.editMemberInfo(member);
 		return "redirect:/admin/admin_member_view";
 	}
@@ -337,6 +339,9 @@ public class AdminController {
 			order.setOrdproductcnt(adminService.getOrderProductCnt(order.getOrdno()).getOrdproductcnt());
 		}
 		
+		List<OrdStts> ordSttsList = adminService.getOrdSttsList();
+		
+		model.addAttribute("ordSttsList", ordSttsList);
 		model.addAttribute("totRows", rowsPagingTarget);
 		model.addAttribute("pager", pager);
 		model.addAttribute("ordList", ordList);
