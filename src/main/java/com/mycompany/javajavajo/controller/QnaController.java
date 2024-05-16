@@ -186,4 +186,15 @@ public class QnaController {
 		jo.put("result", jsonResult);
 		return jo.toString();
 	}
+	
+	@PostMapping(value="/edit_reply", produces="application/json; charset=UTF-8")
+	@ResponseBody()
+	public String editReply(int qnano, String reply) {
+		int result = qnaService.writeReply(qnano, reply);
+		
+		String jsonResult = (result > 0) ? "success" : "fail";
+		JSONObject jo = new JSONObject();
+		jo.put("result", jsonResult);
+		return jo.toString();
+	}
 }

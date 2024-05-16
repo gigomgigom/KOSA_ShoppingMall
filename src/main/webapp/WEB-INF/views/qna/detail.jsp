@@ -94,6 +94,11 @@
 						<a onclick="writeReply()" class="btn" style="background-color: #273740; color: white">답변달기</a>
 					</div>
 				</c:if>
+				<c:if test="${qna.admrply != null}">
+					<div class="d-flex justify-content-center align-items-center w-100 m-0 mb-5 p-0 px-5" >
+						<a onclick="editReply()" class="btn" style="background-color: #273740; color: white">수정하기</a>
+					</div>
+				</c:if>
 				</sec:authorize>
 			</div>
 
