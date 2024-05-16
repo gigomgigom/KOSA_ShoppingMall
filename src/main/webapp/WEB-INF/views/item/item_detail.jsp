@@ -18,7 +18,6 @@
 <script>
 
 		function handleBtnShow(index) {
-			console.log("handleBtn1() 실행");
 			switch(index) {
 				case 1: 
 					$.ajax({
@@ -33,9 +32,14 @@
 					break;
 				
 				case 2:
+					
+					let prodno = $("#prodno").val();
+					let product = {prodno};
+					
 					$.ajax({
 						url: "item_review",
 						method: "get",
+						data : product,
 						success: function(data) {
 							$(".active").attr("class", "nav-item");
 							$("#nav-2").attr("class", "nav-item active");
@@ -94,7 +98,8 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 	<div class="container-fluid my-2">
-		<!--data전달을 위한 form-->
+	<!--data전달을 위한 form-->
+
 		<form method="post" action="${pageContext.request.contextPath}/cart/cartAdd" >
 			<div id="wrapper" class="d-flex flex-column">
 				<div class="container d-flex justify-content-center">
@@ -131,14 +136,12 @@
 	
 									<div class="mt-3 d-flex justify-content-between">
 										
-										<input type="hidden" value="${product.prodno}" name="prodno">
+										<input id="prodno" type="hidden" value="${product.prodno}" name="prodno">
 										<button type="submit" id="add-cart" class="btn btn-lg border fw-bold" 
 											style="background-color: #9DB2BF;">장바구니에 추가</button>
-										
-										<button type="button" id="direct-purchase" class="btn btn-lg text-white fw-bold w-50" onClick="location.href='${pageContext.request.contextPath}/order/order_form'"
-											style="background-color: #27374D;">바로구매</button>
+											<a type="submit" id="direct-purchase" class="btn btn-lg text-white fw-bold w-50"
+												style="background-color: #27374D;" href="${pageContext.request.contextPath}/order/direct">바로구매</a>
 									</div>
-								
 							</div>
 						</div>
 					</div>

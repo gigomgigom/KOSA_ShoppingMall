@@ -27,8 +27,16 @@
 	]]>
 	</select>
 	
+	<select id="selectReviewByProdNo" parameterType="int" resultType="Review">
+		select ordno, prodno, rvtitle, rvdate, rvcontent, rvrating
+		from review
+		where prodno = #{prodno}
+	</select>
 	
-	
-	
+	<select id="selectReviewListByProdNo" parameterType="int" resultType="Review">
+		select ordno, prodno, rvtitle, rvdate, rvcontent, rvrating
+		from review
+		where prodno = #{prodno}
+	</select>
 	
 </mapper>
