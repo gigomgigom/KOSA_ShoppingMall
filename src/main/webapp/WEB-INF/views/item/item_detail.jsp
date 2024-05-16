@@ -140,7 +140,7 @@
 										<button type="submit" id="add-cart" class="btn btn-lg border fw-bold" 
 											style="background-color: #9DB2BF;">장바구니에 추가</button>
 											<a type="submit" id="direct-purchase" class="btn btn-lg text-white fw-bold w-50"
-												style="background-color: #27374D;" href="${pageContext.request.contextPath}/order/direct">바로구매</a>
+												style="background-color: #27374D;" href="${pageContext.request.contextPath}/order/direct?prodno=${product.prodno}">바로구매</a>
 									</div>
 							</div>
 						</div>

@@ -53,5 +53,7 @@ public interface ProductDao {
 	//심영조 - 판매량 순 베스트상품을 가져와!
 	List<Product> selectBestProductFromAdmin();
 
+	List<Product> selectProductListByProdNo(int prodno);
+
 	
 }

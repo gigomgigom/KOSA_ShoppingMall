@@ -18,6 +18,7 @@ import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.OrderList;
 import com.mycompany.javajavajo.dto.Orderer;
+import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.Recipient;
 import com.mycompany.javajavajo.security.Tm1UserDetails;
 import com.mycompany.javajavajo.service.AdminService;
@@ -63,11 +64,17 @@ public class OrderController {
 	
 	// 신우호 - 바로구매 시  오더 폼으로 바로 이동 
 	@GetMapping("/direct")
-	public String direct(Authentication authentication) {
+	public String direct(Authentication authentication, Model model, int prodno) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 		Member member = t1UserDetails.getMember();
 		int memno = member.getMemno();
-		return "order/orderForm";
+		MemberAdr memberAdr = memberService.getMemberAdr(memno);
+		Product product = orderService.getProductByProdNo(prodno);
+		model.addAttribute("memberAdr", memberAdr);
+		model.addAttribute("member", member);
+		model.addAttribute("product", product);
+		
+		return "order/orderDirect";
 	}
 	
 
