@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mycompany.javajavajo.dao.ProductDao">
-	<!-- 이 추상메소드의 이름과 매개변수 타입, 반환값 타입을 어떻게 설정했으며 만약 아래 sql문을 실행했을때 몇개의 결과값이 나올까요?-->
-	<!-- 세림 답변 : selectByProdno /  매개변수 타입 - int/ 반환 값 타입은 product / 40개! -->
-	<select id="selectByProdno" parameterType="int" resultType="Product">
+	<!-- 이 추상메소드의 이름과 매개변수 타입, 반환값 타입을 어떻게 설정했으며 만약 아래 sql문을 실행했을때 몇개의 결과값이 
+		나올까요? -->
+	<!-- 세림 답변 : selectByProdno / 매개변수 타입 - int/ 반환 값 타입은 product / 40개! -->
+	<select id="selectByProdno" parameterType="int"
+		resultType="Product">
 		select *
 		from product
 		where prodno = #{prodno}
 	</select>
-	
-	<select id="selectByCtgno" parameterType="int" resultType="Product">
+
+	<select id="selectByCtgno" parameterType="int"
+		resultType="Product">
 		select *
 		from product
 		where ctgno = #{ctgno}
 	</select>
-	
+
 	<select id="selectLackStock" resultType="Product">
 		<![CDATA[
 		select prodno, ctgno, prodname, prodstock 
@@ -23,8 +26,9 @@
 		order by prodstock
 		]]>
 	</select>
-	
-	<select id="selectTotalProductCnt" parameterType="SearchIndex" resultType="int">
+
+	<select id="selectTotalProductCnt" parameterType="SearchIndex"
+		resultType="int">
 		select count(*)
 		from product
 		<if test="searchkeyword != null and ctgindex != 0">
@@ -32,7 +36,8 @@
 				where prodname like '%' || #{searchkeyword} || '%'
 			</if>
 			<if test="ctgindex != -1">
-				where prodname like '%' || #{searchkeyword} || '%' and ctgno = #{ctgindex}
+				where prodname like '%' || #{searchkeyword} || '%' and
+				ctgno = #{ctgindex}
 			</if>
 		</if>
 		<if test="ctgindex != 0 and searchkeyword == null">
@@ -41,21 +46,24 @@
 			</if>
 		</if>
 	</select>
-	
+
 	<select id="selectProductByPager" parameterType="searchIndex">
-		
+
 		select rnum, prodno, ctgno, prodname, prodprice, proddate, prodstock
 		from (
-		select rownum as rnum, prodno, ctgno, prodname, prodprice, proddate, prodstock
+		select rownum as rnum, prodno, ctgno, prodname, prodprice,
+		proddate, prodstock
 		from (
-		select prodno, ctgno, prodname, prodprice, proddate, prodstock
+		select prodno, ctgno, prodname, prodprice,
+		proddate, prodstock
 		from product
 		<if test="searchkeyword != null and ctgindex != 0">
 			<if test="ctgindex == -1">
 				where prodname like '%' || #{searchkeyword} || '%'
 			</if>
 			<if test="ctgindex != -1">
-				where prodname like '%' || #{searchkeyword} || '%' and ctgno = #{ctgindex}
+				where prodname like '%' || #{searchkeyword} || '%' and
+				ctgno = #{ctgindex}
 			</if>
 		</if>
 		<if test="ctgindex != 0 and searchkeyword == null">
@@ -65,116 +73,152 @@
 		</if>
 		order by prodno desc
 		)
-		where rownum <![CDATA[<]]>= #{pager.endRowNo}
+		where rownum <![CDATA[<]]>=
+		#{pager.endRowNo}
 		)
-		where rnum <![CDATA[>]]>= #{pager.startRowNo}
-		
+		where rnum <![CDATA[>]]>=
+		#{pager.startRowNo}
+
 	</select>
-	
+
 	<update id="updateProdStock" parameterType="Product">
 		update product
-		set prodstock = #{prodstock}
+		set
+		prodstock = #{prodstock}
 		where prodno = #{prodno}
 	</update>
-	
+
 	<update id="updateProductInfo" parameterType="Product">
 		update product
-		set	
-			ctgno=#{ctgno},
-			prodname=#{prodname},
-			prodprice=#{prodprice},
-			prodstock=#{prodstock}
+		set
+		ctgno=#{ctgno},
+		prodname=#{prodname},
+		prodprice=#{prodprice},
+		prodstock=#{prodstock}
 		where prodno = #{prodno}
-		
+
 	</update>
-	
+
 	<delete id="deleteProductByProdno" parameterType="int">
-		delete 
+		delete
 		from product
 		where prodno = #{prodno}
 	</delete>
-	
+
 	<insert id="insertProduct" parameterType="Product">
-		<selectKey keyProperty="prodno" order="BEFORE" resultType="int"> 
+		<selectKey keyProperty="prodno" order="BEFORE"
+			resultType="int">
 			select product_seq.nextval from dual
 		</selectKey>
-		insert into product values (#{prodno}, #{ctgno}, #{prodname}, #{prodprice}, sysdate, #{prodstock})
+		insert into product values (#{prodno}, #{ctgno}, #{prodname},
+		#{prodprice}, sysdate, #{prodstock})
 	</insert>
-	
+
 	<insert id="insertProductImg" parameterType="Product">
-		<selectKey keyProperty="prodno" order="BEFORE" resultType="int"> 
+		<selectKey keyProperty="prodno" order="BEFORE"
+			resultType="int">
 			select product_seq.currval from dual
 		</selectKey>
-		insert into productimg values (#{prodno}, #{productImg.repimg}, #{productImg.dtlimg}, #{productImg.repimgoname}, #{productImg.repimgtype}, #{productImg.dtlimgoname}, #{productImg.dtlimgtype})
+		insert into productimg values (#{prodno}, #{productImg.repimg},
+		#{productImg.dtlimg}, #{productImg.repimgoname},
+		#{productImg.repimgtype}, #{productImg.dtlimgoname},
+		#{productImg.dtlimgtype})
 	</insert>
-	
+
 	<select id="countbyCtgKeyword">
 		select count(*)
 		from product
 		where ctgno = #{ctgno}
 		<if test="keyword != null">
-		and prodname like '%' || #{keyword} || '%'
+			and prodname like '%' || #{keyword} || '%'
 		</if>
 	</select>
-	
+
 	<select id="selectItemList" resultType="Product">
 		select *
 		from (
-		    select rownum as rnum, prodno, prodname, prodprice, ordcount, rvcount, avgrating
-		    from (
-		        select product.prodno as prodno, prodname, prodprice, ordcount, rvcount, avgrating 
-		        from product,
-		        (select count(qty) as ordcount, prodno from ordprod group by prodno)  o,
-		        (select count(rvrating) as rvcount, round(avg(nvl(rvrating,0)),1) as avgrating, prodno from review group by prodno)  r
-		        where ctgno = #{ctgno}
-		        and product.prodno = o.prodno(+)
-		        and product.prodno = r.prodno(+)
-		        <if test="keyword != null">
-		        	and prodname like '%' || #{keyword} || '%'
-				</if>
-				group by product.prodno, prodname, prodprice, ordcount, rvcount, avgrating
-				
-				<if test="sorting == 'newItem'">
-		        order by product.prodno desc
-		        </if>
-		        <if test="sorting == 'highPrice'">
-		        order by prodprice desc
-		        </if>
-		        <if test="sorting == 'lowPrice'">
-		        order by prodprice
-		        </if>
-		    )
+		select rownum as rnum, prodno, prodname, prodprice, ordcount, rvcount,
+		avgrating
+		from (
+		select product.prodno as prodno, prodname, prodprice, ordcount, rvcount,
+		avgrating
+		from product,
+		(select count(qty) as ordcount, prodno from ordprod group by prodno) o,
+		(select count(rvrating) as rvcount, round(avg(nvl(rvrating,0)),1) as
+		avgrating, prodno from review group by prodno) r
+		where ctgno = #{ctgno}
+		and product.prodno = o.prodno(+)
+		and product.prodno = r.prodno(+)
+		<if test="keyword != null">
+			and prodname like '%' || #{keyword} || '%'
+		</if>
+		group by product.prodno, prodname, prodprice, ordcount, rvcount,
+		avgrating
+
+		<if test="sorting == 'newItem'">
+			order by product.prodno desc
+		</if>
+		<if test="sorting == 'highPrice'">
+			order by prodprice desc
+		</if>
+		<if test="sorting == 'lowPrice'">
+			order by prodprice
+		</if>
+		)
 		    <![CDATA[where rownum <= #{pager.endRowNo}
 		)
 		where rnum >= #{pager.startRowNo}
 		]]>
 	</select>
-	
+
 	<select id="selectBestProduct" resultType="Product">
-		select rownum as rnum, prodno, prodname, prodprice, ordcount, rvcount, avgrating
-		    from (
-		        select product.prodno as prodno, prodname, prodprice, ordcount, rvcount, avgrating 
-		        from product,
-		        (select count(qty) as ordcount, prodno from ordprod group by prodno)  o,
-		        (select count(rvrating) as rvcount, round(avg(nvl(rvrating,0)),1) as avgrating, prodno from review group by prodno)  r
-		        where product.prodno = o.prodno(+)
-		        and product.prodno = r.prodno(+)
-		        order by ordcount desc nulls last
-		    )
+		select rownum as rnum, prodno, prodname, prodprice, ordcount, rvcount,
+		avgrating
+		from (
+		select product.prodno as prodno, prodname, prodprice, ordcount, rvcount,
+		avgrating
+		from product,
+		(select count(qty) as ordcount, prodno from ordprod group by prodno) o,
+		(select count(rvrating) as rvcount, round(avg(nvl(rvrating,0)),1) as
+		avgrating, prodno from review group by prodno) r
+		where product.prodno = o.prodno(+)
+		and product.prodno = r.prodno(+)
+		order by ordcount desc nulls last
+		)
 		<![CDATA[where rownum <= 4]]>
 	</select>
-	
-	<select id="selectReviewByProdNo" parameterType="int" resultType="Product">
-		select * 
+
+	<select id="selectReviewByProdNo" parameterType="int"
+		resultType="Product">
+		select *
 		from (
-			select product.prodno, ctgno, prodname, prodprice, ordcount, rvcount, avgrating
-			from product,
-			(select count(qty) as ordcount, prodno from ordprod group by prodno) o,
-			(select count(rvrating) as rvcount, round(avg(nvl(rvrating,0)),1) as avgrating, prodno from review group by prodno) r
-			where product.prodno = o.prodno(+)
-			and product.prodno = r.prodno(+)
-			)
+		select product.prodno, ctgno, prodname, prodprice, ordcount, rvcount,
+		avgrating
+		from product,
+		(select count(qty) as ordcount, prodno from ordprod group by prodno) o,
+		(select count(rvrating) as rvcount, round(avg(nvl(rvrating,0)),1) as
+		avgrating, prodno from review group by prodno) r
+		where product.prodno = o.prodno(+)
+		and product.prodno = r.prodno(+)
+		)
 		where prodno = #{prodno}
 	</select>
-	
+
+	<select id="selectBestProductFromAdmin" resultType="Product">
+		select
+		rownum, prodno, prodname, soldcnt
+		from (
+		select product.prodno, prodname, soldcnt
+		from product,
+		(
+		select prodno, sum(qty) as soldcnt
+		from ordprod
+		group by prodno
+		) sold
+		where product.prodno = sold.prodno
+		order by soldcnt desc
+		)
+		<![CDATA[where rownum < 6]]>
+	</select>
+
 </mapper>

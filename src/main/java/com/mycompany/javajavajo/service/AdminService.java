@@ -248,5 +248,10 @@ public class AdminService {
 		List<Order> comOrderList = orderDao.getComOrderListByPager(pager);
 		return comOrderList;
 	}
+	//심영조 -admin-대시보드 판매량순 베스트 상품의 정보들을 가져와줘!
+	public List<Product> getBestSoldProducts() {
+		List<Product> bestProducts = productDao.selectBestProductFromAdmin();
+		return bestProducts;
+	}
 
 }

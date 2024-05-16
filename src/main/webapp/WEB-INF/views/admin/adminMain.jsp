@@ -133,61 +133,19 @@
 								<b>이번 달 베스트 셀러 TOP 5</b>
 							</h5>
 							<div class="border d-flex my-4" style="width: 90%;">
-								<div class="card" style="width: 20%">
-									<img class="card-img-top"
-										src="${pageContext.request.contextPath}/resources/image/item/snack.png"
-										alt="Card image" style="width: 100%;">
-									<div class="card-body">
-										<h6 class="card-title">
-											<b>상품1</b>
-										</h6>
-										<p>판매량 : 300개</p>
+								<c:forEach var="product" items="${bestProducts}">
+									<div class="card" style="width: 20%">
+										<img class="card-img-top"
+											src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${product.prodno}"
+											alt="Card image" style="width: 100%;">
+										<div class="card-body">
+											<h6 class="card-title">
+												<b>${product.prodname}</b>
+											</h6>
+											<p>판매량 : ${product.soldcnt}개</p>
+										</div>
 									</div>
-								</div>
-								<div class="card" style="width: 20%">
-									<img class="card-img-top"
-										src="${pageContext.request.contextPath}/resources/image/item/snack.png"
-										alt="Card image" style="width: 100%;">
-									<div class="card-body">
-										<h6 class="card-title">
-											<b>상품2</b>
-										</h6>
-										<p>판매량 : 300개</p>
-									</div>
-								</div>
-								<div class="card" style="width: 20%">
-									<img class="card-img-top"
-										src="${pageContext.request.contextPath}/resources/image/item/snack.png"
-										alt="Card image" style="width: 100%;">
-									<div class="card-body">
-										<h6 class="card-title">
-											<b>상품3</b>
-										</h6>
-										<p>판매량 : 300개</p>
-									</div>
-								</div>
-								<div class="card" style="width: 20%">
-									<img class="card-img-top"
-										src="${pageContext.request.contextPath}/resources/image/item/snack.png"
-										alt="Card image" style="width: 100%;">
-									<div class="card-body">
-										<h6 class="card-title">
-											<b>상품4</b>
-										</h6>
-										<p>판매량 : 300개</p>
-									</div>
-								</div>
-								<div class="card" style="width: 20%">
-									<img class="card-img-top"
-										src="${pageContext.request.contextPath}/resources/image/item/snack.png"
-										alt="Card image" style="width: 100%;">
-									<div class="card-body">
-										<h6 class="card-title">
-											<b>상품5</b>
-										</h6>
-										<p>판매량 : 300개</p>
-									</div>
-								</div>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
