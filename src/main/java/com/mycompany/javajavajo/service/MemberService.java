@@ -73,8 +73,12 @@ public class MemberService {
 	}
 
 	public int updateMemberByMemno(Member member) {
+		if (member.getMempw() != null && !member.getMempw().isEmpty()) {
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		member.setMempw(passwordEncoder.encode(member.getMempw())); // 암호화해서 다시 반환
+		//mempw가 공백란일 경우 암호화 하지 않음
+		
+	}
 		int memberInfo = memberDao.updateMemberInformation(member);
 		return memberInfo;
 	}

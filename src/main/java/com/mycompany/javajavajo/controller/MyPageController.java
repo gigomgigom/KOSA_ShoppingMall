@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.MemberAdr;
@@ -123,29 +124,18 @@ public class MyPageController {
 	
 	//황세림 - 사용자 정보 수정
 	@RequestMapping("/update_user_info")
-	public String updateMemberInformation(Member member, MemberAdr memberadr, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		log.info(member.getMempw());
+	public String updateMemberInformation(MultipartFile memimgattach, Member member, MemberAdr memberadr, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		log.info(member.getMempw().equals("") + "|" + (member.getMempw() == null));
 		memberService.updateMemberByMemno(member);
 		memberService.updateMemberAdr(memberadr);
-	
-		
-		byte[] memImgData = member.getMemimg();
+		 return  "redirect:/mypage";
 
-		response.setContentType(member.getMemimgtype());
-		String fileName = new String(member.getMemimgoname().getBytes("UTF-8"),"ISO-8859-1");
-		response.setHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
-		if(memImgData == null) {
-			log.info("null"); 
-		}
-		log.info("run2");
-		OutputStream os = response.getOutputStream();
-		os.write(memImgData);
-		os.flush();
-		os.close();
-		return  "redirect:/mypage";
-		
 	}
+	
+		
+	
 
+	}
 	
 	
-}
+

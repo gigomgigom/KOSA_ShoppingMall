@@ -125,7 +125,7 @@
 		update member
 		set
 		memid = #{memid},
-		 <if test="!mempw.equals('')">
+		<if test="mempw!=null and !mempw.equals('')">
 		mempw = #{mempw},
 		</if> 
 		memname = #{memname},

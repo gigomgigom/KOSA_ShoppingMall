@@ -80,7 +80,7 @@
 					src="${pageContext.request.contextPath}/mypage/downloadMemImg?memno=${member.memno}"
 					width="100px">
 				<div class="d-flex flex-column mt-3">
-					<input type="file" class="form-control" name="memimgattach">
+					<!-- <input type="file" class="form-control" name="memimgattach"> -->
 				</div>
 			</div> 
 			
