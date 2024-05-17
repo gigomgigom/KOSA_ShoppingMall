@@ -173,9 +173,9 @@
 	</select>
 
 	<select id="getTodaySales" resultType="int">
-		select sum(finprice)
+		select sum from (select nvl(sum(finprice), 0) as sum
 		from ord
-		where orddate between sysdate-1 and sysdate
+		where orddate between sysdate-1 and sysdate)
 	</select>
 
 	<select id="getMonthSales" resultType="int">
