@@ -155,20 +155,32 @@
 		</div>
 
 		<div class="mt-4">
-			<h5>배송정보</h5>
-			<hr />
-			<div class="container-fluid d-flex justify-content-between">
-				<span>배송회사</span> <span>우체국 배송조회(문의전화: 1855-1300)</span>
-			</div>
-			<hr />
-			<div class="container-fluid d-flex justify-content-between">
-				<span>운송장번호</span> <span>6861581676379</span>
-			</div>
-			<hr />
-			<div class="container-fluid d-flex justify-content-between">
-				<span>배송일시</span> <span>2024-03-21 13:14:11</span>
-			</div>
-			<hr />
+			<c:if test="${delivery != null}">
+				<h5>배송정보</h5>
+				<hr />
+				<div class="container-fluid d-flex justify-content-between">
+					<span>배송회사</span> <span>${delivery.comname} 배송조회(문의전화: ${delivery.comtel})</span>
+				</div>
+				<hr />
+				<div class="container-fluid d-flex justify-content-between">
+					<span>운송장번호</span> <span>${delivery.trckno}</span>
+				</div>
+				<hr />
+				<div class="container-fluid d-flex justify-content-between">
+					<span>배송일시</span> <span><fmt:formatDate value="${delivery.deldate}" pattern="yyyy-MM-dd" /></span>
+				</div>
+				<hr />
+				<div class="container-fluid d-flex justify-content-between">
+					<span>요청사항</span> <span>${order.rqst}</span>
+				</div>
+				<hr />
+			</c:if>
+			<c:if test="${delivery == null}">
+				<div class="d-flex justify-content-center">
+					<span>배송 준비 중 입니다</span>
+				</div>
+				<hr/>
+			</c:if>
 			<div class="mt-4">
 
 				<div class="container-fluid border bg-light m-2 p-2">

@@ -179,7 +179,7 @@
 							<input type="email" class="form-control mb-4" id="rcptemail"
 								placeholder="E-mail (필수 입력)" name="rcptemail" required /> 
 							<label for="request">요청사항</label>
-							<textarea class="form-control" name="ordrqst" rows="3"></textarea>
+							<textarea class="form-control" name="rqst" rows="3"></textarea>
 						</div>
 					</div>
 				</div>

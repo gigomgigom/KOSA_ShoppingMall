@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.mycompany.javajavajo.dto.CartItem;
+import com.mycompany.javajavajo.dto.Delivery;
 import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.MemberAdr;
 import com.mycompany.javajavajo.dto.OrdProd;
@@ -85,9 +86,16 @@ public class OrderController {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 		Member member = t1UserDetails.getMember();
 		int memno = member.getMemno();
-
 		orderService.createOrder(memno, order, orderer, recipient);
-
+		return "redirect:/order/order_detail?ordno=" + order.getOrdno();
+	}
+	
+	@PostMapping("/create_order_direct")
+	public String createOrderDirect(int prodno,int qty,Order order, Orderer orderer, Recipient recipient, Authentication authentication) {
+		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
+		Member member = t1UserDetails.getMember();
+		int memno = member.getMemno();
+		orderService.createOrderDirect(memno, order, orderer, recipient,prodno, qty);
 		return "redirect:/order/order_detail?ordno=" + order.getOrdno();
 	}
 
@@ -98,12 +106,14 @@ public class OrderController {
 		List<OrdProd> ordProdList = orderService.getOrdProdListByOrdno(ordno);
 		Orderer orderer = orderService.getOrdererByOrdno(ordno);
 		Recipient recipient = orderService.getRecipientByOrdno(ordno);
-
+		Delivery delivery = orderService.getDelivery(ordno);
 		model.addAttribute("order", order);
 		model.addAttribute("ordProdList", ordProdList);
 		model.addAttribute("orderer", orderer);
 		model.addAttribute("recipient", recipient);
-
+		model.addAttribute("delivery",	delivery);
+		
+		
 		return "order/orderDetail";
 	}
 	

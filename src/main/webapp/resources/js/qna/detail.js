@@ -49,8 +49,12 @@ const saveReply = () =>{
 							
 						</p>
 					</div>
+					<div class="d-flex justify-content-center align-items-center w-100 m-0 mb-5 p-0 px-5" >
+						<a onclick="editReply()" class="btn" style="background-color: #273740; color: white">수정하기</a>
+					</div>
 					`;
 					replyArea.querySelector("p").innerHTML= reply;
+					existReply = reply;
 				}
 			}
 		});
@@ -112,7 +116,6 @@ const saveEditReply = () =>{
 					`;
 					replyArea.querySelector("p").innerHTML= reply;
 					existReply = reply;
-					console.log(reply);
 				}
 			}
 		});
