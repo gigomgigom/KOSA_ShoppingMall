@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-//@Secured("ROLE_ADMIN")
+@Secured("ROLE_ADMIN")
 @RequestMapping("/admin")
 public class AdminController {
 
@@ -101,12 +102,7 @@ public class AdminController {
 		//세션에 저장되어있는 SearchIndex 데이터를 가져오기
 		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
 
-		log.info("세션"+sessionSearchIndex);
-		log.info("DTO"+searchIndex);
-
 		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
-
-		log.info("세팅된DTO"+searchIndex);
 
 		int intPageNo = Integer.parseInt(searchIndex.getPageno());
 
@@ -469,21 +465,17 @@ public class AdminController {
 
 		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
 
-		log.info("입력된 시작일" + searchIndex.getStartdate());
-
 		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
 
 		int intPageNo = Integer.parseInt(searchIndex.getPageno());
-
+		
 		int rowsPagingTarget = adminService.getTotalQnaRows(searchIndex);
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
 
 		searchIndex.setPager(pager);
 		session.setAttribute("searchIndex", searchIndex);
-
-		List<Qna> qnaList = adminService.getQnaList(searchIndex);
 		
-		log.info(qnaList.toString());
+		List<Qna> qnaList = adminService.getQnaList(searchIndex);
 
 		model.addAttribute("totRows", rowsPagingTarget);
 		model.addAttribute("pager", pager);

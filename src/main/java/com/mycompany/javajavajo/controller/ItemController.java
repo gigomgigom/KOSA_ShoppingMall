@@ -45,7 +45,10 @@ public class ItemController {
 	
 	
 	@RequestMapping("/item_info")
-	public String itemInfo(Model model) {
+	public String itemInfo(Model model, int prodno) {
+		Product product = new Product();
+		product.setProdno(prodno);
+		model.addAttribute("product", product);
 		return "item/item_info";
 	}
 	// 신우호 - 

@@ -35,15 +35,15 @@
 		<div id="carouselControls" class="carousel" data-bs-ride="carousel">
 			<div class="carousel-inner ">
 				<div class="carousel-item">
-					<a href="exam01_html_structure"><img
+					<a href="#"><img
 						src="https://i.ibb.co/7z5htNw/banner1.jpg" class="d-block w-100"></a>
 				</div>
 				<div class="carousel-item">
-					<a href="exam02_element_attribute"><img
+					<a href="#"><img
 						src="https://i.ibb.co/PhNPTFd/banner2.png" class="d-block w-100"></a>
 				</div>
 				<div class="carousel-item  active">
-					<a href="exam03_block_inline_element"><img
+					<a href="#"><img
 						src="https://i.ibb.co/ZLJdNSF/banner3.jpg" class="d-block w-100"></a>
 				</div>
 			</div>
@@ -138,7 +138,7 @@
 				<img src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${rv.prodno}"  class="w-75 img-thumbnail" />
 				</a> 
 				<div class="p-2 d-flex flex-column align-items-center">
-					<a href="#" class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
+					<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${rv.prodno}" class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
 						${rv.rvtitle}</a>
 					<hr />
 					<p>${rv.rvcontent}</p>

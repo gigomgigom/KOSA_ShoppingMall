@@ -1,36 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mycompany.javajavajo.dao.QnaDao">
-	
+
 	<insert id="insertBoard" parameterType="Qna">
-	<!-- dto의 qnano에 시퀀스 번호를 qnano에 넣어줌 -->
-	<selectKey keyProperty="qnano" order="BEFORE" resultType="int"> 
-			select qna_seq.nextval from dual 
-	</selectKey>
-		insert into qna (qnano, memno, qnacontent, qnatitle, qnadate, qnahitcnt , qnalock, qnaattachoname, qnaattachtype, qnaattachdata)
-		values(#{qnano}, #{memno}, #{qnacontent}, #{qnatitle}, sysdate, 0, #{qnalock}, #{qnaattachoname}, #{qnaattachtype}, #{qnaattachdata})
+		<!-- dto의 qnano에 시퀀스 번호를 qnano에 넣어줌 -->
+		<selectKey keyProperty="qnano" order="BEFORE"
+			resultType="int">
+			select qna_seq.nextval from dual
+		</selectKey>
+		insert into qna (qnano, memno, qnacontent, qnatitle, qnadate,
+		qnahitcnt , qnalock, qnaattachoname, qnaattachtype, qnaattachdata)
+		values(#{qnano}, #{memno}, #{qnacontent}, #{qnatitle}, sysdate, 0,
+		#{qnalock}, #{qnaattachoname}, #{qnaattachtype}, #{qnaattachdata})
 	</insert>
-	
+
 
 	<select id="selectByQnano" parameterType="int" resultType="Qna">
 		select *
 		from(
-		select	rownum as rnum, qnano, memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, qnawriter, qnaattachoname, admrply,
-				pretitle, preno, prememno, prelock, nexttitle, nextno, nextmemno, nextlock
-		from (
-			select 
-			qnano, qna.memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, memid as qnawriter, qnaattachoname, admrply,
-			lag(qnatitle,1,-1) over(order by qnano) as pretitle,  lag(qnano,1,-1) over(order by qnano) as preno,
-			lag(qna.memno,1,-1) over(order by qnano) as prememno, 	lag(qnalock,1,-1) over(order by qnano) as prelock,
-			lead(qnatitle,1,-1) over(order by qnano) as nexttitle,lead(qnano,1,-1) over(order by qnano) as nextno,
-			lead(qna.memno,1,-1) over(order by qnano) as nextmemno,	lead(qnalock,1,-1) over(order by qnano) as nextlock
-			from qna , member 
-			where qna.memno = member.memno
-			<if test="keyword != null">
-				and (qnatitle like '%' || #{keyword} || '%'
-				or qnacontent like '%' || #{keyword} || '%')
-			</if>
-			order by qnano desc
+		select rownum as rnum, qnano, memno, qnatitle,
+		qnacontent, qnadate, qnahitcnt, qnalock, qnawriter, qnaattachoname,
+		admrply,
+		pretitle, preno, prememno, prelock, nexttitle, nextno, nextmemno, nextlock
+		from
+		(
+		select
+		qnano, qna.memno, qnatitle, qnacontent, qnadate, qnahitcnt, qnalock, memid
+		as qnawriter, qnaattachoname, admrply,
+		lag(qnatitle,1,-1) over(order by qnano) as pretitle, lag(qnano,1,-1) over(order by
+		qnano) as preno,
+		lag(qna.memno,1,-1) over(order by qnano) as prememno, lag(qnalock,1,-1) over(order by
+		qnano) as prelock,
+		lead(qnatitle,1,-1) over(order by qnano) as nexttitle,lead(qnano,1,-1) over(order by
+		qnano) as nextno,
+		lead(qna.memno,1,-1) over(order by qnano) as nextmemno, lead(qnalock,1,-1) over(order by
+		qnano) as nextlock
+		from qna , member
+		where qna.memno = member.memno
+		<if test="keyword != null">
+			and (qnatitle like '%' || #{keyword} || '%'
+			or qnacontent like '%' || #{keyword} || '%')
+		</if>
+		order by qnano desc
 		)
 		)
 		where qnano = #{qnano}
@@ -39,102 +50,200 @@
 
 	<update id="updatehitcnt" parameterType="int">
 		update qna set
-			qnahitcnt = qnahitcnt + 1
-			where qnano = #{qnano}
+		qnahitcnt = qnahitcnt + 1
+		where qnano = #{qnano}
 	</update>
 
 
 	<update id="updateQna" parameterType="Qna">
 		update qna set
-			qnatitle=#{qnatitle},
-			qnacontent=#{qnacontent}
-		    <if test="qnaattachoname != null">
-		    	, 
-				qnaattachoname=#{qnaattachoname}, 
-				qnaattachtype=#{qnaattachtype},
-				qnaattachdata=#{qnaattachdata}
-			</if>
-			where qnano = #{qnano}
+		qnatitle=#{qnatitle},
+		qnacontent=#{qnacontent}
+		<if test="qnaattachoname != null">
+			,
+			qnaattachoname=#{qnaattachoname},
+			qnaattachtype=#{qnaattachtype},
+			qnaattachdata=#{qnaattachdata}
+		</if>
+		where qnano = #{qnano}
 	</update>
 
 
 	<delete id="deleteQna" parameterType="int">
-		delete from qna where qnano = #{qnano}
+		delete from qna where qnano
+		= #{qnano}
 	</delete>
 
 	<select id="count" parameterType="String" resultType="int">
-		select count(*) 
+		select count(*)
 		from (
-			select qnatitle, qnacontent
-			from qna
-			<if test="keyword != null">
-				where qnatitle like '%' || #{keyword} || '%'
-				or qnacontent like '%' || #{keyword} || '%'
-			</if>
+		select qnatitle, qnacontent
+		from qna
+		<if test="keyword != null">
+			where qnatitle like '%' || #{keyword} || '%'
+			or qnacontent like '%' || #{keyword} || '%'
+		</if>
 		)
 	</select>
-	
-	<select id="selectQnaList" parameterType="Pager" resultType="Qna">
-	
+
+	<select id="selectQnaList" parameterType="Pager"
+		resultType="Qna">
 		select *
 		from (
-		    select rownum as rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt, qnalock, memid as qnawriter
-		    from (
-		        select qnano, qnatitle, qnacontent, qna.memno as memno, qnadate, qnahitcnt, qnalock, memid
-		        from qna, member
-		        where qna.memno = member.memno
-		        <if test="keyword != null">
-		        	and (qnatitle like '%' || #{keyword} || '%'
-					or qnacontent like '%' || #{keyword} || '%')
-				</if>
-		        order by qnano desc
-		    )
+		select rownum as rnum, qnano, qnatitle, qnacontent, memno, qnadate,
+		qnahitcnt, qnalock, memid as qnawriter
+		from (
+		select qnano, qnatitle, qnacontent, qna.memno as memno, qnadate, qnahitcnt,
+		qnalock, memid
+		from qna, member
+		where qna.memno = member.memno
+		<if test="keyword != null">
+			and (qnatitle like '%' || #{keyword} || '%'
+			or qnacontent like '%' || #{keyword} || '%')
+		</if>
+		order by qnano desc
+		)
 		    <![CDATA[where rownum <= #{pager.endRowNo}
 		)
 		where rnum >= #{pager.startRowNo}
 		]]>
 	</select>
-	
+
 	<select id="selectQnaImgByqnano">
 		select qnaattachoname, qnaattachtype, qnaattachdata
 		from qna
 		where qnano = #{qnano}
 	</select>
-	
+
 	<update id="updateAttach">
 		update qna
 		set qnaattachoname = #{qnaattachoname},
-		    qnaattachtype = #{qnaattachtype},
-		    qnaattachdata = #{qnaattachdata}
+		qnaattachtype = #{qnaattachtype},
+		qnaattachdata = #{qnaattachdata}
 		where qnano = #{qnano}
 	</update>
-	
+
 	<update id="updateAdmrply">
 		update qna
 		set admrply = #{reply}
-		where qnano = #{qnano}
+		where qnano =
+		#{qnano}
 	</update>
-	
-	<select id="getQnaCntByAdmin" parameterType="SearchIndex" resultType="int">
+
+	<select id="getQnaCntByAdmin" parameterType="SearchIndex"
+		resultType="int">
 		select count(*)
-		from qna
+		from qna, member
+		where qna.memno = member.memno
+		<if test="ctgindex != -1 and ctgindex != 0">
+			<if test="ctgindex==1">
+				and admrply is null
+				<if test="startdate != null">
+					and qnadate between #{startdate} and #{enddate}
+				</if>
+				<if test="searchkeyword != null and !searchkeyword.equals('')">
+					<if test="searchindex == 1">
+						and memid like '%' || #{searchkeyword} || '%'
+					</if>
+					<if test="searchindex == 2">
+						and qnatitle like '%' || #{searchkeyword} || '%'
+					</if>
+				</if>
+			</if>
+			<if test="ctgindex==2">
+				and admrply is not null
+				<if test="startdate != null">
+					and qnadate between #{startdate} and #{enddate}
+				</if>
+				<if test="searchkeyword != null and !searchkeyword.equals('')">
+					<if test="searchindex == 1">
+						and memid like '%' || #{searchkeyword} || '%'
+					</if>
+					<if test="searchindex == 2">
+						and qnatitle like '%' || #{searchkeyword} || '%'
+					</if>
+				</if>
+			</if>
+		</if>
+		<if test="ctgindex == -1 or ctgindex == 0">
+			<if test="startdate != null">
+				and qnadate between #{startdate} and #{enddate}
+			</if>
+			<if test="searchkeyword != null and !searchkeyword.equals('')">
+				<if test="searchindex == 1">
+					and memid like '%' || #{searchkeyword} || '%'
+				</if>
+				<if test="searchindex == 2">
+					and qnatitle like '%' || #{searchkeyword} || '%'
+				</if>
+			</if>
+		</if>
+		order by qnano desc
 	</select>
-	
-	<select id="getQnaListByAdmin" parameterType="SearchIndex" resultType="Qna">
+
+	<select id="getQnaListByAdmin" parameterType="SearchIndex"
+		resultType="Qna">
 		select *
 		from (
-		    select rownum as rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt, qnalock, memid as qnawriter, admrply
-		    from (
-		        select qnano, qnatitle, qnacontent, qna.memno as memno, qnadate, qnahitcnt, qnalock, memid, admrply
-		        from qna, member
-		        where qna.memno = member.memno
-		        order by qnano desc
-		    )
-		    where rownum <![CDATA[<]]>= #{pager.endRowNo}
+		select rownum as rnum, qnano, qnatitle, qnacontent, memno, qnadate,
+		qnahitcnt, qnalock, memid as qnawriter, admrply
+		from (
+		select qnano, qnatitle, qnacontent, qna.memno as memno, qnadate, qnahitcnt,
+		qnalock, memid, admrply
+		from qna, member
+		where qna.memno = member.memno
+		<if test="ctgindex != -1 and ctgindex != 0">
+			<if test="ctgindex==1">
+				and admrply is null
+				<if test="startdate != null">
+					and qnadate between #{startdate} and #{enddate}
+				</if>
+				<if test="searchkeyword != null and !searchkeyword.equals('')">
+					<if test="searchindex == 1">
+						and memid like '%' || #{searchkeyword} || '%'
+					</if>
+					<if test="searchindex == 2">
+						and qnatitle like '%' || #{searchkeyword} || '%'
+					</if>
+				</if>
+			</if>
+			<if test="ctgindex==2">
+				and admrply is not null
+				<if test="startdate != null">
+					and qnadate between #{startdate} and #{enddate}
+				</if>
+				<if test="searchkeyword != null and !searchkeyword.equals('')">
+					<if test="searchindex == 1">
+						and memid like '%' || #{searchkeyword} || '%'
+					</if>
+					<if test="searchindex == 2">
+						and qnatitle like '%' || #{searchkeyword} || '%'
+					</if>
+				</if>
+			</if>
+		</if>
+		<if test="ctgindex == -1 or ctgindex == 0">
+			<if test="startdate != null">
+				and qnadate between #{startdate} and #{enddate}
+			</if>
+			<if test="searchkeyword != null and !searchkeyword.equals('')">
+				<if test="searchindex == 1">
+					and memid like '%' || #{searchkeyword} || '%'
+				</if>
+				<if test="searchindex == 2">
+					and qnatitle like '%' || #{searchkeyword} || '%'
+				</if>
+			</if>
+		</if>
+		order by qnano desc
 		)
-		where rnum <![CDATA[>]]>= #{pager.startRowNo}
+		where rownum <![CDATA[<]]>=
+		#{pager.endRowNo}
+		)
+		where rnum <![CDATA[>]]>=
+		#{pager.startRowNo}
 	</select>
-	
+
 </mapper>
 
 

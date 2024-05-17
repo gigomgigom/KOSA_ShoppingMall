@@ -27,11 +27,15 @@
 <!-- 사용자 정의 자바스크립트 -->
 <script>
 		function handleBtnShow(index) {
+			let prodno = $("#prodno").val();
+			let product = {prodno};
+			
 			switch(index) {
 				case 1: 
 					$.ajax({
-						url: "item_info?prodno=${product.prodno}",
+						url: "item_info",
 						method: "get",
+						data : product,
 						success: function(data) {
 							$(".active").attr("class", "nav-item");
 							$("#nav-1").attr("class", "nav-item active");
@@ -41,9 +45,6 @@
 					break;
 				
 				case 2:
-					
-					let prodno = $("#prodno").val();
-					let product = {prodno};
 					
 					$.ajax({
 						url: "item_review",

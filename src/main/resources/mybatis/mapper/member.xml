@@ -17,10 +17,10 @@
 			select member_seq.nextval from dual
 		</selectKey>
 		insert into member (memno, memid, mempw, memname, memnicknm, mememail,
-		memtel, mempoint, memdate, memrole)
+		memtel, mempoint, memdate, memrole, memenabled)
 		values(#{memno}, #{memid},
 		#{mempw}, #{memname}, #{memnicknm}, #{mememail}, #{memtel}, 0,
-		sysdate, 'ROLE_USER')
+		sysdate, 'ROLE_USER', 1)
 	</insert>
 
 	<select id="selectByMemno" parameterType="int"

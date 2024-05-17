@@ -50,14 +50,16 @@
 					</h5>
 					<hr class="w-100" />
 					<div class="d-flex flex-column">
-						<form method="get" action="uncom_order" class="d-flex flex-column">
+						<form method="get" action="qna_board" class="d-flex flex-column">
 							<div class="d-flex justify-content-between align-items-center">
 								<div class="d-flex">
 									<div class="form-group d-flex align-items-center"
 										style="width: 250px">
-										<label for="ctg" style="width: 100px">카테고리</label> <select
+										<label for="ctg" style="width: 100px">주문상태</label> <select
 											class="form-control" id="ctg" name="ctgindex">
 											<option value="-1" ${searchIndex.ctgindex == 0?'selected':''}>전체</option>
+											<option value="1" ${searchIndex.ctgindex == 1?'selected':''}>대기중</option>
+											<option value="2" ${searchIndex.ctgindex == 2?'selected':''}>완료</option>
 										</select>
 									</div>
 								</div>
@@ -77,7 +79,7 @@
 											style="width: 100px">
 											<select class="form-control" name="searchindex">
 												<option value="1" selected>작성자</option>
-												<option value="2">컨텐츠</option>
+												<option value="2" >컨텐츠</option>
 											</select>
 										</div>
 									</div>

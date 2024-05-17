@@ -4,9 +4,9 @@
 
 	<insert id="insertAdr" parameterType="MemberAdr">
 		insert into memberAdr
-		(memno, postno, adr, adrdtl)
+		(memno, postno, adr, adrdtl, adrno)
 		values(#{memno}, #{postno}, #{adr},
-		#{adrdtl})
+		#{adrdtl}, memberadr_seq.nextval)
 	</insert>
 
 	<select id="selectByMemno" parameterType="int">
