@@ -16,7 +16,7 @@ public class Order {
 	private int ordprice;
 	private int discprice;
 	private int finprice;
-	private String ordrqst;
+	private String rqst;
 	
 	//주문상태 문자열로 보여주기(배송, 입금, 취소, 완료)
 	private String ordsttschar;

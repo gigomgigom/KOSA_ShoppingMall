@@ -48,14 +48,20 @@ const usePoint = () => {
 	const useprice = document.querySelector("#useprice");
 	const finprice = document.querySelector("#finprice");
 	finprice.innerText = defaultFinPrice;
+	
+	const ordprice = document.querySelector("#ordprice").innerText.slice(0,-1) * 1;
+	const deliveryprice = document.querySelector("#deliveryprice").innerText.slice(0,-1) * 1 ;
+	const payprice = ordprice +  deliveryprice;
 
 	
-	if(haspoint*1 < discprice.value*1){
+	if(haspoint * 1 < discprice.value*1){
 		discprice.value = haspoint;
+	}
+	
+	if(payprice * 1 < discprice.value*1){
+		discprice.value = payprice;
 	}
 	
 	useprice.innerText = discprice.value + "원";
 	finprice.innerText = (finprice.innerText.slice(0,-1)*1 - discprice.value*1) + "원";
-	
-	
 }

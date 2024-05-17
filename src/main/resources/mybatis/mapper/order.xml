@@ -8,11 +8,10 @@
 			select order_seq.nextval from dual
 		</selectKey>
 		insert into ord (ordno, memno, ordstts, orddate, ordprice, discprice,
-		finprice)
+		finprice, rqst)
 		values
 		(#{ordno}, #{memno}, #{ordstts}, sysdate, #{ordprice},
-		#{discprice},
-		#{finprice})
+		#{discprice}, #{finprice}, #{rqst})
 	</insert>
 
 	<select id="selectOrderByMemno" parameterType="int"

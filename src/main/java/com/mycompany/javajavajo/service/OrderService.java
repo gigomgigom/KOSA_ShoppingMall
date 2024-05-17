@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mycompany.javajavajo.dao.CartItemDao;
+import com.mycompany.javajavajo.dao.DeliveryDao;
 import com.mycompany.javajavajo.dao.MemberDao;
 import com.mycompany.javajavajo.dao.OrdProdDao;
 import com.mycompany.javajavajo.dao.OrderDao;
@@ -15,6 +16,7 @@ import com.mycompany.javajavajo.dao.ProductDao;
 import com.mycompany.javajavajo.dao.RecipientDao;
 import com.mycompany.javajavajo.dao.ReviewDao;
 import com.mycompany.javajavajo.dto.CartItem;
+import com.mycompany.javajavajo.dto.Delivery;
 import com.mycompany.javajavajo.dto.OrdProd;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.Orderer;
@@ -45,6 +47,8 @@ public class OrderService {
 	private OrdProdDao ordProdDao;
 	@Autowired
 	private ReviewDao reviewDao;
+	@Autowired
+	private DeliveryDao deliveryDao;
 	
 	//권우상 - 주문서 폼 내용 db 등록 실행  
 	public void createOrder(int memno, Order order, Orderer orderer, Recipient recipient) {
@@ -203,6 +207,11 @@ public class OrderService {
 		// recipient 삽입
 		recipient.setOrdno(order.getOrdno());
 		int recipientResult = recipientDao.insert(recipient);
+	}
+
+	public Delivery getDelivery(int ordno) {
+		Delivery delivery = deliveryDao.selectDeliveryByOrdno(ordno);
+		return delivery;
 	}
 
 	
