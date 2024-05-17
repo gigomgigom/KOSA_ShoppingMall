@@ -46,25 +46,27 @@ public class MyPageController {
 	@RequestMapping("")
 	public String myPageMain(Authentication authentication, Model model) {
 		String mid = authentication.getName();
+		
+		//황세림 - Mid로 member 객체 가져오기
 		Member member = memberService.getMemberByMid(mid);
 		int memno = member.getMemno();
 		MemberAdr memberAdr = memberService.getMemberAdr(memno);
 		model.addAttribute("member", member);
 		model.addAttribute("memberAdr", memberAdr);
+		
+		//황세림 - 회원 이미지 출력
 		Member memberImg = memberService.getMemberImage(memno);
-		//회원 이미지 출력
 		model.addAttribute("memberImg", memberImg);
 		model.addAttribute("memno", memno);
 
-
-
-
-		// 회원 주문정보 리스트 가져오기
+		// 황세림 - 회원 주문정보 리스트 가져오기
 		List<Order> orderList = memberService.getOrderListByMemno(memno);
 		List<PointDtl> pointDtlList = new ArrayList<>();
+		
 		if(orderList.size() != 0) {
 			// 주문에 상품의 수 그리고 그 들중 한 상품에 대한 정보를 찾아서 Order객체에 넣어준다.
 			for (Order order : orderList) {
+				
 				// 주문 상품정보를 넣어주기
 				int ordno = order.getOrdno();
 				Order outlineOrder = orderService.getOrderProductCnt(ordno);
@@ -76,8 +78,7 @@ public class MyPageController {
 				
 				order.setOneproduct(product);
 				
-				// 주문상태의 정보를 가져오기
-				
+				//황세림 - 주문상태의 정보를 가져오기
 				//주문번호를 주어졌을때 포인트 이력(사용, 적립)을 가져온다.
 				PointDtl usedPointDtl = memberService.getPointDtlListByOrdno(order.getOrdno(), 1);
 
@@ -106,8 +107,6 @@ public class MyPageController {
 
 		return "mypage/mypage";
 	}
-
-
 
 	//멤버 이미지 다운로드
 	@GetMapping("/downloadMemImg")

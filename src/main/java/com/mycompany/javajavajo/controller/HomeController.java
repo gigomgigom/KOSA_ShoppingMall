@@ -29,6 +29,7 @@ public class HomeController {
 		List<Product> prodList= itemService.getBestProduct();
 		List<Review> review = new ArrayList<>();
 		review = reviewService.review();
+		
 		model.addAttribute("prodList", prodList);
 		model.addAttribute("review", review);
 		log.info("실행");

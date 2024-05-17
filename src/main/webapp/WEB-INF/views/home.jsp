@@ -134,9 +134,9 @@
 			<!-- 반복절 -->
 			<c:forEach var="rv" items="${review}">
 			<div id="rcmd-product-1" class="w-25 p-3">
-				<a href="#" class="d-flex flex-column align-items-center"> 
+				<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${rv.prodno}" class="d-flex flex-column align-items-center"> 
 				<img src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${rv.prodno}"  class="w-75 img-thumbnail" />
-				</a>
+				</a> 
 				<div class="p-2 d-flex flex-column align-items-center">
 					<a href="#" class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
 						${rv.rvtitle}</a>
