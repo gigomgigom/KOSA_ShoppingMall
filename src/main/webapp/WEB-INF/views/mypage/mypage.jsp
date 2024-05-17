@@ -113,6 +113,7 @@
 
 				<hr class="w-75 m-0 my-3 p-0" />
 
+
 				<div class="w-75 border m-0 mb-3 p-3">
 					<div class="d-flex justify-content-between m-0 mb-2 p-0">
 						<p class="m-0 p-0">
@@ -129,56 +130,6 @@
 
 					<div class="d-flex justify-content-center border m-0 p-0 px-2">
 						<p class="w-100 m-0 p-0 py-3 text-center">주문취소</p>
-					</div>
-				</div>
-
-				<div class="w-75 border m-0 mb-3 p-3">
-					<div class="d-flex justify-content-between m-0 mb-2 p-0">
-						<p class="m-0 p-0">
-							<a class="text-dark"
-								href="${pageContext.request.contextPath}/order/order_detail">202404181758268</a>
-						</p>
-						<p class="m-0  p-0" style="font-size: 0.75rem;">24-04-18
-							17:59:05</p>
-					</div>
-
-					<p class="m-0 mb-2 p-0">상품2</p>
-
-					<p class="m-0 mb-2 p-0">0원</p>
-
-					<div class="d-flex justify-content-center m-0 mb-2 p-0 px-2">
-						<p class="w-100 m-0 p-0 py-3 text-center"
-							style="background-color: #27374D; color: white;">배송완료</p>
-					</div>
-
-					<div class="d-flex justify-content-center  m-0 p-0 px-2">
-						<p class="w-100 m-0 p-0 py-3 text-center border">우체국
-							6861581676379</p>
-					</div>
-				</div>
-
-				<div class="w-75 border m-0 p-3">
-					<div class="d-flex justify-content-between m-0 mb-2 p-0">
-						<p class="m-0 p-0">
-							<a class="text-dark"
-								href="${pageContext.request.contextPath}/order/order_detail">202404181758268</a>
-						</p>
-						<p class="m-0  p-0" style="font-size: 0.75rem;">24-04-18
-							17:59:05</p>
-					</div>
-
-					<p class="m-0 mb-2 p-0">상품3</p>
-
-					<p class="m-0 mb-2 p-0">0원</p>
-
-					<div class="d-flex justify-content-center m-0 mb-2 p-0 px-2">
-						<p class="w-100 m-0 p-0 py-3 text-center"
-							style="background-color: #27374D; color: white;">배송완료</p>
-					</div>
-
-					<div class="d-flex justify-content-center  m-0 p-0 px-2">
-						<p class="w-100 m-0 p-0 py-3 text-center border">우체국
-							6861581676379</p>
 					</div>
 				</div>
 
