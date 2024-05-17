@@ -191,22 +191,46 @@ public class OrderService {
 		return pointDtlResult;
 	}
 
-	public void createOrderDirect(int memno, Order order, Orderer orderer, Recipient recipient) {
+	public void createOrderDirect(int memno, Order order, Orderer orderer, Recipient recipient, int prodno, int qty) {
+
 		// order 삽입
 		order.setMemno(memno);
 		order.setOrdstts(1);
 		order.setFinprice(order.getFinprice() - order.getDiscprice());
-		int orderDirectResult = orderDao.insert(order);
-		
+		int orderResult = orderDao.insert(order);
+
 		// orderer 삽입
 		orderer.setOrdno(order.getOrdno());
 		int ordererResult = ordererDao.insert(orderer);
 		int ordno = order.getOrdno();
 		
-		
 		// recipient 삽입
-		recipient.setOrdno(order.getOrdno());
+		recipient.setOrdno(ordno);
 		int recipientResult = recipientDao.insert(recipient);
+		
+	
+		//사용한 포인트가 0 이상이라면
+		if(order.getDiscprice() != 0) {
+			// 멤버 포인트 차감
+			memberDao.updatePoint(memno, order.getDiscprice(), "-");
+	
+			// pointDtl 삽입
+			PointDtl pointMinus = new PointDtl();
+			pointMinus.setOrdno(ordno);
+			pointMinus.setAction(1);
+			pointMinus.setAmount(order.getDiscprice());
+			int pointDtlResult = pointDtlDao.insert(pointMinus);
+		}
+		
+		Product product = productDao.selectByProdno(prodno);
+		int price = product.getProdprice();
+		OrdProd ordProd = new OrdProd();
+		ordProd.setOrdno(ordno);
+		ordProd.setProdno(prodno);
+		ordProd.setQty(qty);
+		ordProd.setSubtot(price * qty);
+		int ordProdResult = ordProdDao.insert(ordProd);
+		
 	}
 
 	public Delivery getDelivery(int ordno) {

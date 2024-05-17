@@ -108,6 +108,8 @@
 		</div>
 
 		<form class="w-100 d-flex justify-content-center" action="create_order_direct" method="post">
+			<input type="hidden" name="prodno" value="${product.prodno}">
+			<input type="hidden" name="qty" value="${qty}">
 			<div class="w-75 d-flex flex-row border-top border-dark">
 				<!--주문정보 입력-->
 				<div
@@ -227,7 +229,7 @@
 							<p>
 								<b>배송비</b>
 							</p>
-							<p id="deliveryprice" class="mt-3">${qty * product.prodprice > 100000 ? 0 : 3000}</p>
+							<p id="deliveryprice" class="mt-3">${qty * product.prodprice > 100000 ? 0 : 3000}원</p>
 						</div>
 					</div>
 					<div class="py-1 w-75 text-center"

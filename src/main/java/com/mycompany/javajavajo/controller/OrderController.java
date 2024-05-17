@@ -89,6 +89,15 @@ public class OrderController {
 		orderService.createOrder(memno, order, orderer, recipient);
 		return "redirect:/order/order_detail?ordno=" + order.getOrdno();
 	}
+	
+	@PostMapping("/create_order_direct")
+	public String createOrderDirect(int prodno,int qty,Order order, Orderer orderer, Recipient recipient, Authentication authentication) {
+		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
+		Member member = t1UserDetails.getMember();
+		int memno = member.getMemno();
+		orderService.createOrderDirect(memno, order, orderer, recipient,prodno, qty);
+		return "redirect:/order/order_detail?ordno=" + order.getOrdno();
+	}
 
 	// 권우상 - 주문 상세 페이지
 	@RequestMapping("/order_detail")
