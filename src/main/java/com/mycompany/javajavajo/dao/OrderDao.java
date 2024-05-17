@@ -44,4 +44,6 @@ public interface OrderDao {
 	public int getMonthSales();
 	public int getMaxDaySales();
 
+	
+
 }

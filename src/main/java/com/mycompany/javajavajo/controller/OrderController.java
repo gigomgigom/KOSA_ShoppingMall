@@ -172,4 +172,8 @@ public class OrderController {
 		int reuslt = orderService.completeOrder(memno,ordno,amount);
 		return "redirect:/order/order_detail?ordno=" + ordno;
 	}
+	
+	
+	
+	
 }

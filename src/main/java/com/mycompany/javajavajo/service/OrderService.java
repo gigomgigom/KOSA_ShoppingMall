@@ -187,6 +187,25 @@ public class OrderService {
 		return pointDtlResult;
 	}
 
+	public void createOrderDirect(int memno, Order order, Orderer orderer, Recipient recipient) {
+		// order 삽입
+		order.setMemno(memno);
+		order.setOrdstts(1);
+		order.setFinprice(order.getFinprice() - order.getDiscprice());
+		int orderDirectResult = orderDao.insert(order);
+		
+		// orderer 삽입
+		orderer.setOrdno(order.getOrdno());
+		int ordererResult = ordererDao.insert(orderer);
+		int ordno = order.getOrdno();
+		
+		
+		// recipient 삽입
+		recipient.setOrdno(order.getOrdno());
+		int recipientResult = recipientDao.insert(recipient);
+	}
+
+	
 
 
 

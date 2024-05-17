@@ -59,7 +59,7 @@
 						<p class="m-0  p-0" style="font-size: 0.75rem;"><fmt:formatDate value="${order.ordDate}" pattern="yyyy-MM-dd"/></p>
 						<div class="d-flex justify-content-center mt-2">
 							<p class="text-center rounded d-flex align-items-center p-1"
-								style="background-color: #27374D; color: white;">주문 취소</p>
+								style="background-color: #27374D; color: white;">${order.prodStatus}</p>
 						</div>
 					</div>					
 				</div>				
