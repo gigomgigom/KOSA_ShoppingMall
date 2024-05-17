@@ -114,6 +114,27 @@
 		set admrply = #{reply}
 		where qnano = #{qnano}
 	</update>
+	
+	<select id="getQnaCntByAdmin" parameterType="SearchIndex" resultType="int">
+		select count(*)
+		from qna
+	</select>
+	
+	<select id="getQnaListByAdmin" parameterType="SearchIndex" resultType="Qna">
+		select *
+		from (
+		    select rownum as rnum, qnano, qnatitle, qnacontent, memno, qnadate, qnahitcnt, qnalock, memid as qnawriter, admrply
+		    from (
+		        select qnano, qnatitle, qnacontent, qna.memno as memno, qnadate, qnahitcnt, qnalock, memid, admrply
+		        from qna, member
+		        where qna.memno = member.memno
+		        order by qnano desc
+		    )
+		    where rownum <![CDATA[<]]>= #{pager.endRowNo}
+		)
+		where rnum <![CDATA[>]]>= #{pager.startRowNo}
+	</select>
+	
 </mapper>
 
 

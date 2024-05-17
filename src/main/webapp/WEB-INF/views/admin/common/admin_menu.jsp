@@ -85,8 +85,7 @@
 				aria-labelledby="headingFour" data-bs-parent="#accordionExample">
 				<div class="accordion-body">
 					<div class="d-flex flex-column">
-						<button class="btn row-1">QA게시판</button>
-						<button class="btn row-1">공지사항</button>
+						<a class="btn row-1" href="move_nav_location?url=qna_board">QA게시판</a>
 						<button class="btn row-1">후기조회</button>
 					</div>
 				</div>

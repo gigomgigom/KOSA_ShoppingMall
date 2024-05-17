@@ -35,6 +35,4 @@ public interface QnaDao {
 
 	public List<Qna> getQnaListByAdmin(SearchIndex searchIndex);
 	
-	
-	
 }

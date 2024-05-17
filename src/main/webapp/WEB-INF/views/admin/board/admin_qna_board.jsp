@@ -108,48 +108,45 @@
 
 								</thead>
 								<tbody style="vertical-align: middle;">
-									<c:forEach var="order" items="${ordList}">
+									<c:forEach var="qna" items="${qnaList}">
 										<tr
-											onclick="location.href='${pageContext.request.contextPath}/admin/order_detail?ordno=${order.ordno}'">
-											<td><fmt:formatDate value="${order.orddate}"
+											onclick="location.href='${pageContext.request.contextPath}/qna/qna_detail?qnano=${qna.qnano}'">
+											<td>${qna.admrply == null?'대기중':'완료'}</td>
+											<td>${qna.qnatitle}</td>
+											<td>${qna.qnawriter}</td>
+											<td><fmt:formatDate value="${qna.qnadate}"
 													pattern="yyyy-MM-dd" /></td>
-											<td>${order.ordno}</td>
-											<td>${order.ordsttschar}</td>
-											<td>${order.orderer.ordname}</td>
-											<td>${order.ordproductcnt}개</td>
-											<td>${order.orderer.ordtel}</td>
-											<td>${order.recipient.rcptname}</td>
-											<td>${order.finprice}원</td>
+											<td>${qna.qnahitcnt}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 							<div class="d-flex justify-content-center">
 								<a class="btn btn-outline-primary btn-sm"
-									href="uncom_order?pageno=1">처음</a>
+									href="qna_board?pageno=1">처음</a>
 								<c:if test="${pager.groupNo>1}">
 									<a class="btn btn-outline-info btn-sm"
-										href="uncom_order?pageno=${pager.startPageNo-1}">이전</a>
+										href="qna_board?pageno=${pager.startPageNo-1}">이전</a>
 								</c:if>
 
 								<c:forEach var="i" begin="${pager.startPageNo}"
 									end="${pager.endPageNo}">
 									<c:if test="${pager.pageNo != i}">
 										<a class="btn btn-outline-success btn-sm"
-											href="uncom_order?pageno=${i}">${i}</a>
+											href="qna_board?pageno=${i}">${i}</a>
 									</c:if>
 									<c:if test="${pager.pageNo == i}">
 										<a class="btn btn-danger btn-sm"
-											href="uncom_order?pageno=${i}">${i}</a>
+											href="qna_board?pageno=${i}">${i}</a>
 									</c:if>
 								</c:forEach>
 
 								<c:if test="${pager.groupNo<pager.totalGroupNo}">
 									<a class="btn btn-outline-info btn-sm"
-										href="uncom_order?pageno=${pager.endPageNo+1}">다음</a>
+										href="qna_board?pageno=${pager.endPageNo+1}">다음</a>
 								</c:if>
 								<a class="btn btn-outline-primary btn-sm"
-									href="uncom_order?pageno=${pager.totalPageNo}">맨끝</a>
+									href="qna_board?pageno=${pager.totalPageNo}">맨끝</a>
 							</div>
 						</div>
 					</div>

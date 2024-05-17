@@ -482,11 +482,13 @@ public class AdminController {
 		session.setAttribute("searchIndex", searchIndex);
 
 		List<Qna> qnaList = adminService.getQnaList(searchIndex);
+		
+		log.info(qnaList.toString());
 
 		model.addAttribute("totRows", rowsPagingTarget);
 		model.addAttribute("pager", pager);
 		model.addAttribute("qnaList", qnaList);
-		model.addAttribute("menuNum", 2);
+		model.addAttribute("menuNum", 3);
 
 		return "admin/board/admin_qna_board";
 	}
