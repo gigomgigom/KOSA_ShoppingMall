@@ -64,7 +64,7 @@
 	<!-- 추천상품 -->
 	<div id="recommend"
 		class="container-fluid d-flex flex-column align-items-center justify-content-center"
-		style="background-color: rgb(236, 233, 233);">
+		style="background-color: #F6EEFA;">
 		<div style="height: 30px"></div>
 		<p class="fw-bold fs-3">추천상품</p>
 		<div class="bg-black" style="height: 2px; width: 30px"></div>
@@ -123,7 +123,7 @@
 
 	<div id="recommend"
 		class="container-fluid d-flex flex-column align-items-center justify-content-center"
-		style="background-color: rgb(236, 233, 233);">
+		style="background-color: #F6EEFA;">
 		<div style="height: 30px"></div>
 		<p class="fw-bold fs-3">실시간 리뷰</p>
 		<p class="fs-5">고객님의 생생한 리뷰를 확인해보세요.</p>

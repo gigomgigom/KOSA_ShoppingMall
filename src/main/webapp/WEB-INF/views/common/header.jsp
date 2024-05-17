@@ -47,7 +47,7 @@
 
 <div>
 	<ul class="nav justify-content-center align-items-center"
-		style="height: 50px; background-color: #27374D;">
+		style="height: 50px; background-color: #9523DC;">
 		<li class="nav-item ms-5 me-5"><a
 			class="fw-bold nav-link text-white" aria-current="page"
 			href="${pageContext.request.contextPath}/item/item_list?ctgno=1&pageNo=1&sorting=lowPrice&keyword="><h5>사료</h5></a></li>
