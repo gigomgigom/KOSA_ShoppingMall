@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Qna;
+import com.mycompany.javajavajo.dto.SearchIndex;
 
 @Mapper
 public interface QnaDao {
@@ -29,5 +30,11 @@ public interface QnaDao {
 	public int updateAttach(Qna qna);
 
 	public int updateAdmrply(@Param("qnano") int qnano, @Param("reply") String reply);
+
+	public int getQnaCntByAdmin(SearchIndex searchIndex);
+
+	public List<Qna> getQnaListByAdmin(SearchIndex searchIndex);
+	
+	
 	
 }

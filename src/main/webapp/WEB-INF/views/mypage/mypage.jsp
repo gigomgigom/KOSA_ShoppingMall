@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,12 +92,14 @@
 					class="d-flex flex-column justify-content-between align-items-center border w-100 m-0 p-0 py-3">
 					<div class="w-75 m-0 my-2 p-0 py-2 text-center rounded"
 						style="background-color: #27374D;">
-						<a class="text-decoration-none text-white m-0 p-0" href="${pageContext.request.contextPath}/mypage/edit_user_info">회원정보
+						<a class="text-decoration-none text-white m-0 p-0"
+							href="${pageContext.request.contextPath}/mypage/edit_user_info">회원정보
 							수정</a>
 					</div>
 					<div class="w-75 m-0 my-2 p-0 py-2 text-center rounded"
 						style="background-color: #27374D;">
-						<a class="text-decoration-none text-white m-0 p-0" href="${pageContext.request.contextPath}/logout">로그아웃</a>
+						<a class="text-decoration-none text-white m-0 p-0"
+							href="${pageContext.request.contextPath}/logout">로그아웃</a>
 					</div>
 					<div class="w-75 m-0 my-2 p-0 py-2 text-center rounded"
 						style="background-color: #27374D;">
@@ -105,82 +108,37 @@
 
 				</div>
 			</div>
-
+			<!-- ----------------------------------------------------------------------- -->
 			<div class="col-9 d-flex flex-column  align-items-center m-0 p-0">
 				<div class="w-75 m-0 mt-3 p-0">
 					<p class="w-100 m-0 p-0">주문내역</p>
 				</div>
 
 				<hr class="w-75 m-0 my-3 p-0" />
+				<c:forEach var="order" items="${orderList}">
+					<div class="w-75 border m-0 mb-3 p-3">
+						<div class="d-flex justify-content-between m-0 mb-2 p-0">
+							<p class="m-0 p-0">
+								<a class="text-dark"
+									href="${pageContext.request.contextPath}/order/order_detail?ordno=${order.ordno}">${order.ordno}</a>
+							</p>
+							<p class="m-0  p-0" style="font-size: 0.75rem;"><fmt:formatDate value="${order.orddate}" pattern="yyyy-MM-dd"/></p>
+						</div>
 
-				<div class="w-75 border m-0 mb-3 p-3">
-					<div class="d-flex justify-content-between m-0 mb-2 p-0">
-						<p class="m-0 p-0">
-							<a class="text-dark"
-								href="${pageContext.request.contextPath}/order/order_detail">0516</a>
+						<p class="m-0 mb-2 p-0">
+						${order.oneproduct.prodname}
+						<c:if test="${order.ordproductcnt>1}">외 ${order.ordproductcnt - 1}개</c:if>
 						</p>
-						<p class="m-0  p-0" style="font-size: 0.75rem;">24-04-18
-							17:59:05</p>
+
+						<p class="m-0 mb-2 p-0">${order.finprice}원</p>
+
+						<div class="d-flex justify-content-center border m-0 p-0 px-2">
+							<p class="w-100 m-0 p-0 py-3 text-center">${order.ordsttschar}</p>
+						</div>
 					</div>
+				</c:forEach>
 
-					<p class="m-0 mb-2 p-0">상품1</p>
-
-					<p class="m-0 mb-2 p-0">0원</p>
-
-					<div class="d-flex justify-content-center border m-0 p-0 px-2">
-						<p class="w-100 m-0 p-0 py-3 text-center">주문취소</p>
-					</div>
-				</div>
-
-				<div class="w-75 border m-0 mb-3 p-3">
-					<div class="d-flex justify-content-between m-0 mb-2 p-0">
-						<p class="m-0 p-0">
-							<a class="text-dark"
-								href="${pageContext.request.contextPath}/order/order_detail">202404181758268</a>
-						</p>
-						<p class="m-0  p-0" style="font-size: 0.75rem;">24-04-18
-							17:59:05</p>
-					</div>
-
-					<p class="m-0 mb-2 p-0">상품2</p>
-
-					<p class="m-0 mb-2 p-0">0원</p>
-
-					<div class="d-flex justify-content-center m-0 mb-2 p-0 px-2">
-						<p class="w-100 m-0 p-0 py-3 text-center"
-							style="background-color: #27374D; color: white;">배송완료</p>
-					</div>
-
-					<div class="d-flex justify-content-center  m-0 p-0 px-2">
-						<p class="w-100 m-0 p-0 py-3 text-center border">우체국
-							6861581676379</p>
-					</div>
-				</div>
-
-				<div class="w-75 border m-0 p-3">
-					<div class="d-flex justify-content-between m-0 mb-2 p-0">
-						<p class="m-0 p-0">
-							<a class="text-dark"
-								href="${pageContext.request.contextPath}/order/order_detail">202404181758268</a>
-						</p>
-						<p class="m-0  p-0" style="font-size: 0.75rem;">24-04-18
-							17:59:05</p>
-					</div>
-
-					<p class="m-0 mb-2 p-0">상품3</p>
-
-					<p class="m-0 mb-2 p-0">0원</p>
-
-					<div class="d-flex justify-content-center m-0 mb-2 p-0 px-2">
-						<p class="w-100 m-0 p-0 py-3 text-center"
-							style="background-color: #27374D; color: white;">배송완료</p>
-					</div>
-
-					<div class="d-flex justify-content-center  m-0 p-0 px-2">
-						<p class="w-100 m-0 p-0 py-3 text-center border">우체국
-							6861581676379</p>
-					</div>
-				</div>
+				<!-- ----------------------------------------------------------------------- -->
 
 				<hr class="w-75 m-0 my-3 p-0" />
 

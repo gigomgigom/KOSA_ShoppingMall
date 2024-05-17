@@ -72,8 +72,6 @@
 				or qnacontent like '%' || #{keyword} || '%'
 			</if>
 		)
-	
-		
 	</select>
 	
 	<select id="selectQnaList" parameterType="Pager" resultType="Qna">

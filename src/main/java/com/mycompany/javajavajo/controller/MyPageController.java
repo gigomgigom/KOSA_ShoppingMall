@@ -1,6 +1,5 @@
 package com.mycompany.javajavajo.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
@@ -21,7 +20,10 @@ import com.mycompany.javajavajo.dto.Member;
 import com.mycompany.javajavajo.dto.MemberAdr;
 import com.mycompany.javajavajo.dto.Order;
 import com.mycompany.javajavajo.dto.PointDtl;
+import com.mycompany.javajavajo.dto.Product;
+import com.mycompany.javajavajo.service.ItemService;
 import com.mycompany.javajavajo.service.MemberService;
+import com.mycompany.javajavajo.service.OrderService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +33,12 @@ import lombok.extern.slf4j.Slf4j;
 public class MyPageController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private OrderService orderService;
 
+	@Autowired
+	private ItemService itemService;
 
 
 
@@ -54,13 +61,23 @@ public class MyPageController {
 
 		// 회원 주문정보 리스트 가져오기
 		List<Order> orderList = memberService.getOrderListByMemno(memno);
-		log.info("주문내역" + orderList);
 		List<PointDtl> pointDtlList = new ArrayList<>();
 		if(orderList.size() != 0) {
 			// 주문에 상품의 수 그리고 그 들중 한 상품에 대한 정보를 찾아서 Order객체에 넣어준다.
 			for (Order order : orderList) {
-				// 주문마다 몇개의 상품을 구매했는지 찾는다.
+				// 주문 상품정보를 넣어주기
 				int ordno = order.getOrdno();
+				Order outlineOrder = orderService.getOrderProductCnt(ordno);
+				
+				order.setOneofordproduct(outlineOrder.getOneofordproduct());
+				order.setOrdproductcnt(outlineOrder.getOrdproductcnt());
+				
+				Product product = itemService.getProductByProdno(order.getOneofordproduct());
+				
+				order.setOneproduct(product);
+				
+				// 주문상태의 정보를 가져오기
+				
 				//주문번호를 주어졌을때 포인트 이력(사용, 적립)을 가져온다.
 				PointDtl usedPointDtl = memberService.getPointDtlListByOrdno(order.getOrdno(), 1);
 
@@ -68,7 +85,7 @@ public class MyPageController {
 
 				// 포인트 이력에서 일자를 찾기 위해 주문번호를 넘겨 해당 주문정보를 받아오는 메소드를 호출한다.
 				Order orderForDate = memberService.getOrderByOrdno(order.getOrdno());
-
+				
 
 				if (usedPointDtl != null) {
 					usedPointDtl.setDate(orderForDate.getOrddate());

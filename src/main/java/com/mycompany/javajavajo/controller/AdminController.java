@@ -28,6 +28,7 @@ import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.PointDtl;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.ProductImg;
+import com.mycompany.javajavajo.dto.Qna;
 import com.mycompany.javajavajo.dto.Recipient;
 import com.mycompany.javajavajo.dto.SearchIndex;
 import com.mycompany.javajavajo.service.AdminService;
@@ -40,7 +41,7 @@ import lombok.extern.slf4j.Slf4j;
 //@Secured("ROLE_ADMIN")
 @RequestMapping("/admin")
 public class AdminController {
-	
+
 	@Autowired
 	private AdminService adminService;
 	@Autowired
@@ -64,27 +65,27 @@ public class AdminController {
 		List<Product> lackProducts = adminService.getOutOfStock();
 		//판매량 기준 베스트 상품 가져오기
 		List<Product> bestProducts = adminService.getBestSoldProducts();
-		
+
 		//이번 주 주문 현황 데이터 가져오기
 		int weeklyTotOrd = adminService.getWeeklyTotalOrd();
 		int weeklyNoneDelivery = adminService.getWeeklyNonDel();
 		int weeklyRdyDelivery = adminService.getWeeklyRdyDel();
-		
+
 		//매출 현황 데이터 가져오기
 		int todaySales = adminService.getTodaySales();
 		int monthSales = adminService.getMonthSales();
 		int maxDaySales = adminService.getMaxDaySales();
-		
+
 		Map<String, Integer> thisWeekOrdInfo = new HashMap<>();
 		thisWeekOrdInfo.put("weeklyTotOrd", weeklyTotOrd);
 		thisWeekOrdInfo.put("weeklyNoneDelivery", weeklyNoneDelivery);
 		thisWeekOrdInfo.put("weeklyRdyDelivery", weeklyRdyDelivery);
-		
+
 		Map<String, Integer> salesInfo = new HashMap<>();
 		salesInfo.put("todaySales", todaySales);
 		salesInfo.put("monthSales", monthSales);
 		salesInfo.put("maxDaySales", maxDaySales);
-		
+
 		model.addAttribute("thisWeekOrdInfo", thisWeekOrdInfo);
 		model.addAttribute("salesInfo", salesInfo);
 		model.addAttribute("bestProducts", bestProducts);
@@ -96,29 +97,29 @@ public class AdminController {
 	//회원관리 컨트롤러
 	@GetMapping("/admin_member_view")
 	public String adminMemberView(Model model, HttpSession session, SearchIndex searchIndex) {
-		
+
 		//세션에 저장되어있는 SearchIndex 데이터를 가져오기
 		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
-		
+
 		log.info("세션"+sessionSearchIndex);
 		log.info("DTO"+searchIndex);
-		
+
 		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
-		
+
 		log.info("세팅된DTO"+searchIndex);
-		
+
 		int intPageNo = Integer.parseInt(searchIndex.getPageno());
-		
+
 		int rowsPagingTarget = adminService.getTotalMemberRows(searchIndex);
-		
+
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
 
 		searchIndex.setPager(pager);
 
 		List<Member> memberList = adminService.getMemberList(searchIndex);
-		
+
 		session.setAttribute("searchIndex", searchIndex);
-		
+
 		model.addAttribute("memberList", memberList);
 
 		model.addAttribute("menuNum", 0);
@@ -200,21 +201,21 @@ public class AdminController {
 	//상품 리스트 출력하기
 	@GetMapping("/product_list")
 	public String productList(SearchIndex searchIndex, Model model, HttpSession session) {
-		
+
 		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
-		
+
 		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
-		
+
 		if(searchIndex.getSearchkeyword() != null && !searchIndex.getSearchkeyword().equals("") && searchIndex.getCtgindex() != sessionSearchIndex.getCtgindex()) {
 			searchIndex.setPageno("1");
 		}
-		
+
 		int intPageNo = Integer.parseInt(searchIndex.getPageno());
-		
+
 		int rowsPagingTarget = adminService.getTotalProductRows(searchIndex);
-		
+
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
-		
+
 		searchIndex.setPager(pager);
 		session.setAttribute("searchIndex", searchIndex);
 
@@ -223,7 +224,7 @@ public class AdminController {
 
 		List<Category> ctgList = adminService.getAllCategory();
 		model.addAttribute("ctgList", ctgList);
-		
+
 		model.addAttribute("menuNum", 1);
 		return "admin/product/admin_product_list";
 	}
@@ -345,31 +346,31 @@ public class AdminController {
 	//미완료 주문 리스트 화면으로 이동
 	@GetMapping("/uncom_order")
 	public String uncomOrder(SearchIndex searchIndex, Model model, HttpSession session) {
-		
+
 		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
-		
+
 		log.info("입력된 시작일" + searchIndex.getStartdate());
-		
+
 		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
-		
+
 		int intPageNo = Integer.parseInt(searchIndex.getPageno());
-		
+
 		int rowsPagingTarget = adminService.getTotalUncomRows(searchIndex);
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
-		
+
 		searchIndex.setPager(pager);
 		session.setAttribute("searchIndex", searchIndex);
-		
+
 		List<Order> ordList = adminService.getUncomOrderList(searchIndex);
-		
+
 		for(Order order : ordList) {
 			order.setOrderer(adminService.getOrdererByOrdno(order.getOrdno()));
 			order.setRecipient(adminService.getRcptByOrdno(order.getOrdno()));
 			order.setOrdproductcnt(adminService.getOrderProductCnt(order.getOrdno()).getOrdproductcnt());
 		}
-		
+
 		List<OrdStts> ordSttsList = adminService.getOrdSttsList();
-		
+
 		model.addAttribute("ordSttsList", ordSttsList);
 		model.addAttribute("totRows", rowsPagingTarget);
 		model.addAttribute("pager", pager);
@@ -461,5 +462,32 @@ public class AdminController {
 			result = "success";
 		}
 		return result;
+	}
+	//Q&A 게시판으로 이동
+	@GetMapping("/qna_board")
+	public String qnaBoard(Model model, SearchIndex searchIndex, HttpSession session) {
+
+		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
+
+		log.info("입력된 시작일" + searchIndex.getStartdate());
+
+		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
+
+		int intPageNo = Integer.parseInt(searchIndex.getPageno());
+
+		int rowsPagingTarget = adminService.getTotalQnaRows(searchIndex);
+		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
+
+		searchIndex.setPager(pager);
+		session.setAttribute("searchIndex", searchIndex);
+
+		List<Qna> qnaList = adminService.getQnaList(searchIndex);
+
+		model.addAttribute("totRows", rowsPagingTarget);
+		model.addAttribute("pager", pager);
+		model.addAttribute("qnaList", qnaList);
+		model.addAttribute("menuNum", 2);
+
+		return "admin/board/admin_qna_board";
 	}
 }
