@@ -17,8 +17,11 @@
 
 	<select id="selectOrderByMemno" parameterType="int"
 		resultType="Order">
-		select * from ord where memno = #{memno} order by orddate
-		desc
+		select ordno, memno, ordstts, orddate, ordprice, discprice,
+		finprice, rqst, ordsttschar
+		from ord, ordstts
+		where memno = #{memno} and ordstts.ordsttsno = ord.ordstts
+		order by orddate desc
 	</select>
 
 	<select id="selectOrderByOrdno" parameterType="int"
@@ -173,14 +176,17 @@
 	</select>
 
 	<select id="getTodaySales" resultType="int">
-		select sum from (select nvl(sum(finprice), 0) as sum
+		select sum from (select
+		nvl(sum(finprice), 0) as sum
 		from ord
-		where orddate between sysdate-1 and sysdate)
+		where orddate between sysdate-1
+		and sysdate)
 	</select>
 
 	<select id="getMonthSales" resultType="int">
 		select sum(finprice)
-		from ord
+		from
+		ord
 		where orddate between TRUNC(SYSDATE, 'MM') and last_day(sysdate)
 	</select>
 
@@ -190,9 +196,11 @@
 		(
 		select orddate, sum(finprice) as sum
 		from (
-		select trunc(orddate, 'DD') as orddate, finprice
+		select trunc(orddate, 'DD')
+		as orddate, finprice
 		from ord
-		where orddate between TRUNC(SYSDATE, 'MM') and last_day(sysdate)
+		where orddate between TRUNC(SYSDATE, 'MM')
+		and last_day(sysdate)
 		)
 		group by orddate
 		)

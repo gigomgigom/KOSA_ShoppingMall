@@ -18,6 +18,7 @@ import com.mycompany.javajavajo.dao.OrdererDao;
 import com.mycompany.javajavajo.dao.PointDtlDao;
 import com.mycompany.javajavajo.dao.ProductDao;
 import com.mycompany.javajavajo.dao.ProductImgDao;
+import com.mycompany.javajavajo.dao.QnaDao;
 import com.mycompany.javajavajo.dao.RecipientDao;
 import com.mycompany.javajavajo.dto.Category;
 import com.mycompany.javajavajo.dto.Delivery;
@@ -30,6 +31,7 @@ import com.mycompany.javajavajo.dto.Orderer;
 import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.PointDtl;
 import com.mycompany.javajavajo.dto.Product;
+import com.mycompany.javajavajo.dto.Qna;
 import com.mycompany.javajavajo.dto.Recipient;
 import com.mycompany.javajavajo.dto.SearchIndex;
 
@@ -63,6 +65,8 @@ public class AdminService {
 	private DeliveryDao delDao;
 	@Autowired
 	private DeliveryComDao delComDao;
+	@Autowired
+	private QnaDao qnaDao;
 
 	//심영조-admin-Category 정보들을 전부 가져와줘
 	public List<Category> getAllCategory() {
@@ -272,5 +276,13 @@ public class AdminService {
 	}
 	public int getMaxDaySales() {
 		return orderDao.getMaxDaySales();
+	}
+	//심영조-admin-board-qna 게시판의 모든 게시글의 수를 가져오기
+	public int getTotalQnaRows(SearchIndex searchIndex) {
+		return qnaDao.getQnaCntByAdmin(searchIndex);
+	}
+	//심영조-admin-board-qna 게시글들을 가져오기
+	public List<Qna> getQnaList(SearchIndex searchIndex) {
+		return qnaDao.getQnaListByAdmin(searchIndex);
 	}
 }
