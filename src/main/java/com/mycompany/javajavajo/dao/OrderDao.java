@@ -44,6 +44,8 @@ public interface OrderDao {
 	public int getMonthSales();
 	public int getMaxDaySales();
 
+	public List<Order> getOrderListInMyPage(int memno);
+
 	
 
 }

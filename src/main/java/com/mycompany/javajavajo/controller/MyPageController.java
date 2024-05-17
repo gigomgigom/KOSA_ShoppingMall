@@ -60,7 +60,7 @@ public class MyPageController {
 		model.addAttribute("memno", memno);
 
 		// 황세림 - 회원 주문정보 리스트 가져오기
-		List<Order> orderList = memberService.getOrderListByMemno(memno);
+		List<Order> orderList = memberService.getOrderListInMypage(memno);
 		List<PointDtl> pointDtlList = new ArrayList<>();
 		
 		if(orderList.size() != 0) {

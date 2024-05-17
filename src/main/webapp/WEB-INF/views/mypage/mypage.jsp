@@ -108,6 +108,7 @@
 
             </div>
          </div>
+         <!-- 주문내역 foreach로 반복해서 출력 -->
          <!-- ----------------------------------------------------------------------- -->
          <div class="col-9 d-flex flex-column  align-items-center m-0 p-0">
             <div class="w-75 m-0 mt-3 p-0">

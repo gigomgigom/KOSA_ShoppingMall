@@ -17,20 +17,24 @@
 
 	<select id="selectOrderByMemno" parameterType="int"
 		resultType="Order">
-		select ordno, memno, ordstts, orddate, ordprice, discprice,
-		finprice, rqst, ordsttschar
-		from ord, ordstts
-		where memno = #{memno} and ordstts.ordsttsno = ord.ordstts
-		order by orddate desc
+		select ordno, memno, ordstts, orddate, ordprice, discprice, finprice,
+		rqst, ordsttschar from ord, ordstts where memno = #{memno} and
+		ordstts.ordsttsno
+		= ord.ordstts order by orddate desc
 	</select>
 
 	<select id="selectOrderByOrdno" parameterType="int"
 		resultType="Order">
+
 		select ordno, memno, ord.ordstts, ordstts.ordsttschar,
-		orddate, ordprice, discprice, finprice, rqst
+		orddate, ordprice,
+		discprice, finprice, rqst
 		from ord, ordstts
 		where
-		ord.ordstts = ordstts.ordsttsno and ord.ordno = #{ordno}
+		ord.ordstts =
+		ordstts.ordsttsno and ord.ordno = #{ordno}
+
+
 	</select>
 
 	<update id="updateOrdStts">
@@ -204,5 +208,23 @@
 		)
 		group by orddate
 		)
+	</select>
+
+	<select id="getOrderListInMyPage" parameterType="int" resultType="Order">
+	
+		<![CDATA[
+		select * from(
+		select rownum rnum, ordno, memno, prodname, ordstts, orddate,
+		ordprice, discprice,
+		finprice, rqst, ordsttschar
+		from ord, ordstts,
+		product
+		where memno = #{memno} and
+		ordstts.ordsttsno = ord.ordstts
+		order
+		by orddate desc
+		)
+		where rnum < 5
+		]]>
 	</select>
 </mapper>	

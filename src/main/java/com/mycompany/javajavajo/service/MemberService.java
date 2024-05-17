@@ -85,4 +85,8 @@ public class MemberService {
 		memberAdrDao.updateMemberAddress(memberAdr);
 		
 	}
+
+	public List<Order> getOrderListInMypage(int memno) {
+		return orderDao.getOrderListInMyPage(memno);
+	}
 }
