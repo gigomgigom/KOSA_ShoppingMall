@@ -82,13 +82,13 @@
 							</div>
 						</div>
 						<div
-							class="col-3 d-flex flex-column justify-content-center align-items-center p-0">
-							<p class="m-0 p-0">${product.prodname}</p>
+							class="col-3 d-flex flex-column justify-content-center align-items-left p-0">
+							<p class="m-2 p-0">${product.prodname}</p>
 						</div>
 						<div
 							class="col-3 d-flex align-items-center justify-content-center m-0 p-0">
 							<div>
-								<p class="m-0 p-0">${qty.qty}개</p>
+								<p class="m-0 p-0">${qty}개</p>
 							</div>
 						</div>
 						<div
@@ -100,7 +100,7 @@
 						<div
 							class="col-2 d-flex justify-content-center align-items-center p-0">
 							<div class="w-75 text-center">
-								<p class="m-0 p-0"></p>
+								<p class="m-0 p-0">${qty * product.prodprice}원</p>
 							</div>
 						</div>
 					</li>
@@ -213,8 +213,8 @@
 							<p>
 								<b>주문 금액</b>
 							</p>
-							<p id="ordprice" class="mt-3">${itemsPrice}원</p>
-							<input type="hidden" name="ordprice" value="${itemsPrice}">
+							<p id="ordprice" class="mt-3">${qty * product.prodprice}원</p>
+							<input type="hidden" name="ordprice" value="${qty * product.prodprice}">
 						</div>
 						<div
 							class="col-4 pt-3 border-end d-flex flex-column align-items-center">
@@ -227,13 +227,13 @@
 							<p>
 								<b>배송비</b>
 							</p>
-							<p id="deliveryprice" class="mt-3">${deliveryPrice}원</p>
+							<p id="deliveryprice" class="mt-3">${qty * product.prodprice > 100000 ? 0 : 3000}</p>
 						</div>
 					</div>
 					<div class="py-1 w-75 text-center"
 						style="background-color: #DDE6ED;">
-						<span><b>최종 결제금액 : <span id="finprice">${itemsPrice + deliveryPrice}원</span></b></span>
-						<input type="hidden" name="finprice" value="${itemsPrice + deliveryPrice}">
+						<span><b>최종 결제금액 : <span id="finprice">${product.prodprice + qty * product.prodprice > 100000 ? 0 : 3000 + qty * product.prodprice}원</span></b></span>
+						<input type="hidden" name="finprice" value="${product.prodprice + qty * product.prodprice > 100000 ? 0 : 3000 + qty * product.prodprice}">
 					</div>
 					<div style="height: 30px;"></div>
 					<!--2.3 결제방식 선택-->

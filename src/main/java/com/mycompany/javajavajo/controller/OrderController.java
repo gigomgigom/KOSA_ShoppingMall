@@ -63,8 +63,8 @@ public class OrderController {
 	}
 	
 	// 신우호 - 바로구매 시  오더 폼으로 바로 이동 
-	@GetMapping("/direct")
-	public String direct(Authentication authentication, Model model, int prodno) {
+	@PostMapping("/direct")
+	public String direct(Authentication authentication, Model model, int prodno, int qty) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 		Member member = t1UserDetails.getMember();
 		int memno = member.getMemno();
@@ -73,6 +73,7 @@ public class OrderController {
 		model.addAttribute("memberAdr", memberAdr);
 		model.addAttribute("member", member);
 		model.addAttribute("product", product);
+		model.addAttribute("qty", qty);
 		
 		return "order/orderDirect";
 	}

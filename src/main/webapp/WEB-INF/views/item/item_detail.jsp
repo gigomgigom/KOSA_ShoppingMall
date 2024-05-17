@@ -72,8 +72,26 @@
 					});
 					break;
 			}
-			
 		}
+		
+		function submitDirect() {
+			let prodno = $("#prodno").val(); /* id가 prodno인 값을 가져옴 */
+			let qty = $("#qty").val(); /* id가 qty인 값을 가져옴 */
+			console.log(prodno); /* 값이 잘 나오는지 확인 */
+			console.log(qty);
+			
+			let productInfo = {prodno, qty}; /* prodno값을 객체(productInfo에 담아 컨트롤러에 전달) */
+			
+			
+			$.ajax({
+				url: "/javajavajo_mini_web/order/direct",
+				method: "post",
+				data: productInfo
+			})
+		}
+		
+		
+		
 		</script>
 <!-- jQuery 외부 라이브러리 설정 -->
 <script
@@ -100,7 +118,7 @@
 	<div class="container-fluid my-2">
 	<!--data전달을 위한 form-->
 
-		<form method="post" action="${pageContext.request.contextPath}/cart/cartAdd" >
+		<form method="post" action="${pageContext.request.contextPath}/order/direct" >
 			<div id="wrapper" class="d-flex flex-column">
 				<div class="container d-flex justify-content-center">
 					<div class="w-75 d-flex justify-content-center">
@@ -130,17 +148,17 @@
 								<!--  -->
 								
 									<div class="mt-4 px-5 d-flex justify-content-between">
-										<span class="fw-bold">수량</span> <input type="number" value="1" min="1" name="qty"
+										<span class="fw-bold">수량</span> <input id="qty" type="number" value="1" min="1" name="qty"
 											style="text-align: center;">
 									</div>
 	
 									<div class="mt-3 d-flex justify-content-between">
 										
 										<input id="prodno" type="hidden" value="${product.prodno}" name="prodno">
-										<button type="submit" id="add-cart" class="btn btn-lg border fw-bold" 
+										<button type="button" id="add-cart" class="btn btn-lg border fw-bold" 
 											style="background-color: #9DB2BF;">장바구니에 추가</button>
-											<a type="submit" id="direct-purchase" class="btn btn-lg text-white fw-bold w-50"
-												style="background-color: #27374D;" href="${pageContext.request.contextPath}/order/direct?prodno=${product.prodno}">바로구매</a>
+											<button type="submit" id="direct-purchase" class="btn btn-lg text-white fw-bold w-50"
+												style="background-color: #27374D;">바로구매</button>
 									</div>
 							</div>
 						</div>
