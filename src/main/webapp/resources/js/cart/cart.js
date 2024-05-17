@@ -45,7 +45,7 @@ const updateItemData = (prodno, operator) => {
 	let params = {prodno,operator};
 	
 	$.ajax({
-		url:"cart/update_cart",
+		url:"/javajavajo_mini_web/cart/update_cart",
 		method:"post",
 		data: params,
 		success: function(data){
@@ -80,7 +80,7 @@ const deleteSelect = () => {
     }else{
     	let params ={prodnos}
     	$.ajax({
-    		url:"cart/delete_cart_items",
+    		url:"/javajavajo_mini_web/cart/delete_cart_items",
     		method:"post",
     		data: params,
     		success: function(data){

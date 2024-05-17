@@ -14,9 +14,18 @@
 	background-color: #27374D;
 }
 </style>
+<!-- Latest compiled and minified CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- 사용자 정의 자바스크립트 -->
 <script>
-
 		function handleBtnShow(index) {
 			switch(index) {
 				case 1: 
@@ -74,40 +83,31 @@
 			}
 		}
 		
-		function submitDirect() {
-			let prodno = $("#prodno").val(); /* id가 prodno인 값을 가져옴 */
-			let qty = $("#qty").val(); /* id가 qty인 값을 가져옴 */
-			console.log(prodno); /* 값이 잘 나오는지 확인 */
-			console.log(qty);
+		function submitCart() {
+			const modal = new bootstrap.Modal(document.getElementById('myModal'));
+			let prodno = $("#prodno").val(); 
+			let qty = $("#qty").val(); 
+
 			
-			let productInfo = {prodno, qty}; /* prodno값을 객체(productInfo에 담아 컨트롤러에 전달) */
+			let productInfo = {prodno, qty}; 
 			
 			
 			$.ajax({
-				url: "/javajavajo_mini_web/order/direct",
+				url: "/javajavajo_mini_web/cart/cartAdd",
 				method: "post",
-				data: productInfo
-			})
+				data: productInfo,
+				success: function(data) {
+					if(data["result"]  == "success"){
+						modal.show()
+					}
+				}
+			}) 
 		}
 		
 		
 		
 		</script>
-<!-- jQuery 외부 라이브러리 설정 -->
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Latest compiled and minified CSS -->
-<!-- 클라이언트에게 라이브러리 파일을 어디 서버에 다운받을 지 배정받는다. -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <meta charset="UTF-8">
 <title>꼭꼭 씹어먹어요 개껌</title>
 </head>
@@ -116,15 +116,18 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 
 	<div class="container-fluid my-2">
-	<!--data전달을 위한 form-->
+		<!--data전달을 위한 form-->
 
-		<form method="post" action="${pageContext.request.contextPath}/order/direct" >
+		<form method="post"
+			action="${pageContext.request.contextPath}/order/direct">
 			<div id="wrapper" class="d-flex flex-column">
 				<div class="container d-flex justify-content-center">
 					<div class="w-75 d-flex justify-content-center">
 						<div class="w-50 p-3">
 							<div class="card w-75">
-								<img src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${product.prodno}" alt="">
+								<img
+									src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${product.prodno}"
+									alt="">
 							</div>
 						</div>
 						<div class="w-50 p-3 d-flex flex-column">
@@ -132,34 +135,39 @@
 								<!--상품정보(상품명, 구매후기, 가격, 배송비)-->
 								<div class="d-flex flex-column border-bottom">
 									<h5 class="fw-bold">${product.prodname}</h5>
-									<span>구매후기 ${product.rvcount}건 | <c:if test="${product.avgrating >= 1 && product.avgrating < 2}">⭐</c:if>
-													<c:if test="${product.avgrating >= 2 && product.avgrating < 3}">⭐⭐</c:if>
-													<c:if test="${product.avgrating >= 3 && product.avgrating < 4}">⭐⭐⭐</c:if>
-													<c:if test="${product.avgrating >= 4 && product.avgrating < 5}">⭐⭐⭐⭐</c:if>
-													<c:if test="${product.avgrating == 5}">⭐⭐⭐⭐⭐</c:if>
-									</span> <span class="mt-4 fw-bold">소비자가
-										${product.prodprice}원</span> 
-										
-										<span class="mt-2" style="font-size: 0.75rem;">배송비
-										3,000원 (주문시 결제) - CJ 대한통운</span> <span class="mb-3"
+									<span>구매후기 ${product.rvcount}건 | <c:if
+											test="${product.avgrating >= 1 && product.avgrating < 2}">⭐</c:if>
+										<c:if
+											test="${product.avgrating >= 2 && product.avgrating < 3}">⭐⭐</c:if>
+										<c:if
+											test="${product.avgrating >= 3 && product.avgrating < 4}">⭐⭐⭐</c:if>
+										<c:if
+											test="${product.avgrating >= 4 && product.avgrating < 5}">⭐⭐⭐⭐</c:if>
+										<c:if test="${product.avgrating == 5}">⭐⭐⭐⭐⭐</c:if>
+									</span> <span class="mt-4 fw-bold">소비자가 ${product.prodprice}원</span> <span
+										class="mt-2" style="font-size: 0.75rem;">배송비 3,000원
+										(주문시 결제) - CJ 대한통운</span> <span class="mb-3"
 										style="font-size: 0.75em;">제주 추가 3,000원, 제주 외 도서지역 추가
 										7,000원</span>
 								</div>
 								<!--  -->
-								
-									<div class="mt-4 px-5 d-flex justify-content-between">
-										<span class="fw-bold">수량</span> <input id="qty" type="number" value="1" min="1" name="qty"
-											style="text-align: center;">
-									</div>
-	
-									<div class="mt-3 d-flex justify-content-between">
-										
-										<input id="prodno" type="hidden" value="${product.prodno}" name="prodno">
-										<button type="button" id="add-cart" class="btn btn-lg border fw-bold" 
-											style="background-color: #9DB2BF;">장바구니에 추가</button>
-											<button type="submit" id="direct-purchase" class="btn btn-lg text-white fw-bold w-50"
-												style="background-color: #27374D;">바로구매</button>
-									</div>
+
+								<div class="mt-4 px-5 d-flex justify-content-between">
+									<span class="fw-bold">수량</span> <input id="qty" type="number"
+										value="1" min="1" name="qty" style="text-align: center;">
+								</div>
+
+								<div class="mt-3 d-flex justify-content-between">
+
+									<input id="prodno" type="hidden" value="${product.prodno}"
+										name="prodno">
+									<button onclick="submitCart()" type="button" id="add-cart"
+										class="btn btn-lg border fw-bold"
+										style="background-color: #9DB2BF;">장바구니에 추가</button>
+									<button type="submit" id="direct-purchase"
+										class="btn btn-lg text-white fw-bold w-50"
+										style="background-color: #27374D;">바로구매</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -194,5 +202,26 @@
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+
+	<!-- modal -->
+	<div class="modal" id="myModal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+
+				<!-- Modal body -->
+				<div class="modal-body">장바구니로 갈까요?</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<a type="button" class="btn btn-danger"
+						href="${pageContext.request.contextPath}/cart/">장바구니로 가기
+						</a>
+					<a type="button" class="btn btn-danger"
+						href="${pageContext.request.contextPath}/item/item_list?ctgno=${product.ctgno}&pageNo=1&sorting=lowPrice&keyword=">쇼핑 계속하기</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -5,11 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mycompany.javajavajo.dao.CartDao;
+
 import com.mycompany.javajavajo.dao.CartItemDao;
 import com.mycompany.javajavajo.dao.ProductDao;
 import com.mycompany.javajavajo.dao.ProductImgDao;
-import com.mycompany.javajavajo.dto.Cart;
 import com.mycompany.javajavajo.dto.CartItem;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.ProductImg;
@@ -19,8 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class CartService {
-	@Autowired
-	private CartDao cartDao;
+
 	@Autowired
 	private CartItemDao cartItemDao;
 	@Autowired
@@ -28,16 +26,6 @@ public class CartService {
 	@Autowired
 	private ProductImgDao productImgDao;
 
-	//권우상 - memno에 해당하는 cart가 있는지 확인 없다면 만들어줌
-	public Cart findCart(int memno) {
-		Cart cart = cartDao.selectByMemno(memno);
-		if(cart == null) {
-			cartDao.insert(memno);
-			cart = cartDao.selectByMemno(memno);
-		}
-		return cart;
-	}
-	
 	//권우상 - memno에 해당하는 cartItem 전부를 찾아옴
 	public List<CartItem> findCartItems(int memno) {
 		List<CartItem> cartItems = cartItemDao.selectByMemno(memno);
@@ -72,21 +60,6 @@ public class CartService {
 		return cartItemDao.selectProductByprodNo(prodNo);
 	}
 		
-	// 신우호 - 회원번호를 사용해서 카트목록을 불러옴
-	public List<Cart> getCartListByMemNo(int memNo) {
-		return cartDao.selectByMemNo(memNo);
-	}
-		
-	// 신우호 - 회원번호를 사용해 카트의 정보들을 불러옴
-	public Cart getCartByMemNo(int memNo) {
-		return cartDao.selectByMemno(memNo);
-	}
-
-	// 신우호 - 회원번호를 사용해 카트가 없을 경우 카트를 새로 만들어줌
-	public int createCart(int memNo) {
-		return cartDao.insert(memNo);
-	}
-
 	// 신우호 - 장바구니 카트 아이템 추가
 	public int addCartItem(CartItem cartItem) {
 		return cartItemDao.insertCartItem(cartItem);
