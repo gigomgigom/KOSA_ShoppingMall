@@ -30,7 +30,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@Secured("ROLE_USER")
 @RequestMapping("/mypage")
 public class MyPageController {
 	@Autowired
@@ -43,7 +42,7 @@ public class MyPageController {
 	private ItemService itemService;
 
 
-
+	@Secured("ROLE_USER")
 	//황세림 - member를 받아 회원의 주소를 출력하는 경로
 	@RequestMapping("")
 	public String myPageMain(Authentication authentication, Model model) {
@@ -109,7 +108,7 @@ public class MyPageController {
 
 		return "mypage/mypage";
 	}
-
+	
 	//멤버 이미지 다운로드
 	@GetMapping("/downloadMemImg")
 	public void downloadMemberImg(int memno, HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
@@ -128,7 +127,8 @@ public class MyPageController {
 		os.flush();
 		os.close();
 	}
-
+	
+	@Secured("ROLE_USER")
 	//사용자 정보 수정
 	@GetMapping("/edit_user_info")
 	public String editUserInfo(Authentication authentication, Model model) {
@@ -142,7 +142,8 @@ public class MyPageController {
 
 		return "mypage/edit_user_info";
 	}
-
+	
+	@Secured("ROLE_USER")
 	//황세림 - 사용자 정보 수정
 	@RequestMapping("/update_user_info")
 	public String updateMemberInformation(Member member, MemberAdr memberadr, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
