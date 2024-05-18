@@ -27,7 +27,8 @@
 		class="container-fluid  d-flex flex-column align-items-center m-0, my-5 p-0">
 
 		<div class="d-flex w-75 m-0 my-5 p-0 ">
-			<form class="d-flex w-100 m-0 p-0" method="get" action="" autocomplete="off">
+			<form class="d-flex w-100 m-0 p-0" method="get" action=""
+				autocomplete="off">
 				<input name="pageNo" type="hidden" value="1"> <input
 					name="keyword"
 					class="form-control form-control-sm text-center text-muted w-100 m-0 p-0 py-2"
@@ -70,11 +71,21 @@
 				<!-- items = 반복가능한 무언가?(qna(dto)의 정보) -->
 				<c:forEach var="qna" items="${qnaList}">
 					<tr class="row border-bottom border-second-subtle m-0 p-0 py-3">
-						<td
-							class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
-							<span class="badge rounded-pill"
-							style="background-color: #9DB2BF; color: white">접수</span>
-						</td>
+						<c:if test="${qna.admrply == null}">
+							<td
+								class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
+								<span class="badge rounded-pill"
+								style="background-color: #9DB2BF; color: white">접수</span>
+							</td>
+						</c:if>
+						
+						<c:if test="${qna.admrply != null}">
+							<td
+								class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
+								<span class="badge rounded-pill"
+								style="background-color: #9DB2BF; color: white">완료</span>
+							</td>
+						</c:if>
 						<td
 							class="d-flex justify-content-center align-items-center col-6 m-0 p-0">
 							<!-- 제목의 절대경로지정 제목 클릭 시 detailBoard의 qnano해당 번호로 이동 --> <sec:authorize
