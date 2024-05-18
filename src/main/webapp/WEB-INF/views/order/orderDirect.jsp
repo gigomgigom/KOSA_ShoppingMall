@@ -234,8 +234,8 @@
 					</div>
 					<div class="py-1 w-75 text-center"
 						style="background-color: #DDE6ED;">
-						<span><b>최종 결제금액 : <span id="finprice">${product.prodprice + qty * product.prodprice > 100000 ? 0 : 3000 + qty * product.prodprice}원</span></b></span>
-						<input type="hidden" name="finprice" value="${product.prodprice + qty * product.prodprice > 100000 ? 0 : 3000 + qty * product.prodprice}">
+						<span><b>최종 결제금액 : <span id="finprice">${(qty * product.prodprice > 100000 ? 0 : 3000) + qty * product.prodprice}원</span></b></span>
+						<input type="hidden" name="finprice" value="${(qty * product.prodprice > 100000 ? 0 : 3000 ) + qty * product.prodprice}">
 					</div>
 					<div style="height: 30px;"></div>
 					<!--2.3 결제방식 선택-->
