@@ -51,7 +51,7 @@
 							<fmt:formatDate value="${qna.qnadate}" pattern="yyyy-MM-dd" />
 						</p>
 						<p class="border-end border-secondary-subtle m-0 p-0 px-3">${qna.qnahitcnt}</p>
-						<p class="m-0 p-0 ps-3">
+						<p id="rplysts" class="m-0 p-0 ps-3">
 							상태:
 							<c:if test="${qna.admrply == null}">
 								<span class="badge rounded-pill"

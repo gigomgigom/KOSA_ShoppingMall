@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,25 +85,27 @@
 			}
 		}
 		
-		function submitCart() {
+		function submitCart(isLogin) {
 			const modal = new bootstrap.Modal(document.getElementById('myModal'));
 			let prodno = $("#prodno").val(); 
 			let qty = $("#qty").val(); 
-
-			
+			console.log(isLogin);
 			let productInfo = {prodno, qty}; 
 			
-			
-			$.ajax({
-				url: "/javajavajo_mini_web/cart/cartAdd",
-				method: "post",
-				data: productInfo,
-				success: function(data) {
-					if(data["result"]  == "success"){
-						modal.show()
+			if(isLogin){
+				$.ajax({
+					url: "/javajavajo_mini_web/cart/cartAdd",
+					method: "post",
+					data: productInfo,
+					success: function(data) {
+						if(data["result"]  == "success"){
+							modal.show()
+						}
 					}
-				}
-			}) 
+				}) 
+			}else{
+				location.href= "/javajavajo_mini_web/item/item_detail?prodno=" + prodno;
+			}
 		}
 		
 		
@@ -162,7 +165,7 @@
 
 									<input id="prodno" type="hidden" value="${product.prodno}"
 										name="prodno">
-									<button onclick="submitCart()" type="button" id="add-cart"
+									<button onclick="submitCart(${isLogin})" type="button" id="add-cart"
 										class="btn btn-lg border fw-bold"
 										style="background-color: #9DB2BF;">장바구니에 추가</button>
 									<button type="submit" id="direct-purchase"

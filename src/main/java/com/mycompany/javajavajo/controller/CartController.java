@@ -8,6 +8,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -110,5 +111,11 @@ public class CartController {
 			JSONObject jo = new JSONObject();
 			jo.put("result", jsonResult);
 			return jo.toString();
+		}
+		
+		@GetMapping("/cartAdd")
+		public String cartAddReturn(int prodno) {
+			log.info(""+prodno);
+			return "redirect:/item/item_detail?prodno=" + prodno;
 		}
 }

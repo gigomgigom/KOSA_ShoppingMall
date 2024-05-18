@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,6 +70,7 @@ public class QnaController {
 	}
 
 	// 글쓰기 페이지로 이동
+	@Secured("ROLE_USER")
 	@GetMapping("/write_qna")
 	public String writeQnaForm() {
 		return "qna/writeQna";
@@ -110,6 +112,7 @@ public class QnaController {
 	}
 
 	// 글수정할 페이지 이동
+	@Secured("ROLE_USER")
 	@GetMapping("/update_qna")
 	public String updateQnaForm(int qnano, Model model) {
 		String keyword = "";
@@ -119,6 +122,7 @@ public class QnaController {
 	}
 
 	// 글수정된 페이지로 이동
+	@Secured("ROLE_USER")
 	@PostMapping("/update_qna")
 	public String updateQna(Qna qna) {
 		
@@ -137,7 +141,7 @@ public class QnaController {
 		
 		return "redirect:/qna/qna_detail?qnano=" + qna.getQnano();
 	}
-
+	@Secured("ROLE_USER")
 	@GetMapping("/delete_qna")
 	public String deleteQna(int qnano) {
 		qnaService.deleteQna(qnano);
@@ -165,6 +169,7 @@ public class QnaController {
 		os.close();
 	}
 	
+	@Secured("ROLE_USER")
 	@PostMapping(value="/delete_attach", produces="application/json; charset=UTF-8")
 	@ResponseBody()
 	public String deleteAttach(int qnano) {
@@ -176,6 +181,7 @@ public class QnaController {
 		return jo.toString();
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@PostMapping(value="/write_reply", produces="application/json; charset=UTF-8")
 	@ResponseBody()
 	public String writeReply(int qnano, String reply) {
@@ -187,6 +193,7 @@ public class QnaController {
 		return jo.toString();
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@PostMapping(value="/edit_reply", produces="application/json; charset=UTF-8")
 	@ResponseBody()
 	public String editReply(int qnano, String reply) {

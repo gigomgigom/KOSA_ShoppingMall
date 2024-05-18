@@ -32,6 +32,7 @@ const cancelWriteReply = () =>{
 const saveReply = () =>{
 	const reply = replyArea.querySelector("textarea").value;
 	const qnano = document.querySelector("#qnano").value;
+	const rplysts = document.querySelector("#rplysts")
 	const params = {qnano,reply};
 	console.log(params);
 	$.ajax({
@@ -52,6 +53,11 @@ const saveReply = () =>{
 					<div class="d-flex justify-content-center align-items-center w-100 m-0 mb-5 p-0 px-5" >
 						<a onclick="editReply()" class="btn" style="background-color: #273740; color: white">수정하기</a>
 					</div>
+					`;
+					
+					rplysts.innerHTML = `
+						<span class="badge rounded-pill"
+						style="background-color: #9DB2BF; color: white">완료</span>
 					`;
 					replyArea.querySelector("p").innerHTML= reply;
 					existReply = reply;

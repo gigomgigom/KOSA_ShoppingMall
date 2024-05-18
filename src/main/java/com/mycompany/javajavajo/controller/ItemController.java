@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import com.mycompany.javajavajo.dto.Pager;
 import com.mycompany.javajavajo.dto.Product;
 import com.mycompany.javajavajo.dto.ProductImg;
 import com.mycompany.javajavajo.dto.Review;
+import com.mycompany.javajavajo.security.Tm1UserDetails;
 import com.mycompany.javajavajo.service.ItemService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,9 +39,15 @@ public class ItemController {
 	
 	//다음단계는 ItemService로!
 	@RequestMapping("/item_detail")
-	public String itemDetail(int prodno, Model model) {
+	public String itemDetail(int prodno, Model model,  Authentication authentication) {
+		log.info("hi");
+		boolean isLogin = false;
+		if(authentication != null) {
+			isLogin = true;
+		}
 		Product product = service.getProductByProdno(prodno);
 		model.addAttribute("product", product);
+		model.addAttribute("isLogin", isLogin);
 		return "item/item_detail";
 	}
 	
