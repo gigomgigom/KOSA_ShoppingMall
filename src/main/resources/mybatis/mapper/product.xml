@@ -154,7 +154,13 @@
 		</if>
 		group by product.prodno, prodname, prodprice, ordcount, rvcount,
 		avgrating
-
+		
+		<if test="sorting == 'bestItem'">
+			order by ordcount desc nulls last
+		</if>
+		<if test="sorting == 'highItem'">
+			order by avgrating desc nulls last
+		</if>
 		<if test="sorting == 'newItem'">
 			order by product.prodno desc
 		</if>

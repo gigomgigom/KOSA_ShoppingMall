@@ -42,7 +42,8 @@
 		</header>
 	</div>
 
-	<div class="container-fluid d-flex align-items-center flex-column mt-5" style="min-width: 1250px">
+	<div class="container-fluid d-flex align-items-center flex-column mt-5"
+		style="min-width: 1250px">
 		<h1>
 			<b>${ctgno == 1 ? '사료' : ctgno == 2? '간식' : '영양제'}</b>
 		</h1>
@@ -55,6 +56,10 @@
 							name="pageNo" type="hidden" value="1"> <select
 							class="form-select form-select-sm w-100 h-100" name="sorting"
 							onchange="this.form.submit()">
+							<option value="bestItem"
+								${sorting == "bestItem"? "selected" : ""}>인기 상품순</option>
+							<option value="highItem"
+								${sorting == "highItem"? "selected" : ""}>리뷰 평점순</option>
 							<option value="lowPrice"
 								${sorting == "lowPrice"? "selected" : ""}>낮은 가격순</option>
 							<option value="highPrice"
@@ -117,41 +122,41 @@
 
 				<!-- ---------------------------------------------------------------------------------------- -->
 			</div>
-				<div class="d-flex justify-content-center m-0 p-0">
-					<tr>
-						<td colspan="4" class="text-center">
-							<div>
+			<div class="d-flex justify-content-center m-0 p-0">
+				<tr>
+					<td colspan="4" class="text-center">
+						<div>
+							<a class="btn btn-outline-light btn-sm text-dark"
+								href="${pageContext.request.contextPath}/item/item_list?pageNo=1&ctgno=${ctgno}">처음</a>
+							<c:if test="${pager.groupNo>1}">
 								<a class="btn btn-outline-light btn-sm text-dark"
-									href="${pageContext.request.contextPath}/item/item_list?pageNo=1&ctgno=${ctgno}">처음</a>
-								<c:if test="${pager.groupNo>1}">
-									<a class="btn btn-outline-light btn-sm text-dark"
-										href="${pageContext.request.contextPath}/item/item_list?pageNo=${pager.startPageNo-1}&ctgno=${ctgno}">이전</a>
-								</c:if>
+									href="${pageContext.request.contextPath}/item/item_list?pageNo=${pager.startPageNo-1}&ctgno=${ctgno}">이전</a>
+							</c:if>
 
-								<c:forEach var="i" begin="${pager.startPageNo}"
-									end="${pager.endPageNo}">
-									<c:if test="${pager.pageNo != i}">
-										<a class="btn btn-outline-light btn-sm text-dark"
-											href="${pageContext.request.contextPath}/item/item_list?pageNo=${i}&ctgno=${ctgno}">${i}</a>
-									</c:if>
-									<c:if test="${pager.pageNo == i}">
-										<a class="btn t btn-sm"
-											style="background-color: #9523DC; color: white"
-											href="${pageContext.request.contextPath}/item/item_list?pageNo=${i}&ctgno=${ctgno}">${i}</a>
-									</c:if>
-								</c:forEach>
-								<!-- 그룹의 번호가 마지막 그룹의 번호보다 작을 경우에만 다음 버튼이 보이게 함 -->
-								<c:if test="${pager.groupNo<pager.totalGroupNo}">
+							<c:forEach var="i" begin="${pager.startPageNo}"
+								end="${pager.endPageNo}">
+								<c:if test="${pager.pageNo != i}">
 									<a class="btn btn-outline-light btn-sm text-dark"
-										href="${pageContext.request.contextPath}/item/item_list?pageNo=${pager.endPageNo+1}&ctgno=${ctgno}">다음</a>
+										href="${pageContext.request.contextPath}/item/item_list?pageNo=${i}&ctgno=${ctgno}">${i}</a>
 								</c:if>
+								<c:if test="${pager.pageNo == i}">
+									<a class="btn t btn-sm"
+										style="background-color: #9523DC; color: white"
+										href="${pageContext.request.contextPath}/item/item_list?pageNo=${i}&ctgno=${ctgno}">${i}</a>
+								</c:if>
+							</c:forEach>
+							<!-- 그룹의 번호가 마지막 그룹의 번호보다 작을 경우에만 다음 버튼이 보이게 함 -->
+							<c:if test="${pager.groupNo<pager.totalGroupNo}">
 								<a class="btn btn-outline-light btn-sm text-dark"
-									href="${pageContext.request.contextPath}/item/item_list?pageNo=${pager.totalPageNo}&ctgno=${ctgno}">맨끝</a>
-							</div>
-						</td>
-					</tr>
-					</table>
-				</div>
+									href="${pageContext.request.contextPath}/item/item_list?pageNo=${pager.endPageNo+1}&ctgno=${ctgno}">다음</a>
+							</c:if>
+							<a class="btn btn-outline-light btn-sm text-dark"
+								href="${pageContext.request.contextPath}/item/item_list?pageNo=${pager.totalPageNo}&ctgno=${ctgno}">맨끝</a>
+						</div>
+					</td>
+				</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 
