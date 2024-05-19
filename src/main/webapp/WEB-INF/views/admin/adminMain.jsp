@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,13 +116,13 @@
 								</div>
 								<div class="d-flex w-100 p-1">
 									<div class="col-4 text-center">
-										<h5>${salesInfo.todaySales}원</h5>
+										<h5><fmt:formatNumber value="${salesInfo.todaySales}" pattern="#,###" />원</h5>
 									</div>
 									<div class="col-4 text-center">
-										<h5>${salesInfo.monthSales}원</h5>
+										<h5><fmt:formatNumber value="${salesInfo.monthSales}" pattern="#,###" />원</h5>
 									</div>
 									<div class="col-4 text-center">
-										<h5>${salesInfo.maxDaySales}원</h5>
+										<h5><fmt:formatNumber value="${salesInfo.maxDaySales}" pattern="#,###" />원</h5>
 									</div>
 								</div>
 							</div>

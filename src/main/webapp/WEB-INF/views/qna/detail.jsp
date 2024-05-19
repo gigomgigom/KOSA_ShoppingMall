@@ -57,12 +57,12 @@
 							상태:
 							<c:if test="${qna.admrply == null}">
 								<span class="badge rounded-pill"
-								style="background-color: #9DB2BF; color: white">접수</span>
+								style="background-color: #F6EEFA; color: black">접수</span>
 							</c:if>
 
 							<c:if test="${qna.admrply != null}">
 								<span class="badge rounded-pill"
-								style="background-color: #273740; color: white">완료</span>
+								style="background-color: #9523DC; color: white">완료</span>
 							</c:if>
 						</p>
 					</diV>
@@ -90,12 +90,12 @@
 							style="color: white; background-color: #27374D; position: absolute; top: -10%; left: -1%;">답변
 							대기 중입니다</span>
 						<p class="m-0 px-3 py-5">
-							답변이 없습니다 <br /> <br />없다니까요 <br />없어요 없어 <br />돌아가요
+							판매자의 답변이 없습니다.
 						</p>
 					</c:if>
 					<c:if test="${qna.admrply != null}">
 						<span class="m-0  px-3 py-2 rounded-pill text-center"
-							style="color: white; background-color: #27374D; position: absolute; top: -10%; left: -1%;">관리자의
+							style="color: white; background-color: #9523DC; position: absolute; top: -10%; left: -1%;">관리자의
 							답변</span>
 						<p class="m-0 px-3 py-5">${qna.admrply}</p>
 					</c:if>
@@ -112,7 +112,7 @@
 						<div
 							class="d-flex justify-content-center align-items-center w-100 m-0 mb-5 p-0 px-5">
 							<a onclick="editReply()" class="btn"
-								style="background-color: #273740; color: white">수정하기</a>
+								style="background-color: #9523DC; color: white">수정하기</a>
 						</div>
 					</c:if>
 				</sec:authorize>
@@ -187,7 +187,7 @@
 
 							<c:if
 								test="${member.memno != qna.prememno and member.memrole != 'ROLE_ADMIN'}">
-								<p class="m-0 p-0 text-start">&#9661이전글 비밀이라니까요...</p>
+								<p class="m-0 p-0 text-start">&#9661이전글 비밀글</p>
 							</c:if>
 						</c:if>
 
@@ -203,7 +203,7 @@
 
 					<sec:authorize access="isAnonymous()">
 						<c:if test="${qna.prelock == 1}">
-							<p class="m-0 p-0 text-start">&#9661이전글 비밀이에요...</p>
+							<p class="m-0 p-0 text-start">&#9661이전글 비밀글</p>
 						</c:if>
 
 						<c:if test="${qna.prelock == 0}">
@@ -221,8 +221,8 @@
 
 		<div
 			class="d-flex w-75 justify-content-center align-items-center m-0 mb-5 p-0">
-			<a class="btn btn-outline-light btn-sm text-dark m-0 px-2"
-				href="${pageContext.request.contextPath}/qna/qna_list">목록</a>
+			<a class="btn btn-outline-light btn-sm text-white m-0 px-2"
+				href="${pageContext.request.contextPath}/qna/qna_list" style="background-color:#9523DC">목록</a>
 		</div>
 
 		<div
@@ -232,10 +232,10 @@
 				<c:if test="${member.memid == qna.qnawriter}">
 					<a
 						href="${pageContext.request.contextPath}/qna/update_qna?qnano=${qna.qnano}"
-						class="btn btn-outline-light btn-sm m-0 text-dark m-0 me-3 p-0 px-2">수정</a>
+						class="btn btn-outline-light text-white btn-sm text-dark py-1 me-3 p-0 px-2" style="background-color:#9523DC">수정</a>
 					<a
 						href="${pageContext.request.contextPath}/qna/delete_qna?qnano=${qna.qnano}"
-						class="btn btn-outline-light btn-sm text-dark m-0 p-0 px-2">삭제</a>
+						class="btn btn-outline-light btn-sm text-dark my-1 p-0 px-2">삭제</a>
 				</c:if>
 			</sec:authorize>
 		</div>

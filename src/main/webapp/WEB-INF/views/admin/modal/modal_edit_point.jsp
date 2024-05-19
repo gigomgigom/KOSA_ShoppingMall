@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div class="modal fade" id="pointModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -14,7 +15,7 @@
 			<div class="modal-body">
 				<form id="point" method="post" action="edit_point">
 					<input type="hidden" value="${member.memno}" name="memno">
-					<h6>${member.memname}님의잔여 포인트 : ${member.mempoint}</h6>
+					<h6>${member.memname}님의잔여 포인트 : <fmt:formatNumber value="${member.mempoint}" pattern="#,###" /></h6>
 					<input type="number" class="form-control" value="${member.mempoint}" name="mempoint">
 				</form>
 			</div>

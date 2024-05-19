@@ -121,7 +121,7 @@
 													<c:if test="${order.ordproductcnt == 0}">
 														<td>개껌</td>
 													</c:if>
-													<td>${order.finprice}</td>
+													<td><fmt:formatNumber value="${order.finprice}" pattern="#,###" />원</td>
 													<td><fmt:formatDate value="${order.orddate}"
 															pattern="yyyy-MM-dd" /></td>
 												</tr>
@@ -152,7 +152,7 @@
 													<c:if test="${pointDtl.action == 0}">
 														<td>적립</td>
 													</c:if>
-													<td>${pointDtl.amount}포인트</td>
+													<td><fmt:formatNumber value="${pointDtl.amount}" pattern="#,###" />포인트</td>
 													<td><fmt:formatDate value="${pointDtl.date}"
 															pattern="yyyy-MM-dd" /></td>
 												</tr>

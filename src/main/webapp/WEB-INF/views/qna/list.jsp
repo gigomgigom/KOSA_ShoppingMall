@@ -84,7 +84,7 @@
 							<td
 								class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
 								<span class="badge rounded-pill"
-								style="background-color: #9DB2BF; color: white">접수</span>
+								style="background-color: #F6EEFA; color: black">접수</span>
 							</td>
 						</c:if>
 
@@ -92,7 +92,7 @@
 							<td
 								class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
 								<span class="badge rounded-pill"
-								style="background-color: #273740; color: white;" color:white">완료</span>
+								style="background-color: #9523DC; color: white;" color:white">완료</span>
 							</td>
 						</c:if>
 						<td
@@ -183,7 +183,7 @@
 								</c:if>
 								<c:if test="${pager.pageNo == i}">
 									<a class="btn t btn-sm"
-										style="background-color: #273740; color: white"
+										style="background-color: #9523DC; color: white"
 										href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${i}">${i}</a>
 								</c:if>
 							</c:forEach>
@@ -203,7 +203,7 @@
 		<div class="d-flex justify-content-end w-75 m-0 p-0">
 			<div>
 				<a href="${pageContext.request.contextPath}/qna/write_qna"
-					class="btn" style="background-color: #273740; color: white">글쓰기</a>
+					class="btn" style="background-color: #9523DC; color: white">글쓰기</a>
 			</div>
 		</div>
 	</div>

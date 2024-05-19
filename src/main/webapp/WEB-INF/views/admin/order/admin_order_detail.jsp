@@ -120,7 +120,7 @@
 													<td>${ordProd.prodno}</td>
 													<td>${ordProd.prodname}</td>
 													<td>${ordProd.qty}개</td>
-													<td>${ordProd.subtot}원</td>
+													<td><fmt:formatNumber value="${ordProd.subtot}" pattern="#,###" />원</td>
 												</tr>
 											</c:forEach>
 										</tbody>
@@ -137,9 +137,9 @@
 										</thead>
 										<tbody>
 											<tr>
-												<td>${orderInfoMap.order.ordprice}원</td>
-												<td>${orderInfoMap.order.discprice}원</td>
-												<td>${orderInfoMap.order.finprice}원</td>
+												<td><fmt:formatNumber value="${orderInfoMap.order.ordprice}" pattern="#,###" />원</td>
+												<td><fmt:formatNumber value="${orderInfoMap.order.discprice}" pattern="#,###" />원</td>
+												<td><fmt:formatNumber value="${orderInfoMap.order.finprice}" pattern="#,###" />원</td>
 											</tr>
 										</tbody>
 									</table>

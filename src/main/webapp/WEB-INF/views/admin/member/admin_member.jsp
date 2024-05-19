@@ -104,31 +104,31 @@
 						</table>
 							<div class="d-flex justify-content-center mt-5">
 								<div>
-									<a class="btn btn-outline-primary btn-sm"
+									<a class="btn btn-sm"
 										href="admin_member_view?pageno=1">처음</a>
 									<c:if test="${searchIndex.pager.groupNo>1}">
-										<a class="btn btn-outline-info btn-sm"
+										<a class="btn btn-sm"
 											href="admin_member_view?pageno=${searchIndex.pager.startPageNo-1}">이전</a>
 									</c:if>
 
 									<c:forEach var="i" begin="${searchIndex.pager.startPageNo}"
 										end="${searchIndex.pager.endPageNo}">
 										<c:if test="${searchIndex.pager.pageNo != i}">
-											<a class="btn btn-outline-success btn-sm"
+											<a class="btn btn-sm"
 												href="admin_member_view?pageno=${i}">${i}</a>
 										</c:if>
 										<c:if test="${searchIndex.pager.pageNo == i}">
-											<a class="btn btn-danger btn-sm"
-												href="admin_member_view?pageno=${i}">${i}</a>
+											<a class="btn btn-sm"
+												href="admin_member_view?pageno=${i}"><b>${i}</b></a>
 										</c:if>
 									</c:forEach>
 
 									<c:if
 										test="${searchIndex.pager.groupNo<searchIndex.pager.totalGroupNo}">
-										<a class="btn btn-outline-info btn-sm"
+										<a class="btn btn-sm"
 											href="admin_member_view?pageno=${searchIndex.pager.endPageNo+1}">다음</a>
 									</c:if>
-									<a class="btn btn-outline-primary btn-sm"
+									<a class="btn btn-sm"
 										href="admin_member_view?pageno=${searchIndex.pager.totalPageNo}">맨끝</a>
 								</div>
 							</div>

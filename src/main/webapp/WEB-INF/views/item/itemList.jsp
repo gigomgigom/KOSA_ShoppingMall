@@ -122,31 +122,31 @@
 						<td colspan="4" class="text-center">
 							<div>
 								<a class="btn btn-outline-light btn-sm text-dark"
-									href="${pageContext.request.contextPath}/qna/qna_list?pageNo=1">처음</a>
+									href="${pageContext.request.contextPath}/item/item_list?pageNo=1&ctgno=${ctgno}">처음</a>
 								<c:if test="${pager.groupNo>1}">
 									<a class="btn btn-outline-light btn-sm text-dark"
-										href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${pager.startPageNo-1}">이전</a>
+										href="${pageContext.request.contextPath}/item/item_list?pageNo=${pager.startPageNo-1}&ctgno=${ctgno}">이전</a>
 								</c:if>
 
 								<c:forEach var="i" begin="${pager.startPageNo}"
 									end="${pager.endPageNo}">
 									<c:if test="${pager.pageNo != i}">
 										<a class="btn btn-outline-light btn-sm text-dark"
-											href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${i}">${i}</a>
+											href="${pageContext.request.contextPath}/item/item_list?pageNo=${i}&ctgno=${ctgno}">${i}</a>
 									</c:if>
 									<c:if test="${pager.pageNo == i}">
 										<a class="btn t btn-sm"
-											style="background-color: #273740; color: white"
-											href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${i}">${i}</a>
+											style="background-color: #9523DC; color: white"
+											href="${pageContext.request.contextPath}/item/item_list?pageNo=${i}&ctgno=${ctgno}">${i}</a>
 									</c:if>
 								</c:forEach>
 								<!-- 그룹의 번호가 마지막 그룹의 번호보다 작을 경우에만 다음 버튼이 보이게 함 -->
 								<c:if test="${pager.groupNo<pager.totalGroupNo}">
 									<a class="btn btn-outline-light btn-sm text-dark"
-										href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${pager.endPageNo+1}">다음</a>
+										href="${pageContext.request.contextPath}/item/item_list?pageNo=${pager.endPageNo+1}&ctgno=${ctgno}">다음</a>
 								</c:if>
 								<a class="btn btn-outline-light btn-sm text-dark"
-									href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${pager.totalPageNo}">맨끝</a>
+									href="${pageContext.request.contextPath}/item/item_list?pageNo=${pager.totalPageNo}&ctgno=${ctgno}">맨끝</a>
 							</div>
 						</td>
 					</tr>

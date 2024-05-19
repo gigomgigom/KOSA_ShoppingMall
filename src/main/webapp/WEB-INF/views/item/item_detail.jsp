@@ -212,6 +212,9 @@
 			<%@ include file="/WEB-INF/views/item/item_info.jsp"%>
 		</div>
 	</div>
+	<div style="height: 100px">
+	
+	</div>
 
 	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
 		<footer>

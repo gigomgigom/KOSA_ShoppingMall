@@ -94,7 +94,7 @@
 											<td onclick="openProductDetail(${product.prodno})">${product.ctgno==1?'사료':product.ctgno==2?'간식':'영양제'}</td>
 											<td onclick="openProductDetail(${product.prodno})">${product.prodno}</td>
 											<td onclick="openProductDetail(${product.prodno})">${product.prodname}</td>
-											<td onclick="openProductDetail(${product.prodno})">${product.prodprice}원</td>
+											<td onclick="openProductDetail(${product.prodno})"><fmt:formatNumber value="${product.prodprice}" pattern="#,###"/>원</td>
 											<td onclick="openProductDetail(${product.prodno})"><fmt:formatDate
 													value="${product.proddate}" pattern="yyyy-MM-dd" /></td>
 											<td>
@@ -114,31 +114,31 @@
 							<c:if test="${searchIndex.pager.totalPageNo > 1}">
 								<div class="d-flex justify-content-center mt-5">
 									<div>
-										<a class="btn btn-outline-primary btn-sm"
+										<a class="btn btn-sm"
 											href="product_list?pageno=1">처음</a>
 										<c:if test="${searchIndex.pager.groupNo>1}">
-											<a class="btn btn-outline-info btn-sm"
+											<a class="btn btn-sm"
 												href="product_list?pageno=${searchIndex.pager.startPageNo-1}">이전</a>
 										</c:if>
 
 										<c:forEach var="i" begin="${searchIndex.pager.startPageNo}"
 											end="${searchIndex.pager.endPageNo}">
 											<c:if test="${searchIndex.pager.pageNo != i}">
-												<a class="btn btn-outline-success btn-sm"
+												<a class="btn btn-sm"
 													href="product_list?pageno=${i}">${i}</a>
 											</c:if>
 											<c:if test="${searchIndex.pager.pageNo == i}">
-												<a class="btn btn-danger btn-sm"
-													href="product_list?pageno=${i}">${i}</a>
+												<a class="btn btn-sm"
+													href="product_list?pageno=${i}"><b>${i}</b></a>
 											</c:if>
 										</c:forEach>
 
 										<c:if
 											test="${searchIndex.pager.groupNo<searchIndex.pager.totalGroupNo}">
-											<a class="btn btn-outline-info btn-sm"
+											<a class="btn btn-sm"
 												href="product_list?pageno=${searchIndex.pager.endPageNo+1}">다음</a>
 										</c:if>
-										<a class="btn btn-outline-primary btn-sm"
+										<a class="btn btn-sm"
 											href="product_list?pageno=${searchIndex.pager.totalPageNo}">맨끝</a>
 									</div>
 								</div>

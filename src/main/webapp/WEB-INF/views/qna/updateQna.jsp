@@ -41,7 +41,7 @@
 
 				<div
 					class="col-2 d-flex justify-content-center align-items-center border-end m-0 p-0 py-3"
-					style="background-color: #27374D; color: white">
+					style="background-color: #9523DC; color: white">
 					<p class="m-0 p-0">제목</p>
 				</div>
 				<div
@@ -54,7 +54,7 @@
 			<div class="row w-50 border-bottom m-0 p-0">
 				<div
 					class="col-2 d-flex justify-content-center align-items-center border-end m-0 p-0 py-3"
-					style="background-color: #27374D; color: white">
+					style="background-color: #9523DC; color: white">
 					<p class="m-0 p-0">내용</p>
 				</div>
 				<div
@@ -67,7 +67,7 @@
 			<div class="row w-50 border-bottom m-0 p-0">
 				<div
 					class="col-2 d-flex justify-content-center align-items-center border-end  m-0 p-0 py-3"
-					style="background-color: #27374D; color: white">
+					style="background-color: #9523DC; color: white">
 					<p class="m-0 p-0">첨부파일</p>
 				</div>
 				<div
@@ -98,7 +98,7 @@
 				class="d-flex justify-conten-center align-items-center m-0 my-5 p-0">
 
 				<button id="btn-save" class="btn me-2"
-					style="background-color: #273740; color: white">수정</button>
+					style="background-color: #9523DC; color: white">수정</button>
 
 				<a href="qna_list" class="btn border text-decoration-none text-dark">취소</a>
 			</div>
