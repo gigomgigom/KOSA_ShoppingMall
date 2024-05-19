@@ -104,7 +104,7 @@
 					}
 				}) 
 			}else{
-				location.href= "/javajavajo_mini_web/item/item_detail?prodno=" + prodno;
+				location.href= "/javajavajo_mini_web/cart/cartAdd?prodno=" + prodno;
 			}
 		}
 		
@@ -116,14 +116,23 @@
 <title>꼭꼭 씹어먹어요 개껌</title>
 </head>
 <body>
-	<!-- header -->
-	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<header>
+			<%@ include file="/WEB-INF/views/common/header.jsp"%>
+		</header>
+	</div>
 
-	<div class="container-fluid my-2">
+	<div class="container-fluid my-2" style="min-width: 1250px">
 		<!--data전달을 위한 form-->
-
-		<form method="post"
-			action="${pageContext.request.contextPath}/order/direct">
+		<c:if test="${!isLogin}">
+			<form method="get"
+				action="${pageContext.request.contextPath}/cart/cartAdd">
+		</c:if>
+		
+		<c:if test="${isLogin}">
+			<form method="post"
+				action="${pageContext.request.contextPath}/order/direct">
+		</c:if>
 			<div id="wrapper" class="d-flex flex-column">
 				<div class="container d-flex justify-content-center">
 					<div class="w-75 d-flex justify-content-center">
@@ -204,8 +213,11 @@
 		</div>
 	</div>
 
-	<!-- footer -->
-	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<footer>
+			<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+		</footer>
+	</div>
 
 	<!-- modal -->
 	<div class="modal" id="myModal">

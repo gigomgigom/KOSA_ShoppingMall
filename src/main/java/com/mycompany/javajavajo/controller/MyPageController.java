@@ -67,7 +67,7 @@ public class MyPageController {
 		if(orderList.size() != 0) {
 			// 주문에 상품의 수 그리고 그 들중 한 상품에 대한 정보를 찾아서 Order객체에 넣어준다.
 			for (Order order : orderList) {
-				
+				log.info(""+order);
 				// 주문 상품정보를 넣어주기
 				int ordno = order.getOrdno();
 				Order outlineOrder = orderService.getOrderProductCnt(ordno);

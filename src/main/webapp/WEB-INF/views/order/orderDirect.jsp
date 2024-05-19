@@ -30,12 +30,15 @@
 <title>주문서 작성</title>
 </head>
 <body>
-	<!-- header -->
-	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<header>
+			<%@ include file="/WEB-INF/views/common/header.jsp"%>
+		</header>
+	</div>
 
 	<div style="height: 70px"></div>
 
-	<div id="wrapper"
+	<div id="wrapper" style="min-width: 1250px"
 		class="container-fluid d-flex flex-column align-items-center my-5">
 		<!--title-->
 		<div
@@ -238,38 +241,11 @@
 						<input type="hidden" name="finprice" value="${(qty * product.prodprice > 100000 ? 0 : 3000 ) + qty * product.prodprice}">
 					</div>
 					<div style="height: 30px;"></div>
-					<!--2.3 결제방식 선택-->
-				<!-- 	<div class="w-100 ps-5 my-4">
-						<h4>
-							<b>결제 방식 선택</b>
-						</h4>
-					</div>
 
-					<input type="radio" class="btn-check" name="options"
-						id="creditcard" autocomplete="off" checked> <label
-						class="w-75 btn" for="creditcard"
-						style="background-color: #DDE6ED;">신용카드</label> <input
-						type="radio" class="btn-check" name="options" id="accounttransfer"
-						autocomplete="off" checked> <label
-						class="w-75 btn text-white mt-4" for="accounttransfer"
-						style="background-color: #27374D;">무통장 입금</label>
-
-					<div style="height: 30px;"></div>
-
-					2.3.1 무통장입금시 예금주명 입력
-					<div class="w-75 p-3 d-flex flex-column align-items-center">
-						<span><b>입금 계좌 : 3333-06-144-1796 카카오</b></span>
-
-						<div
-							class="mt-4 d-flex justify-content-between align-items-center">
-							<span><b>예금주</b></span> <input type="text" id="depositor"
-								name="despositor" class="form-control w-50" placeholder="예금주 입력"
-								required />
-						</div>
-					</div> -->
-
+	
 					<button class="btn text-white w-75" type="submit"
 						style="background-color: #27374D;">결제하기</button>
+					<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${product.prodno}" class="btn btn-outline-light text-dark w-75">취소하기</a>
 				</div>
 			</div>
 		</form>
@@ -277,8 +253,11 @@
 
 	<div style="height: 150px"></div>
 
-	<!-- Footer -->
-	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<footer>
+			<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+		</footer>
+	</div>
 
 	<script src="/javajavajo_mini_web/resources/js/order/orderForm.js"></script>>
 

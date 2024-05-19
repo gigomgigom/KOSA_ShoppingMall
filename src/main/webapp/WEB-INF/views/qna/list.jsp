@@ -19,13 +19,22 @@
 
 </head>
 <body>
-	<header>
-		<%@ include file="/WEB-INF/views/common/header.jsp"%>
-	</header>
-
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<header>
+			<%@ include file="/WEB-INF/views/common/header.jsp"%>
+		</header>
+	</div>
 	<div
-		class="container-fluid  d-flex flex-column align-items-center m-0, my-5 p-0">
+		class="container-fluid  d-flex flex-column align-items-center m-0, my-5 p-0"
+		style="min-width: 1250px">
 
+		<div
+			class="d-flex justify-content-center align-items-center m-0 p-0">
+			<div>
+				<h1>Q&A</h1>
+			</div>
+		</div>
+		
 		<div class="d-flex w-75 m-0 my-5 p-0 ">
 			<form class="d-flex w-100 m-0 p-0" method="get" action=""
 				autocomplete="off">
@@ -78,12 +87,12 @@
 								style="background-color: #9DB2BF; color: white">접수</span>
 							</td>
 						</c:if>
-						
+
 						<c:if test="${qna.admrply != null}">
 							<td
 								class="d-flex justify-content-center align-items-center col-2 m-0 p-0">
 								<span class="badge rounded-pill"
-								style="background-color: #9DB2BF; color: white">완료</span>
+								style="background-color: #273740; color: white;" color:white">완료</span>
 							</td>
 						</c:if>
 						<td
@@ -159,30 +168,31 @@
 				<tr>
 					<td colspan="4" class="text-center">
 						<div>
-							<a class="btn btn-outline-primary btn-sm"
+							<a class="btn btn-outline-light btn-sm text-dark"
 								href="${pageContext.request.contextPath}/qna/qna_list?pageNo=1">처음</a>
 							<c:if test="${pager.groupNo>1}">
-								<a class="btn btn-outline-info btn-sm"
+								<a class="btn btn-outline-light btn-sm text-dark"
 									href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${pager.startPageNo-1}">이전</a>
 							</c:if>
 
 							<c:forEach var="i" begin="${pager.startPageNo}"
 								end="${pager.endPageNo}">
 								<c:if test="${pager.pageNo != i}">
-									<a class="btn btn-outline-success btn-sm"
+									<a class="btn btn-outline-light btn-sm text-dark"
 										href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${i}">${i}</a>
 								</c:if>
 								<c:if test="${pager.pageNo == i}">
-									<a class="btn btn-danger btn-sm"
+									<a class="btn t btn-sm"
+										style="background-color: #273740; color: white"
 										href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${i}">${i}</a>
 								</c:if>
 							</c:forEach>
 							<!-- 그룹의 번호가 마지막 그룹의 번호보다 작을 경우에만 다음 버튼이 보이게 함 -->
 							<c:if test="${pager.groupNo<pager.totalGroupNo}">
-								<a class="btn btn-outline-info btn-sm"
+								<a class="btn btn-outline-light btn-sm text-dark"
 									href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${pager.endPageNo+1}">다음</a>
 							</c:if>
-							<a class="btn btn-outline-primary btn-sm"
+							<a class="btn btn-outline-light btn-sm text-dark"
 								href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${pager.totalPageNo}">맨끝</a>
 						</div>
 					</td>
@@ -191,17 +201,17 @@
 			</div>
 		</div>
 		<div class="d-flex justify-content-end w-75 m-0 p-0">
-			<sec:authorize access="isAuthenticated">
-				<div>
-					<a href="${pageContext.request.contextPath}/qna/write_qna"
-						class="btn" style="background-color: #273740; color: white">글쓰기</a>
-				</div>
-			</sec:authorize>
+			<div>
+				<a href="${pageContext.request.contextPath}/qna/write_qna"
+					class="btn" style="background-color: #273740; color: white">글쓰기</a>
+			</div>
 		</div>
 	</div>
 
-	<footer>
-		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
-	</footer>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<footer>
+			<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+		</footer>
+	</div>
 </body>
 </html>

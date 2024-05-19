@@ -212,18 +212,20 @@
 	<select id="getOrderListInMyPage" parameterType="int" resultType="Order">
 	
 		<![CDATA[
-		select * from(
-		select rownum rnum, ordno, memno, prodname, ordstts, orddate,
+		select rownum, ordno, memno, ordstts, orddate,
 		ordprice, discprice,
-		finprice, rqst, ordsttschar
-		from ord, ordstts,
-		product
-		where memno = #{memno} and
-		ordstts.ordsttsno = ord.ordstts
-		order
-		by orddate desc
+		finprice, rqst, ordsttschar 
+		from(
+			select ordno, memno, ordstts, orddate,
+			ordprice, discprice,
+			finprice, rqst, ordsttschar
+			from ord, ordstts
+			where memno = #{memno} and
+			ordstts.ordsttsno = ord.ordstts
+			order
+			by orddate desc	
 		)
-		where rnum < 5
+		where rownum < 5
 		]]>
 	</select>
 </mapper>	

@@ -36,15 +36,17 @@
 <title>ItemList</title>
 </head>
 <body>
-	<header>
-		<%@ include file="/WEB-INF/views/common/header.jsp"%>
-	</header>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<header>
+			<%@ include file="/WEB-INF/views/common/header.jsp"%>
+		</header>
+	</div>
 
-	<div class="container-fluid d-flex align-items-center flex-column mt-5">
+	<div class="container-fluid d-flex align-items-center flex-column mt-5" style="min-width: 1250px">
 		<h1>
 			<b>${ctgno == 1 ? '사료' : ctgno == 2? '간식' : '영양제'}</b>
 		</h1>
-		<div class="d-flex flex-column my-5" style="width: 80vw;">
+		<div class="d-flex flex-column w-75 my-5">
 			<div
 				class="w-100 d-flex justify-content-between border border-dark rounded mb-5">
 				<div class="d-flex">
@@ -115,47 +117,49 @@
 
 				<!-- ---------------------------------------------------------------------------------------- -->
 			</div>
-			<div class="d-flex justify-content-center m-0 p-0">
-				<tr>
-					<td colspan="4" class="text-center">
-						<div>
-							<a class="btn btn-outline-primary btn-sm"
-								href="${pageContext.request.contextPath}/item/item_list?ctgno=${ctgno}&pageNo=1">처음</a>
-							<c:if test="${pager.groupNo>1}">
-								<a class="btn btn-outline-info btn-sm"
-									href="${pageContext.request.contextPath}/item/item_list?ctgno=${ctgno}&pageNo=${pager.startPageNo-1}">이전</a>
-							</c:if>
+				<div class="d-flex justify-content-center m-0 p-0">
+					<tr>
+						<td colspan="4" class="text-center">
+							<div>
+								<a class="btn btn-outline-light btn-sm text-dark"
+									href="${pageContext.request.contextPath}/qna/qna_list?pageNo=1">처음</a>
+								<c:if test="${pager.groupNo>1}">
+									<a class="btn btn-outline-light btn-sm text-dark"
+										href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${pager.startPageNo-1}">이전</a>
+								</c:if>
 
-							<c:forEach var="i" begin="${pager.startPageNo}"
-								end="${pager.endPageNo}">
-								<c:if test="${pager.pageNo != i}">
-									<a class="btn btn-outline-success btn-sm"
-										href="${pageContext.request.contextPath}/item/item_list?ctgno=${ctgno}&pageNo=${i}">${i}</a>
+								<c:forEach var="i" begin="${pager.startPageNo}"
+									end="${pager.endPageNo}">
+									<c:if test="${pager.pageNo != i}">
+										<a class="btn btn-outline-light btn-sm text-dark"
+											href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${i}">${i}</a>
+									</c:if>
+									<c:if test="${pager.pageNo == i}">
+										<a class="btn t btn-sm"
+											style="background-color: #273740; color: white"
+											href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${i}">${i}</a>
+									</c:if>
+								</c:forEach>
+								<!-- 그룹의 번호가 마지막 그룹의 번호보다 작을 경우에만 다음 버튼이 보이게 함 -->
+								<c:if test="${pager.groupNo<pager.totalGroupNo}">
+									<a class="btn btn-outline-light btn-sm text-dark"
+										href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${pager.endPageNo+1}">다음</a>
 								</c:if>
-								<c:if test="${pager.pageNo == i}">
-									<a class="btn btn-danger btn-sm"
-										href="${pageContext.request.contextPath}/item/item_list?ctgno=${ctgno}&pageNo=${i}">${i}</a>
-								</c:if>
-							</c:forEach>
-							<!-- 그룹의 번호가 마지막 그룹의 번호보다 작을 경우에만 다음 버튼이 보이게 함 -->
-							<c:if test="${pager.groupNo<pager.totalGroupNo}">
-								<a class="btn btn-outline-info btn-sm"
-									href="${pageContext.request.contextPath}/item/item_list?ctgno=${ctgno}&pageNo=${pager.endPageNo+1}">다음</a>
-							</c:if>
-							<a class="btn btn-outline-primary btn-sm"
-								href="${pageContext.request.contextPath}/item/item_list?ctgno=${ctgno}&pageNo=${pager.totalPageNo}">맨끝</a>
-						</div>
-					</td>
-				</tr>
-				</table>
-			</div>
+								<a class="btn btn-outline-light btn-sm text-dark"
+									href="${pageContext.request.contextPath}/qna/qna_list?pageNo=${pager.totalPageNo}">맨끝</a>
+							</div>
+						</td>
+					</tr>
+					</table>
+				</div>
 		</div>
 	</div>
 
-	<footer>
-		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
-	</footer>
-
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<footer>
+			<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+		</footer>
+	</div>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">

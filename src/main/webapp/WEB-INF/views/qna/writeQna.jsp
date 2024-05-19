@@ -16,37 +16,36 @@
 
 </head>
 <body>
-	<header>
-		<%@ include file="/WEB-INF/views/common/header.jsp"%>
-	</header>
-
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<header>
+			<%@ include file="/WEB-INF/views/common/header.jsp"%>
+		</header>
+	</div>
 	
 	<form action="write_qna" method="post" enctype="multipart/form-data">
 
 
 
 	<div
-		class="container-fluid  d-flex flex-column align-items-center m-0 my-5 p-0">
+		class="container-fluid  d-flex flex-column align-items-center m-0 my-5 p-0" style="min-width: 1250px">
 
 		<div
-			class="d-flex justify-content-center align-items-center m-0 my-5 p-0">
+			class="d-flex justify-content-center align-items-center m-0 my-3 p-0">
 			<div>
-				<h1>Q&A 게시판</h1>
+				<h1>Q&A</h1>
 			</div>
 		</div>
-
-		<hr class="w-25 m-0 mb-5 p-0" />
 
 		<div class="row w-50 border-top border-bottom m-0 p-0">
 
 
 			<div
-				class="col-2 d-flex justify-content-center align-items-center border-end m-0 p-0 py-2"
+				class="col-2 d-flex justify-content-center align-items-center border-end m-0 p-0 py-3"
 				style="background-color: #27374D; color: white">
 				<p class="m-0 p-0">제목</p>
 			</div>
 			<div
-				class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-2">
+				class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-3">
 				<input id='qnatitle' name="qnatitle" type="text"
 					class="form-control w-75">
 			</div>
@@ -55,25 +54,25 @@
 
 		<div class="row w-50 border-bottom m-0 p-0">
 			<div
-				class="col-2 d-flex justify-content-center align-items-center border-end m-0 p-0 py-2"
+				class="col-2 d-flex justify-content-center align-items-center border-end m-0 p-0 py-3"
 				style="background-color: #27374D; color: white">
 				<p class="m-0 p-0">내용</p>
 			</div>
 			<div
-				class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-2">
+				class="col-10 d-flex justify-content-center align-items-center m-0 p-0 py-4">
 				<textarea id='content' name="qnacontent" class="form-control w-75"
-					rows="5"></textarea>
+					rows="10"></textarea>
 			</div>
 		</div>
 
 		<div class="row w-50 border-bottom m-0 p-0">
 			<div
-				class="col-2 d-flex justify-content-center align-items-center border-end  m-0 p-0 py-2"
+				class="col-2 d-flex justify-content-center align-items-center border-end  m-0 p-0 py-3"
 				style="background-color: #27374D; color: white">
 				<p class="m-0 p-0">첨부파일</p>
 			</div>
 			<div
-				class="col-10 d-flex flex-column justify-content-center align-items-center m-0 p-0 py-2">
+				class="col-10 d-flex flex-column justify-content-center align-items-center m-0 p-0 py-3">
 				<input id='qnaattach' type="file" name="qnaattach"
 					class="form-control w-75 text-center m-0 p-0">
 			</div>
@@ -92,8 +91,10 @@
 		</div>
 	</div>
 	</form>
-	<footer>
-		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
-	</footer>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<footer>
+			<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+		</footer>
+	</div>
 </body>
 </html>

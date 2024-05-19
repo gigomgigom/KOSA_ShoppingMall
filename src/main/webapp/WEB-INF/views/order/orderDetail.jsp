@@ -22,12 +22,15 @@
 </head>
 
 <body>
-	<!-- header -->
-	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<header>
+			<%@ include file="/WEB-INF/views/common/header.jsp"%>
+		</header>
+	</div>
 
 	<div
-		class="my-5 d-flex justify-content-center container-fluid d-flex flex-column"
-		style="width: 800px;">
+		class="my-5 d-flex justify-content-center container-fluid d-flex flex-column w-75"
+		style="min-width: 1250px">
 		<div class="d-flex justify-content-center p-2 m-2">
 			<h5>주문상세내역</h5>
 		</div>
@@ -158,7 +161,8 @@
 				<h5>배송정보</h5>
 				<hr />
 				<div class="container-fluid d-flex justify-content-between">
-					<span>배송회사</span> <span>${delivery.comname} 배송조회(문의전화: ${delivery.comtel})</span>
+					<span>배송회사</span> <span>${delivery.comname} 배송조회(문의전화:
+						${delivery.comtel})</span>
 				</div>
 				<hr />
 				<div class="container-fluid d-flex justify-content-between">
@@ -166,7 +170,8 @@
 				</div>
 				<hr />
 				<div class="container-fluid d-flex justify-content-between">
-					<span>배송일시</span> <span><fmt:formatDate value="${delivery.deldate}" pattern="yyyy-MM-dd" /></span>
+					<span>배송일시</span> <span><fmt:formatDate
+							value="${delivery.deldate}" pattern="yyyy-MM-dd" /></span>
 				</div>
 				<hr />
 				<div class="container-fluid d-flex justify-content-between">
@@ -178,7 +183,7 @@
 				<div class="d-flex justify-content-center">
 					<span>배송 준비 중 입니다</span>
 				</div>
-				<hr/>
+				<hr />
 			</c:if>
 			<div class="mt-4">
 
@@ -214,7 +219,7 @@
 						<div class="container-fluid">
 							<a
 								href="${pageContext.request.contextPath}/order/cancel_order?ordno=${order.ordno}"
-								class="btn btn-secondary w-100 mb-3">주문취소하기</a>
+								class="btn w-100 mb-3" style="background-color: #273740; color: white">주문취소하기</a>
 						</div>
 					</c:if>
 					<c:if test="${order.ordstts == 3}">
@@ -222,7 +227,8 @@
 							<form method="post" action="complete_order">
 								<input type="hidden" name="amount" value="${order.finprice}">
 								<input type="hidden" name="ordno" value="${order.ordno}">
-								<button type="submit" class="btn btn-secondary w-100 mb-3">수령 확인</button>
+								<button type="submit" class="btn w-100 mb-3" style="background-color: #273740; color: white">수령
+									확인</button>
 							</form>
 						</div>
 					</c:if>
@@ -230,12 +236,13 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<footer>
+			<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+		</footer>
 	</div>
-	</div>
-	<!-- Footer -->
-	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<%@ include file="/WEB-INF/views/order/write_review_modal.jsp"%>
 </body>
 <script src="/javajavajo_mini_web/resources/js/order/orderDetail.js"></script>
->
 </html>
