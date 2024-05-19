@@ -11,8 +11,12 @@
 </style>
 <!-- 사용자 정의 자바스크립트 -->
 <script>
+	/* 데이터 유효성을 확인 해당 데이터 처리하는 메소드 */
+
 
 </script>
+
+
 <!-- jQuery 외부 라이브러리 설정 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
@@ -37,13 +41,15 @@
 
 
 	<div class="container-fluid d-flex justify-content-center">
-	
+
 		<form id="joinForm" name="joinForm"
-			action="${pageContext.request.contextPath}/mypage/update_user_info" method="post"
-			novalidate style="width: 400px;"
-			class="d-flex flex-column" enctype="multipart/form-data">
-			 <input type="hidden" class="form-control w-100" id="memno" name="memno"
-				value="${member.memno}" readonly>
+			action="${pageContext.request.contextPath}/mypage/update_user_info"
+			method="post" novalidate style="width: 400px;" class="d-flex flex-column"
+			enctype="multipart/form-data">
+			
+			<input type="hidden" class="form-control w-100" id="memno"
+				name="memno" value="${member.memno}" readonly>
+
 			<!-- handleCheckData()를 사용하여 사용자 정의 유효성 검사를 수행함, novalidate속성을 사용하여 기본 브라우저의  유효성 검사를 막음 -->
 			<div class="container-fluid d-flex justify-content-center p-5 m-3">
 				<h2>사용자 정보 수정</h2>
@@ -56,8 +62,7 @@
 				value="${member.memid}" readonly>
 			<div class="my-2 ms-2"></div>
 			<div class="my-2">
-				<label for="mempw">비밀번호 변경</label> 
-				<input type="password"
+				<label for="mempw">비밀번호 변경</label> <input type="password"
 					class="form-control w-100" id="mempw" name="mempw"
 					placeholder="새 비밀번호 입력(필수)">
 				<div class="mx-2 mt-2">
@@ -71,20 +76,20 @@
 				<span id="mempwReSpan" class="form-text" style="font-size: 11px;">비밀번호가
 					일치하지 않습니다.</span>
 			</div>
-			
-		 <div class="mt-2">
+
+			<div class="mt-2">
 				<span>이미지 변경</span>
 			</div>
-			
+
 			<div class="border p-3 d-flex flex-column align-items-center">
 				<img class="img-fluid rounded-circle"
 					src="${pageContext.request.contextPath}/mypage/downloadMemImg?memno=${member.memno}"
 					width="100px">
 				<div class="d-flex flex-column mt-3">
-					 <input type="file" class="form-control" name="memimgattach"> 
+					<input type="file" class="form-control" name="memimgattach">
 				</div>
-			</div> 
-			
+			</div>
+
 			<div class="pt-5">
 				<h5>개인정보</h5>
 			</div>
@@ -146,7 +151,7 @@
 
 			<input type="text" class="form-control w-100" id="adrdtl"
 				placeholder="상세주소" name="adrdtl" value="${memberAdr.adrdtl}">
-				
+
 			<div class="w-100 d-flex justify-content-center p-5">
 				<input type="submit" class="btn text-white btn-sm w-100"
 					style="background-color: #27374D;" value="회원정보수정" />

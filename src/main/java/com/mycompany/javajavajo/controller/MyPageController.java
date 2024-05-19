@@ -129,7 +129,7 @@ public class MyPageController {
 	}
 	
 	@Secured("ROLE_USER")
-	//사용자 정보 수정
+	//기존의 사용자 정보를 불러온다.
 	@GetMapping("/edit_user_info")
 	public String editUserInfo(Authentication authentication, Model model) {
 		String mid = authentication.getName();
@@ -147,8 +147,8 @@ public class MyPageController {
 	//황세림 - 사용자 정보 수정
 	@RequestMapping("/update_user_info")
 	public String updateMemberInformation(Member member, MemberAdr memberadr, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		log.info(member.toString());
-		log.info(memberadr.toString());
+	/*	log.info(member.toString());
+		log.info(memberadr.toString());*/
 
 		//이미지 수정
 		if(member.getMemimgattach() !=null && !member.getMemimgattach().isEmpty()) {
