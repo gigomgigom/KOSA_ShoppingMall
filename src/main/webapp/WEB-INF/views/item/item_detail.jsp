@@ -12,7 +12,7 @@
 }
 
 .active {
-	background-color: #27374D;
+	background-color: #9523DC;
 }
 </style>
 <!-- Latest compiled and minified CSS -->
@@ -39,7 +39,7 @@
 						data : product,
 						success: function(data) {
 							$(".active").attr("class", "nav-item");
-							$("#nav-1").attr("class", "nav-item active");
+							$("#nav-1").attr("class", "nav-item active text-white");
 							$("#item_container").html(data);
 						}
 					});
@@ -53,7 +53,7 @@
 						data : product,
 						success: function(data) {
 							$(".active").attr("class", "nav-item");
-							$("#nav-2").attr("class", "nav-item active");
+							$("#nav-2").attr("class", "nav-item active text-white");
 							$("#item_container").html(data);
 						}
 					});
@@ -65,7 +65,7 @@
 						method: "get",
 						success: function(data) {
 							$(".active").attr("class", "nav-item");
-							$("#nav-3").attr("class", "nav-item active");
+							$("#nav-3").attr("class", "nav-item active text-white");
 							$("#item_container").html(data);
 						}
 					});
@@ -77,7 +77,7 @@
 						method: "get",
 						success: function(data) {
 							$(".active").attr("class", "nav-item");
-							$("#nav-4").attr("class", "nav-item active");
+							$("#nav-4").attr("class", "nav-item active text-white");
 							$("#item_container").html(data);
 						}
 					});
@@ -167,10 +167,10 @@
 										name="prodno">
 									<button onclick="submitCart(${isLogin})" type="button" id="add-cart"
 										class="btn btn-lg border fw-bold"
-										style="background-color: #9DB2BF;">장바구니에 추가</button>
+										style="background-color: #F6EEFA;">장바구니에 추가</button>
 									<button type="submit" id="direct-purchase"
 										class="btn btn-lg text-white fw-bold w-50"
-										style="background-color: #27374D;">바로구매</button>
+										style="background-color: #9523DC;">바로구매</button>
 								</div>
 							</div>
 						</div>
@@ -179,20 +179,20 @@
 			</div>
 		</form>
 		<!--nav-->
-		<div class="border-top container" style="background-color: #9DB2BF;">
+		<div class="border-top container" style="background-color: #F6EEFA;">
 			<nav class="navbar justify-content-center">
 				<ul class="nav justify-content-center me-5">
 					<li class="nav-item active" id="nav-1"><a
-						class="btn fw-bold text-white" onclick="handleBtnShow(1)">상품정보</a>
+						class="btn fw-bold text-black" onclick="handleBtnShow(1)">상품정보</a>
 					</li>
 					<li class="nav-item" id="nav-2"><a
-						class="btn fw-bold text-white" onclick="handleBtnShow(2)">구매후기</a>
+						class="btn fw-bold text-black" onclick="handleBtnShow(2)">구매후기</a>
 					</li>
 					<li class="nav-item" id="nav-3"><a
-						class="btn fw-bold text-white" onclick="handleBtnShow(3)">상품문의</a>
+						class="btn fw-bold text-black" onclick="handleBtnShow(3)">상품문의</a>
 					</li>
 					<li class="nav-item" id="nav-4"><a
-						class="btn fw-bold text-white" onclick="handleBtnShow(4)">배송정보</a>
+						class="btn fw-bold text-black" onclick="handleBtnShow(4)">배송정보</a>
 					</li>
 				</ul>
 			</nav>
@@ -213,15 +213,15 @@
 			<div class="modal-content">
 
 				<!-- Modal body -->
-				<div class="modal-body">장바구니로 갈까요?</div>
+				<div class="modal-body">장바구니에 선택하신 상품을 담았습니다!</div>
 
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<a type="button" class="btn btn-danger"
-						href="${pageContext.request.contextPath}/cart/">장바구니로 가기
+					<a type="button" class="btn"
+						href="${pageContext.request.contextPath}/cart/" style="color: white; background-color: #9523DC">장바구니로 가기
 						</a>
-					<a type="button" class="btn btn-danger"
-						href="${pageContext.request.contextPath}/item/item_list?ctgno=${product.ctgno}&pageNo=1&sorting=lowPrice&keyword=">쇼핑 계속하기</a>
+					<a type="button" class="btn"
+						href="${pageContext.request.contextPath}/item/item_list?ctgno=${product.ctgno}&pageNo=1&sorting=lowPrice&keyword=" style="background-color: #F6EEFA">쇼핑 계속하기</a>
 				</div>
 
 			</div>

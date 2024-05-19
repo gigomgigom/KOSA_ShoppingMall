@@ -128,7 +128,7 @@
 			</div>
 			<div class="w-100 d-flex justify-content-end mt-3 mb-3">
 				<button type="button" class="btn text-white btn-sm"
-					style="background-color: #27374D;">주소검색</button>
+					style="background-color: #9523DC;">주소검색</button>
 			</div>
 			<div class="mb-3">
 				<input type="text" class="form-control w-100" id="postno"
@@ -154,10 +154,11 @@
 
 			<div class="w-100 d-flex justify-content-center p-5">
 				<input type="submit" class="btn text-white btn-sm w-100"
-					style="background-color: #27374D;" value="회원정보수정" />
+					style="background-color: #9523DC;" value="회원정보수정" />
 			</div>
 		</form>
 	</div>
+	<div style="height:100px"></div>
 
 	<!-- footer -->
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>

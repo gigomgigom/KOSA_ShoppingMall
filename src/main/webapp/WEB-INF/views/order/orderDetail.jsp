@@ -61,7 +61,7 @@
 									<div id="reviewButton${ordprod.prodno}">
 										<c:if
 											test="${ordprod.hasReview == false and order.ordsttschar == '완료'}">
-											<button type="button" class="btn btn-dark btn-sm"
+											<button type="button" class="btn text-white btn-sm" style="background-color:#9523DC"
 												onclick="showModal(${ordprod.prodno})"
 												data-bs-toggle="modal" data-bs-target="#myModal">사용후기
 												쓰기</button>
@@ -69,9 +69,8 @@
 
 										<c:if
 											test="${ordprod.hasReview == true or order.ordsttschar != '완료'}">
-											<a prodno=${ordprod.prodno
-												} href='${pageContext.request.contextPath}/item/item_detail?prodno=${ordprod.prodno}'
-												class='btn btn-dark btn-sm'>상품으로 이동</a>
+											<a href='${pageContext.request.contextPath}/item/item_detail?prodno=${ordprod.prodno}' style="background-color:#9523DC"
+												class='btn btn-sm text-white'>상품으로 이동</a>
 										</c:if>
 
 									</div>

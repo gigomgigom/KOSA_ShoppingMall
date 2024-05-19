@@ -133,7 +133,7 @@
 								<input type="text" class="form-control mb-4 w-25" id="ordpostno"
 									placeholder="우편번호" name="ordpostno" required value="${memberAdr.postno}"/>
 								<button type="button" class="btn btn-sm ms-2 text-white"
-									style="height: 38px; background-color: #27374D">주소검색</button>
+									style="height: 38px; background-color: #9523DC">주소검색</button>
 							</div>
 							<input type="text" class="form-control mb-4" id="ordadr"
 								placeholder="주소 (필수 입력)" name="ordadr" required value="${memberAdr.adr}" /> 
@@ -170,7 +170,7 @@
 								<input type="text" class="form-control mb-4 w-25" id="rcptpostno"
 									placeholder="우편번호" name="rcptpostno" required />
 								<button type="button" class="btn btn-sm ms-2 text-white"
-									style="height: 38px; background-color: #27374D">주소검색</button>
+									style="height: 38px; background-color: #9523DC">주소검색</button>
 							</div>
 							<input type="text" class="form-control mb-4" id="rcptadr"
 								placeholder="주소 (필수 입력)" name="rcptadr" required /> 
@@ -270,7 +270,7 @@
 					</div> -->
 
 					<button class="btn text-white w-75" type="submit"
-						style="background-color: #27374D;">결제하기</button>
+						style="background-color: #9523DC;">결제하기</button>
 				</div>
 			</div>
 		</form>

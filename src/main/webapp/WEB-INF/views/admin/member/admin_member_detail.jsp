@@ -95,9 +95,9 @@
 						</div>
 						<div class="col-8">
 							<!-- 주문내역 사용내역 -->
-							<div class="container-fluid h-50 py-3">
-								<div class="container-fluid h-100 border border-dark"
-									style="overflow: auto;">
+							<div class="container-fluid py-3">
+								<div class="container-fluid border border-dark"
+									style="overflow: auto; height: 284px">
 									<table class="table table-hover">
 										<thead>
 											<tr>
@@ -111,7 +111,7 @@
 										<tbody>
 											<c:forEach var="order" items="${orderList}">
 												<tr
-													onclick="location.href='${pageContext.request.contextPath}/order/order_detail?ordno=${order.ordno}'">
+													onclick="location.href='${pageContext.request.contextPath}/admin/order_detail?ordno=${order.ordno}'">
 													<th scope="row">${order.ordno}</th>
 													<td>${order.ordstts}</td>
 													<c:if test="${order.ordproductcnt != 0}">
@@ -131,8 +131,8 @@
 								</div>
 							</div>
 							<!-- 포인트 사용내역 -->
-							<div class="container-fluid h-50 py-3">
-								<div class="h-100 border border-dark" style="overflow: auto;">
+							<div class="container-fluid py-3">
+								<div class="border border-dark" style="overflow: auto; height: 284px">
 									<table class="table">
 										<thead>
 											<tr>

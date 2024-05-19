@@ -58,9 +58,9 @@
 			</div>
 
 			<button type="submit" class="w-100 text-white mt-2 "
-				style="background-color: #27374D; height: 40px;">로그인</button>
+				style="background-color: #9523DC; height: 40px; border: 0;">로그인</button>
 			<button type="button" class="w-100  mt-2" onclick="location.href='${pageContext.request.contextPath}/auth/signup'"
-				style="background-color: #ffffff; height: 40px;">회원가입</button>
+				style="background-color: #F6EEFA; height: 40px; border: 0;">회원가입</button>
 		</form>
 	</div>
 	

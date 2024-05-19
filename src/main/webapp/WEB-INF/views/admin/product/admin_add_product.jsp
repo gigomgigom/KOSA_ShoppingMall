@@ -57,7 +57,7 @@
 			</div>
 			<div class="border d-flex justify-content-center"
 				style="width: 100px">
-				<img id="repimg-container" src=""
+				<img id="repimg-container" src="${pageContext.request.contextPath}/resources/image/icon/noimgadmin.jpg"
 					style="width: 100px; height: 100px" />
 			</div>
 			<div class="mt-3">

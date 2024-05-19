@@ -57,9 +57,9 @@
 
             <div
                class="d-flex flex-column justify-content-center align-items-center w-100 m-0 p-0 py-3
-               btn btn-primary"
+               btn"
                data-bs-toggle="modal" data-bs-target="#myModal"
-               style="background-color: #27374D; color: white;">
+               style="background-color: #9523DC; color: white;">
                <p class="m-0 p-0">포인트</p>
                <p class="m-0 p-0">${member.mempoint}p</p>
             </div>
@@ -91,18 +91,18 @@
             <div
                class="d-flex flex-column justify-content-between align-items-center border w-100 m-0 p-0 py-3">
                <div class="w-75 m-0 my-2 p-0 py-2 text-center rounded"
-                  style="background-color: #27374D;">
+                  style="background-color: #9523DC;">
                   <a class="text-decoration-none text-white m-0 p-0"
                      href="${pageContext.request.contextPath}/mypage/edit_user_info">회원정보
                      수정</a>
                </div>
                <div class="w-75 m-0 my-2 p-0 py-2 text-center rounded"
-                  style="background-color: #27374D;">
+                  style="background-color: #9523DC;">
                   <a class="text-decoration-none text-white m-0 p-0"
                      href="${pageContext.request.contextPath}/logout">로그아웃</a>
                </div>
                <div class="w-75 m-0 my-2 p-0 py-2 text-center rounded"
-                  style="background-color: #27374D;">
+                  style="background-color: #9523DC;">
                   <a class="text-decoration-none text-white m-0 p-0" href="#">탈퇴</a>
                </div>
 
@@ -145,7 +145,7 @@
 
             <div
                class=" d-flex justify-content-center align-items-center w-25 border m-0 my-3 p-0 rounded"
-               style="background-color: #27374D;">
+               style="background-color: #9523DC;">
                <p class="m-0 p-0 py-2">
                   <a class="text-white text-decoration-none"
                      href="${pageContext.request.contextPath}/order/order_history">주문내역

@@ -35,7 +35,7 @@
 		<hr class="w-75 my-1 p-0" />
 
 		<div class="w-75  d-flex justify-content-start align-items-center m-1 p-0">
-			<input id="allCheck" onclick="allCheck()" class="m-0 p-0" type="checkbox" style="accent-color: #273740D;"> 
+			<input id="allCheck" onclick="allCheck()" class="m-0 p-0" type="checkbox" style="accent-color: #9523DC;"> 
 			<label class="form-check-label">전체 선택</label>
 		</div>
 
@@ -44,7 +44,7 @@
 				<li id="item${cartItem.prodno}" class="row border-top border-bottom m-0 py-1">
 					<div class="col-2 row border-end m-0 p-0">
 						<div class="form-check col-2 d-flex justify-content-start align-items-center m-0 p-0">
-							<input onclick="cancelAllCheck()" class="m-0" type="checkbox" style="accent-color: #27374D;">
+							<input onclick="cancelAllCheck()" class="m-0" type="checkbox" style="accent-color: #9523DC;">
 						</div>
 						<div class="d-flex col-10 justify-content-center align-items-center p-0">
 							<img src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${cartItem.prodno}" class="w-50" height="150">
@@ -59,7 +59,7 @@
 					<div class="col-3 row d-flex align-items-center border-end m-0 p-0">
 						<div class="col-5 d-flex justify-content-end p-0">
 							<button onclick="updateItemData(${cartItem.prodno},'-')" type="button"
-								class="btn m-1 p-2 text-white" style="background-color: #273740">-</button>
+								class="btn m-1 p-2 text-white" style="background-color: #9523DC">-</button>
 						</div>
 						<div class="col-2 text-center p-0">
 							<p class="m-0 p-0">개수</p>
@@ -67,7 +67,7 @@
 						</div>
 						<div class="col-5 d-flex justify-content-start p-0">
 							<button onclick="updateItemData(${cartItem.prodno},'+')" type="button" 
-								class="btn m-1 p-2 text-white" style="background-color: #273740">+</button>
+								class="btn m-1 p-2 text-white" style="background-color: #9523DC">+</button>
 						</div>
 					</div>
 	
@@ -77,7 +77,7 @@
 					</div>
 	
 					<div class="col-2 d-flex justify-content-center align-items-center p-0">
-						<div class="w-75 text-white text-center"style="background-color: #27374D">
+						<div class="w-75 text-center"style="">
 							<p class="m-0 p-0">총 액</p>
 							<p id="totalPrice${cartItem.prodno}" class="m-0 p-0">${cartItem.product.prodprice * cartItem.qty}원</p>
 						</div>
@@ -88,13 +88,13 @@
 
 		<div class="w-75 d-flex justify-content-start align-items-center m-1">
 			<button onclick="deleteSelect()" type="button"
-				class="btn text-white p-0" style="background-color: #273740">선택 삭제</button>
+				class="btn text-white p-0" style="background-color: #9523DC">선택 삭제</button>
 		</div>
 
 		<hr class="w-75 my-1 p-0" />
 		<form action="${pageContext.request.contextPath}/order/order_form" method="post" class="w-50 m-0 p-0">
 			<div id="resultBox" class="w-100 row text-white my-1"
-				style="background-color: #273740">
+				style="background-color: #9523DC">
 				<div
 					class="col-3 d-flex flex-column justify-content-center align-items-center my-2 p-0">
 					<p class="m-0 p-0">상품금액</p>
@@ -119,7 +119,7 @@
 					class="col-3 d-flex justify-content-center align-items-center my-2 p-0">
 					<div class="w-75 d-flex justify-content-center align-items-center">
 						<button type="submit" class="btn btn-light p-1"
-							style="color: #273740">주문</button>
+							style="color: #9523DC">주문</button>
 					</div>
 				</div>
 			</div>
