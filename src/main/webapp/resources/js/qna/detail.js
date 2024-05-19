@@ -55,9 +55,9 @@ const saveReply = () =>{
 					</div>
 					`;
 					
-					rplysts.innerHTML = `
+					rplysts.innerHTML = `상태: 
 						<span class="badge rounded-pill"
-						style="background-color: #9DB2BF; color: white">완료</span>
+						style="background-color: #273740; color: white">완료</span>
 					`;
 					replyArea.querySelector("p").innerHTML= reply;
 					existReply = reply;

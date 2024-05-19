@@ -56,7 +56,7 @@ public class QnaController {
 		// Pager 객체 생성
 		int rowsPagingTarget = qnaService.getTotalRows(keyword);
 		log.info(rowsPagingTarget+"");
-		Pager pager = new Pager(5, 5, rowsPagingTarget, intPageNo);
+		Pager pager = new Pager(10, 5, rowsPagingTarget, intPageNo);
 
 		// Service에서 게시물 목록 요청
 		List<Qna> qnaList = qnaService.getQnaList(pager, keyword);
@@ -105,7 +105,7 @@ public class QnaController {
 	public String qnaDetail(int qnano, Model model, HttpSession session) {
 		String keyword = (String) session.getAttribute("keyword");
 		Qna qna = qnaService.getQna(qnano,keyword); // dto를 통해서 한 게시물의 정보를 가져옴
-		int pageNo = (qna.getRnum() - 1) / 5 + 1;
+		int pageNo = (qna.getRnum() - 1) / 10 + 1;
 		session.setAttribute("pageNo", pageNo + "");
 		model.addAttribute("qna", qna);
 		return "qna/detail";

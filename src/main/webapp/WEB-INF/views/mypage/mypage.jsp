@@ -29,11 +29,14 @@
 <title>멍슐랭</title>
 </head>
 <body>
-   <!-- header -->
-   <%@ include file="/WEB-INF/views/common/header.jsp"%>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<header>
+			<%@ include file="/WEB-INF/views/common/header.jsp"%>
+		</header>
+	</div>
    <div style="height: 100px"></div>
    <div
-      class="container-fluid  d-flex flex-column align-items-center m-0, p-0">
+      class="container-fluid  d-flex flex-column align-items-center m-0, p-0" style="min-width: 1250px">
 
       <div
          class="d-flex justify-content-center align-items-center w-75 m-0 my-3 p-0">
@@ -47,9 +50,9 @@
          <div class="col-2 d-flex flex-column align-items-center m-0 p-0">
             <div
                class="d-flex flex-column justify-content-center align-items-center border w-100 m-0 p-0 py-3">
-               <img class="img-fluid rounded-circle"
+               <img class="rounded-circle"
                   src="${pageContext.request.contextPath}/mypage/downloadMemImg?memno=${member.memno}"
-                  width="150px">
+                  width="80%" height="80%">
                <p class="m-0 my-3 p-0">
                <h3>${member.memname}님</h3>
                </p>
@@ -157,7 +160,11 @@
    </div>
    <div style="height: 300px"></div>
 
-   <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+   	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<footer>
+			<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+		</footer>
+	</div>
    <%@ include file="/WEB-INF/views/mypage/point_detail_modal.jsp"%>
 </body>
 </html>

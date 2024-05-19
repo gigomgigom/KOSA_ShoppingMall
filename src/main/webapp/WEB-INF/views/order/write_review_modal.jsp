@@ -49,8 +49,8 @@
 
 			<!-- Modal footer -->
 			<div class="modal-footer">
-				<button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="writeReview()">제출하기</button>
-				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
+				<button type="button" style="background-color: #273740; color: white" class="btn" data-bs-dismiss="modal" onclick="writeReview()">제출하기</button>
+				<button type="button" class="btn btn-outline-light text-dark" data-bs-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>

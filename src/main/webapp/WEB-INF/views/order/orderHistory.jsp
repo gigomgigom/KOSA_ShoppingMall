@@ -28,10 +28,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<!-- header -->
-	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<header>
+			<%@ include file="/WEB-INF/views/common/header.jsp"%>
+		</header>
+	</div>
+	
 	<div style="height: 100px"></div>
-	<div class="container-fluid d-flex flex-column align-items-center">
+	<div class="container-fluid d-flex flex-column align-items-center" style="min-width: 1250px">
 		<h1 class="my-3">주문 내역</h1>
 		<hr class="w-50 m-0 my-3 p-0" />
 		
@@ -71,6 +75,10 @@
 		</c:forEach>
 	</div>
 	<div style="height: 100px"></div>
-	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+		<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<footer>
+			<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+		</footer>
+	</div>
 </body>
 </html>

@@ -68,8 +68,8 @@ public class OrderController {
 	// 신우호 - 바로구매 시  오더 폼으로 바로 이동 
 	@PostMapping("/direct")
 	public String direct(Authentication authentication, Model model, int prodno, int qty) {
-		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
-		Member member = t1UserDetails.getMember();
+		String mid = authentication.getName();
+		Member member = memberService.getMemberByMid(mid);
 		int memno = member.getMemno();
 		MemberAdr memberAdr = memberService.getMemberAdr(memno);
 		Product product = orderService.getProductByProdNo(prodno);

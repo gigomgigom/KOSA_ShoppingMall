@@ -19,21 +19,23 @@
 
 </head>
 <body>
-	<header>
-		<%@ include file="/WEB-INF/views/common/header.jsp"%>
-	</header>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<header>
+			<%@ include file="/WEB-INF/views/common/header.jsp"%>
+		</header>
+	</div>
 	<input id="qnano" type="hidden" value="${qna.qnano}">
 	<div
-		class="container-fluid d-flex flex-column align-items-center m-0 my-5 p-0">
+		class="container-fluid d-flex flex-column align-items-center m-0 my-5 p-0" style="min-width: 1250px">
 		<div
 			class="container-fluid d-flex flex-column align-items-center border border-secondary-subtle w-75 m-0 mb-5 p-0">
 			<div class="row w-100 border-bottom border-secondary-subtle m-0 p-0">
 				<div class="col-1 border-end border-secondary-subtle m-0 p-0">
 					<div
-						class="d-flex justify-content-center align-items-center h-100 m-0 p-0">
-						<img class="img-fluid rounded-circle"
+						class="d-flex justify-content-center align-items-center h-100 m-0 p-0 py-3">
+						<img class="rounded-circle"
 							src="${pageContext.request.contextPath}/mypage/downloadMemImg?memno=${qna.memno}"
-							width="80%" height="80%">
+							width="90%" height="90%">
 					</div>
 				</div>
 
@@ -60,7 +62,7 @@
 
 							<c:if test="${qna.admrply != null}">
 								<span class="badge rounded-pill"
-								style="background-color: #9DB2BF; color: white">완료</span>
+								style="background-color: #273740; color: white">완료</span>
 							</c:if>
 						</p>
 					</diV>
@@ -218,9 +220,8 @@
 		</div>
 
 		<div
-			class="d-flex w-75 justify-content-center align-items-center m-0 mb-3 p-0">
-			<a class="btn btn-sm m-0 p-0"
-				style="background-color: #27374D; color: white;"
+			class="d-flex w-75 justify-content-center align-items-center m-0 mb-5 p-0">
+			<a class="btn btn-outline-light btn-sm text-dark m-0 px-2"
 				href="${pageContext.request.contextPath}/qna/qna_list">목록</a>
 		</div>
 
@@ -231,17 +232,19 @@
 				<c:if test="${member.memid == qna.qnawriter}">
 					<a
 						href="${pageContext.request.contextPath}/qna/update_qna?qnano=${qna.qnano}"
-						class="btn btn-sm border border-secondary-subtle m-0 me-3 p-0">수정</a>
+						class="btn btn-outline-light btn-sm m-0 text-dark m-0 me-3 p-0 px-2">수정</a>
 					<a
 						href="${pageContext.request.contextPath}/qna/delete_qna?qnano=${qna.qnano}"
-						class="btn btn-sm border border-secondary-subtle m-0 p-0">삭제</a>
+						class="btn btn-outline-light btn-sm text-dark m-0 p-0 px-2">삭제</a>
 				</c:if>
 			</sec:authorize>
 		</div>
 	</div>
-	<footer>
-		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
-	</footer>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<footer>
+			<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+		</footer>
+	</div>
 
 </body>
 <script src="/javajavajo_mini_web/resources/js/qna/detail.js"></script>

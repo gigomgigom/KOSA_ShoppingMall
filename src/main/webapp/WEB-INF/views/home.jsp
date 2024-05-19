@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,23 +28,26 @@
 <title>멍슐랭</title>
 </head>
 <body>
-	<!-- header -->
-	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<header>
+			<%@ include file="/WEB-INF/views/common/header.jsp"%>
+		</header>
+	</div>
 	<!-- 홈 배너 캐로슬-->
-	<div>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
 		<div id="carouselControls" class="carousel" data-bs-ride="carousel">
 			<div class="carousel-inner ">
 				<div class="carousel-item">
-					<a href="#"><img
-						src="https://i.ibb.co/7z5htNw/banner1.jpg" class="d-block w-100"></a>
+					<a href="#"><img src="https://i.ibb.co/7z5htNw/banner1.jpg"
+						class="d-block w-100"></a>
 				</div>
 				<div class="carousel-item">
-					<a href="#"><img
-						src="https://i.ibb.co/PhNPTFd/banner2.png" class="d-block w-100"></a>
+					<a href="#"><img src="https://i.ibb.co/PhNPTFd/banner2.png"
+						class="d-block w-100"></a>
 				</div>
 				<div class="carousel-item  active">
-					<a href="#"><img
-						src="https://i.ibb.co/ZLJdNSF/banner3.jpg" class="d-block w-100"></a>
+					<a href="#"><img src="https://i.ibb.co/ZLJdNSF/banner3.jpg"
+						class="d-block w-100"></a>
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button"
@@ -62,9 +65,9 @@
 	<div style="height: 200px"></div>
 
 	<!-- 추천상품 -->
-	<div id="recommend"
-		class="container-fluid d-flex flex-column align-items-center justify-content-center"
-		style="background-color: #F6EEFA;">
+	<div id="recommend" 
+		class="container-fluid w-100 d-flex flex-column align-items-center justify-content-center"
+		style="background-color: #F6EEFA; min-width: 1250px;">
 		<div style="height: 30px"></div>
 		<p class="fw-bold fs-3">추천상품</p>
 		<div class="bg-black" style="height: 2px; width: 30px"></div>
@@ -72,12 +75,15 @@
 			class="p-3 mt-4 w-75 d-flex justify-content-center">
 			<c:forEach var="prod" items="${prodList}">
 				<div id="rcmd-product-1" class="w-25 p-3">
-					<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${prod.prodno}" class="d-flex flex-column align-items-center"> 
-					<img src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${prod.prodno}"
+					<a
+						href="${pageContext.request.contextPath}/item/item_detail?prodno=${prod.prodno}"
+						class="d-flex flex-column align-items-center"> <img
+						src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${prod.prodno}"
 						class="w-75 img-thumbnail hover-shadow" />
 					</a>
 					<div class="p-2">
-						<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${prod.prodno}"
+						<a
+							href="${pageContext.request.contextPath}/item/item_detail?prodno=${prod.prodno}"
 							class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
 							<p class="text-center">${prod.prodname}</p>
 						</a>
@@ -91,7 +97,10 @@
 							<c:if test="${prod.avgrating == 5}">⭐⭐⭐⭐⭐</c:if>
 							(${prod.rvcount})
 						</p>
-						<p><fmt:formatNumber value="${prod.prodprice}" pattern="#,###" />원</p>
+						<p>
+							<fmt:formatNumber value="${prod.prodprice}" pattern="#,###" />
+							원
+						</p>
 					</div>
 				</div>
 			</c:forEach>
@@ -102,7 +111,7 @@
 	<!--무언갈 보여드리겠습니다!-->
 	<div style="height: 150px"></div>
 
-	<div class="container-fluid d-flex flex-column align-items-center">
+	<div class="container-fluid d-flex flex-column align-items-center" style="min-width: 1250px">
 		<p class="fw-bold fs-3">멍슐랭은 다릅니다!</p>
 		<div class="bg-black" style="height: 2px; width: 30px"></div>
 		<div class="mt-4 w-75 d-flex justify-content-center">
@@ -121,47 +130,56 @@
 	<!-- 실시간 리뷰 -->
 
 
-	<div id="recommend"
+	<div id="recommend" 
 		class="container-fluid d-flex flex-column align-items-center justify-content-center"
-		style="background-color: #F6EEFA;">
+		style="background-color: #F6EEFA; min-width: 1250px;">
 		<div style="height: 30px"></div>
 		<p class="fw-bold fs-3">실시간 리뷰</p>
 		<p class="fs-5">고객님의 생생한 리뷰를 확인해보세요.</p>
 		<div class="bg-black" style="height: 2px; width: 30px"></div>
 		<div id="rcmd-product-list"
 			class="p-3 mt-4 w-75 d-flex justify-content-center">
-			
+
 			<!-- 반복절 -->
 			<c:forEach var="rv" items="${review}">
-			<div id="rcmd-product-1" class="w-25 p-3">
-				<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${rv.prodno}" class="d-flex flex-column align-items-center"> 
-				<img src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${rv.prodno}"  class="w-75 img-thumbnail" />
-				</a> 
-				<div class="p-2 d-flex flex-column align-items-center">
-					<a href="${pageContext.request.contextPath}/item/item_detail?prodno=${rv.prodno}" class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
-						${rv.rvtitle}</a>
-					<hr />
-					<p>${rv.rvcontent}</p>
-					<c:if test="${rv.rvrating == 1}">⭐</c:if>
-					<c:if test="${rv.rvrating == 2}">⭐⭐</c:if>
-					<c:if test="${rv.rvrating == 3}">⭐⭐⭐</c:if>
-					<c:if test="${rv.rvrating == 4}">⭐⭐⭐⭐</c:if>
-					<c:if test="${rv.rvrating == 5}">⭐⭐⭐⭐⭐</c:if>
-					
+				<div id="rcmd-product-1" class="w-25 p-3">
+					<a
+						href="${pageContext.request.contextPath}/item/item_detail?prodno=${rv.prodno}"
+						class="d-flex flex-column align-items-center"> <img
+						src="${pageContext.request.contextPath}/item/downloadRepimg?prodno=${rv.prodno}"
+						class="w-75 img-thumbnail" />
+					</a>
+					<div class="p-2 d-flex flex-column align-items-center">
+						<a
+							href="${pageContext.request.contextPath}/item/item_detail?prodno=${rv.prodno}"
+							class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold text-black">
+							${rv.rvtitle}</a>
+						<hr />
+						<p>${rv.rvcontent}</p>
+						<c:if test="${rv.rvrating == 1}">⭐</c:if>
+						<c:if test="${rv.rvrating == 2}">⭐⭐</c:if>
+						<c:if test="${rv.rvrating == 3}">⭐⭐⭐</c:if>
+						<c:if test="${rv.rvrating == 4}">⭐⭐⭐⭐</c:if>
+						<c:if test="${rv.rvrating == 5}">⭐⭐⭐⭐⭐</c:if>
+
+					</div>
 				</div>
-			</div>
 			</c:forEach>
 			<!-- 반복절 -->
-			
-			
-			</div>
+
+
 		</div>
-		<div style="height: 20px"></div>
+	</div>
+	<div style="height: 20px"></div>
 
 
 
 	<div style="height: 75px"></div>
 
-	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	<div class="container-fluid w-100 m-0 p-0" style="min-width: 1250px">
+		<footer>
+			<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+		</footer>
+	</div>
 </body>
 </html>
