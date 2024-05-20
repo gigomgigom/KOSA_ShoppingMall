@@ -24,8 +24,10 @@ public class HomeController {
 	@Autowired
 	ItemService itemService;
 	
+	//권우상 - 메인페이지 메소드
 	@RequestMapping("")
 	public String reviewRespone(Model model) {
+		//권우상 - 주문 건수 기준으로(count)가장 높은 수치를 기록한 상품 4개를 불러옴
 		List<Product> prodList= itemService.getBestProduct();
 		List<Review> review = new ArrayList<>();
 		review = reviewService.review();

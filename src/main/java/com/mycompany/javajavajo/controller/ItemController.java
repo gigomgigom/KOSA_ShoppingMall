@@ -41,6 +41,7 @@ public class ItemController {
 	@RequestMapping("/item_detail")
 	public String itemDetail(int prodno, Model model,  Authentication authentication) {
 		log.info("hi");
+		//권우상 - 유저의 로그인 여부를 파악 이는 상품 상세 페이지에서 장바구니 추가, 바로 구매 시 스프링 시큐리티 처리를 위해 존재함
 		boolean isLogin = false;
 		if(authentication != null) {
 			isLogin = true;
@@ -87,14 +88,17 @@ public class ItemController {
 	@RequestMapping("/item_list")
 	public String itemList(int ctgno, String pageNo, String keyword, String sorting,
 				HttpSession session,Model model) {
+		//권우상 - 페이지 네이션시 페이지 번호
 		if (pageNo == null) {
 			pageNo = (String) session.getAttribute("pageNo");
 		}
 		
+		//권우상 - 검색어 유지를 위한 변수
 		if(keyword == null) {
 			keyword = (String) session.getAttribute("keyword");
 		}
 		
+		//권우상 - 정렬 기준 유지를 위한 변수
 		if(sorting == null) {
 			sorting = (String) session.getAttribute("sorting");
 		}

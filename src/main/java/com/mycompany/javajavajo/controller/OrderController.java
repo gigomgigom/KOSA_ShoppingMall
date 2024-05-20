@@ -91,6 +91,7 @@ public class OrderController {
 		return "redirect:/order/order_detail?ordno=" + order.getOrdno();
 	}
 	
+	// 권우상 - 바로 구매로 주문시 주문 관련 테이블을 작성하는 메소드
 	@PostMapping("/create_order_direct")
 	public String createOrderDirect(int prodno,int qty,Order order, Orderer orderer, Recipient recipient, Authentication authentication) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
@@ -173,6 +174,7 @@ public class OrderController {
 		return "redirect:/order/order_detail?ordno=" + ordno;
 	}
 	
+	//권우상 - 수령확인 눌렀을 시 작동하는 메소드
 	@PostMapping("complete_order")
 	public String completeOrder(int ordno,int amount,Authentication authentication) {
 		log.info("실행1");

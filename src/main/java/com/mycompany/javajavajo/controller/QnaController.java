@@ -76,7 +76,7 @@ public class QnaController {
 		return "qna/writeQna";
 	}
 
-	// form 데이터로 Qna(dto)객체를 매개변수로 받아옴
+	//신우호 - form 데이터로 Qna(dto)객체를 매개변수로 받아옴
 	@PostMapping("/write_qna")
 	// 로그인한 사용자(인증객체)면 글쓰기를 작성할 수 있도록 함
 	public String writeQna(Qna qna, Authentication authentication) {
@@ -138,6 +138,8 @@ public class QnaController {
 		
 		return "redirect:/qna/qna_detail?qnano=" + qna.getQnano();
 	}
+	
+	//권우상 - 글쓰기 페이지로 이동
 	@Secured("ROLE_USER")
 	@GetMapping("/delete_qna")
 	public String deleteQna(int qnano) {
@@ -145,7 +147,7 @@ public class QnaController {
 		return "redirect:/qna/qna_list";
 	}
 	
-	//대표이미지를 다운로드
+	//권우상 - qna 첨부파일 다운로드 메소드
 	@GetMapping("/downloadQnaAttach")
 	public void downloadQnaAttach(int qnano, HttpServletRequest request, HttpServletResponse response) throws IOException, SQLException {
 		Qna qnaAttach = qnaService.getQnaAttach(qnano);
@@ -166,6 +168,7 @@ public class QnaController {
 		os.close();
 	}
 	
+	//권우상 - 글 수정 페이지에서 첨푸파일 삭제 처리 메소드
 	@Secured("ROLE_USER")
 	@PostMapping(value="/delete_attach", produces="application/json; charset=UTF-8")
 	@ResponseBody()
@@ -178,6 +181,7 @@ public class QnaController {
 		return jo.toString();
 	}
 	
+	//권우상 - 관리자가 게시판에서 답변을 작성 할 때 사용하는 메소드
 	@Secured("ROLE_ADMIN")
 	@PostMapping(value="/write_reply", produces="application/json; charset=UTF-8")
 	@ResponseBody()
@@ -190,6 +194,7 @@ public class QnaController {
 		return jo.toString();
 	}
 	
+	//권우상 - 관리자가 게시판에서 답글 수정 할 때 사용 하는 메소드
 	@Secured("ROLE_ADMIN")
 	@PostMapping(value="/edit_reply", produces="application/json; charset=UTF-8")
 	@ResponseBody()

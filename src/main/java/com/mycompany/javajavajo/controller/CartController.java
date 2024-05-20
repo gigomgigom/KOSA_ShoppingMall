@@ -44,7 +44,7 @@ public class CartController {
 	    return "/cart/cart";
 	}
 	
-	//권우상 - 카트아이템 수량 업데이트 컨트롤러
+	//권우상 - ajax로 요청을 받아 카트의 수량을 1개씩 변화시키는 컨트롤러 operator = "+" 혹은 "-"
 	@PostMapping(value="/update_cart", produces="application/json; charset=UTF-8")
 	@ResponseBody()
 	public String updateCart(Authentication authentication, int prodno, String operator) {
@@ -53,13 +53,15 @@ public class CartController {
 	    int memno = member.getMemno();
 		int result = service.updateCart(memno, prodno, operator);
 		
+		//업데이트가 성공적으로 이루어졌다면 result = 1 success가 jsonResult에 저장
 		String jsonResult = (result > 0) ? "success" : "fail";
 		JSONObject jo = new JSONObject();
 		jo.put("result", jsonResult);
 		return jo.toString();
 	}
 	
-	//권우상 - 카트아이템 삭제 컨트롤러
+	
+	//권우상 - ajax로 요청을 받아 선택 된 카트아이템을 삭제, 삭제 될 아이템의 상품번호를 int배열의 형태로 받는다 
 	@PostMapping(value="/delete_cart_items", produces="application/json; charset=UTF-8")
 	@ResponseBody()
 	public String deleteCartItems(Authentication authentication, @RequestParam(value="prodnos[]")int[] prodnos) {
@@ -68,16 +70,17 @@ public class CartController {
 	    int memno = member.getMemno();
 		int result = service.deleteCartItems(memno, prodnos);
 		
+		//삭제가 정상적으로 작동 되었다면 result는 1이상 따라서 success가 jsonResult에 저장
 		String jsonResult = (result > 0) ? "success" : "fail";
 		JSONObject jo = new JSONObject();
 		jo.put("result", jsonResult);
 		return jo.toString();
 	}
 	
-	// 신우호 - 장바구니 추가할 시 카트페이지 이동
+	// 신우호 - ajax로 카트에 아이템 추가 요청 
 		@PostMapping(value="/cartAdd", produces="application/json; charset=UTF-8")
 		@ResponseBody()
-		// cartItem(jsp에서 form으로 전달받은 cartItem)
+		// cartItem(jsp에서 form으로 전달받은 cartItem) 안에 들어있는 내용은 상품번호와 상품수량
 		public String cartCart(Authentication authentiaction, Model model, CartItem cartItem) {
 			Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentiaction.getPrincipal();
 			int memNo = t1UserDetails.getMember().getMemno();
@@ -113,6 +116,7 @@ public class CartController {
 			return jo.toString();
 		}
 		
+		//권우상 - ajax처리시 spring security 적용을 위한 메소드
 		@GetMapping("/cartAdd")
 		public String cartAddReturn(int prodno) {
 			log.info(""+prodno);
