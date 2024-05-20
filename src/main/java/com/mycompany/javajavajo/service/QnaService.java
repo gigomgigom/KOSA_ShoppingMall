@@ -21,6 +21,7 @@ public class QnaService {
 	@Autowired
 	private MemberDao memberDao;
 
+	// 게시판 글쓰기 
 	public void writeBoard(Qna qna) {
 		// 비지니스 로직 처리
 		int rowNum = qnaDao.insertBoard(qna); // insert, update, delete = int형으로 (몇행이 바뀌는지 리턴해줌)
@@ -31,11 +32,9 @@ public class QnaService {
 	public Qna getQna(int qnano, String keyword) {
 		int qnahitcnt = qnaDao.updatehitcnt(qnano);
 		Qna qna = qnaDao.selectByQnano(qnano,keyword);
-		
 		if(qna.getQnacontent() != null) {
 			qna.setQnacontent(qna.getQnacontent().replace("\r\n", "<br/>"));
 		}
-
 		return qna;
 	}
 
@@ -47,9 +46,7 @@ public class QnaService {
 
 	// 페이징 게시물 목록 요청
 	public List<Qna> getQnaList(Pager pager, String keyword) {
-	
 		List<Qna> qnaList = qnaDao.selectQnaList(pager, keyword);
-
 		return qnaList;
 	}
 

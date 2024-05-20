@@ -16,7 +16,7 @@ public interface MemberDao {
 	//심영조 - SpringSecurity를 위한 MemberDao메소드
 	public Member selectByMid(String username);
 	
-	// insert = int 타입으로 받기
+	//신우호 - 회원정보를 넣어주기 위함 
 	public int insert(Member member);
 
 	//심영조 - 회원번호를 통해 해당 회원의 정보들을 가져오기

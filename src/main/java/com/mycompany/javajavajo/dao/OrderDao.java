@@ -44,6 +44,7 @@ public interface OrderDao {
 	public int getMonthSales();
 	public int getMaxDaySales();
 
+	//신우호 - 회원번호를 통해 주문목록을 가져온다.
 	public List<Order> getOrderListInMyPage(int memno);
 
 	

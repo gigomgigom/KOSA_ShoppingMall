@@ -40,8 +40,8 @@ public class AuthController {
 		return "auth/signin";
 	}
 	
+	//신우호 - member, memberAdr 매개변수로 받아 서비스 호출하여 로직처리 함
 	@PostMapping("/auth")
-	// member, memberAdr 매개변수로 받음
 	public String auth(Member member, MemberAdr memberadr) {
 		service.auth(member, memberadr);
 		log.info(memberadr.getAdr());

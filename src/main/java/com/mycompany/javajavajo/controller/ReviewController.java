@@ -26,7 +26,6 @@ public class ReviewController {
 	@ResponseBody()
 	public String writeReview(Review review) {
 		int result = reviewService.createReview(review);
-	
 		String jsonResult = (result > 0) ? "success" : "fail";
 		JSONObject jo = new JSONObject();
 		jo.put("result", jsonResult);

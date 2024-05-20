@@ -29,12 +29,12 @@ public class MemberService {
 	private OrderDao orderDao;
 	@Autowired
 	private PointDtlDao pointDtlDao;
-
+	
+	//신우호 - dto로 받아온 매개변수를 통해 memberDto의 비밀번호를 암호화 처리 
 	public void auth(Member member, MemberAdr memberAdr) {
 		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		member.setMempw(passwordEncoder.encode(member.getMempw())); // 암호화해서 다시 반환
 		member.setMemenabled(true);
-
 		memberDao.insert(member);
 		// member의 memno를 불러와서 memberAdr의 setting
 		memberAdr.setMemno(member.getMemno());

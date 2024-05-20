@@ -77,7 +77,6 @@ public class OrderController {
 		model.addAttribute("member", member);
 		model.addAttribute("product", product);
 		model.addAttribute("qty", qty);
-		
 		return "order/orderDirect";
 	}
 	
@@ -126,10 +125,8 @@ public class OrderController {
 		// 인증된 객체를 확인한다.
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 		int memNo = t1UserDetails.getMember().getMemno();
-		
 		// orderDtoList를 선언한다.
 		List<OrderList> orderDtoList = new ArrayList<>();
-		
 		// 해당 유저의 주문목록을 돌려준다.
 		List<Order> orderList = orderService.getOrderListByMemno(memNo);
 		// orderList Null Check

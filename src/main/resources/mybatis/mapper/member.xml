@@ -11,6 +11,7 @@
 		#{memid}
 	</select>
 
+<!-- 신우호 : 회원가입 후 회원정보 db에 삽입 -->
 	<insert id="insert" parameterType="Member">
 		<selectKey keyProperty="memno" order="BEFORE"
 			resultType="int">

@@ -76,27 +76,24 @@ public class QnaController {
 		return "qna/writeQna";
 	}
 
-	// 글쓰기 페이지에서 dto로 게시물 작성에 필요한 정보들을 얻어옴
-	// Controller에서 Service로 요청
+	// form 데이터로 Qna(dto)객체를 매개변수로 받아옴
 	@PostMapping("/write_qna")
+	// 로그인한 사용자(인증객체)면 글쓰기를 작성할 수 있도록 함
 	public String writeQna(Qna qna, Authentication authentication) {
 		Tm1UserDetails t1UserDetails = (Tm1UserDetails) authentication.getPrincipal();
 		Member member  = t1UserDetails.getMember();
 		qna.setMemno(member.getMemno());
 		// 첨부파일이 null값이 아니고 비어있지 않으면 첨부파일의 오리지널 네임과, 타입을 세팅해줌
 		if (qna.getQnaattach() != null && !qna.getQnaattach().isEmpty()) {
-
+			// 첨부파일의 이름과 타입을 세팅해줌
 			qna.setQnaattachoname(qna.getQnaattach().getOriginalFilename());
 			qna.setQnaattachtype(qna.getQnaattach().getContentType());
-
 			try {
 				qna.setQnaattachdata(qna.getQnaattach().getBytes());
 			} catch (Exception e) {
 			}
 		}
-		
 		qnaService.writeBoard(qna);
-
 		return "redirect:/qna/qna_list";
 		// 클라이언트 요청 -> 컨트롤러 -> 클라이언트 -> 경로로 이동시킴
 	}
