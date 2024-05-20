@@ -54,7 +54,8 @@ public class AdminController {
 
 		//세션 데이터 삭제
 		session.removeAttribute("searchIndex");
-
+		
+		//매개값으로 전달받은 url로 다시 재요청하도록 재요청 주소를 생성함
 		String requestUrl = "redirect:/admin/"+url;
 		return requestUrl;
 	}
@@ -76,17 +77,19 @@ public class AdminController {
 		int todaySales = adminService.getTodaySales();
 		int monthSales = adminService.getMonthSales();
 		int maxDaySales = adminService.getMaxDaySales();
-
+		
+		//Model 영역에 이번주 주문 현황 데이터들을 넣기 위해 Map타입 객체를 만들어둠
 		Map<String, Integer> thisWeekOrdInfo = new HashMap<>();
 		thisWeekOrdInfo.put("weeklyTotOrd", weeklyTotOrd);
 		thisWeekOrdInfo.put("weeklyNoneDelivery", weeklyNoneDelivery);
 		thisWeekOrdInfo.put("weeklyRdyDelivery", weeklyRdyDelivery);
-
+		//Model 영역에 매출 현황 데이터들을 넣기 위해 Map타입 객체를 만들어둠
 		Map<String, Integer> salesInfo = new HashMap<>();
 		salesInfo.put("todaySales", todaySales);
 		salesInfo.put("monthSales", monthSales);
 		salesInfo.put("maxDaySales", maxDaySales);
-
+		
+		//JSP에 전달할 데이터들을 Model로 전달
 		model.addAttribute("thisWeekOrdInfo", thisWeekOrdInfo);
 		model.addAttribute("salesInfo", salesInfo);
 		model.addAttribute("bestProducts", bestProducts);
@@ -101,23 +104,23 @@ public class AdminController {
 
 		//세션에 저장되어있는 SearchIndex 데이터를 가져오기
 		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
-
+		//세션에 저장되어있는 SearchIndex DTO객체와 파라미터로 전달받은 SearchIndex DTO객체를 대조해서 쿼리문에 전달할 SearchIndex 객체를 Set한다.
 		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
-
+		//그렇게 찾은 SearchIndex DTO 객체 내부에 존재하는 페이지 번호를 Int형으로 변환한다. (페이지 번호가 Pager객체 생성자에 필요한 매개값들중 하나이기 때문에)
 		int intPageNo = Integer.parseInt(searchIndex.getPageno());
-
+		//검색조건들이 담긴 SearchIndex DTO객체를 통해 DB에서 도출된 데이터 행의 수를 가져온다.
 		int rowsPagingTarget = adminService.getTotalMemberRows(searchIndex);
-
+		//요청 페이지번호와 검색결과 행 수들을 통해 Pager 객체를 생성한다.
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
-
+		//생성된 Pager객체를 SearchIndexDTO 객체 내부 필드에 set해준다.
 		searchIndex.setPager(pager);
-
+		//SearchIndex 내부의 검색조건들과 Pager객체를 통해 조건에 해당하는 회원(MemberDto)들의 리스트를 받아온다.
 		List<Member> memberList = adminService.getMemberList(searchIndex);
-
+		//다음 요청작업에서도 검색결과가 유지될 수 있도록 세션에 SearchIndex 객체를 등록시킨다.
 		session.setAttribute("searchIndex", searchIndex);
-
+		//찾아온 회원정보리스트들을 JSP파일에 보내기위해 Model에 저장한다.
 		model.addAttribute("memberList", memberList);
-
+		//0번 아코디언이 확장되어 보여줄 수 있도록 모델에 menuNum을 지정해준다.
 		model.addAttribute("menuNum", 0);
 		return "admin/member/admin_member";
 	}
@@ -129,7 +132,7 @@ public class AdminController {
 		Member member = adminService.getMemberByMemno(memno);
 		//회원 주문정보 리스트 가져오기
 		List<Order> orderList = adminService.getOrderListByMemno(memno);
-
+		//회원 포인트 내역(PointDtl DTO)을 담을 수 있는 List타입의 객체를 생성한다.
 		List<PointDtl> pointDtlList = new ArrayList<>();
 
 		//주문에 상품의 수 그리고 그 들중 한 상품에 대한 정보를 찾아서 Order객체에 넣어준다.
@@ -150,7 +153,8 @@ public class AdminController {
 			PointDtl rewardPointDtl = adminService.getPointDtlListByOrdno(order.getOrdno(), 0);
 			//포인트 이력에서 일자를 찾기 위해 주문번호를 넘겨 해당 주문정보를 받아오는 메소드를 호출한다.
 			Order orderForDate = adminService.getOrderByOrdno(order.getOrdno());
-
+			
+			//포인트를 사용했는데 결제금액이 없어서 적립 포인트가 없는 경우 또는 포인트를 사용하지 않았고 포인트 적립이 이루어진 경우를 반영하기 위해 작성했다.
 			if(usedPointDtl != null) {
 				usedPointDtl.setDate(orderForDate.getOrddate());
 				pointDtlList.add(usedPointDtl);
@@ -197,24 +201,25 @@ public class AdminController {
 	//상품 리스트 출력하기
 	@GetMapping("/product_list")
 	public String productList(SearchIndex searchIndex, Model model, HttpSession session) {
-
+		//세션에 등록되어있는 SearchIndex 객체를 받아온다.
 		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
-
+		//세션에 등록되어있는 SearchIndex 객체와 파라미터로 받아온 SearchIndex객체를 대조하여 검색에 반영할 SearchIndex객체를 세팅해준다.
 		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
-
+		
+		//검색 작업을 하기전에 SearchIndex객체 내부의 페이지번호를 1로 초기화 시켜주는 작업
 		if(searchIndex.getSearchkeyword() != null && !searchIndex.getSearchkeyword().equals("") && searchIndex.getCtgindex() != sessionSearchIndex.getCtgindex()) {
 			searchIndex.setPageno("1");
 		}
-
+		//그렇게 찾은 SearchIndex DTO 객체 내부에 존재하는 페이지 번호를 Int형으로 변환한다. (페이지 번호가 Pager객체 생성자에 필요한 매개값들중 하나이기 때문에)
 		int intPageNo = Integer.parseInt(searchIndex.getPageno());
-
+		//검색조건들이 담긴 SearchIndex DTO객체를 통해 DB에서 도출된 데이터 행의 수를 가져온다.
 		int rowsPagingTarget = adminService.getTotalProductRows(searchIndex);
-
+		//요청 페이지번호와 검색결과 행 수들을 통해 Pager 객체를 생성한다.
 		Pager pager = new Pager(10, 10, rowsPagingTarget, intPageNo);
-
+		//생성된 Pager객체를 SearchIndexDTO 객체 내부 필드에 set해준다.
 		searchIndex.setPager(pager);
 		session.setAttribute("searchIndex", searchIndex);
-
+		//SearchIndex 내부의 검색조건들과 Pager객체를 통해 조건에 해당하는 회원(MemberDto)들의 리스트를 받아온다.
 		List<Product> productList = adminService.getProductList(searchIndex);
 		model.addAttribute("productList", productList);
 
@@ -344,9 +349,7 @@ public class AdminController {
 	public String uncomOrder(SearchIndex searchIndex, Model model, HttpSession session) {
 
 		SearchIndex sessionSearchIndex = (SearchIndex) session.getAttribute("searchIndex");
-
-		log.info("입력된 시작일" + searchIndex.getStartdate());
-
+		
 		searchIndex = pagerService.setSearchIndex(searchIndex, sessionSearchIndex);
 
 		int intPageNo = Integer.parseInt(searchIndex.getPageno());
@@ -358,13 +361,14 @@ public class AdminController {
 		session.setAttribute("searchIndex", searchIndex);
 
 		List<Order> ordList = adminService.getUncomOrderList(searchIndex);
-
+		//--위의 코드들은 다른 테이블화면과 가져오는 방식이 동일함
+		//가져온 ordList내부에 존재하는 OrderDto객체가 갖는 주문번호를 통해 주문자, 수령인, 주문상품정보(전부 DTO로 받음)들을 찾아서 해당 OrderDTO객체 내부에 set해준다.
 		for(Order order : ordList) {
 			order.setOrderer(adminService.getOrdererByOrdno(order.getOrdno()));
 			order.setRecipient(adminService.getRcptByOrdno(order.getOrdno()));
 			order.setOrdproductcnt(adminService.getOrderProductCnt(order.getOrdno()).getOrdproductcnt());
 		}
-
+		//데이터베이스에 존재하는 주문상태정보들의 리스트를 받아온다.
 		List<OrdStts> ordSttsList = adminService.getOrdSttsList();
 
 		model.addAttribute("ordSttsList", ordSttsList);
@@ -374,7 +378,7 @@ public class AdminController {
 		model.addAttribute("menuNum", 2);
 		return "admin/order/admin_uncom_order";
 	}
-	//완료 및 취소된 주문 리스트 페이지 이동
+	//완료 및 취소된 주문 리스트 페이지 이동 (현재 사용X 미완료 주문화면에 병합시킴.)
 	@GetMapping("/com_order")
 	public String comOrder(Model model, String pageNo, HttpSession session) {
 		if(pageNo == null) {
@@ -433,6 +437,7 @@ public class AdminController {
 
 		//배송정보 가져오기
 		Delivery del = adminService.getDeliveryInfoByOrdno(ordno);
+		//만약 해당 주문건이 갖고 있는 배송정보가 존재하지않는다면 Model에 넣을 데이터에 배송정보를 제외한다.
 		if(del != null) {
 			orderInfoMap.put("delivery", del);
 		}
