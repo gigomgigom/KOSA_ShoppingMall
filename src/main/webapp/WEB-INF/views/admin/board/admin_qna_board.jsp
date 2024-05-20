@@ -55,7 +55,7 @@
 								<div class="d-flex">
 									<div class="form-group d-flex align-items-center"
 										style="width: 250px">
-										<label for="ctg" style="width: 100px">주문상태</label> <select
+										<label for="ctg" style="width: 100px">상태</label> <select
 											class="form-control" id="ctg" name="ctgindex">
 											<option value="-1" ${searchIndex.ctgindex == 0?'selected':''}>전체</option>
 											<option value="1" ${searchIndex.ctgindex == 1?'selected':''}>대기중</option>
