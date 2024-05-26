@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css">
 <!--헤더-->
 <div class="border-bottom">
 	<ul class="nav justify-content-end me-5">
@@ -46,17 +47,21 @@
 </div>
 
 <div>
-	<ul class="nav justify-content-center align-items-center"
-		style="height: 50px; background-color: #9523DC;">
-		<li class="nav-item ms-5 me-5"><a
-			class="fw-bold nav-link text-white" aria-current="page"
-			href="${pageContext.request.contextPath}/item/item_list?ctgno=1&pageNo=1&sorting=bestItem&keyword="><h5>사료</h5></a></li>
-		<li class="nav-item ms-5 me-5"><a class="nav-link text-white"
-			href="${pageContext.request.contextPath}/item/item_list?ctgno=2&pageNo=1&sorting=bestItem&keyword="><h5>간식</h5></a></li>
-		<li class="nav-item ms-5 me-5"><a class="nav-link  text-white"
-			href="${pageContext.request.contextPath}/item/item_list?ctgno=3&pageNo=1&sorting=bestItem&keyword="><h5>영양제</h5></a></li>
-		<li class="nav-item ms-5 me-5"><a class="nav-link text-white"
-			href='${pageContext.request.contextPath}/qna/qna_list?pageNo=1&keyword='><h5>Q&A</h5></a></li>
+	<ul class="nav justify-content-center align-items-center menu">
+		<li class="nav-item"><a aria-current="page"
+			href="${pageContext.request.contextPath}/item/item_list?ctgno=1&pageNo=1&sorting=bestItem&keyword=">사료</a>
+			<ul class="submenu">
+				<li>
+					<a>이별주</a>
+				</li>
+			</ul>
+		</li>
+		<li class="nav-item"><a
+			href="${pageContext.request.contextPath}/item/item_list?ctgno=2&pageNo=1&sorting=bestItem&keyword=">간식</a></li>
+		<li class="nav-item"><a
+			href="${pageContext.request.contextPath}/item/item_list?ctgno=3&pageNo=1&sorting=bestItem&keyword=">영양제</a></li>
+		<li class="nav-item"><a
+			href='${pageContext.request.contextPath}/qna/qna_list?pageNo=1&keyword='>게시판</a></li>
 	</ul>
 </div>
 
